@@ -58,6 +58,11 @@ const useStyles = makeStyles((theme) => {
     ListItemText: {
       color: "#ffffff",
     },
+    ListItem: {
+      "&:hover": {
+        backgroundColor: "#303c4f",
+      },
+    },
   };
 });
 
@@ -125,7 +130,9 @@ export default function Layout({ children }) {
               button
               key={item.text}
               onClick={() => history.push(item.path)}
-              className={location.pathname == item.path ? classes.active : null}
+              className={`${
+                location.pathname == item.path ? classes.active : null
+              } ${classes.ListItem}`}
               //  to make the btns hover
             >
               <ListItemIcon>{item.icon}</ListItemIcon>
