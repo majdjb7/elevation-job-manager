@@ -34,12 +34,15 @@ const useStyles = makeStyles((theme) => {
     },
     drawerPaper: {
       width: drawerWidth,
+      backgroundColor: "#29374e",
     },
     active: {
-      background: "#f4f4f4",
+      background: "#45546e",
     },
     title: {
       padding: theme.spacing(2),
+      color: "#ffffff",
+      backgroundColor: "#212c3f",
     },
     appBar: {
       width: `calc(100% - ${drawerWidth}px)`,
@@ -51,6 +54,9 @@ const useStyles = makeStyles((theme) => {
     toolbar: theme.mixins.toolbar,
     avatar: {
       marginLeft: theme.spacing(2),
+    },
+    ListItemText: {
+      color: "#ffffff",
     },
   };
 });
@@ -88,7 +94,7 @@ export default function Layout({ children }) {
         position="fixed"
         className={classes.appBar}
         elevation={0}
-        color="primary"
+        color={"primary"}
       >
         <Toolbar>
           <Typography className={classes.date}>
@@ -123,7 +129,10 @@ export default function Layout({ children }) {
               //  to make the btns hover
             >
               <ListItemIcon>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.text} />
+              <ListItemText
+                primary={item.text}
+                className={classes.ListItemText}
+              />
             </ListItem>
           ))}
         </List>

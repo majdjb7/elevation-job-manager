@@ -5,14 +5,14 @@ import { createMuiTheme, ThemeProvider } from "@material-ui/core";
 import { purple } from "@material-ui/core/colors";
 import Layout from "./components/Layout";
 import Processes from "./components/Processes";
-
+//#24292f
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: "#fafafa",
+      main: "#1a73e8",
     },
     secondary: {
-      main: "#ec407a",
+      main: "#ffffff",
     },
   },
   typography: {
