@@ -107,8 +107,11 @@ export default function Layout({ children }) {
           <Typography className={classes.date}>
             Today is the {format(new Date(), "do MMMM Y")}
           </Typography>
-          <Typography>Mario</Typography>
-          <Avatar className={classes.avatar} src="/mario-av.png" />
+          <Typography>Ayman</Typography>
+          <Avatar
+            className={classes.avatar}
+            src="https://media-exp1.licdn.com/dms/image/C4E03AQGzvBqaQHa1vw/profile-displayphoto-shrink_800_800/0/1631448072130?e=1648684800&v=beta&t=6122tVcQhDq7qdokhU5w-kFyImVX3OcGrJq6i1IMMck"
+          />
         </Toolbar>
       </AppBar>
 
