@@ -7,7 +7,11 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import { AddCircleOutlineOutlined, SubjectOutlined } from "@material-ui/icons";
+import {
+  AddCircleOutlineOutlined,
+  SubjectOutlined,
+  Work,
+} from "@material-ui/icons";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import { format } from "date-fns";
@@ -71,9 +75,9 @@ export default function Layout({ children }) {
       path: "/create",
     },
     {
-      text: "STUDENTS",
-      icon: <AddCircleOutlineOutlined color="secondary" />,
-      path: "/",
+      text: "Processes",
+      icon: <Work color="secondary" />,
+      path: "/Processes",
     },
   ];
 
