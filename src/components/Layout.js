@@ -11,7 +11,9 @@ import {
   AddCircleOutlineOutlined,
   SubjectOutlined,
   Work,
+  SchoolRounded,
 } from "@material-ui/icons";
+
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import { format } from "date-fns";
@@ -119,7 +121,7 @@ export default function Layout({ children }) {
       >
         <div>
           <Typography variant="h5" className={classes.title}>
-            ELEVATION
+            <SchoolRounded color="secondary" /> ELEVATION
           </Typography>
         </div>
 
