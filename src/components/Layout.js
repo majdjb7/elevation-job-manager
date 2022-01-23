@@ -13,7 +13,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import { format } from "date-fns";
 import Avatar from "@material-ui/core/Avatar";
 
-const drawerWidth = 180;
+const drawerWidth = 230;
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -71,7 +71,7 @@ export default function Layout({ children }) {
       path: "/create",
     },
     {
-      text: "Create Note3",
+      text: "STUDENTS",
       icon: <AddCircleOutlineOutlined color="secondary" />,
       path: "/",
     },
@@ -104,7 +104,7 @@ export default function Layout({ children }) {
       >
         <div>
           <Typography variant="h5" className={classes.title}>
-            Ninja Notes
+            ELEVATION
           </Typography>
         </div>
 
