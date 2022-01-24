@@ -79,12 +79,18 @@ function Processes() {
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell className={classes.tableHeaderCell}>User Info</TableCell>
-            <TableCell className={classes.tableHeaderCell}>Job Info</TableCell>
             <TableCell className={classes.tableHeaderCell}>
-              Joining Date
+              <Typography variant="h6">User Info</Typography>
             </TableCell>
-            <TableCell className={classes.tableHeaderCell}>Status</TableCell>
+            <TableCell className={classes.tableHeaderCell}>
+              <Typography variant="h6">Job Info</Typography>
+            </TableCell>
+            <TableCell className={classes.tableHeaderCell}>
+              <Typography variant="h6">Joining Date</Typography>
+            </TableCell>
+            <TableCell className={classes.tableHeaderCell}>
+              <Typography variant="h6">Status</Typography>
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
