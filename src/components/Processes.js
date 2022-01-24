@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
   avatar: {
     backgroundColor: theme.palette.primary.light,
     color: theme.palette.getContrastText(theme.palette.primary.light),
+    marginRight: "15px",
   },
   name: {
     fontWeight: "bold",
@@ -46,21 +47,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-let USERS = [],
-  STATUSES = ["Active", "Pending", "Blocked"];
-for (let i = 0; i < 14; i++) {
-  USERS[i] = {
-    name: "user" + i,
-    email: "email" + i,
-    phone: "phone" + i,
-    jobTitle: "jobTitle" + i,
-    company: "company" + i,
-    joinDate: "joinDate" + i,
-    status: STATUSES[Math.floor(Math.random() * STATUSES.length)],
-  };
-}
+let STATUSES = ["Active", "Pending", "Blocked"];
 
-function Processes() {
+function Processes({ studentData }) {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -75,82 +64,89 @@ function Processes() {
   };
 
   return (
-    <TableContainer component={Paper} className={classes.tableContainer}>
-      <Table className={classes.table} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell className={classes.tableHeaderCell}>
-              <Typography variant="h6">User Info</Typography>
-            </TableCell>
-            <TableCell className={classes.tableHeaderCell}>
-              <Typography variant="h6">Job Info</Typography>
-            </TableCell>
-            <TableCell className={classes.tableHeaderCell}>
-              <Typography variant="h6">Joining Date</Typography>
-            </TableCell>
-            <TableCell className={classes.tableHeaderCell}>
-              <Typography variant="h6">Status</Typography>
-            </TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {USERS.slice(
-            page * rowsPerPage,
-            page * rowsPerPage + rowsPerPage
-          ).map((row) => (
-            <TableRow key={row.name}>
-              <TableCell>
-                <Grid container>
-                  <Grid item lg={2}>
-                    <Avatar alt={row.name} src="." className={classes.avatar} />
-                  </Grid>
-                  <Grid item lg={10}>
-                    <Typography className={classes.name}>{row.name}</Typography>
-                    <Typography color="textSecondary" variant="body2">
-                      {row.email}
-                    </Typography>
-                    <Typography color="textSecondary" variant="body2">
-                      {row.phone}
-                    </Typography>
-                  </Grid>
-                </Grid>
+    <Paper sx={{ width: "100%", overflow: "hidden" }}>
+      <TableContainer component={Paper} className={classes.tableContainer}>
+        <Table className={classes.table} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell className={classes.tableHeaderCell}>
+                <Typography variant="h6">Compnay Info</Typography>
               </TableCell>
-              <TableCell>
-                <Typography variant="subtitle2">{row.jobTitle}</Typography>
-                <Typography color="textSecondary" variant="body2">
-                  {row.company}
-                </Typography>
+              <TableCell className={classes.tableHeaderCell}>
+                <Typography variant="h6">Job Info</Typography>
               </TableCell>
-              <TableCell>{row.joinDate}</TableCell>
-              <TableCell>
-                <Typography
-                  className={classes.status}
-                  style={{
-                    backgroundColor:
-                      (row.status === "Active" && "green") ||
-                      (row.status === "Pending" && "blue") ||
-                      (row.status === "Blocked" && "orange"),
-                  }}
-                >
-                  {row.status}
-                </Typography>
+              <TableCell className={classes.tableHeaderCell}>
+                <Typography variant="h6">Interview Date</Typography>
+              </TableCell>
+              <TableCell className={classes.tableHeaderCell}>
+                <Typography variant="h6">Status</Typography>
               </TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-        <TableFooter>
-          <TablePagination
-            rowsPerPageOptions={[5, 10, 15]}
-            component="div"
-            count={USERS.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onChangePage={handleChangePage}
-            onChangeRowsPerPage={handleChangeRowsPerPage}
-          />
-        </TableFooter>
-      </Table>
-    </TableContainer>
+          </TableHead>
+          <TableBody>
+            {studentData
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((row, index) => (
+                <TableRow hover key={index}>
+                  <TableCell>
+                    <Grid container>
+                      <Grid item lg={2}>
+                        <Avatar
+                          alt={row.CompanyName}
+                          src="."
+                          className={classes.avatar}
+                        />
+                      </Grid>
+                      <Grid item lg={10}>
+                        <Typography className={classes.name}>
+                          {row.CompanyName}
+                        </Typography>
+                        <Typography color="textSecondary" variant="body2">
+                          {row.Location}
+                        </Typography>
+                        <Typography color="textSecondary" variant="body2">
+                          I found it by {row.whereFindJob}
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                  </TableCell>
+                  <TableCell>
+                    <Typography variant="subtitle2">{row.role}</Typography>
+                    <Typography color="textSecondary" variant="body2">
+                      {row.description}
+                    </Typography>
+                  </TableCell>
+                  <TableCell>22-02-22</TableCell>
+                  <TableCell>
+                    <Typography
+                      className={classes.status}
+                      style={{
+                        backgroundColor:
+                          (row.status === "open" && "green") ||
+                          (row.status === "pending" && "blue") ||
+                          (row.status === "blocked" && "red"),
+                      }}
+                    >
+                      {row.status}
+                    </Typography>
+                  </TableCell>
+                </TableRow>
+              ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      {/* <TableFooter> */}
+      <TablePagination
+        rowsPerPageOptions={[5, 10, 15]}
+        component="div"
+        count={studentData.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onChangePage={handleChangePage}
+        onChangeRowsPerPage={handleChangeRowsPerPage}
+      />
+      {/* </TableFooter> */}
+    </Paper>
   );
 }
 
