@@ -22,12 +22,11 @@ const useStyles = makeStyles((theme) => ({
   tableContainer: {
     borderRadius: 15,
     margin: "10px 10px",
-    maxWidth: 950,
+    maxWidth: "90%",
   },
   tableHeaderCell: {
     fontWeight: "bold",
-    backgroundColor: theme.palette.primary.dark,
-    color: theme.palette.getContrastText(theme.palette.primary.dark),
+    color: "#0066ff",
   },
   avatar: {
     backgroundColor: theme.palette.primary.light,
@@ -112,9 +111,7 @@ function Processes() {
                 </Grid>
               </TableCell>
               <TableCell>
-                <Typography color="primary" variant="subtitle2">
-                  {row.jobTitle}
-                </Typography>
+                <Typography variant="subtitle2">{row.jobTitle}</Typography>
                 <Typography color="textSecondary" variant="body2">
                   {row.company}
                 </Typography>
