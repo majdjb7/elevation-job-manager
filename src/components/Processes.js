@@ -21,8 +21,8 @@ const useStyles = makeStyles((theme) => ({
   },
   tableContainer: {
     borderRadius: 15,
-    margin: "10px 10px",
-    maxWidth: "90%",
+    margin: "10px 130px",
+    maxWidth: "80%",
   },
   tableHeaderCell: {
     fontWeight: "bold",
@@ -44,6 +44,9 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 8,
     padding: "3px 10px",
     display: "inline-block",
+  },
+  TablePagination: {
+    maxWidth: "65%",
   },
 }));
 
@@ -137,6 +140,7 @@ function Processes({ studentData }) {
       </TableContainer>
       {/* <TableFooter> */}
       <TablePagination
+        className={classes.TablePagination}
         rowsPerPageOptions={[5, 10, 15]}
         component="div"
         count={studentData.length}
