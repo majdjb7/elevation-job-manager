@@ -3,7 +3,8 @@ import { createMuiTheme, ThemeProvider } from "@material-ui/core";
 import { purple } from "@material-ui/core/colors";
 import Layout from "./components/Layout";
 import Processes from "./components/Processes";
-
+import { useState, useEffect } from "react";
+import axios from "axios";
 const theme = createMuiTheme({
   palette: {
     primary: {
