@@ -78,19 +78,9 @@ export default function Layout({ children }) {
 
   const menuItems = [
     {
-      text: "My Notes",
-      icon: <SubjectOutlined color="secondary" />,
-      path: "/",
-    },
-    {
-      text: "Create Note",
-      icon: <AddCircleOutlineOutlined color="secondary" />,
-      path: "/create",
-    },
-    {
       text: "Processes",
       icon: <Work color="secondary" />,
-      path: "/Processes",
+      path: "/",
     },
   ];
 
