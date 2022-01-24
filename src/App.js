@@ -1,11 +1,9 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Notes from "./pages/Notes";
-import Create from "./pages/Create";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core";
 import { purple } from "@material-ui/core/colors";
 import Layout from "./components/Layout";
 import Processes from "./components/Processes";
-//#24292f
+
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -35,12 +33,6 @@ function App() {
           <Switch>
             {/* Switch = every time will get 1 router */}
             <Route exact path="/">
-              <Notes />
-            </Route>
-            <Route path="/create">
-              <Create />
-            </Route>
-            <Route path="/Processes">
               <Processes />
             </Route>
           </Switch>
