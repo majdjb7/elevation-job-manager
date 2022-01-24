@@ -1,31 +1,71 @@
 const express = require("express");
 const router = express.Router();
+const Jobs= require('../models/jobs')
+const Students=require('../models/students')
+const Interviews=require('../models/interviews')
+router.get("/students/:id/jobs", async (req, res) => {
+   let id=req.params.id
+   try {
+  const jobs= Students.findOne({ _id: id })
+   .populate('jobs')
+   .exec(function (err, student) {
+       res.send(student.jobs)
+   })}catch (error) {
+       res.send(error);
+     }
+});
+router.post("/students/:id/jobs", async (req, res) => {
+  let id=req.params.id
+  try {
+    let job = new Jobs({
+      CompanyName: req.body.CompanyName,
+      role: req.body.role,
+      location: req.body.location,
+      description: req.body.description,
+      status: req.body.status,
+      whereFindJob: req.body.whereFindJob,
+  })
 
-router.get("/transactions", async (req, res) => {
-  // try {
-  //   const transactions = await Transaction.find({});
-  //   res.send({ transactions });
-  // } catch (error) {
-  //   res.send(error);
-  // }
+  Students.findByIdAndUpdate((id), { $push: { jobs: job } }, function (err, user) {
+  })
+  await job.save()
+  res.send(job)
+  }catch (error) {
+      res.send(error);
+    }
+});
+router.get("/jobs/:id/interviews", async (req, res) => {
+  let id=req.params.id
+  try {
+ const interviews= Jobs.findOne({ _id: id })
+  .populate('interviews')
+  .exec(function (err, job) {
+      res.send(job.interviews)
+  })}catch (error) {
+      res.send(error);
+    }
 });
 
-router.post("/transaction", async (req, res) => {
-  // try {
-  //   const transaction = new Transaction(req.body);
-  //   await transaction.save();
-  //   res.send(transaction);
-  // } catch (error) {
-  //   res.send(error);
-  // }
+
+
+router.post("/jobs/:id/interviews", async (req, res) => {
+  let id=req.params.id
+  try {
+    let interview = new Interviews({
+      type: req.body.type,
+      time:  req.body.time,
+      interviewerName: req.body.interviewerName,
+      status : req.body.status
+  })
+
+  Jobs.findByIdAndUpdate((id), { $push: { interviews: interview } }, function (err, interview) {
+  })
+ await interview.save()
+  res.send(interview)
+  }catch (error) {
+      res.send(error);
+    }
 });
 
-router.delete("/transaction/:id", async (req, res) => {
-  // const transactionID = req.params.id;
-  // const transaction = await Transaction.findOneAndDelete({
-  //   _id: transactionID,
-  // });
-  // res.send(transaction);
-});
 
 module.exports = router;
