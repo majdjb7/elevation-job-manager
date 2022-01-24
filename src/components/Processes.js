@@ -21,8 +21,8 @@ const useStyles = makeStyles((theme) => ({
   },
   tableContainer: {
     borderRadius: 15,
-    margin: "10px 130px",
-    maxWidth: "80%",
+    margin: "10px 30px",
+    maxWidth: "90%",
   },
   tableHeaderCell: {
     fontWeight: "bold",
@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
     display: "inline-block",
   },
   TablePagination: {
-    maxWidth: "65%",
+    maxWidth: "32%",
   },
 }));
 
