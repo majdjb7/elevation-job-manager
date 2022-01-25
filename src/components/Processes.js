@@ -68,6 +68,17 @@ function Processes({ studentData }) {
 
   console.log(studentData)
 
+  const getMostRecentInterview= function(interviews) {
+    let mostRelevantInterview, interviewType = null
+    let maxDate = null
+    new Date(Math.max.apply(null, interviews.map(function(e) {
+      maxDate = e.time;
+      interviewType = e.type
+    })));
+    mostRelevantInterview = interviewType + ": " + maxDate.substring(0, maxDate.indexOf("T"));
+    return mostRelevantInterview;
+  }
+
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
       <TableContainer component={Paper} className={classes.tableContainer}>
@@ -75,13 +86,13 @@ function Processes({ studentData }) {
           <TableHead>
             <TableRow>
               <TableCell className={classes.tableHeaderCell}>
-                <Typography variant="h6">Compnay Info</Typography>
+                <Typography variant="h6">Company Info</Typography>
               </TableCell>
               <TableCell className={classes.tableHeaderCell}>
                 <Typography variant="h6">Job Info</Typography>
               </TableCell>
               <TableCell className={classes.tableHeaderCell}>
-                <Typography variant="h6">Interview Date</Typography>
+                <Typography variant="h6">Closest Interview</Typography>
               </TableCell>
               <TableCell className={classes.tableHeaderCell}>
                 <Typography variant="h6">Status</Typography>
@@ -121,7 +132,7 @@ function Processes({ studentData }) {
                       {row.description}
                     </Typography>
                   </TableCell>
-                  <TableCell>22-02-22</TableCell>
+                  <TableCell>{getMostRecentInterview(row.interviews)}</TableCell>
                   <TableCell>
                     <Typography
                       className={classes.status}
