@@ -1,28 +1,36 @@
 const express = require("express");
 const router = express.Router();
-const Job= require('../models/Job')
-const Student=require('../models/Student')
-const Interview=require('../models/Interview')
+const Job = require('../models/Job')
+const Student = require('../models/Student')
+const Interview = require('../models/Interview')
 router.get("/students/:id/jobs", async (req, res) => {
    let id=req.params.id
+   console.log(id)
    try {
-  const jobs= Student.findOne({ _id: id })
-   .populate('jobs')
+  const jobs=  Student.findOne({ _id: id })
+  .populate({
+    path: 'jobs',
+      populate: {
+          path: 'interviews'
+      } 
+    })
    .exec(function (err, student) {
        res.send(student.jobs)
    })}catch (error) {
        res.send(error);
      }
 });
+
 router.post("/students/:id/jobs", async (req, res) => {
   let id=req.params.id
+  console.log(req.body)
   try {
     let job = new Job({
       companyName: req.body.companyName,
       role: req.body.role,
       location: req.body.location,
       description: req.body.description,
-      status: req.body.status,
+      status: 'Open',
       whereFindJob: req.body.whereFindJob,
   })
 
@@ -34,17 +42,18 @@ router.post("/students/:id/jobs", async (req, res) => {
       res.send(error);
     }
 });
-router.get("/jobs/:id/interviews", async (req, res) => {
-  let id=req.params.id
-  try {
- const interviews= Job.findOne({ _id: id })
-  .populate('interviews')
-  .exec(function (err, job) {
-      res.send(job.interviews)
-  })}catch (error) {
-      res.send(error);
-    }
-});
+
+// router.get("/jobs/:id/interviews", async (req, res) => {
+//   let id=req.params.id
+//   try {
+//  const interviews= Job.findOne({ _id: id })
+//   .populate('interviews')
+//   .exec(function (err, job) {
+//       res.send(job.interviews)
+//   })}catch (error) {
+//       res.send(error);
+//     }
+// });
 
 
 
