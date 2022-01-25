@@ -1,12 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const Jobs= require('../models/Job')
-const Students=require('../models/Student')
-const Interviews=require('../models/Interview')
+const Job= require('../models/Job')
+const Student=require('../models/Student')
+const Interview=require('../models/Interview')
 router.get("/students/:id/jobs", async (req, res) => {
    let id=req.params.id
    try {
-  const jobs= Students.findOne({ _id: id })
+  const jobs= Student.findOne({ _id: id })
    .populate('jobs')
    .exec(function (err, student) {
        res.send(student.jobs)
@@ -17,8 +17,8 @@ router.get("/students/:id/jobs", async (req, res) => {
 router.post("/students/:id/jobs", async (req, res) => {
   let id=req.params.id
   try {
-    let job = new Jobs({
-      CompanyName: req.body.CompanyName,
+    let job = new Job({
+      companyName: req.body.companyName,
       role: req.body.role,
       location: req.body.location,
       description: req.body.description,
@@ -26,7 +26,7 @@ router.post("/students/:id/jobs", async (req, res) => {
       whereFindJob: req.body.whereFindJob,
   })
 
-  Students.findByIdAndUpdate((id), { $push: { jobs: job } }, function (err, user) {
+  Student.findByIdAndUpdate((id), { $push: { jobs: job } }, function (err, user) {
   })
   await job.save()
   res.send(job)
@@ -37,7 +37,7 @@ router.post("/students/:id/jobs", async (req, res) => {
 router.get("/jobs/:id/interviews", async (req, res) => {
   let id=req.params.id
   try {
- const interviews= Jobs.findOne({ _id: id })
+ const interviews= Job.findOne({ _id: id })
   .populate('interviews')
   .exec(function (err, job) {
       res.send(job.interviews)
@@ -51,14 +51,14 @@ router.get("/jobs/:id/interviews", async (req, res) => {
 router.post("/jobs/:id/interviews", async (req, res) => {
   let id=req.params.id
   try {
-    let interview = new Interviews({
+    let interview = new Interview({
       type: req.body.type,
       time:  req.body.time,
       interviewerName: req.body.interviewerName,
       status : req.body.status
   })
 
-  Jobs.findByIdAndUpdate((id), { $push: { interviews: interview } }, function (err, interview) {
+  Job.findByIdAndUpdate((id), { $push: { interviews: interview } }, function (err, interview) {
   })
  await interview.save()
   res.send(interview)
