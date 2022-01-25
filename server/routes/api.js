@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const Jobs= require('../models/jobs')
-const Students=require('../models/students')
-const Interviews=require('../models/interviews')
+const Jobs= require('../models/Job')
+const Students=require('../models/Student')
+const Interviews=require('../models/Interview')
 router.get("/students/:id/jobs", async (req, res) => {
    let id=req.params.id
    try {

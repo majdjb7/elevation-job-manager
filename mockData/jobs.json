@@ -1,0 +1,29 @@
+[
+    {
+        "companyName": "Intel",
+        "role": "Backend",
+        "location": "Haifa",
+        "description": "requirements:c++,c#,nodeJs",
+        "status": "Open",
+        "whereFindJob": "Facebook",
+        "interviews": []
+    },
+    {
+        "companyName": "Google",
+        "role": "Frontend",
+        "location": "Tel-Aviv",
+        "description": "requirements:React",
+        "status": "Open",
+        "whereFindJob": "Friend",
+        "interviews": []
+    },
+    {
+        "companyName": "Facebook",
+        "role": "Full stack",
+        "location": "Haifa",
+        "description": "requirements:React,nodeJs",
+        "status": "Open",
+        "whereFindJob": "LinkedIn",
+        "interviews": []
+    }
+]

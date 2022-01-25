@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const jobsSchema = new Schema({
-    CompanyName: String,
+const jobSchema = new Schema({
+    companyName: String,
     role: String,
     location: String,
     description: String,
@@ -11,9 +11,9 @@ const jobsSchema = new Schema({
         type: String,
         enum: ['LinkedIn', 'Facebook', 'Company website', 'Friend']
     },
-    interviews: [{ type: Schema.Types.ObjectId, ref: 'interviews' }]
+    interviews: [{ type: Schema.Types.ObjectId, ref: 'Interview' }]
 })
 
-const Jobs = mongoose.model("jobs", jobsSchema)
-module.exports = Jobs
+const Job = mongoose.model("Job", jobSchema)
+module.exports = Job
 

@@ -1,0 +1,30 @@
+[
+    {
+        "firstName": "Mostfa",
+        "lastName": "Mraei",
+        "email": "mostfa13392@gmail.com",
+        "cohort": "Cohort 21",
+        "mobileNo": "0532282478",
+        "password": "12345",
+        "jobs": []
+
+    },
+    {
+        "firstName": "Ayman",
+        "lastName": "Ghosh",
+        "email": "Ayman@gmail.com",
+        "cohort": "Cohort 22",
+        "mobileNo": "0532282478",
+        "password": "12345",
+        "jobs": []
+    },
+    {
+        "firstName": "Majd",
+        "lastName": "Jaber",
+        "email": "majd@gmail.com",
+        "cohort": "Cohort 22",
+        "mobileNo": "0532282478",
+        "password": "12345",
+        "jobs": []
+    }
+]
