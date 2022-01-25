@@ -1,0 +1,14 @@
+[
+    {
+        "type":"HR",
+        "time": "Saturday, May 5, 2018 2:06 PM",
+        "interviewerName": "Ayman",
+        "status":"Open"
+    },
+    {
+        "type":"Technical",
+        "time": "Sunday, August 19, 2018 9:23 PM",
+        "interviewerName": "Ahmad",
+        "status":"Accepted"
+    }
+]

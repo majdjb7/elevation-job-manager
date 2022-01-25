@@ -29,134 +29,146 @@ const theme = createMuiTheme({
 function App() {
   const [studentData, setstudentData] = useState([]);
 
-  useEffect(() => {
-    //const response = await axios.get("http://localhost:8888//jobs/:id/interviews");
-    let response = [
-      {
-        CompanyName: "Intel",
-        role: "back-end",
-        Location: "Haifa",
-        description: "requirements:c++,c#,nodeJs",
-        status: "open",
-        whereFindJob: "Facebook",
-      },
-      {
-        CompanyName: "Google",
-        role: "front-end",
-        Location: "Tel-Aviv",
-        description: "requirements:React",
-        status: "pending",
-        whereFindJob: "Friend",
-      },
-      {
-        CompanyName: "Facebook",
-        role: "Full stack",
-        Location: "Haifa",
-        description: "requirements:React,nodeJs",
-        status: "open",
-        whereFindJob: "LinkedIn",
-      },
-      {
-        CompanyName: "Intel",
-        role: "back-end",
-        Location: "Haifa",
-        description: "requirements:c++,c#,nodeJs",
-        status: "blocked",
-        whereFindJob: "Facebook",
-      },
-      {
-        CompanyName: "Google",
-        role: "front-end",
-        Location: "Tel-Aviv",
-        description: "requirements:React",
-        status: "open",
-        whereFindJob: "Friend",
-      },
-      {
-        CompanyName: "Facebook",
-        role: "Full stack",
-        Location: "Haifa",
-        description: "requirements:React,nodeJs",
-        status: "open",
-        whereFindJob: "LinkedIn",
-      },
-      {
-        CompanyName: "Intel",
-        role: "back-end",
-        Location: "Haifa",
-        description: "requirements:c++,c#,nodeJs",
-        status: "open",
-        whereFindJob: "Facebook",
-      },
-      {
-        CompanyName: "Google",
-        role: "front-end",
-        Location: "Tel-Aviv",
-        description: "requirements:React",
-        status: "open",
-        whereFindJob: "Friend",
-      },
-      {
-        CompanyName: "Facebook",
-        role: "Full stack",
-        Location: "Haifa",
-        description: "requirements:React,nodeJs",
-        status: "open",
-        whereFindJob: "LinkedIn",
-      },
-      {
-        CompanyName: "Intel",
-        role: "back-ind",
-        Location: "Haifa",
-        description: "requirements:c++,c#,nodeJs",
-        status: "open",
-        whereFindJob: "Facebook",
-      },
-      {
-        CompanyName: "Google",
-        role: "front-ind",
-        Location: "Tel-Aviv",
-        description: "requirements:React",
-        status: "open",
-        whereFindJob: "Friend",
-      },
-      {
-        CompanyName: "Facebook",
-        role: "Full stack",
-        Location: "Haifa",
-        description: "requirements:React,nodeJs",
-        status: "open",
-        whereFindJob: "LinkedIn",
-      },
-      {
-        CompanyName: "Intel",
-        role: "back-ind",
-        Location: "Haifa",
-        description: "requirements:c++,c#,nodeJs",
-        status: "open",
-        whereFindJob: "Facebook",
-      },
-      {
-        CompanyName: "Google",
-        role: "front-ind",
-        Location: "Tel-Aviv",
-        description: "requirements:React",
-        status: "open",
-        whereFindJob: "Friend",
-      },
-      {
-        CompanyName: "Facebook",
-        role: "Full stack",
-        Location: "Haifa",
-        description: "requirements:React,nodeJs",
-        status: "open",
-        whereFindJob: "LinkedIn",
-      },
-    ];
+  const MAJD_ID   = "61f000571d1570a4aada148a"
+  const AYMAN_ID  = "61f000571d1570a4aada1477"
+  const MOSTFA_ID = "61f000571d1570a4aada1464"
 
-    setstudentData(response);
-    console.log(response);
+  useEffect( async () => {
+    let result = await axios.get(`http://localhost:8888/students/${MAJD_ID}/jobs`)
+    let studentJobs = result.data
+    setstudentData(studentJobs);
+    console.log(studentJobs);
   }, []);
+
+  // useEffect(() => {
+  //   //const response = await axios.get("http://localhost:8888//jobs/:id/interviews");
+  //   let response = [
+  //     {
+  //       CompanyName: "Intel",
+  //       role: "back-ind",
+  //       Location: "Haifa",
+  //       description: "requirements:c++,c#,nodeJs",
+  //       status: "open",
+  //       whereFindJob: "Facebook",
+  //     },
+  //     {
+  //       CompanyName: "Google",
+  //       role: "front-ind",
+  //       Location: "Tel-Aviv",
+  //       description: "requirements:React",
+  //       status: "pending",
+  //       whereFindJob: "Friend",
+  //     },
+  //     {
+  //       CompanyName: "Facebook",
+  //       role: "Full stack",
+  //       Location: "Haifa",
+  //       description: "requirements:React,nodeJs",
+  //       status: "open",
+  //       whereFindJob: "LinkedIn",
+  //     },
+  //     {
+  //       CompanyName: "Intel",
+  //       role: "back-ind",
+  //       Location: "Haifa",
+  //       description: "requirements:c++,c#,nodeJs",
+  //       status: "blocked",
+  //       whereFindJob: "Facebook",
+  //     },
+  //     {
+  //       CompanyName: "Google",
+  //       role: "front-ind",
+  //       Location: "Tel-Aviv",
+  //       description: "requirements:React",
+  //       status: "open",
+  //       whereFindJob: "Friend",
+  //     },
+  //     {
+  //       CompanyName: "Facebook",
+  //       role: "Full stack",
+  //       Location: "Haifa",
+  //       description: "requirements:React,nodeJs",
+  //       status: "open",
+  //       whereFindJob: "LinkedIn",
+  //     },
+  //     {
+  //       CompanyName: "Intel",
+  //       role: "back-ind",
+  //       Location: "Haifa",
+  //       description: "requirements:c++,c#,nodeJs",
+  //       status: "open",
+  //       whereFindJob: "Facebook",
+  //     },
+  //     {
+  //       CompanyName: "Google",
+  //       role: "front-ind",
+  //       Location: "Tel-Aviv",
+  //       description: "requirements:React",
+  //       status: "open",
+  //       whereFindJob: "Friend",
+  //     },
+  //     {
+  //       CompanyName: "Facebook",
+  //       role: "Full stack",
+  //       Location: "Haifa",
+  //       description: "requirements:React,nodeJs",
+  //       status: "open",
+  //       whereFindJob: "LinkedIn",
+  //     },
+  //     {
+  //       CompanyName: "Intel",
+  //       role: "back-ind",
+  //       Location: "Haifa",
+  //       description: "requirements:c++,c#,nodeJs",
+  //       status: "open",
+  //       whereFindJob: "Facebook",
+  //     },
+  //     {
+  //       CompanyName: "Google",
+  //       role: "front-ind",
+  //       Location: "Tel-Aviv",
+  //       description: "requirements:React",
+  //       status: "open",
+  //       whereFindJob: "Friend",
+  //     },
+  //     {
+  //       CompanyName: "Facebook",
+  //       role: "Full stack",
+  //       Location: "Haifa",
+  //       description: "requirements:React,nodeJs",
+  //       status: "open",
+  //       whereFindJob: "LinkedIn",
+  //     },
+  //     {
+  //       CompanyName: "Intel",
+  //       role: "back-ind",
+  //       Location: "Haifa",
+  //       description: "requirements:c++,c#,nodeJs",
+  //       status: "open",
+  //       whereFindJob: "Facebook",
+  //     },
+  //     {
+  //       CompanyName: "Google",
+  //       role: "front-ind",
+  //       Location: "Tel-Aviv",
+  //       description: "requirements:React",
+  //       status: "open",
+  //       whereFindJob: "Friend",
+  //     },
+  //     {
+  //       CompanyName: "Facebook",
+  //       role: "Full stack",
+  //       Location: "Haifa",
+  //       description: "requirements:React,nodeJs",
+  //       status: "open",
+  //       whereFindJob: "LinkedIn",
+  //     },
+  //   ];
+
+  //   setstudentData(response);
+  //   console.log(response);
+  // }, []);
+
   return (
     <ThemeProvider theme={theme}>
       {/* to overide and change the orignal colors and thems in other comps */}
