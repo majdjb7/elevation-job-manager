@@ -33,7 +33,7 @@ router.post("/students/:id/jobs", async (req, res) => {
       description: req.body.description,
       status: 'Open',
       whereFindJob: req.body.whereFindJob,
-  })
+    })
 
   Student.findByIdAndUpdate((id), { $push: { jobs: job } }, function (err, user) {
   })
@@ -59,16 +59,15 @@ router.post("/students/:id/jobs", async (req, res) => {
 
 
 router.post("/jobs/:id/interviews", async (req, res) => {
-  let id=req.params.id
+  let id = req.params.id
+  console.log(id);
   try {
     let interview = new Interview({
       type: req.body.type,
-      time:  req.body.time,
-      interviewerName: req.body.interviewerName,
-      status : req.body.status
-  })
-
-  Job.findByIdAndUpdate((id), { $push: { interviews: interview, mostRecentInterview: time }, }, function (err, interview) {
+      time: req.body.time,
+      interviewerName: req.body.interviewerName
+    })
+    Job.findByIdAndUpdate((id), { $push: { interviews: interview },mostRecentInterview: req.body.time }, function (err, interview) {
   })
  await interview.save()
   res.send(interview)

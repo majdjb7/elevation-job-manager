@@ -3,6 +3,8 @@ import { createMuiTheme, ThemeProvider } from "@material-ui/core";
 import { purple } from "@material-ui/core/colors";
 import Layout from "./components/Layout";
 import Processes from "./components/Processes";
+import AddProcess from "./components/AddProcess"
+import AddInterview from "./components/AddInterview";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -178,6 +180,12 @@ function App() {
             {/* Switch = every time will get 1 router */}
             <Route exact path="/">
               <Processes studentData={studentData} />
+            </Route>
+            <Route exact path="/addProcess">
+              <AddProcess  />
+            </Route>
+            <Route exact path="/addInterview">
+              <AddInterview  />
             </Route>
           </Switch>
         </Layout>

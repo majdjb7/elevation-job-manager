@@ -7,6 +7,10 @@ const jobSchema = new Schema({
     location: String,
     description: String,
     status: String,
+    mostRecentInterview: {
+        type:Date,
+        default:null
+    },
     whereFindJob: {
         type: String,
         enum: ['LinkedIn', 'Facebook', 'Company website', 'Friend']
