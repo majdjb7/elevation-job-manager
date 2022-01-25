@@ -1,16 +1,19 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Notes from "./pages/Notes";
-import Create from "./pages/Create";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core";
 import { purple } from "@material-ui/core/colors";
 import Layout from "./components/Layout";
+import Processes from "./components/Processes";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: "#fefefe",
+      main: "#1a73e8",
     },
-    secondary: purple,
+    secondary: {
+      main: "#ffffff",
+    },
   },
   typography: {
     fontFamily: "Quicksand",
@@ -22,6 +25,136 @@ const theme = createMuiTheme({
 });
 
 function App() {
+  const [studentData, setstudentData] = useState([]);
+
+  useEffect(() => {
+    //const response = await axios.get("http://localhost:8888//jobs/:id/interviews");
+    let response = [
+      {
+        CompanyName: "Intel",
+        role: "back-ind",
+        Location: "Haifa",
+        description: "requirements:c++,c#,nodeJs",
+        status: "open",
+        whereFindJob: "Facebook",
+      },
+      {
+        CompanyName: "Google",
+        role: "front-ind",
+        Location: "Tel-Aviv",
+        description: "requirements:React",
+        status: "pending",
+        whereFindJob: "Friend",
+      },
+      {
+        CompanyName: "Facebook",
+        role: "Full stack",
+        Location: "Haifa",
+        description: "requirements:React,nodeJs",
+        status: "open",
+        whereFindJob: "LinkedIn",
+      },
+      {
+        CompanyName: "Intel",
+        role: "back-ind",
+        Location: "Haifa",
+        description: "requirements:c++,c#,nodeJs",
+        status: "blocked",
+        whereFindJob: "Facebook",
+      },
+      {
+        CompanyName: "Google",
+        role: "front-ind",
+        Location: "Tel-Aviv",
+        description: "requirements:React",
+        status: "open",
+        whereFindJob: "Friend",
+      },
+      {
+        CompanyName: "Facebook",
+        role: "Full stack",
+        Location: "Haifa",
+        description: "requirements:React,nodeJs",
+        status: "open",
+        whereFindJob: "LinkedIn",
+      },
+      {
+        CompanyName: "Intel",
+        role: "back-ind",
+        Location: "Haifa",
+        description: "requirements:c++,c#,nodeJs",
+        status: "open",
+        whereFindJob: "Facebook",
+      },
+      {
+        CompanyName: "Google",
+        role: "front-ind",
+        Location: "Tel-Aviv",
+        description: "requirements:React",
+        status: "open",
+        whereFindJob: "Friend",
+      },
+      {
+        CompanyName: "Facebook",
+        role: "Full stack",
+        Location: "Haifa",
+        description: "requirements:React,nodeJs",
+        status: "open",
+        whereFindJob: "LinkedIn",
+      },
+      {
+        CompanyName: "Intel",
+        role: "back-ind",
+        Location: "Haifa",
+        description: "requirements:c++,c#,nodeJs",
+        status: "open",
+        whereFindJob: "Facebook",
+      },
+      {
+        CompanyName: "Google",
+        role: "front-ind",
+        Location: "Tel-Aviv",
+        description: "requirements:React",
+        status: "open",
+        whereFindJob: "Friend",
+      },
+      {
+        CompanyName: "Facebook",
+        role: "Full stack",
+        Location: "Haifa",
+        description: "requirements:React,nodeJs",
+        status: "open",
+        whereFindJob: "LinkedIn",
+      },
+      {
+        CompanyName: "Intel",
+        role: "back-ind",
+        Location: "Haifa",
+        description: "requirements:c++,c#,nodeJs",
+        status: "open",
+        whereFindJob: "Facebook",
+      },
+      {
+        CompanyName: "Google",
+        role: "front-ind",
+        Location: "Tel-Aviv",
+        description: "requirements:React",
+        status: "open",
+        whereFindJob: "Friend",
+      },
+      {
+        CompanyName: "Facebook",
+        role: "Full stack",
+        Location: "Haifa",
+        description: "requirements:React,nodeJs",
+        status: "open",
+        whereFindJob: "LinkedIn",
+      },
+    ];
+
+    setstudentData(response);
+    console.log(response);
+  }, []);
   return (
     <ThemeProvider theme={theme}>
       {/* to overide and change the orignal colors and thems in other comps */}
@@ -32,10 +165,7 @@ function App() {
           <Switch>
             {/* Switch = every time will get 1 router */}
             <Route exact path="/">
-              <Notes />
-            </Route>
-            <Route path="/create">
-              <Create />
+              <Processes studentData={studentData} />
             </Route>
           </Switch>
         </Layout>

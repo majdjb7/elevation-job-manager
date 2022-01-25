@@ -7,7 +7,13 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import { AddCircleOutlineOutlined, SubjectOutlined } from "@material-ui/icons";
+import {
+  AddCircleOutlineOutlined,
+  SubjectOutlined,
+  Work,
+  SchoolRounded,
+} from "@material-ui/icons";
+
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import { format } from "date-fns";
@@ -30,12 +36,15 @@ const useStyles = makeStyles((theme) => {
     },
     drawerPaper: {
       width: drawerWidth,
+      backgroundColor: "#29374e",
     },
     active: {
-      background: "#f4f4f4",
+      background: "#45546e",
     },
     title: {
       padding: theme.spacing(2),
+      color: "#ffffff",
+      backgroundColor: "#212c3f",
     },
     appBar: {
       width: `calc(100% - ${drawerWidth}px)`,
@@ -47,6 +56,14 @@ const useStyles = makeStyles((theme) => {
     toolbar: theme.mixins.toolbar,
     avatar: {
       marginLeft: theme.spacing(2),
+    },
+    ListItemText: {
+      color: "#ffffff",
+    },
+    ListItem: {
+      "&:hover": {
+        backgroundColor: "#303c4f",
+      },
     },
   };
 });
@@ -61,18 +78,8 @@ export default function Layout({ children }) {
 
   const menuItems = [
     {
-      text: "My Notes",
-      icon: <SubjectOutlined color="secondary" />,
-      path: "/",
-    },
-    {
-      text: "Create Note",
-      icon: <AddCircleOutlineOutlined color="secondary" />,
-      path: "/create",
-    },
-    {
-      text: "STUDENTS",
-      icon: <AddCircleOutlineOutlined color="secondary" />,
+      text: "Processes",
+      icon: <Work color="secondary" />,
       path: "/",
     },
   ];
@@ -84,14 +91,17 @@ export default function Layout({ children }) {
         position="fixed"
         className={classes.appBar}
         elevation={0}
-        color="primary"
+        color={"primary"}
       >
         <Toolbar>
           <Typography className={classes.date}>
             Today is the {format(new Date(), "do MMMM Y")}
           </Typography>
-          <Typography>Mario</Typography>
-          <Avatar className={classes.avatar} src="/mario-av.png" />
+          <Typography>Ayman</Typography>
+          <Avatar
+            className={classes.avatar}
+            src="https://media-exp1.licdn.com/dms/image/C4E03AQGzvBqaQHa1vw/profile-displayphoto-shrink_800_800/0/1631448072130?e=1648684800&v=beta&t=6122tVcQhDq7qdokhU5w-kFyImVX3OcGrJq6i1IMMck"
+          />
         </Toolbar>
       </AppBar>
 
@@ -104,7 +114,7 @@ export default function Layout({ children }) {
       >
         <div>
           <Typography variant="h5" className={classes.title}>
-            ELEVATION
+            <SchoolRounded color="secondary" /> ELEVATION
           </Typography>
         </div>
 
@@ -115,11 +125,16 @@ export default function Layout({ children }) {
               button
               key={item.text}
               onClick={() => history.push(item.path)}
-              className={location.pathname == item.path ? classes.active : null}
+              className={`${
+                location.pathname == item.path ? classes.active : null
+              } ${classes.ListItem}`}
               //  to make the btns hover
             >
               <ListItemIcon>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.text} />
+              <ListItemText
+                primary={item.text}
+                className={classes.ListItemText}
+              />
             </ListItem>
           ))}
         </List>

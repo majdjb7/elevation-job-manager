@@ -1,7 +1,9 @@
 const express = require("express");
 const path = require("path");
 const app = express();
+const mongoose = require('mongoose')
 const api = require("./server/routes/api");
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/final', { useNewUrlParser: true })
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
