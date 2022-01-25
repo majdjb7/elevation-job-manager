@@ -66,6 +66,8 @@ function Processes({ studentData }) {
     setPage(0);
   };
 
+  console.log(studentData)
+
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
       <TableContainer component={Paper} className={classes.tableContainer}>

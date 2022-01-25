@@ -44,5 +44,55 @@ studentData.forEach(student => {
         s.jobs.push(j)
     })
 
+    jobData.forEach(job => {
+        const j = new Job({
+            companyName: job.companyName,
+            role: job.role,
+            location: job.location,
+            description: job.description,
+            status: job.status,
+            whereFindJob: job.whereFindJob,
+            mostRecentInterview: "Sunday, August 19, 2018 9:23 PM",
+            interviews: job.interviews
+        })
+        interviewData.forEach(interview => {
+            const i = new Interview({
+                type: interview.type,
+                time: interview.time,
+                interviewerName: interview.interviewerName,
+                status: interview.status
+            })
+            i.save()
+            j.interviews.push(i)
+        })
+        j.save()
+        s.jobs.push(j)
+    })
+
+    jobData.forEach(job => {
+        const j = new Job({
+            companyName: job.companyName,
+            role: job.role,
+            location: job.location,
+            description: job.description,
+            status: job.status,
+            whereFindJob: job.whereFindJob,
+            mostRecentDate: null,
+            interviews: job.interviews
+        })
+        interviewData.forEach(interview => {
+            const i = new Interview({
+                type: interview.type,
+                time: interview.time,
+                interviewerName: interview.interviewerName,
+                status: interview.status
+            })
+            i.save()
+            j.interviews.push(i)
+        })
+        j.save()
+        s.jobs.push(j)
+    })
+
     s.save()
 })

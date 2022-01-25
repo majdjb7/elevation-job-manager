@@ -11,7 +11,7 @@ const interviewSchema = new Schema({
     status: {
         type: String,
         enum: ['Open', 'Accepted', 'Rejected', 'Pending', 'NoReply'],
-        default: 'open'
+        default: 'Open'
     }
 })
 

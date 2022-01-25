@@ -68,7 +68,7 @@ router.post("/jobs/:id/interviews", async (req, res) => {
       status : req.body.status
   })
 
-  Job.findByIdAndUpdate((id), { $push: { interviews: interview } }, function (err, interview) {
+  Job.findByIdAndUpdate((id), { $push: { interviews: interview, mostRecentInterview: time }, }, function (err, interview) {
   })
  await interview.save()
   res.send(interview)
