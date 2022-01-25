@@ -1,0 +1,17 @@
+[
+    {
+        "firstName": "Lotem",
+        "lastName": "Hiki",
+        "email": "lotem@gmail.com",
+        "mobileNo": "0532282478",
+        "password": "12345"
+
+    },
+    {
+        "firstName": "Ofri",
+        "lastName": "Weizmann",
+        "email": "ofri@gmail.com",
+        "mobileNo": "0532282478",
+        "password": "12345"
+    }
+]
