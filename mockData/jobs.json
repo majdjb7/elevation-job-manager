@@ -25,5 +25,14 @@
         "status": "Open",
         "whereFindJob": "LinkedIn",
         "interviews": []
+    },
+    {
+        "companyName": "Microsoft",
+        "role": "Backend",
+        "location": "Herzliyya",
+        "description": "requirements:Python",
+        "status": "Open",
+        "whereFindJob": "Friend",
+        "interviews": []
     }
 ]
