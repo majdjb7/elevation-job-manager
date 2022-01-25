@@ -3,6 +3,7 @@ const router = express.Router();
 const Job = require('../models/Job')
 const Student = require('../models/Student')
 const Interview = require('../models/Interview')
+
 router.get("/students/:id/jobs", async (req, res) => {
    let id=req.params.id
    console.log(id)

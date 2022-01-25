@@ -95,17 +95,17 @@ function Processes({ studentData }) {
                     <Grid container>
                       <Grid item lg={2}>
                         <Avatar
-                          alt={row.CompanyName}
+                          alt={row.companyName}
                           src="."
                           className={classes.avatar}
                         />
                       </Grid>
                       <Grid item lg={10}>
                         <Typography className={classes.name}>
-                          {row.CompanyName}
+                          {row.companyName}
                         </Typography>
                         <Typography color="textSecondary" variant="body2">
-                          {row.Location}
+                          {row.location}
                         </Typography>
                         <Typography color="textSecondary" variant="body2">
                           I found it by {row.whereFindJob}
@@ -125,9 +125,9 @@ function Processes({ studentData }) {
                       className={classes.status}
                       style={{
                         backgroundColor:
-                          (row.status === "open" && "green") ||
-                          (row.status === "pending" && "blue") ||
-                          (row.status === "blocked" && "red"),
+                          (row.status === "Open" && "green") ||
+                          (row.status === "Pending" && "blue") ||
+                          (row.status === "Declined" && "red"),
                       }}
                     >
                       {row.status}
