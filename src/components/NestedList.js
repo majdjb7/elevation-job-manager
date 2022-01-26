@@ -49,22 +49,27 @@ export default function NestedList() {
       }
     >
       <ListItemButton onClick={handleClick}>
-        <ListItemText primary="14/02/22" />
+        <ListItemText primary="open" />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
           <ListItemText sx={{ pl: 1 }} primary="Hr - 14/02/22" />
+<<<<<<< HEAD
 
           <hr />
 
           <ListItemText sx={{ pl: 1 }} primary="Hr - 14/02/22" />
 
           <hr />
+=======
+          <ListItemText sx={{ pl: 1 }} primary="Hr - 14/02/22" />
+>>>>>>> main
           <ListItemText sx={{ pl: 1 }} primary="Hr - 14/02/22" />
           {/* <ListItemButton sx={{ pl: 1 }}>
             <ListItemText primary="Hr - 14/02/22" />
           </ListItemButton> */}
+<<<<<<< HEAD
           <TextField
             // onChange={(e) => setTime(e.target.value)}
             id="datetime-local"
@@ -94,6 +99,8 @@ export default function NestedList() {
               <MenuItem value={50}>Home Test</MenuItem>
             </Select>
           </FormControl>
+=======
+>>>>>>> main
         </List>
       </Collapse>
     </List>

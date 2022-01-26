@@ -26,6 +26,11 @@ const useStyles = makeStyles({
 });
 
 function AddProcess() {
+
+    const MAJD_ID   = "61f10b63c075b471f2572fe1"
+    const AYMAN_ID  = "61f10b63c075b471f2572f98"
+    const MOSTFA_ID = "61f10b63c075b471f2572f4f"
+
   const classes = useStyles();
   const history = useHistory();
   const [companyName, setCompanyName] = useState("");
@@ -64,7 +69,7 @@ function AddProcess() {
     }
     if (companyName && role && location && description && whereFindJob) {
       const res = await axios.post(
-        "http://localhost:8888/students/61f13e5252922dc4a89fd6e1/jobs",
+        `http://localhost:8888/student/jobs/${MAJD_ID}`,
         { companyName, role, location, description, whereFindJob }
       );
       history.push({

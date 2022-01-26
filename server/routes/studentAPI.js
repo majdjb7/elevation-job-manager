@@ -4,7 +4,7 @@ const Job = require('../models/Job')
 const Student = require('../models/Student')
 const Interview = require('../models/Interview')
 
-router.get("/students/:id/jobs", async (req, res) => {
+router.get("/jobs/:id", async (req, res) => {
    let id=req.params.id
    console.log(id)
    try {
@@ -22,7 +22,7 @@ router.get("/students/:id/jobs", async (req, res) => {
      }
 });
 
-router.post("/students/:id/jobs", async (req, res) => {
+router.post("/jobs/:id", async (req, res) => {
   let id=req.params.id
   console.log(req.body)
   try {
