@@ -61,7 +61,7 @@ function AddProcess() {
             setWhereFindJobError(true)
         }
         if (companyName && role && location && description && whereFindJob) {
-        const res= await  axios.post('http://localhost:8888/students/61eeae27be3baa3fbc6bf598/jobs', 
+        const res= await  axios.post('http://localhost:8888/students/61f01b490a23ad5421828bf6/jobs', 
                  {companyName,role,location,description,whereFindJob})
         history.push({
             pathname: '/addInterview',
@@ -130,9 +130,9 @@ function AddProcess() {
                  */}
 
 
-        <FormControl className={classes.field}>
+        <FormControl className={classes.field} >
           <FormLabel>Where You Find The Job</FormLabel>
-          <RadioGroup value={whereFindJob} onChange={(e) => setWhereFindJob(e.target.value)}>
+          <RadioGroup error={whereFindJob} value={whereFindJob} onChange={(e) => setWhereFindJob(e.target.value)}>
             <FormControlLabel value="LinkedIn" control={<Radio />} label="LinkedIn" />
             <FormControlLabel value="Facebook" control={<Radio />} label="Facebook" />
             <FormControlLabel value="Company website" control={<Radio />} label="Company website" />

@@ -14,6 +14,8 @@ import { useHistory } from 'react-router-dom'
 import { useLocation } from "react-router-dom"
 import axios from 'axios'
 
+
+
 const useStyles = makeStyles({
     field: {
         marginTop: 20,
@@ -49,11 +51,11 @@ function AddInterview() {
         if (interviewerName == '') {
             setInterviewerNameError(true)
         }
-      
+
         if (type && time && interviewerName) {
-           let id= location.state
-            const res = await axios.post("http://localhost:8888/jobs/"+id+"/interviews",
-                { type, time, interviewerName})
+            let id = location.state
+            const res = await axios.post("http://localhost:8888/jobs/" + id + "/interviews",
+                { type, time, interviewerName })
             history.push({
                 pathname: '/',
                 state: res.data._id,
@@ -73,23 +75,30 @@ function AddInterview() {
             </Typography>
 
             <form noValidate autoComplete="off" onSubmit={handleSubmit}>
-                <TextField className={classes.field}
-                    onChange={(e) => setType(e.target.value)}
-                    label="Type"
-                    variant="outlined"
-                    color="secondary"
-                    fullWidth
-                    required
-                    error={typeError}
-                />
-                <TextField className={classes.field}
-                    onChange={(e) => setTime(e.target.value)}
+
+                <FormControl className={classes.field}>
+                    <FormLabel>Type</FormLabel>
+                    <RadioGroup value={type} onChange={(e) => setType(e.target.value)}>
+                        <FormControlLabel value="HR" control={<Radio />} label="HR" />
+                        <FormControlLabel value="Telephone" control={<Radio />} label="Telephone" />
+                        <FormControlLabel value="Technical" control={<Radio />} label="Technical" />
+                        <FormControlLabel value="Home Assignment" control={<Radio />} label="Home Assignment" />
+                        <FormControlLabel value="Home Test" control={<Radio />} label="Home Test" />
+                    </RadioGroup>
+                </FormControl>
+               
+                <TextField
+                 onChange={(e) => setTime(e.target.value)}
+                    id="datetime-local"
                     label="Time"
-                    variant="outlined"
-                    color="secondary"
-                    fullWidth
+                    type="datetime-local"
+                   
                     required
                     error={timeError}
+                    sx={{ width: 250 }}
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
                 />
                 <TextField className={classes.field}
                     onChange={(e) => setInterviewerName(e.target.value)}
