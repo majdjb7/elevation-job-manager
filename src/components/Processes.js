@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Table,
@@ -14,7 +14,11 @@ import {
   TablePagination,
   TableFooter,
 } from "@material-ui/core";
+////////////////////////////
+import { inject, observer } from "mobx-react";
+import { observe } from "mobx";
 
+/////////////////////////////
 const useStyles = makeStyles((theme) => ({
   table: {
     minWidth: 650,
@@ -52,119 +56,136 @@ const useStyles = makeStyles((theme) => ({
 
 let STATUSES = ["Active", "Pending", "Blocked"];
 
-function Processes({ studentData }) {
-  const classes = useStyles();
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+const Processes = inject("studentStore")(
+  observer((props) => {
+    /************************************************ */
+    const [studentData, setstudentData] = useState([]);
+    useEffect(async () => {
+      await props.studentStore.addJobsFromDB();
+      setstudentData(props.studentStore.StudentJobs);
+      console.log(studentData);
+    }, []);
+    /************************************************ */
+    const classes = useStyles();
+    const [page, setPage] = React.useState(0);
+    const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
+    const handleChangePage = (event, newPage) => {
+      setPage(newPage);
+    };
 
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
+    const handleChangeRowsPerPage = (event) => {
+      setRowsPerPage(+event.target.value);
+      setPage(0);
+    };
 
-  console.log(studentData)
+    const getMostRecentInterview = function (interviews) {
+      let mostRelevantInterview,
+        interviewType = null;
+      let maxDate = null;
+      new Date(
+        Math.max.apply(
+          null,
+          interviews.map(function (e) {
+            maxDate = e.time;
+            interviewType = e.type;
+          })
+        )
+      );
+      mostRelevantInterview =
+        interviewType + ": " + maxDate.substring(0, maxDate.indexOf("T"));
+      return mostRelevantInterview;
+    };
 
-  const getMostRecentInterview= function(interviews) {
-    let mostRelevantInterview, interviewType = null
-    let maxDate = null
-    new Date(Math.max.apply(null, interviews.map(function(e) {
-      maxDate = e.time;
-      interviewType = e.type
-    })));
-    mostRelevantInterview = interviewType + ": " + maxDate.substring(0, maxDate.indexOf("T"));
-    return mostRelevantInterview;
-  }
-
-  return (
-    <Paper sx={{ width: "100%", overflow: "hidden" }}>
-      <TableContainer component={Paper} className={classes.tableContainer}>
-        <Table className={classes.table} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell className={classes.tableHeaderCell}>
-                <Typography variant="h6">Company Info</Typography>
-              </TableCell>
-              <TableCell className={classes.tableHeaderCell}>
-                <Typography variant="h6">Job Info</Typography>
-              </TableCell>
-              <TableCell className={classes.tableHeaderCell}>
-                <Typography variant="h6">Closest Interview</Typography>
-              </TableCell>
-              <TableCell className={classes.tableHeaderCell}>
-                <Typography variant="h6">Status</Typography>
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {studentData
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row, index) => (
-                <TableRow hover key={index}>
-                  <TableCell>
-                    <Grid container>
-                      <Grid item lg={2}>
-                        <Avatar
-                          alt={row.companyName}
-                          src="."
-                          className={classes.avatar}
-                        />
+    return (
+      <Paper sx={{ width: "100%", overflow: "hidden" }}>
+        <TableContainer component={Paper} className={classes.tableContainer}>
+          <Table className={classes.table} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell className={classes.tableHeaderCell}>
+                  <Typography variant="h6">Company Info</Typography>
+                </TableCell>
+                <TableCell className={classes.tableHeaderCell}>
+                  <Typography variant="h6">Job Info</Typography>
+                </TableCell>
+                <TableCell className={classes.tableHeaderCell}>
+                  <Typography variant="h6">Closest Interview</Typography>
+                </TableCell>
+                <TableCell className={classes.tableHeaderCell}>
+                  <Typography variant="h6">Status</Typography>
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {studentData
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((row, index) => (
+                  <TableRow hover key={index}>
+                    <TableCell>
+                      <Grid container>
+                        <Grid item lg={2}>
+                          <Avatar
+                            alt={row.companyName}
+                            src="."
+                            className={classes.avatar}
+                          />
+                        </Grid>
+                        <Grid item lg={10}>
+                          <Typography className={classes.name}>
+                            {row.companyName}
+                          </Typography>
+                          <Typography color="textSecondary" variant="body2">
+                            {row.location}
+                          </Typography>
+                          <Typography color="textSecondary" variant="body2">
+                            I found it by {row.whereFindJob}
+                          </Typography>
+                        </Grid>
                       </Grid>
-                      <Grid item lg={10}>
-                        <Typography className={classes.name}>
-                          {row.companyName}
-                        </Typography>
-                        <Typography color="textSecondary" variant="body2">
-                          {row.location}
-                        </Typography>
-                        <Typography color="textSecondary" variant="body2">
-                          I found it by {row.whereFindJob}
-                        </Typography>
-                      </Grid>
-                    </Grid>
-                  </TableCell>
-                  <TableCell>
-                    <Typography variant="subtitle2">{row.role}</Typography>
-                    <Typography color="textSecondary" variant="body2">
-                      {row.description}
-                    </Typography>
-                  </TableCell>
-                  <TableCell>{getMostRecentInterview(row.interviews)}</TableCell>
-                  <TableCell>
-                    <Typography
-                      className={classes.status}
-                      style={{
-                        backgroundColor:
-                          (row.status === "Open" && "green") ||
-                          (row.status === "Pending" && "blue") ||
-                          (row.status === "Declined" && "red"),
-                      }}
-                    >
-                      {row.status}
-                    </Typography>
-                  </TableCell>
-                </TableRow>
-              ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      {/* <TableFooter> */}
-      <TablePagination
-        className={classes.TablePagination}
-        rowsPerPageOptions={[5, 10, 15]}
-        component="div"
-        count={studentData.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onChangePage={handleChangePage}
-        onChangeRowsPerPage={handleChangeRowsPerPage}
-      />
-      {/* </TableFooter> */}
-    </Paper>
-  );
-}
+                    </TableCell>
+                    <TableCell>
+                      <Typography variant="subtitle2">{row.role}</Typography>
+                      <Typography color="textSecondary" variant="body2">
+                        {row.description}
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      {getMostRecentInterview(row.interviews)}
+                    </TableCell>
+                    <TableCell>
+                      <Typography
+                        className={classes.status}
+                        style={{
+                          backgroundColor:
+                            (row.status === "Open" && "green") ||
+                            (row.status === "Pending" && "blue") ||
+                            (row.status === "Declined" && "red"),
+                        }}
+                      >
+                        {row.status}
+                      </Typography>
+                    </TableCell>
+                  </TableRow>
+                ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        {/* <TableFooter> */}
+        <TablePagination
+          className={classes.TablePagination}
+          rowsPerPageOptions={[5, 10, 15]}
+          component="div"
+          count={studentData.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onChangePage={handleChangePage}
+          onChangeRowsPerPage={handleChangeRowsPerPage}
+        />
+        {/* </TableFooter> */}
+      </Paper>
+    );
+  })
+);
 
 export default Processes;
