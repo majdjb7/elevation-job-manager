@@ -29,20 +29,14 @@ export default function NestedList() {
       }
     >
       <ListItemButton onClick={handleClick}>
-        <ListItemText primary="14/02/22" />
+        <ListItemText primary="open" />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          <ListItemButton sx={{ pl: 1 }}>
-            <ListItemText primary="Hr - 14/02/22" />
-          </ListItemButton>
-          <ListItemButton sx={{ pl: 1 }}>
-            <ListItemText primary="Hr - 14/02/22" />
-          </ListItemButton>
-          <ListItemButton sx={{ pl: 1 }}>
-            <ListItemText primary="Hr - 14/02/22" />
-          </ListItemButton>
+          <ListItemText sx={{ pl: 1 }} primary="Hr - 14/02/22" />
+          <ListItemText sx={{ pl: 1 }} primary="Hr - 14/02/22" />
+          <ListItemText sx={{ pl: 1 }} primary="Hr - 14/02/22" />
         </List>
       </Collapse>
     </List>
