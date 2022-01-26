@@ -19,6 +19,8 @@ import { inject, observer } from "mobx-react";
 import { observe } from "mobx";
 
 /////////////////////////////
+import NestedList from "./NestedList";
+
 const useStyles = makeStyles((theme) => ({
   table: {
     minWidth: 650,
@@ -113,6 +115,9 @@ const Processes = inject("studentStore")(
                 <TableCell className={classes.tableHeaderCell}>
                   <Typography variant="h6">Status</Typography>
                 </TableCell>
+                <TableCell className={classes.tableHeaderCell}>
+                  <Typography variant="h6">show History</Typography>
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -164,6 +169,9 @@ const Processes = inject("studentStore")(
                     >
                       {row.status}
                     </Typography>
+                  </TableCell>
+                  <TableCell>
+                    <NestedList />
                   </TableCell>
                 </TableRow>
               ))}

@@ -8,6 +8,7 @@ import AddInterview from "./components/AddInterview";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+import NestedList from "./components/NestedList";
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -44,6 +45,9 @@ function App() {
             </Route>
             <Route exact path="/addInterview">
               <AddInterview />
+            </Route>
+            <Route exact path="/NestedList">
+              <NestedList />
             </Route>
           </Switch>
         </Layout>
