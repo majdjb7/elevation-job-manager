@@ -27,20 +27,6 @@ const theme = createMuiTheme({
 });
 
 function App() {
-  const [studentData, setstudentData] = useState([]);
-
-  const MAJD_ID = "61f026b72a694eebcf65cc62";
-  const AYMAN_ID = "61f023bf4ddc42f640e75db1";
-  const MOSTFA_ID = "61f023bf4ddc42f640e75d98";
-
-  useEffect(async () => {
-    let result = await axios.get(
-      `http://localhost:8888/students/${MAJD_ID}/jobs`
-    );
-    let studentJobs = result.data;
-    setstudentData(studentJobs);
-  }, []);
-
   return (
     <ThemeProvider theme={theme}>
       {/* to overide and change the orignal colors and thems in other comps */}

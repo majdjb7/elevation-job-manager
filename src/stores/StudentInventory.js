@@ -4,24 +4,20 @@ import axios from "axios";
 
 export class StudentInventory {
   constructor() {
-    this.jobs = [];
     this.StudentJobs = [];
     makeObservable(this, {
-      jobs: observable,
+      StudentJobs: observable,
       numItems: computed,
       addJobsFromDB: action,
     });
+    this.addJobsFromDB();
   }
-
   get numItems() {
-    return this.jobs.length;
+    return this.StudentJobs.length;
   }
   addJobsFromDB = async () => {
-    let majd = "61f026b72a694eebcf65cc62";
+    let majd = "61f13e5252922dc4a89fd6e1";
     let result = await axios.get(`http://localhost:8888/students/${majd}/jobs`);
     this.StudentJobs = result.data;
-  };
-  getStudentJobs = () => {
-    return this.StudentJobs;
   };
 }
