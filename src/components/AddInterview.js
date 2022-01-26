@@ -21,6 +21,10 @@ const useStyles = makeStyles({
     marginTop: 20,
     marginBottom: 20,
     display: "block",
+    maxWidth: "25%",
+  },
+  Container: {
+    marginLeft: "-80px",
   },
 });
 const AddInterview = inject("studentStore")(
@@ -71,33 +75,39 @@ const AddInterview = inject("studentStore")(
           color="textSecondary"
           component="h2"
           gutterBottom
+          className={classes.Container}
         >
           Create a New Interview
         </Typography>
 
-        <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+        <form
+          noValidate
+          autoComplete="off"
+          onSubmit={handleSubmit}
+          className={classes.Container}
+        >
           <FormControl className={classes.field}>
             <FormLabel>Type</FormLabel>
             <RadioGroup value={type} onChange={(e) => setType(e.target.value)}>
               <FormControlLabel value="HR" control={<Radio />} label="HR" />
               <FormControlLabel
                 value="Telephone"
-                control={<Radio />}
+                control={<Radio color="primary" />}
                 label="Telephone"
               />
               <FormControlLabel
                 value="Technical"
-                control={<Radio />}
+                control={<Radio color="primary" />}
                 label="Technical"
               />
               <FormControlLabel
                 value="Home Assignment"
-                control={<Radio />}
+                control={<Radio color="primary" />}
                 label="Home Assignment"
               />
               <FormControlLabel
                 value="Home Test"
-                control={<Radio />}
+                control={<Radio color="primary" />}
                 label="Home Test"
               />
             </RadioGroup>
@@ -120,7 +130,7 @@ const AddInterview = inject("studentStore")(
             onChange={(e) => setInterviewerName(e.target.value)}
             label="InterviewerName"
             variant="outlined"
-            color="secondary"
+            color="primary"
             fullWidth
             required
             error={interviewerNameError}
@@ -128,7 +138,7 @@ const AddInterview = inject("studentStore")(
 
           <Button
             type="submit"
-            color="secondary"
+            color="primary"
             variant="contained"
             endIcon={<KeyboardArrowRightIcon />}
           >

@@ -20,6 +20,7 @@ import { observe } from "mobx";
 
 /////////////////////////////
 import NestedList from "./NestedList";
+import Box from "@mui/material/Box";
 
 const useStyles = makeStyles((theme) => ({
   table: {
@@ -181,7 +182,7 @@ const Processes = inject("studentStore")(
         {/* <TableFooter> */}
         <TablePagination
           className={classes.TablePagination}
-          rowsPerPageOptions={[5, 10, 15]}
+          rowsPerPageOptions={[5, 10]}
           component="div"
           count={props.studentStore.StudentJobs.length}
           rowsPerPage={rowsPerPage}
