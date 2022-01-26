@@ -35,7 +35,9 @@ function AddProcess() {
     const [whereFindJob, setWhereFindJob] = useState('')
     const [whereFindJobError, setWhereFindJobError] = useState(false)
 
-
+    const MAJD_ID   = "61f10b63c075b471f2572fe1"
+    const AYMAN_ID  = "61f10b63c075b471f2572f98"
+    const MOSTFA_ID = "61f10b63c075b471f2572f4f"
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -61,7 +63,7 @@ function AddProcess() {
             setWhereFindJobError(true)
         }
         if (companyName && role && location && description && whereFindJob) {
-        const res= await  axios.post('http://localhost:8888/students/61f01b490a23ad5421828bf6/jobs', 
+        const res= await  axios.post(`http://localhost:8888/students/${MAJD_ID}/jobs`, 
                  {companyName,role,location,description,whereFindJob})
         history.push({
             pathname: '/addInterview',
