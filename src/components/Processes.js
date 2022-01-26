@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Table,
@@ -14,6 +14,12 @@ import {
   TablePagination,
   TableFooter,
 } from "@material-ui/core";
+////////////////////////////
+import { inject, observer } from "mobx-react";
+import { observe } from "mobx";
+
+/////////////////////////////
+import NestedList from "./NestedList";
 
 const useStyles = makeStyles((theme) => ({
   table: {
@@ -52,57 +58,73 @@ const useStyles = makeStyles((theme) => ({
 
 let STATUSES = ["Active", "Pending", "Blocked"];
 
-function Processes({ studentData }) {
-  const classes = useStyles();
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+const Processes = inject("studentStore")(
+  observer((props) => {
+    /************************************************ */
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
+    useEffect(async () => {
+      await props.studentStore.addJobsFromDB();
+    }, []);
+    /************************************************ */
+    const classes = useStyles();
+    const [page, setPage] = React.useState(0);
+    const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
+    const handleChangePage = (event, newPage) => {
+      setPage(newPage);
+    };
 
-  console.log(studentData)
+    const handleChangeRowsPerPage = (event) => {
+      setRowsPerPage(+event.target.value);
+      setPage(0);
+    };
 
-  const getMostRecentInterview= function(interviews) {
-    let mostRelevantInterview, interviewType = null
-    let maxDate = null
-    new Date(Math.max.apply(null, interviews.map(function(e) {
-      maxDate = e.time;
-      interviewType = e.type
-    })));
-    mostRelevantInterview = interviewType + ": " + maxDate.substring(0, maxDate.indexOf("T"));
-    return mostRelevantInterview;
-  }
+    const getMostRecentInterview = function (interviews) {
+      let mostRelevantInterview,
+        interviewType = null;
+      let maxDate = null;
+      new Date(
+        Math.max.apply(
+          null,
+          interviews.map(function (e) {
+            maxDate = e.time;
+            interviewType = e.type;
+          })
+        )
+      );
+      mostRelevantInterview =
+        interviewType + ": " + maxDate.substring(0, maxDate.indexOf("T"));
+      return mostRelevantInterview;
+    };
 
-  return (
-    <Paper sx={{ width: "100%", overflow: "hidden" }}>
-      <TableContainer component={Paper} className={classes.tableContainer}>
-        <Table className={classes.table} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell className={classes.tableHeaderCell}>
-                <Typography variant="h6">Company Info</Typography>
-              </TableCell>
-              <TableCell className={classes.tableHeaderCell}>
-                <Typography variant="h6">Job Info</Typography>
-              </TableCell>
-              <TableCell className={classes.tableHeaderCell}>
-                <Typography variant="h6">Closest Interview</Typography>
-              </TableCell>
-              <TableCell className={classes.tableHeaderCell}>
-                <Typography variant="h6">Status</Typography>
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {studentData
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row, index) => (
+    return (
+      <Paper sx={{ width: "100%", overflow: "hidden" }}>
+        <TableContainer component={Paper} className={classes.tableContainer}>
+          <Table className={classes.table} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell className={classes.tableHeaderCell}>
+                  <Typography variant="h6">Company Info</Typography>
+                </TableCell>
+                <TableCell className={classes.tableHeaderCell}>
+                  <Typography variant="h6">Job Info</Typography>
+                </TableCell>
+                <TableCell className={classes.tableHeaderCell}>
+                  <Typography variant="h6">Closest Interview</Typography>
+                </TableCell>
+                <TableCell className={classes.tableHeaderCell}>
+                  <Typography variant="h6">Status</Typography>
+                </TableCell>
+                <TableCell className={classes.tableHeaderCell}>
+                  <Typography variant="h6">show History</Typography>
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {props.studentStore.StudentJobs.slice(
+                page * rowsPerPage,
+                page * rowsPerPage + rowsPerPage
+              ).map((row, index) => (
                 <TableRow hover key={index}>
                   <TableCell>
                     <Grid container>
@@ -132,7 +154,9 @@ function Processes({ studentData }) {
                       {row.description}
                     </Typography>
                   </TableCell>
-                  <TableCell>{getMostRecentInterview(row.interviews)}</TableCell>
+                  <TableCell>
+                    {getMostRecentInterview(row.interviews)}
+                  </TableCell>
                   <TableCell>
                     <Typography
                       className={classes.status}
@@ -146,25 +170,29 @@ function Processes({ studentData }) {
                       {row.status}
                     </Typography>
                   </TableCell>
+                  <TableCell>
+                    <NestedList />
+                  </TableCell>
                 </TableRow>
               ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      {/* <TableFooter> */}
-      <TablePagination
-        className={classes.TablePagination}
-        rowsPerPageOptions={[5, 10, 15]}
-        component="div"
-        count={studentData.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onChangePage={handleChangePage}
-        onChangeRowsPerPage={handleChangeRowsPerPage}
-      />
-      {/* </TableFooter> */}
-    </Paper>
-  );
-}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        {/* <TableFooter> */}
+        <TablePagination
+          className={classes.TablePagination}
+          rowsPerPageOptions={[5, 10, 15]}
+          component="div"
+          count={props.studentStore.StudentJobs.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onChangePage={handleChangePage}
+          onChangeRowsPerPage={handleChangeRowsPerPage}
+        />
+        {/* </TableFooter> */}
+      </Paper>
+    );
+  })
+);
 
 export default Processes;
