@@ -9,17 +9,37 @@ import InboxIcon from "@mui/icons-material/MoveToInbox";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import StarBorder from "@mui/icons-material/StarBorder";
+import Input from "@mui/material/Input";
+import TextField from "@material-ui/core/TextField";
+import { makeStyles } from "@material-ui/core";
 
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+const useStyles = makeStyles({
+  Container: {
+    maxWidth: "100%",
+  },
+  SelectL: {
+    width: "200px",
+  },
+});
 export default function NestedList() {
   const [open, setOpen] = React.useState(false);
-
+  const ariaLabel = { "aria-label": "description" };
+  const classes = useStyles();
   const handleClick = () => {
     setOpen(!open);
   };
+  const [interviewType, setInterviewType] = React.useState("");
 
+  const handleChange = (event) => {
+    setInterviewType(event.target.value);
+  };
   return (
     <List
-      sx={{ width: "100%", maxWidth: 300 }}
+      sx={{ width: "100%", maxWidth: 150 }}
       component="nav"
       subheader={
         <ListSubheader
@@ -35,11 +55,52 @@ export default function NestedList() {
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
           <ListItemText sx={{ pl: 1 }} primary="Hr - 14/02/22" />
+<<<<<<< HEAD
+
+          <hr />
+
           <ListItemText sx={{ pl: 1 }} primary="Hr - 14/02/22" />
+
+          <hr />
+=======
+          <ListItemText sx={{ pl: 1 }} primary="Hr - 14/02/22" />
+>>>>>>> main
           <ListItemText sx={{ pl: 1 }} primary="Hr - 14/02/22" />
           {/* <ListItemButton sx={{ pl: 1 }}>
             <ListItemText primary="Hr - 14/02/22" />
           </ListItemButton> */}
+<<<<<<< HEAD
+          <TextField
+            // onChange={(e) => setTime(e.target.value)}
+            id="datetime-local"
+            label="Add new Interview"
+            type="datetime-local"
+            required
+            // error={timeError}
+            className={classes.Container}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+          <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+            <InputLabel id="demo-simple-select-standard-label">Type</InputLabel>
+            <Select
+              labelId="demo-simple-select-standard-label"
+              id="demo-simple-select-standard"
+              value={interviewType}
+              onChange={handleChange}
+              className={classes.Select}
+              label="interviewType"
+            >
+              <MenuItem value={10}>HR</MenuItem>
+              <MenuItem value={20}>Telephone</MenuItem>
+              <MenuItem value={30}>Technical</MenuItem>
+              <MenuItem value={40}>Home Assignment</MenuItem>
+              <MenuItem value={50}>Home Test</MenuItem>
+            </Select>
+          </FormControl>
+=======
+>>>>>>> main
         </List>
       </Collapse>
     </List>

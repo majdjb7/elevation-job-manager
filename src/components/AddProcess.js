@@ -18,6 +18,10 @@ const useStyles = makeStyles({
     marginTop: 20,
     marginBottom: 20,
     display: "block",
+    maxWidth: "35%",
+  },
+  Container: {
+    marginLeft: "-80px",
   },
 });
 
@@ -82,17 +86,23 @@ function AddProcess() {
         color="textSecondary"
         component="h2"
         gutterBottom
+        className={classes.Container}
       >
         Create a New Procsss
       </Typography>
 
-      <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+      <form
+        noValidate
+        autoComplete="off"
+        onSubmit={handleSubmit}
+        className={classes.Container}
+      >
         <TextField
           className={classes.field}
           onChange={(e) => setCompanyName(e.target.value)}
           label="Company Name"
           variant="outlined"
-          color="secondary"
+          color="primary"
           fullWidth
           required
           error={companyNameError}
@@ -102,7 +112,7 @@ function AddProcess() {
           onChange={(e) => setRole(e.target.value)}
           label="Role"
           variant="outlined"
-          color="secondary"
+          color="primary"
           fullWidth
           required
           error={roleError}
@@ -112,7 +122,7 @@ function AddProcess() {
           onChange={(e) => setLocation(e.target.value)}
           label="Location"
           variant="outlined"
-          color="secondary"
+          color="primary"
           fullWidth
           required
           error={locationError}
@@ -122,21 +132,11 @@ function AddProcess() {
           onChange={(e) => setDescription(e.target.value)}
           label="description"
           variant="outlined"
-          color="secondary"
+          color="primary"
           fullWidth
           required
           error={descriptionError}
         />
-        {/* <TextField className={classes.field}
-                    onChange={(e) => setWhereFindJob(e.target.value)}
-                    label="Where You Find The Job"
-                    variant="outlined"
-                    color="secondary"
-                    fullWidth
-                    required
-                    error={whereFindJobError}
-                />
-                 */}
 
         <FormControl className={classes.field}>
           <FormLabel>Where You Find The Job</FormLabel>
@@ -147,22 +147,22 @@ function AddProcess() {
           >
             <FormControlLabel
               value="LinkedIn"
-              control={<Radio />}
+              control={<Radio color="primary" />}
               label="LinkedIn"
             />
             <FormControlLabel
               value="Facebook"
-              control={<Radio />}
+              control={<Radio color="primary" />}
               label="Facebook"
             />
             <FormControlLabel
               value="Company website"
-              control={<Radio />}
+              control={<Radio color="primary" />}
               label="Company website"
             />
             <FormControlLabel
               value="Friend"
-              control={<Radio />}
+              control={<Radio color="primary" />}
               label="Friend"
             />
           </RadioGroup>
@@ -170,7 +170,7 @@ function AddProcess() {
 
         <Button
           type="submit"
-          color="secondary"
+          color="primary"
           variant="contained"
           endIcon={<KeyboardArrowRightIcon />}
         >

@@ -7,12 +7,8 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import {
-  AddCircleOutlineOutlined,
-  SubjectOutlined,
-  Work,
-  SchoolRounded,
-} from "@material-ui/icons";
+
+import { Work, SchoolRounded, AddCircle } from "@material-ui/icons";
 
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -83,8 +79,8 @@ export default function Layout({ children }) {
       path: "/",
     },
     {
-      text: "AddProcess",
-      icon: <Work color="secondary" />,
+      text: "Add Process",
+      icon: <AddCircle color="secondary" />,
       path: "/addProcess",
     },
     {
