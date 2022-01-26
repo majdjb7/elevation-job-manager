@@ -87,6 +87,11 @@ export default function Layout({ children }) {
       icon: <Work color="secondary" />,
       path: "/addProcess",
     },
+    {
+      text: "AdminPage",
+      icon: <Work color="secondary" />,
+      path: "/adminPage",
+    },
   ];
 
   return (

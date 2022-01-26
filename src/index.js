@@ -4,11 +4,14 @@ import "./index.css";
 import App from "./App";
 import { Provider } from "mobx-react";
 import { StudentInventory } from "./stores/StudentInventory";
+import { AdminInventory } from "./stores/AdminInventory"
 
 let studentStore = new StudentInventory();
+let adminStore = new AdminInventory();
 
 const stores = {
   studentStore,
+  adminStore,
 };
 
 ReactDOM.render(

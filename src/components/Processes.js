@@ -121,6 +121,7 @@ const Processes = inject("studentStore")(
               </TableRow>
             </TableHead>
             <TableBody>
+              {console.log(props.studentStore.StudentJobs)}
               {props.studentStore.StudentJobs.slice(
                 page * rowsPerPage,
                 page * rowsPerPage + rowsPerPage

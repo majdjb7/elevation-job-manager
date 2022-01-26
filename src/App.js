@@ -5,6 +5,7 @@ import Layout from "./components/Layout";
 import Processes from "./components/Processes";
 import AddProcess from "./components/AddProcess";
 import AddInterview from "./components/AddInterview";
+import AdminPage from "./components/AdminPage"
 import { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -48,6 +49,9 @@ function App() {
             </Route>
             <Route exact path="/NestedList">
               <NestedList />
+            </Route>
+            <Route exact path="/AdminPage">
+              <AdminPage />
             </Route>
           </Switch>
         </Layout>

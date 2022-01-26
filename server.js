@@ -3,7 +3,7 @@ const path = require("path");
 const app = express();
 const mongoose = require('mongoose')
 const studentAPI = require("./server/routes/studentAPI");
-// const adminAPI = require("./server/routes/adminAPI");
+const adminAPI = require("./server/routes/adminAPI");
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/finalProjectDB', { useNewUrlParser: true })
 
@@ -20,7 +20,7 @@ app.use(function (req, res, next) {
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use("/student", studentAPI);
-// app.use("/admin/", adminAPI);
+app.use("/admin", adminAPI);
 
 
 const port = 8888;
