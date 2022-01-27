@@ -20,6 +20,7 @@ import { observe } from "mobx";
 import { toJS } from 'mobx'
 /////////////////////////////
 import NestedList from "./NestedList";
+import PieChart from "./PieChart";
 import moment from 'moment'
 
 const useStyles = makeStyles((theme) => ({
@@ -69,6 +70,12 @@ const Processes = inject("adminStore")(
     useEffect(async () => {
       await props.adminStore.addJobsFromDBToAdmin();
       // console.log(toJS(props.adminStore.AdminJobs))
+
+      props.adminStore.getStatsOfAcceptedStudents()
+      props.adminStore.getStatsOfAcceptedStudents("Cohort 21")
+      props.adminStore.getStatusStats()
+      props.adminStore.getStatusStatsByCohort()
+
     }, []);
     /************************************************ */
     const classes = useStyles();
@@ -102,8 +109,27 @@ const Processes = inject("adminStore")(
       return mostRelevantInterview;
     };
 
+
     return (
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
+        <Grid
+          container
+          direction="row"
+          justifyContent="space-between"
+          alignItems="flex-start">
+          <Grid item lg={7}>
+            <PieChart
+              name="Percentage of Students with Jobs"
+              stats={toJS(props.adminStore.acceptedStudentsPercentage)}
+            />
+          </Grid>
+          <Grid item lg={5}>
+            <PieChart
+              name="General Status of All Jobs"
+              stats={toJS(props.adminStore.statsOfJobStatus)}
+            />
+          </Grid>
+        </Grid>
         <TableContainer component={Paper} className={classes.tableContainer}>
           <Table className={classes.table} aria-label="simple table">
             <TableHead>
