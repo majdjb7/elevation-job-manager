@@ -12,7 +12,9 @@ import StarBorder from "@mui/icons-material/StarBorder";
 import Input from "@mui/material/Input";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core";
-
+import { toJS } from 'mobx'
+import Moment from 'react-moment';
+import { Grid } from "@material-ui/core";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -25,7 +27,7 @@ const useStyles = makeStyles({
     width: "200px",
   },
 });
-export default function NestedList() {
+export default function NestedList(props) {
   const [open, setOpen] = React.useState(false);
   const ariaLabel = { "aria-label": "description" };
   const classes = useStyles();
@@ -54,17 +56,16 @@ export default function NestedList() {
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          <ListItemText sx={{ pl: 1 }} primary="Hr - 14/02/22" />
+          {props.interviews.length>0 ?
+            props.interviews.map(i =>
+              <div>
+                <ListItemText sx = {{ pl: 1}} primary={`${i.type}`} />
+                <Moment format="DD/MM/YYYY">{i.time}</Moment>
+                <hr />
+              </div>
+              )
+            : null }
 
-          <hr />
-
-          <ListItemText sx={{ pl: 1 }} primary="Hr - 14/02/22" />
-
-          <hr />
-          <ListItemText sx={{ pl: 1 }} primary="Hr - 14/02/22" />
-          {/* <ListItemButton sx={{ pl: 1 }}>
-            <ListItemText primary="Hr - 14/02/22" />
-          </ListItemButton> */}
           <TextField
             // onChange={(e) => setTime(e.target.value)}
             id="datetime-local"

@@ -20,6 +20,7 @@ import { observe } from "mobx";
 import { toJS } from 'mobx'
 /////////////////////////////
 import NestedList from "./NestedList";
+import moment from 'moment'
 
 const useStyles = makeStyles((theme) => ({
   table: {
@@ -84,9 +85,9 @@ const Processes = inject("adminStore")(
     };
 
     const getMostRecentInterview = function (interviews) {
-      let mostRelevantInterview,
-        interviewType = null;
+      let mostRelevantInterview, interviewType = null;
       let maxDate = null;
+      const format1 = "DD/MM/YYYY HH:mm"
       new Date(
         Math.max.apply(
           null,
@@ -97,9 +98,7 @@ const Processes = inject("adminStore")(
         )
       );
       mostRelevantInterview =
-          //UNTIL WE FIX BUG OF DATE
-        // interviewType + ": " + maxDate.substring(0, maxDate.indexOf("T"));
-        interviewType + ": " + maxDate;
+        interviewType + ": " + moment(maxDate).format(format1);
       return mostRelevantInterview;
     };
 
@@ -151,7 +150,6 @@ const Processes = inject("adminStore")(
                       </Grid>
                     </Grid>
                   </TableCell>
-
                   <TableCell>
                     <Grid container>
                       {/* <Grid item lg={2}>
@@ -201,7 +199,7 @@ const Processes = inject("adminStore")(
                   </TableCell>
 
                   <TableCell>
-                    <NestedList />
+                    <NestedList interviews={row.interviews}/>
                   </TableCell>
 
                 </TableRow>
