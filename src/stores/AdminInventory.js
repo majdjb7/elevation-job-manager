@@ -6,8 +6,8 @@ export class AdminInventory {
   constructor() {
     this.AdminJobs = [];
     this.allStudents = []
-    this.acceptedStudentsPercentage = {"AcceptedStudents": 0, "StudentsSearching": 0}
-    this.acceptedStudentsPercentagePerCohort = {"AcceptedStudents": 0, "StudentsSearching": 0}
+    this.acceptedStudentsPercentage = {"Employed": 0, "Unemployed": 0}
+    this.acceptedStudentsPercentagePerCohort = {"Employed": 0, "Unemployed": 0}
     this.statsOfJobStatus = {'Open': 0, 'Accepted': 0, 'Rejected': 0, 'Pending': 0, 'NoReply': 0}
     this.statsOfJobStatusByCohort = {'Open': 0, 'Accepted': 0, 'Rejected': 0, 'Pending': 0, 'NoReply': 0}
 
@@ -27,6 +27,10 @@ export class AdminInventory {
     return this.AdminJobs.length;
   }
 
+  get numOfStudents() {
+    return this.allStudents.length;
+  }
+
   sortAllStudentJobs = () => {
     this.allStudents.map((s) => {
       s.jobs.map((j) => {
@@ -42,8 +46,8 @@ export class AdminInventory {
 
   //GENERAL: Returns how many students have accepted jobs, and and the rest whoa re still searching
   getStatsOfAcceptedStudents = () => {
-    this.acceptedStudentsPercentage["StudentsSearching"] = 0
-    this.acceptedStudentsPercentage["AcceptedStudents"] = 0
+    this.acceptedStudentsPercentage["Unemployed"] = 0
+    this.acceptedStudentsPercentage["Employed"] = 0
     this.allStudents.map(s => {
       let accepted = false
       s.jobs.map(j => {
@@ -52,8 +56,8 @@ export class AdminInventory {
         }
       })
       accepted==false ?
-        this.acceptedStudentsPercentage["StudentsSearching"] +=1
-          : this.acceptedStudentsPercentage["AcceptedStudents"] +=1
+        this.acceptedStudentsPercentage["Unemployed"] +=1
+          : this.acceptedStudentsPercentage["Employed"] +=1
     })
     return this.acceptedStudentsPercentage
   }
@@ -62,7 +66,7 @@ export class AdminInventory {
 
   getStatsOfAcceptedStudentsPerCohort = (cohort) => {
     this.acceptedStudentsPercentagePerCohort["StudentsSearching"] = 0
-    this.acceptedStudentsPercentagePerCohort["AcceptedStudents"] = 0
+    this.acceptedStudentsPercentagePerCohort["Employed"] = 0
     this.allStudents.map(s => {
       if(s.cohort == cohort) {
         let accepted = false
@@ -73,7 +77,7 @@ export class AdminInventory {
         })
         accepted==false ?
           this.acceptedStudentsPercentagePerCohort["StudentsSearching"] +=1
-            : this.acceptedStudentsPercentagePerCohort["AcceptedStudents"] +=1
+            : this.acceptedStudentsPercentagePerCohort["Employed"] +=1
         }
     })
     return this.acceptedStudentsPercentagePerCohort

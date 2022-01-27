@@ -76,6 +76,7 @@ const Processes = inject("adminStore")(
       props.adminStore.getStatusStats()
       props.adminStore.getStatusStatsByCohort()
 
+      console.log(props.adminStore.numOfStudents)
     }, []);
     /************************************************ */
     const classes = useStyles();
@@ -112,6 +113,7 @@ const Processes = inject("adminStore")(
 
     return (
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
+        <h1 text-align="center">Total Num of Students: {props.adminStore.numOfStudents}</h1>
         <Grid
           container
           direction="row"
@@ -119,7 +121,7 @@ const Processes = inject("adminStore")(
           alignItems="flex-start">
           <Grid item lg={7}>
             <PieChart
-              name="Percentage of Students with Jobs"
+              name="Percentage of Employed/Unemployed"
               stats={toJS(props.adminStore.acceptedStudentsPercentage)}
             />
           </Grid>
