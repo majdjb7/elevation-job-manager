@@ -14,12 +14,16 @@ import {
   TablePagination,
   TableFooter,
 } from "@material-ui/core";
+import { IconButton } from "@mui/material";
+
 ////////////////////////////
 import { inject, observer } from "mobx-react";
 import { observe } from "mobx";
-
+import { Work, SchoolRounded, AddCircle } from "@material-ui/icons";
 /////////////////////////////
 import NestedList from "./NestedList";
+import FormDialog from "./FormDialog";
+
 import Box from "@mui/material/Box";
 
 const useStyles = makeStyles((theme) => ({
@@ -117,8 +121,11 @@ const Processes = inject("studentStore")(
                   <Typography variant="h6">Status</Typography>
                 </TableCell>
                 <TableCell className={classes.tableHeaderCell}>
-                  <Typography variant="h6">show History</Typography>
+                  <Typography variant="h6">Show History</Typography>
                 </TableCell>
+                {/* <TableCell className={classes.tableHeaderCell}>
+                  <Typography variant="h6">Add new Interview</Typography>
+                </TableCell> */}
               </TableRow>
             </TableHead>
             <TableBody>
@@ -174,6 +181,9 @@ const Processes = inject("studentStore")(
                   </TableCell>
                   <TableCell>
                     <NestedList />
+                  </TableCell>
+                  <TableCell>
+                    <FormDialog jobId={22} />
                   </TableCell>
                 </TableRow>
               ))}

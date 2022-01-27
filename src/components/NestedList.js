@@ -49,51 +49,22 @@ export default function NestedList() {
       }
     >
       <ListItemButton onClick={handleClick}>
-        <ListItemText primary="open" />
+        <ListItemText primary="Type-Date" />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          <ListItemText sx={{ pl: 1 }} primary="Hr - 14/02/22" />
+          <ListItemText sx={{ pl: 2 }} primary="Hr - 14/02/22" />
 
           <hr />
 
-          <ListItemText sx={{ pl: 1 }} primary="Hr - 14/02/22" />
+          <ListItemText sx={{ pl: 2 }} primary="Hr - 14/02/22" />
 
           <hr />
-          <ListItemText sx={{ pl: 1 }} primary="Hr - 14/02/22" />
+          <ListItemText sx={{ pl: 2 }} primary="Hr - 14/02/22" />
           {/* <ListItemButton sx={{ pl: 1 }}>
             <ListItemText primary="Hr - 14/02/22" />
           </ListItemButton> */}
-          <TextField
-            // onChange={(e) => setTime(e.target.value)}
-            id="datetime-local"
-            label="Add new Interview"
-            type="datetime-local"
-            required
-            // error={timeError}
-            className={classes.Container}
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
-          <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-            <InputLabel id="demo-simple-select-standard-label">Type</InputLabel>
-            <Select
-              labelId="demo-simple-select-standard-label"
-              id="demo-simple-select-standard"
-              value={interviewType}
-              onChange={handleChange}
-              className={classes.Select}
-              label="interviewType"
-            >
-              <MenuItem value={10}>HR</MenuItem>
-              <MenuItem value={20}>Telephone</MenuItem>
-              <MenuItem value={30}>Technical</MenuItem>
-              <MenuItem value={40}>Home Assignment</MenuItem>
-              <MenuItem value={50}>Home Test</MenuItem>
-            </Select>
-          </FormControl>
         </List>
       </Collapse>
     </List>
