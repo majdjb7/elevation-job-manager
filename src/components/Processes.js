@@ -14,13 +14,18 @@ import {
   TablePagination,
   TableFooter,
 } from "@material-ui/core";
+import { IconButton } from "@mui/material";
+
 ////////////////////////////
 import { inject, observer } from "mobx-react";
 import { observe } from "mobx";
-import moment from 'moment'
+import { Work, SchoolRounded, AddCircle } from "@material-ui/icons";
+import moment from "moment";
 
 /////////////////////////////
 import NestedList from "./NestedList";
+import FormDialog from "./FormDialog";
+
 import Box from "@mui/material/Box";
 
 const useStyles = makeStyles((theme) => ({
@@ -82,9 +87,10 @@ const Processes = inject("studentStore")(
     };
 
     const getMostRecentInterview = function (interviews) {
-      let mostRelevantInterview, interviewType = null;
+      let mostRelevantInterview,
+        interviewType = null;
       let maxDate = null;
-      const format1 = "DD/MM/YYYY HH:mm"
+      const format1 = "DD/MM/YYYY HH:mm";
       new Date(
         Math.max.apply(
           null,
@@ -118,8 +124,11 @@ const Processes = inject("studentStore")(
                   <Typography variant="h6">Status</Typography>
                 </TableCell>
                 <TableCell className={classes.tableHeaderCell}>
-                  <Typography variant="h6">show History</Typography>
+                  <Typography variant="h6">Show History</Typography>
                 </TableCell>
+                {/* <TableCell className={classes.tableHeaderCell}>
+                  <Typography variant="h6">Add new Interview</Typography>
+                </TableCell> */}
               </TableRow>
             </TableHead>
             <TableBody>
@@ -173,7 +182,10 @@ const Processes = inject("studentStore")(
                     </Typography>
                   </TableCell>
                   <TableCell>
-                    <NestedList interviews={row.interviews}/>
+                    <NestedList interviews={row.interviews} />
+                  </TableCell>
+                  <TableCell>
+                    <FormDialog jobId={22} />
                   </TableCell>
                 </TableRow>
               ))}

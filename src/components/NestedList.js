@@ -12,8 +12,8 @@ import StarBorder from "@mui/icons-material/StarBorder";
 import Input from "@mui/material/Input";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core";
-import { toJS } from 'mobx'
-import Moment from 'react-moment';
+import { toJS } from "mobx";
+import Moment from "react-moment";
 import { Grid } from "@material-ui/core";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -51,20 +51,20 @@ export default function NestedList(props) {
       }
     >
       <ListItemButton onClick={handleClick}>
-        <ListItemText primary="open" />
+        <ListItemText primary="Type-Date" />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          {props.interviews.length>0 ?
-            props.interviews.map(i =>
-              <div>
-                <ListItemText sx = {{ pl: 1}} primary={`${i.type}`} />
-                <Moment format="DD/MM/YYYY">{i.time}</Moment>
-                <hr />
-              </div>
-              )
-            : null }
+          {props.interviews.length > 0
+            ? props.interviews.map((i) => (
+                <div>
+                  <ListItemText sx={{ pl: 1 }} primary={`${i.type}`} />
+                  <Moment format="DD/MM/YYYY">{i.time}</Moment>
+                  <hr />
+                </div>
+              ))
+            : null}
 
           <TextField
             // onChange={(e) => setTime(e.target.value)}
