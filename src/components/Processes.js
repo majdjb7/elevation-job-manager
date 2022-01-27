@@ -20,6 +20,8 @@ import { IconButton } from "@mui/material";
 import { inject, observer } from "mobx-react";
 import { observe } from "mobx";
 import { Work, SchoolRounded, AddCircle } from "@material-ui/icons";
+import moment from "moment";
+
 /////////////////////////////
 import NestedList from "./NestedList";
 import FormDialog from "./FormDialog";
@@ -88,6 +90,7 @@ const Processes = inject("studentStore")(
       let mostRelevantInterview,
         interviewType = null;
       let maxDate = null;
+      const format1 = "DD/MM/YYYY HH:mm";
       new Date(
         Math.max.apply(
           null,
@@ -98,7 +101,7 @@ const Processes = inject("studentStore")(
         )
       );
       mostRelevantInterview =
-        interviewType + ": " + maxDate.substring(0, maxDate.indexOf("T"));
+        interviewType + ": " + moment(maxDate).format(format1);
       return mostRelevantInterview;
     };
 
@@ -180,7 +183,7 @@ const Processes = inject("studentStore")(
                     </Typography>
                   </TableCell>
                   <TableCell>
-                    <NestedList />
+                    <NestedList interviews={row.interviews} />
                   </TableCell>
                   <TableCell>
                     <FormDialog jobId={22} />
