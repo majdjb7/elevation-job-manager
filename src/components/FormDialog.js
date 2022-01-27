@@ -50,7 +50,7 @@ export default function FormDialog(props) {
     if (interviewerName == "") {
       setInterviewerNameError(true);
     }
-
+    console.log(type, time, interviewerName);
     if (type && time && interviewerName) {
       // let id = location.state;
       // const res = await axios.post(
