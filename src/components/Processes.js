@@ -185,7 +185,7 @@ const Processes = inject("studentStore")(
                     <NestedList interviews={row.interviews} />
                   </TableCell>
                   <TableCell>
-                    <FormDialog jobId={22} />
+                    <FormDialog jobId={row._id} />
                   </TableCell>
                 </TableRow>
               ))}

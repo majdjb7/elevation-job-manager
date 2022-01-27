@@ -65,36 +65,6 @@ export default function NestedList(props) {
                 </div>
               ))
             : null}
-
-          <TextField
-            // onChange={(e) => setTime(e.target.value)}
-            id="datetime-local"
-            label="Add new Interview"
-            type="datetime-local"
-            required
-            // error={timeError}
-            className={classes.Container}
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
-          <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-            <InputLabel id="demo-simple-select-standard-label">Type</InputLabel>
-            <Select
-              labelId="demo-simple-select-standard-label"
-              id="demo-simple-select-standard"
-              value={interviewType}
-              onChange={handleChange}
-              className={classes.Select}
-              label="interviewType"
-            >
-              <MenuItem value={10}>HR</MenuItem>
-              <MenuItem value={20}>Telephone</MenuItem>
-              <MenuItem value={30}>Technical</MenuItem>
-              <MenuItem value={40}>Home Assignment</MenuItem>
-              <MenuItem value={50}>Home Test</MenuItem>
-            </Select>
-          </FormControl>
         </List>
       </Collapse>
     </List>

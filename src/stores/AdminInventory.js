@@ -1,6 +1,6 @@
 import { observable, action, makeObservable, computed } from "mobx";
 import axios from "axios";
-import { toJS } from 'mobx'
+import { toJS } from "mobx";
 
 export class AdminInventory {
   constructor() {
@@ -28,17 +28,17 @@ export class AdminInventory {
   }
 
   sortAllStudentJobs = () => {
-    this.allStudents.map(s => {
-      s.jobs.map(j => {
-        let newJob = j
-        newJob['studentName'] = s.firstName + ' ' + s.lastName
-        newJob['mobileNo'] = s.mobileNo
-        newJob['email'] = s.email
-        newJob['cohort'] = s.cohort
-        this.AdminJobs.push(newJob)
-      })
-    })
-  }
+    this.allStudents.map((s) => {
+      s.jobs.map((j) => {
+        let newJob = j;
+        newJob["studentName"] = s.firstName + " " + s.lastName;
+        newJob["mobileNo"] = s.mobileNo;
+        newJob["email"] = s.email;
+        newJob["cohort"] = s.cohort;
+        this.AdminJobs.push(newJob);
+      });
+    });
+  };
 
   //GENERAL: Returns how many students have accepted jobs, and and the rest whoa re still searching
   getStatsOfAcceptedStudents = () => {
@@ -140,10 +140,10 @@ export class AdminInventory {
   }
 
   addJobsFromDBToAdmin = async () => {
-    this.allStudents = []
+    this.allStudents = [];
+    this.AdminJobs = [];
     let result = await axios.get(`http://localhost:8888/admin/jobs`);
     this.allStudents = result.data;
-    this.sortAllStudentJobs()
-
+    this.sortAllStudentJobs();
   };
 }
