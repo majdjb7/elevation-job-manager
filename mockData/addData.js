@@ -111,7 +111,7 @@ mongoose.connect(
 
 //   s.save();
 // });
-
+function updateJob(){
 try{
 Student.find({})
 .populate({
@@ -134,3 +134,5 @@ await Job.findByIdAndUpdate(
 } catch (error) {
 res.send(error);
 }
+}
+//updateJob()

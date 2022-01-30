@@ -17,11 +17,14 @@ import {
 ////////////////////////////
 import { inject, observer } from "mobx-react";
 import { observe } from "mobx";
-import { toJS } from 'mobx'
+import { toJS } from "mobx";
 /////////////////////////////
 import NestedList from "./NestedList";
 import PieChart from "./PieChart";
-import moment from 'moment'
+
+import BasicSelect from "./filter/BasicSelect";
+
+import moment from "moment";
 
 const useStyles = makeStyles((theme) => ({
   table: {
@@ -71,12 +74,12 @@ const Processes = inject("adminStore")(
       await props.adminStore.addJobsFromDBToAdmin();
       // console.log(toJS(props.adminStore.AdminJobs))
 
-      props.adminStore.getStatsOfAcceptedStudents()
-      props.adminStore.getStatsOfAcceptedStudents("Cohort 21")
-      props.adminStore.getStatusStats()
-      props.adminStore.getStatusStatsByCohort()
+      props.adminStore.getStatsOfAcceptedStudents();
+      props.adminStore.getStatsOfAcceptedStudents("Cohort 21");
+      props.adminStore.getStatusStats();
+      props.adminStore.getStatusStatsByCohort();
 
-      console.log(props.adminStore.numOfStudents)
+      console.log(props.adminStore.numOfStudents);
     }, []);
     /************************************************ */
     const classes = useStyles();
@@ -93,9 +96,10 @@ const Processes = inject("adminStore")(
     };
 
     const getMostRecentInterview = function (interviews) {
-      let mostRelevantInterview, interviewType = null;
+      let mostRelevantInterview,
+        interviewType = null;
       let maxDate = null;
-      const format1 = "DD/MM/YYYY HH:mm"
+      const format1 = "DD/MM/YYYY HH:mm";
       new Date(
         Math.max.apply(
           null,
@@ -110,147 +114,168 @@ const Processes = inject("adminStore")(
       return mostRelevantInterview;
     };
 
-
     return (
-      <Paper sx={{ width: "100%", overflow: "hidden" }}>
-        <h1 text-align="center">Total Num of Students: {props.adminStore.numOfStudents}</h1>
+      <div>
         <Grid
           container
           direction="row"
-          justifyContent="space-between"
-          alignItems="flex-start">
-          <Grid item lg={7}>
-            <PieChart
-              name="Percentage of Employed/Unemployed"
-              stats={toJS(props.adminStore.acceptedStudentsPercentage)}
+          justifycontent="space-between"
+          alignItems="flex-start"
+        >
+          <Grid item lg={2}>
+            <BasicSelect
+              selectBy="Cohort"
+              ArrMenuItems={["Cohort 21", "Cohort 22"]}
             />
           </Grid>
-          <Grid item lg={5}>
-            <PieChart
-              name="General Status of All Jobs"
-              stats={toJS(props.adminStore.statsOfJobStatus)}
+          <Grid item lg={8}>
+            <BasicSelect
+              selectBy="Status"
+              ArrMenuItems={["Open", "Pandding", "Accepted", "Rejected"]}
             />
           </Grid>
         </Grid>
-        <TableContainer component={Paper} className={classes.tableContainer}>
-          <Table className={classes.table} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-              <TableCell className={classes.tableHeaderCellForName}>
-                  <Typography variant="h6">Student Name</Typography>
-                </TableCell>
-                <TableCell className={classes.tableHeaderCell}>
-                  <Typography variant="h6">Company Info</Typography>
-                </TableCell>
-                <TableCell className={classes.tableHeaderCell}>
-                  <Typography variant="h6">Job Info</Typography>
-                </TableCell>
-                <TableCell className={classes.tableHeaderCell}>
-                  <Typography variant="h6">Closest Interview</Typography>
-                </TableCell>
-                <TableCell className={classes.tableHeaderCell}>
-                  <Typography variant="h6">Status</Typography>
-                </TableCell>
-                <TableCell className={classes.tableHeaderCell}>
-                  <Typography variant="h6">show History</Typography>
-                </TableCell>
-              </TableRow>
-            </TableHead>
-
-            <TableBody>
-              {props.adminStore.AdminJobs.slice(
-                page * rowsPerPage,
-                page * rowsPerPage + rowsPerPage
-              ).map((row, index) => (
-                <TableRow hover key={index}>
-                  <TableCell>
-                    <Grid container>
-                      <Grid item lg={10}>
-                        <Typography className={classes.name}>
-                          {row.studentName} - ({row.cohort})
-                        </Typography>
-                        <Typography color="textSecondary" variant="body2">
-                          Phone No: {row.mobileNo}
-                        </Typography>
-                        <Typography color="textSecondary" variant="body2">
-                          eMail: {row.email}
-                        </Typography>
-                      </Grid>
-                    </Grid>
+        <Paper sx={{ width: "100%", overflow: "hidden" }}>
+          <h1 text-align="center">
+            Total Num of Students: {props.adminStore.numOfStudents}
+          </h1>
+          <Grid
+            container
+            direction="row"
+            justifycontent="space-between"
+            alignItems="flex-start"
+          >
+            <Grid item lg={7}>
+              <PieChart
+                name="Percentage of Employed/Unemployed"
+                stats={toJS(props.adminStore.acceptedStudentsPercentage)}
+              />
+            </Grid>
+            <Grid item lg={5}>
+              <PieChart
+                name="General Status of All Jobs"
+                stats={toJS(props.adminStore.statsOfJobStatus)}
+              />
+            </Grid>
+          </Grid>
+          <TableContainer component={Paper} className={classes.tableContainer}>
+            <Table className={classes.table} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell className={classes.tableHeaderCellForName}>
+                    <Typography variant="h6">Student Name</Typography>
                   </TableCell>
-                  <TableCell>
-                    <Grid container>
-                      {/* <Grid item lg={2}>
+                  <TableCell className={classes.tableHeaderCell}>
+                    <Typography variant="h6">Company Info</Typography>
+                  </TableCell>
+                  <TableCell className={classes.tableHeaderCell}>
+                    <Typography variant="h6">Job Info</Typography>
+                  </TableCell>
+                  <TableCell className={classes.tableHeaderCell}>
+                    <Typography variant="h6">Closest Interview</Typography>
+                  </TableCell>
+                  <TableCell className={classes.tableHeaderCell}>
+                    <Typography variant="h6">Status</Typography>
+                  </TableCell>
+                  <TableCell className={classes.tableHeaderCell}>
+                    <Typography variant="h6">show History</Typography>
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+
+              <TableBody>
+                {props.adminStore.AdminJobs.slice(
+                  page * rowsPerPage,
+                  page * rowsPerPage + rowsPerPage
+                ).map((row, index) => (
+                  <TableRow hover key={index}>
+                    <TableCell>
+                      <Grid container>
+                        <Grid item lg={10}>
+                          <Typography className={classes.name}>
+                            {row.studentName} - ({row.cohort})
+                          </Typography>
+                          <Typography color="textSecondary" variant="body2">
+                            Phone No: {row.mobileNo}
+                          </Typography>
+                          <Typography color="textSecondary" variant="body2">
+                            eMail: {row.email}
+                          </Typography>
+                        </Grid>
+                      </Grid>
+                    </TableCell>
+                    <TableCell>
+                      <Grid container>
+                        {/* <Grid item lg={2}>
                         <Avatar
                           alt={row.companyName}
                           src="."
                           className={classes.avatar}
                         />
                       </Grid> */}
-                      <Grid item lg={10}>
-                        <Typography className={classes.name}>
-                          {row.companyName}
-                        </Typography>
-                        <Typography color="textSecondary" variant="body2">
-                          {row.location}
-                        </Typography>
-                        <Typography color="textSecondary" variant="body2">
-                          I found it by {row.whereFindJob}
-                        </Typography>
+                        <Grid item lg={10}>
+                          <Typography className={classes.name}>
+                            {row.companyName}
+                          </Typography>
+                          <Typography color="textSecondary" variant="body2">
+                            {row.location}
+                          </Typography>
+                          <Typography color="textSecondary" variant="body2">
+                            I found it by {row.whereFindJob}
+                          </Typography>
+                        </Grid>
                       </Grid>
-                    </Grid>
-                  </TableCell>
+                    </TableCell>
 
-                  <TableCell>
-                    <Typography variant="subtitle2">{row.role}</Typography>
-                    <Typography color="textSecondary" variant="body2">
-                      {row.description}
-                    </Typography>
-                  </TableCell>
+                    <TableCell>
+                      <Typography variant="subtitle2">{row.role}</Typography>
+                      <Typography color="textSecondary" variant="body2">
+                        {row.description}
+                      </Typography>
+                    </TableCell>
 
-                  <TableCell>
-                    {getMostRecentInterview(row.interviews)}
-                  </TableCell>
+                    <TableCell>
+                      {getMostRecentInterview(row.interviews)}
+                    </TableCell>
 
-                  <TableCell>
-                    <Typography
-                      className={classes.status}
-                      style={{
-                        backgroundColor:
-                          (row.status === "Open" && "green") ||
-                          (row.status === "Pending" && "blue") ||
-                          (row.status === "Declined" && "red"),
-                      }}
-                    >
-                      {row.status}
-                    </Typography>
-                  </TableCell>
+                    <TableCell>
+                      <Typography
+                        className={classes.status}
+                        style={{
+                          backgroundColor:
+                            (row.status === "Open" && "green") ||
+                            (row.status === "Pending" && "blue") ||
+                            (row.status === "Declined" && "red"),
+                        }}
+                      >
+                        {row.status}
+                      </Typography>
+                    </TableCell>
 
-                  <TableCell>
-                    <NestedList interviews={row.interviews}/>
-                  </TableCell>
+                    <TableCell>
+                      <NestedList interviews={row.interviews} />
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          {/* <TableFooter> */}
 
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        {/* <TableFooter> */}
+          <TablePagination
+            className={classes.TablePagination}
+            rowsPerPageOptions={[5, 10, 15]}
+            component="div"
+            count={props.adminStore.AdminJobs.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onChangePage={handleChangePage}
+            onChangeRowsPerPage={handleChangeRowsPerPage}
+          />
 
-        <TablePagination
-          className={classes.TablePagination}
-          rowsPerPageOptions={[5, 10, 15]}
-          component="div"
-          count={props.adminStore.AdminJobs.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onChangePage={handleChangePage}
-          onChangeRowsPerPage={handleChangeRowsPerPage}
-        />
-
-
-        {/* </TableFooter> */}
-      </Paper>
+          {/* </TableFooter> */}
+        </Paper>
+      </div>
     );
   })
 );
