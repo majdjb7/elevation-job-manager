@@ -2,12 +2,20 @@ const express = require("express");
 const path = require("path");
 const app = express();
 const mongoose = require('mongoose')
+const cors = require('cors')
+const cookieParser = require('cookie-parser')
 const studentAPI = require("./server/routes/studentAPI");
 const adminAPI = require("./server/routes/adminAPI");
 const authAPI = require("./server/routes/authAPI");
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/finalProjectDB', { useNewUrlParser: true })
 //might need useUnifiedTopology: true
+
+app.use(cookieParser())
+app.use(cors({
+  credentials: true,
+  origin: ['http://localhost:3000']
+}))
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
