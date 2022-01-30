@@ -57,10 +57,16 @@ export default function NestedList(props) {
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
           {props.interviews.length > 0
-            ? props.interviews.map((i) => (
-                <div>
-                  <ListItemText sx={{ pl: 1 }} primary={`${i.type}`} />
-                  <Moment format="DD/MM/YYYY">{i.time}</Moment>
+            ? props.interviews.map((i, index) => (
+                <div key={index}>
+                  <ListItemText
+                    key={index}
+                    sx={{ pl: 1 }}
+                    primary={`${i.type}`}
+                  />
+                  <Moment key={index} format="DD/MM/YYYY">
+                    {i.time}
+                  </Moment>
                   <hr />
                 </div>
               ))

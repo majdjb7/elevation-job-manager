@@ -22,7 +22,7 @@
         "role": "Full stack",
         "location": "Haifa",
         "description": "requirements:React,nodeJs",
-        "status": "Open",
+        "status": "Rejected",
         "whereFindJob": "LinkedIn",
         "interviews": []
     },
@@ -31,7 +31,7 @@
         "role": "Backend",
         "location": "Herzliyya",
         "description": "requirements:Python",
-        "status": "Open",
+        "status": "Pending",
         "whereFindJob": "Friend",
         "interviews": []
     }
