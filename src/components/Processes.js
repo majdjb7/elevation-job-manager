@@ -118,7 +118,7 @@ const Processes = inject("studentStore")(
                   <Typography variant="h6">Job Info</Typography>
                 </TableCell>
                 <TableCell className={classes.tableHeaderCell}>
-                  <Typography variant="h6">Closest Interview</Typography>
+                  <Typography variant="h6">Current interview</Typography>
                 </TableCell>
                 <TableCell className={classes.tableHeaderCell}>
                   <Typography variant="h6">Status</Typography>
