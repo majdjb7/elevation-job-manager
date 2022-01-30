@@ -6,7 +6,7 @@ export class AdminInventory {
   constructor() {
     this.AdminJobs = [];
     this.allStudents = [];
-    this.showCurrCohort = "Cohort 21";
+    this.showCurrCohort = "All";
     this.acceptedStudentsPercentage = { Employed: 0, Unemployed: 0 };
     this.acceptedStudentsPercentagePerCohort = { Employed: 0, Unemployed: 0 };
     this.statsOfJobStatus = {
@@ -161,13 +161,18 @@ export class AdminInventory {
     this.allStudents = [];
     this.AdminJobs = [];
     this.showCurrCohort = cohortName;
-    let result = await axios.get(
-      `http://localhost:8888/admin/cohorts/${cohortName}`
-    );
-    this.allStudents = result.data;
-    this.sortAllStudentJobs();
+    if (cohortName === "All") {
+      await this.addJobsFromDBToAdmin();
+    } else {
+      let result = await axios.get(
+        `http://localhost:8888/admin/cohorts/${cohortName}`
+      );
+      this.allStudents = result.data;
+      this.sortAllStudentJobs();
+    }
   };
   sortByStatus = async (status) => {
+    console.log(status);
     await this.sortPerCohortName(this.showCurrCohort);
     let filterArr = this.AdminJobs.filter((a) => a.status == status);
     this.AdminJobs = [...filterArr];

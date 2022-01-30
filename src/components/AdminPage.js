@@ -78,8 +78,6 @@ const Processes = inject("adminStore")(
       props.adminStore.getStatsOfAcceptedStudents("Cohort 21");
       props.adminStore.getStatusStats();
       props.adminStore.getStatusStatsByCohort();
-
-      console.log(props.adminStore.numOfStudents);
     }, []);
     /************************************************ */
     const classes = useStyles();
@@ -125,7 +123,7 @@ const Processes = inject("adminStore")(
           <Grid item lg={2}>
             <BasicSelect
               selectBy="Cohort"
-              ArrMenuItems={["Cohort 21", "Cohort 22"]}
+              ArrMenuItems={["All", "Cohort 21", "Cohort 22"]}
             />
           </Grid>
           <Grid item lg={8}>
