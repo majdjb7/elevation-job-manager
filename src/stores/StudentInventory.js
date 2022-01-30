@@ -16,7 +16,7 @@ export class StudentInventory {
     return this.StudentJobs.length;
   }
   addJobsFromDB = async () => {
-    let majd = "61f6a857da58142f79a54b12";
+    let majd = "61f6ab5115cb71811bc607d3";
     let result = await axios.get(`http://localhost:8888/student/jobs/${majd}`);
     this.StudentJobs = result.data;
   };
