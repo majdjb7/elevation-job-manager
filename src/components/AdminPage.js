@@ -23,6 +23,7 @@ import NestedList from "./NestedList";
 import PieChart from "./PieChart";
 
 import BasicSelect from "./filter/BasicSelect";
+import AutocompleteSearch from "./filter/AutocompleteSearch";
 
 import moment from "moment";
 
@@ -114,6 +115,7 @@ const Processes = inject("adminStore")(
 
     return (
       <div>
+        <AutocompleteSearch />
         <Grid
           container
           direction="row"
