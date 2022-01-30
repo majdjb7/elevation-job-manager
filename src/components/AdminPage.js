@@ -172,7 +172,7 @@ const Processes = inject("adminStore")(
                     <Typography variant="h6">Job Info</Typography>
                   </TableCell>
                   <TableCell className={classes.tableHeaderCell}>
-                    <Typography variant="h6">Closest Interview</Typography>
+                    <Typography variant="h6">Current Interview</Typography>
                   </TableCell>
                   <TableCell className={classes.tableHeaderCell}>
                     <Typography variant="h6">Status</Typography>
@@ -193,7 +193,10 @@ const Processes = inject("adminStore")(
                       <Grid container>
                         <Grid item lg={10}>
                           <Typography className={classes.name}>
-                            {row.studentName} - ({row.cohort})
+                            {row.studentName}
+                          </Typography>
+                          <Typography color="textSecondary" variant="body2">
+                            {row.cohort}
                           </Typography>
                           <Typography color="textSecondary" variant="body2">
                             Phone No: {row.mobileNo}

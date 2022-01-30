@@ -175,7 +175,7 @@ const Processes = inject("studentStore")(
                         backgroundColor:
                           (row.status === "Open" && "green") ||
                           (row.status === "Pending" && "blue") ||
-                          (row.status === "Declined" && "red"),
+                          (row.status === "Rejected" && "red"),
                       }}
                     >
                       {row.status}
