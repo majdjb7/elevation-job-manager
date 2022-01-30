@@ -8,14 +8,18 @@ const jobSchema = new Schema({
     description: String,
     status: String,
     mostRecentInterview: {
-        type:Date,
-        default:null
+        type: Date,
+        default: null
     },
     whereFindJob: {
         type: String,
         enum: ['LinkedIn', 'Facebook', 'Company website', 'Friend']
     },
-    interviews: [{ type: Schema.Types.ObjectId, ref: 'Interview' }]
+    interviews: [{ type: Schema.Types.ObjectId, ref: 'Interview' }],
+    studentId: {
+        type: String,
+        default: null
+    }
 })
 
 const Job = mongoose.model("Job", jobSchema)

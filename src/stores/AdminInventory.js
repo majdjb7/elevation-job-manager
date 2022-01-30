@@ -148,6 +148,8 @@ export class AdminInventory {
     this.AdminJobs = [];
     let result = await axios.get(`http://localhost:8888/admin/jobs`);
     this.allStudents = result.data;
-    this.sortAllStudentJobs();
+    let jobs=await axios.get(`http://localhost:8888/admin/allJobs`);
+    this.AdminJobs =jobs.data
+  //  this.sortAllStudentJobs();
   };
 }

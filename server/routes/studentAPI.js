@@ -14,6 +14,7 @@ router.get("/jobs/:id", async (req, res) => {
         populate: {
           path: "interviews",
         },
+         options: { sort: { mostRecentInterview: -1 }}
       })
       .exec(function (err, student) {
         res.send(student.jobs);
@@ -34,6 +35,7 @@ router.post("/jobs/:id", async (req, res) => {
       description: req.body.description,
       status: "Open",
       whereFindJob: req.body.whereFindJob,
+      studentId:id
     });
 
     Student.findByIdAndUpdate(
