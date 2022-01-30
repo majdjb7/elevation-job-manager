@@ -111,28 +111,22 @@ mongoose.connect(
 
 //   s.save();
 // });
-function updateJob(){
-try{
-Student.find({})
-.populate({
-  path: "jobs",
-})
-.exec(async function (err, students) {
-
-//  console.log(students);
-for(let student of students){
-  for(let job of student.jobs ){
-    
-await Job.findByIdAndUpdate(
-  job._id,
-  {studentId:student._id})
+function updateJob() {
+  try {
+    Student.find({})
+      .populate({
+        path: "jobs",
+      })
+      .exec(async function (err, students) {
+        //  console.log(students);
+        for (let student of students) {
+          for (let job of student.jobs) {
+            await Job.findByIdAndUpdate(job._id, { studentId: student._id });
+          }
+        }
+      });
+  } catch (error) {
+    res.send(error);
   }
-
 }
-
-});
-} catch (error) {
-res.send(error);
-}
-}
-//updateJob()
+updateJob();

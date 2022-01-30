@@ -131,7 +131,7 @@ const Processes = inject("adminStore")(
           <Grid item lg={8}>
             <BasicSelect
               selectBy="Status"
-              ArrMenuItems={["Open", "Pandding", "Accepted", "Rejected"]}
+              ArrMenuItems={["Open", "Pending", "Accepted", "Rejected"]}
             />
           </Grid>
         </Grid>
@@ -245,7 +245,7 @@ const Processes = inject("adminStore")(
                           backgroundColor:
                             (row.status === "Open" && "green") ||
                             (row.status === "Pending" && "blue") ||
-                            (row.status === "Declined" && "red"),
+                            (row.status === "Rejected" && "red"),
                         }}
                       >
                         {row.status}

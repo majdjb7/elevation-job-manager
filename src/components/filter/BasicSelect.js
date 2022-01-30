@@ -23,6 +23,9 @@ const BasicSelect = inject(
       if (props.selectBy === "Cohort") {
         props.adminStore.sortPerCohortName(e);
       }
+      if (props.selectBy === "Status") {
+        props.adminStore.sortByStatus(e);
+      }
     };
 
     return (

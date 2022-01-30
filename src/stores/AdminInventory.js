@@ -6,6 +6,7 @@ export class AdminInventory {
   constructor() {
     this.AdminJobs = [];
     this.allStudents = [];
+    this.showCurrCohort = "Cohort 21";
     this.acceptedStudentsPercentage = { Employed: 0, Unemployed: 0 };
     this.acceptedStudentsPercentagePerCohort = { Employed: 0, Unemployed: 0 };
     this.statsOfJobStatus = {
@@ -33,6 +34,7 @@ export class AdminInventory {
       numItems: computed,
       addJobsFromDBToAdmin: action,
       sortPerCohortName: action,
+      sortByStatus: action,
     });
     this.addJobsFromDBToAdmin();
   }
@@ -158,20 +160,25 @@ export class AdminInventory {
   sortPerCohortName = async (cohortName) => {
     this.allStudents = [];
     this.AdminJobs = [];
-
+    this.showCurrCohort = cohortName;
     let result = await axios.get(
       `http://localhost:8888/admin/cohorts/${cohortName}`
     );
     this.allStudents = result.data;
     this.sortAllStudentJobs();
   };
+  sortByStatus = async (status) => {
+    await this.sortPerCohortName(this.showCurrCohort);
+    let filterArr = this.AdminJobs.filter((a) => a.status == status);
+    this.AdminJobs = [...filterArr];
+  };
   addJobsFromDBToAdmin = async () => {
     this.allStudents = [];
     this.AdminJobs = [];
     let result = await axios.get(`http://localhost:8888/admin/jobs`);
     this.allStudents = result.data;
-    let jobs=await axios.get(`http://localhost:8888/admin/allJobs`);
-    this.AdminJobs =jobs.data
-  //  this.sortAllStudentJobs();
+    let jobs = await axios.get(`http://localhost:8888/admin/allJobs`);
+    this.AdminJobs = jobs.data;
+    //  this.sortAllStudentJobs();
   };
 }
