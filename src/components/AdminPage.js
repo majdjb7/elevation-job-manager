@@ -125,7 +125,7 @@ const Processes = inject("adminStore")(
           <Grid item lg={2}>
             <BasicSelect
               selectBy="Cohort"
-              ArrMenuItems={["cohort-10", "cohort-20"]}
+              ArrMenuItems={["Cohort 21", "Cohort 22"]}
             />
           </Grid>
           <Grid item lg={8}>

@@ -5,11 +5,23 @@ import { toJS } from "mobx";
 export class AdminInventory {
   constructor() {
     this.AdminJobs = [];
-    this.allStudents = []
-    this.acceptedStudentsPercentage = {"Employed": 0, "Unemployed": 0}
-    this.acceptedStudentsPercentagePerCohort = {"Employed": 0, "Unemployed": 0}
-    this.statsOfJobStatus = {'Open': 0, 'Accepted': 0, 'Rejected': 0, 'Pending': 0, 'NoReply': 0}
-    this.statsOfJobStatusByCohort = {'Open': 0, 'Accepted': 0, 'Rejected': 0, 'Pending': 0, 'NoReply': 0}
+    this.allStudents = [];
+    this.acceptedStudentsPercentage = { Employed: 0, Unemployed: 0 };
+    this.acceptedStudentsPercentagePerCohort = { Employed: 0, Unemployed: 0 };
+    this.statsOfJobStatus = {
+      Open: 0,
+      Accepted: 0,
+      Rejected: 0,
+      Pending: 0,
+      NoReply: 0,
+    };
+    this.statsOfJobStatusByCohort = {
+      Open: 0,
+      Accepted: 0,
+      Rejected: 0,
+      Pending: 0,
+      NoReply: 0,
+    };
 
     makeObservable(this, {
       AdminJobs: observable,
@@ -20,6 +32,7 @@ export class AdminInventory {
       statsOfJobStatusByCohort: observable,
       numItems: computed,
       addJobsFromDBToAdmin: action,
+      sortPerCohortName: action,
     });
     this.addJobsFromDBToAdmin();
   }
@@ -46,103 +59,112 @@ export class AdminInventory {
 
   //GENERAL: Returns how many students have accepted jobs, and and the rest whoa re still searching
   getStatsOfAcceptedStudents = () => {
-    this.acceptedStudentsPercentage["Unemployed"] = 0
-    this.acceptedStudentsPercentage["Employed"] = 0
-    this.allStudents.map(s => {
-      let accepted = false
-      s.jobs.map(j => {
-        if(j.status == "Accepted") {
-          accepted = true
+    this.acceptedStudentsPercentage["Unemployed"] = 0;
+    this.acceptedStudentsPercentage["Employed"] = 0;
+    this.allStudents.map((s) => {
+      let accepted = false;
+      s.jobs.map((j) => {
+        if (j.status == "Accepted") {
+          accepted = true;
         }
-      })
-      accepted==false ?
-        this.acceptedStudentsPercentage["Unemployed"] +=1
-          : this.acceptedStudentsPercentage["Employed"] +=1
-    })
-    return this.acceptedStudentsPercentage
-  }
+      });
+      accepted == false
+        ? (this.acceptedStudentsPercentage["Unemployed"] += 1)
+        : (this.acceptedStudentsPercentage["Employed"] += 1);
+    });
+    return this.acceptedStudentsPercentage;
+  };
 
   //BY COHORT: Returns how many students have accepted jobs, and and the rest whoa re still searching
 
   getStatsOfAcceptedStudentsPerCohort = (cohort) => {
-    this.acceptedStudentsPercentagePerCohort["StudentsSearching"] = 0
-    this.acceptedStudentsPercentagePerCohort["Employed"] = 0
-    this.allStudents.map(s => {
-      if(s.cohort == cohort) {
-        let accepted = false
-        s.jobs.map(j => {
-          if(j.status == "Accepted") {
-            accepted = true
+    this.acceptedStudentsPercentagePerCohort["StudentsSearching"] = 0;
+    this.acceptedStudentsPercentagePerCohort["Employed"] = 0;
+    this.allStudents.map((s) => {
+      if (s.cohort == cohort) {
+        let accepted = false;
+        s.jobs.map((j) => {
+          if (j.status == "Accepted") {
+            accepted = true;
           }
-        })
-        accepted==false ?
-          this.acceptedStudentsPercentagePerCohort["StudentsSearching"] +=1
-            : this.acceptedStudentsPercentagePerCohort["Employed"] +=1
-        }
-    })
-    return this.acceptedStudentsPercentagePerCohort
-  }
+        });
+        accepted == false
+          ? (this.acceptedStudentsPercentagePerCohort["StudentsSearching"] += 1)
+          : (this.acceptedStudentsPercentagePerCohort["Employed"] += 1);
+      }
+    });
+    return this.acceptedStudentsPercentagePerCohort;
+  };
 
   getStatusStats = () => {
-    this.statsOfJobStatus["Open"] = 0
-    this.statsOfJobStatus["Accepted"] = 0
-    this.statsOfJobStatus["Rejected"] = 0
-    this.statsOfJobStatus["Pending"] = 0
-    this.statsOfJobStatus["NoReply"] = 0
+    this.statsOfJobStatus["Open"] = 0;
+    this.statsOfJobStatus["Accepted"] = 0;
+    this.statsOfJobStatus["Rejected"] = 0;
+    this.statsOfJobStatus["Pending"] = 0;
+    this.statsOfJobStatus["NoReply"] = 0;
 
-    this.allStudents.map(s => {
-      s.jobs.map(j => {
-        if(j.status == "Open") {
-          this.statsOfJobStatus["Open"] += 1
+    this.allStudents.map((s) => {
+      s.jobs.map((j) => {
+        if (j.status == "Open") {
+          this.statsOfJobStatus["Open"] += 1;
         }
-        if(j.status == "Accepted") {
-          this.statsOfJobStatus["Accepted"] += 1
+        if (j.status == "Accepted") {
+          this.statsOfJobStatus["Accepted"] += 1;
         }
-        if(j.status == "Rejected") {
-          this.statsOfJobStatus["Open"] += 1
+        if (j.status == "Rejected") {
+          this.statsOfJobStatus["Open"] += 1;
         }
-        if(j.status == "Pending") {
-          this.statsOfJobStatus["Pending"] += 1
+        if (j.status == "Pending") {
+          this.statsOfJobStatus["Pending"] += 1;
         }
-        if(j.status == "NoReply") {
-          this.statsOfJobStatus["NoReply"] += 1
+        if (j.status == "NoReply") {
+          this.statsOfJobStatus["NoReply"] += 1;
         }
-      })
-    })
-    return this.statsOfJobStatus
-  }
+      });
+    });
+    return this.statsOfJobStatus;
+  };
 
   getStatusStatsByCohort = (cohort) => {
-    this.statsOfJobStatusByCohort["Open"] = 0
-    this.statsOfJobStatusByCohort["Accepted"] = 0
-    this.statsOfJobStatusByCohort["Rejected"] = 0
-    this.statsOfJobStatusByCohort["Pending"] = 0
-    this.statsOfJobStatusByCohort["NoReply"] = 0
+    this.statsOfJobStatusByCohort["Open"] = 0;
+    this.statsOfJobStatusByCohort["Accepted"] = 0;
+    this.statsOfJobStatusByCohort["Rejected"] = 0;
+    this.statsOfJobStatusByCohort["Pending"] = 0;
+    this.statsOfJobStatusByCohort["NoReply"] = 0;
 
-    this.allStudents.map(s => {
-      if(s.cohort == cohort) { 
-        s.jobs.map(j => {
-          if(j.status == "Open") {
-            this.statsOfJobStatusByCohort["Open"] += 1
+    this.allStudents.map((s) => {
+      if (s.cohort == cohort) {
+        s.jobs.map((j) => {
+          if (j.status == "Open") {
+            this.statsOfJobStatusByCohort["Open"] += 1;
           }
-          if(j.status == "Accepted") {
-            this.statsOfJobStatusByCohort["Accepted"] += 1
+          if (j.status == "Accepted") {
+            this.statsOfJobStatusByCohort["Accepted"] += 1;
           }
-          if(j.status == "Rejected") {
-            this.statsOfJobStatusByCohort["Open"] += 1
+          if (j.status == "Rejected") {
+            this.statsOfJobStatusByCohort["Open"] += 1;
           }
-          if(j.status == "Pending") {
-            this.statsOfJobStatusByCohort["Pending"] += 1
+          if (j.status == "Pending") {
+            this.statsOfJobStatusByCohort["Pending"] += 1;
           }
-          if(j.status == "NoReply") {
-            this.statsOfJobStatusByCohort["NoReply"] += 1
+          if (j.status == "NoReply") {
+            this.statsOfJobStatusByCohort["NoReply"] += 1;
           }
-      })
-    }
-    })
-    return this.statsOfJobStatusByCohort
-  }
+        });
+      }
+    });
+    return this.statsOfJobStatusByCohort;
+  };
+  sortPerCohortName = async (cohortName) => {
+    this.allStudents = [];
+    this.AdminJobs = [];
 
+    let result = await axios.get(
+      `http://localhost:8888/admin/cohorts/${cohortName}`
+    );
+    this.allStudents = result.data;
+    this.sortAllStudentJobs();
+  };
   addJobsFromDBToAdmin = async () => {
     this.allStudents = [];
     this.AdminJobs = [];

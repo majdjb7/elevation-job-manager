@@ -62,7 +62,7 @@ router.post("/jobs/:id", async (req, res) => {
 
 router.post("/jobs/:id/interviews", async (req, res) => {
   let id = req.params.id;
-  console.log(id);
+
   try {
     let interview = new Interview({
       type: req.body.type,

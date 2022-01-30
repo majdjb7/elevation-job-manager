@@ -4,31 +4,49 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+////////////////////////////
+import { inject, observer } from "mobx-react";
+import { observe } from "mobx";
+import { toJS } from "mobx";
+/////////////////////////////
+const BasicSelect = inject(
+  "adminStore",
+  "studentStore"
+)(
+  observer((props) => {
+    const [menuItem, setMenuItem] = React.useState("");
 
-export default function BasicSelect({ selectBy, ArrMenuItems, choice }) {
-  const [menuItem, setMenuItem] = React.useState("");
+    const handleChange = (event) => {
+      let e = event.target.value;
+      setMenuItem(e);
 
-  const handleChange = (event) => {
-    setMenuItem(event.target.value);
-  };
+      if (props.selectBy === "Cohort") {
+        props.adminStore.sortPerCohortName(e);
+      }
+    };
 
-  return (
-    <Box sx={{ minWidth: 100, maxWidth: 200 }}>
-      <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">{selectBy}</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          label="menuItem"
-          onChange={handleChange}
-        >
-          {ArrMenuItems.map((item, index) => (
-            <MenuItem key={index} value={index}>
-              {item}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-    </Box>
-  );
-}
+    return (
+      <Box sx={{ minWidth: 100, maxWidth: 200 }}>
+        <FormControl fullWidth>
+          <InputLabel id="demo-simple-select-label">
+            {props.selectBy}
+          </InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            label="menuItem"
+            onChange={handleChange}
+            value={menuItem}
+          >
+            {props.ArrMenuItems.map((item, index) => (
+              <MenuItem key={index} value={item}>
+                {item}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </Box>
+    );
+  })
+);
+export default BasicSelect;
