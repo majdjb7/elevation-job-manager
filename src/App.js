@@ -9,6 +9,10 @@ import AdminPage from "./components/AdminPage";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+import Home from "./pages/Home";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
+
 import NestedList from "./components/NestedList";
 const theme = createMuiTheme({
   palette: {
@@ -29,16 +33,34 @@ const theme = createMuiTheme({
 });
 
 function App() {
+  const [name, setName] = useState('');
+
+  useEffect(() => {
+      (
+          async () => {
+              const response = await fetch('http://localhost:8888/api/user', {
+                  headers: {'Content-Type': 'application/json'},
+                  credentials: 'include',
+              });
+
+              const content = await response.json();
+
+              setName(content.name);
+          }
+      )();
+  });
+
+
   return (
     <ThemeProvider theme={theme}>
       {/* to overide and change the orignal colors and thems in other comps */}
       <Router>
         <Layout>
-          {/* to make the navbar and the bar stick on all the pgs down */}
-
           <Switch>
-            {/* Switch = every time will get 1 router */}
             <Route exact path="/">
+              <Home />
+            </Route>
+            <Route exact path="/processes">
               <Processes />
             </Route>
             <Route exact path="/addProcess">
@@ -50,6 +72,18 @@ function App() {
 
             <Route exact path="/AdminPage">
               <AdminPage />
+            </Route>
+
+            <Route exact path="/Home">
+              <Home />
+            </Route>
+
+            <Route exact path="/Register">
+              <Register />
+            </Route>
+
+            <Route exact path="/Login">
+              <Login />
             </Route>
           </Switch>
         </Layout>

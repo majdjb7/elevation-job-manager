@@ -74,9 +74,14 @@ export default function Layout({ children }) {
 
   const menuItems = [
     {
-      text: "Processes",
+      text: "Home",
       icon: <Work color="secondary" />,
       path: "/",
+    },
+    {
+      text: "Processes",
+      icon: <Work color="secondary" />,
+      path: "/processes",
     },
     {
       text: "Add Process",
@@ -104,10 +109,12 @@ export default function Layout({ children }) {
             Today is the {format(new Date(), "do MMMM Y")}
           </Typography>
           <Typography>Ayman</Typography>
+          <button label="hi"/>
           <Avatar
             className={classes.avatar}
             src="https://media-exp1.licdn.com/dms/image/C4E03AQGzvBqaQHa1vw/profile-displayphoto-shrink_800_800/0/1631448072130?e=1648684800&v=beta&t=6122tVcQhDq7qdokhU5w-kFyImVX3OcGrJq6i1IMMck"
           />
+          
         </Toolbar>
       </AppBar>
 
