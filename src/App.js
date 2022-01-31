@@ -8,7 +8,8 @@ import AddInterview from "./components/AddInterview";
 import AdminPage from "./components/AdminPage";
 import { useState, useEffect } from "react";
 import axios from "axios";
-
+import { inject, observer } from "mobx-react";
+import { observe } from "mobx";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
@@ -32,64 +33,65 @@ const theme = createMuiTheme({
   },
 });
 
-function App() {
-  const [name, setName] = useState('');
+const App= inject("studentStore")(
+  observer((props) => {
 
-  // useEffect(() => {
-  //     (
-  //         async () => {
-  //             const response = await fetch('http://localhost:8888/api/user', {
-  //                 headers: {'Content-Type': 'application/json'},
-  //                 credentials: 'include',
-  //             });
+  // const [name, setName] = useState('');
 
-  //             const content = await response.json();
+  const [loggedIn, setLoggedIn] = useState(false)
 
-  //             setName(content.name);
-  //         }
-  //     )();
-  // });
-
+  useEffect(() => {
+    props.studentStore.checkUserLoggedIn()
+    // if(props.studentStore.name != '') {
+    //   setLoggedIn(true)
+    // }
+  });
 
   return (
     <ThemeProvider theme={theme}>
       {/* to overide and change the orignal colors and thems in other comps */}
-      <Router>
-        <Layout>
-          <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route exact path="/processes">
-              <Processes />
-            </Route>
-            <Route exact path="/addProcess">
-              <AddProcess />
-            </Route>
-            <Route exact path="/addInterview">
-              <AddInterview />
-            </Route>
+        {loggedIn ?
+        <Router>
+          <Layout>
+            <Switch>
+              <Route exact path="/processes">
+                <Processes />
+              </Route>
+              <Route exact path="/addProcess">
+                <AddProcess />
+              </Route>
+              <Route exact path="/addInterview">
+                <AddInterview />
+              </Route>
 
-            <Route exact path="/AdminPage">
-              <AdminPage />
-            </Route>
+              <Route exact path="/AdminPage">
+                <AdminPage />
+              </Route>
 
-            <Route exact path="/Home">
-              <Home />
-            </Route>
+              <Route exact path="/Home">
+                <Home />
+              </Route>
 
-            <Route exact path="/Register">
-              <Register />
-            </Route>
+              <Route exact path="/Register">
+                <Register />
+              </Route>
 
-            <Route exact path="/Login">
-              <Login />
-            </Route>
-          </Switch>
-        </Layout>
-      </Router>
+              <Route exact path="/Login">
+                <Login />
+              </Route>
+            </Switch>
+          </Layout>
+        </Router> :
+                <Router>
+                  <Switch>
+                    <Route exact path="/">
+                      <Home name={props.studentStore.name} loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
+                    </Route>
+                  </Switch>
+                  </Router>}
+        
     </ThemeProvider>
   );
-}
+}));
 
 export default App;

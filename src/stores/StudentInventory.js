@@ -5,9 +5,12 @@ import axios from "axios";
 export class StudentInventory {
   constructor() {
     this.StudentJobs = [];
+    this.name = '';
     makeObservable(this, {
+      name: observable,
       StudentJobs: observable,
       numItems: computed,
+      checkUserLoggedIn: action,
       addJobsFromDB: action,
     });
     this.addJobsFromDB();
@@ -20,4 +23,16 @@ export class StudentInventory {
     let result = await axios.get(`http://localhost:8888/student/jobs/${majd}`);
     this.StudentJobs = result.data;
   };
+
+  checkUserLoggedIn = async () => {
+    const response = await fetch('http://localhost:8888/auth/user', {
+        headers: {'Content-Type': 'application/json'},
+        credentials: 'include',
+    });
+
+    const content = await response.json();
+
+    this.name = content.name
+  
+  }
 }

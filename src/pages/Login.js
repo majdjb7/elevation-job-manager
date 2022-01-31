@@ -21,7 +21,6 @@ export default function Login(props) {
     });
 
     const content = await response.json();
-    console.log(content)
 
     setRedirect(true);
     // props.setName(content.name);

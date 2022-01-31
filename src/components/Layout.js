@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core";
 import Drawer from "@material-ui/core/Drawer";
 import Typography from "@material-ui/core/Typography";
@@ -7,8 +7,11 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-
+import Nav from './Nav'
+import { inject, observer } from "mobx-react";
+import { observe } from "mobx";
 import { Work, SchoolRounded, AddCircle } from "@material-ui/icons";
+import { Redirect } from 'react-router-dom'
 
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -64,13 +67,18 @@ const useStyles = makeStyles((theme) => {
   };
 });
 
-export default function Layout({ children }) {
+const Layout = inject("studentStore") (
+observer((props) => {
   {
     /* the props children is all the comps from app.js under the switch */
   }
   const classes = useStyles();
   const history = useHistory();
   const location = useLocation();
+
+  if(props.studentStore.name === '') {
+    return <Redirect to="/"/>;
+  }
 
   const menuItems = [
     {
@@ -118,7 +126,7 @@ export default function Layout({ children }) {
           <Typography className={classes.date}>
             Today is the {format(new Date(), "do MMMM Y")}
           </Typography>
-          <Typography>Ayman</Typography>
+          <Typography>{props.studentStore.name}</Typography>
           <button label="hi"/>
           <Avatar
             className={classes.avatar}
@@ -168,8 +176,10 @@ export default function Layout({ children }) {
         <div className={classes.toolbar}>
           {/* to make some space under the toolbar|navBar */}
         </div>
-        {children}
+        {props.children}
       </div>
     </div>
   );
-}
+}));
+
+export default Layout;
