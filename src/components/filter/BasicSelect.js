@@ -21,7 +21,12 @@ const BasicSelect = inject(
       setMenuItem(e);
 
       if (props.selectBy === "Cohort") {
+        console.log(props.selectBy);
         props.adminStore.sortPerCohortName(e);
+      }
+      if (props.selectBy === "Status") {
+        // console.log("Status");
+        props.adminStore.sortByStatus(e);
       }
     };
 

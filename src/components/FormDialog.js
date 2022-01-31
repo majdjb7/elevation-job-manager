@@ -13,7 +13,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
-import { makeStyles, Grid } from "@material-ui/core";
+import { makeStyles, Grid, Typography } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { inject, observer } from "mobx-react";
@@ -74,7 +74,8 @@ const FormDialog = inject("studentStore")(
     return (
       <div>
         <IconButton onClick={handleClickOpen}>
-          <AddCircleOutline />
+          {/* <AddCircleOutline /> */}
+          <Typography>Add new interview</Typography>
         </IconButton>
         <Dialog open={open} onClose={handleClose}>
           <DialogTitle>ِAdd new Interview</DialogTitle>

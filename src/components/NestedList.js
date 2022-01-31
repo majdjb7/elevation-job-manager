@@ -51,7 +51,7 @@ export default function NestedList(props) {
       }
     >
       <ListItemButton onClick={handleClick}>
-        <ListItemText primary="Type-Date" />
+        <ListItemText primary="Past Interviews" />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>

@@ -15,17 +15,23 @@ import {
   TableFooter,
 } from "@material-ui/core";
 import { IconButton } from "@mui/material";
-
+import Button from "@mui/material/Button";
 ////////////////////////////
 import { inject, observer } from "mobx-react";
 import { observe } from "mobx";
-import { Work, SchoolRounded, AddCircle } from "@material-ui/icons";
+import {
+  Work,
+  SchoolRounded,
+  AddCircle,
+  AddCircleOutline,
+} from "@material-ui/icons";
 import moment from "moment";
 
 /////////////////////////////
 import NestedList from "./NestedList";
 import FormDialog from "./FormDialog";
 
+import StatusSelect from "./StatusSelect";
 import Box from "@mui/material/Box";
 
 const useStyles = makeStyles((theme) => ({
@@ -76,7 +82,8 @@ const Processes = inject("studentStore")(
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
-
+    const [isDoubileClick, setIsDoubileClick] = React.useState(false);
+    const [status, setStatus] = React.useState("");
     const handleChangePage = (event, newPage) => {
       setPage(newPage);
     };
@@ -85,7 +92,9 @@ const Processes = inject("studentStore")(
       setRowsPerPage(+event.target.value);
       setPage(0);
     };
-
+    const handleDoubleClick = function (event) {
+      setIsDoubileClick(!isDoubileClick);
+    };
     const getMostRecentInterview = function (interviews) {
       let mostRelevantInterview,
         interviewType = null;
@@ -118,13 +127,19 @@ const Processes = inject("studentStore")(
                   <Typography variant="h6">Job Info</Typography>
                 </TableCell>
                 <TableCell className={classes.tableHeaderCell}>
-                  <Typography variant="h6">Closest Interview</Typography>
+                  <Typography variant="h6">Current interview</Typography>
                 </TableCell>
                 <TableCell className={classes.tableHeaderCell}>
                   <Typography variant="h6">Status</Typography>
                 </TableCell>
                 <TableCell className={classes.tableHeaderCell}>
                   <Typography variant="h6">Show History</Typography>
+                </TableCell>
+                <TableCell className={classes.tableHeaderCell}>
+                  <Typography variant="h6">New interview</Typography>
+                </TableCell>
+                <TableCell className={classes.tableHeaderCell}>
+                  <Typography variant="h6">Save</Typography>
                 </TableCell>
                 {/* <TableCell className={classes.tableHeaderCell}>
                   <Typography variant="h6">Add new Interview</Typography>
@@ -169,23 +184,52 @@ const Processes = inject("studentStore")(
                     {getMostRecentInterview(row.interviews)}
                   </TableCell>
                   <TableCell>
-                    <Typography
-                      className={classes.status}
-                      style={{
-                        backgroundColor:
-                          (row.status === "Open" && "green") ||
-                          (row.status === "Pending" && "blue") ||
-                          (row.status === "Declined" && "red"),
-                      }}
-                    >
-                      {row.status}
-                    </Typography>
+                    <div onDoubleClick={handleDoubleClick}>
+                      {isDoubileClick ? (
+                        <StatusSelect status={status} setStatus={setStatus} />
+                      ) : (
+                        <Typography
+                          className={classes.status}
+                          style={{
+                            backgroundColor:
+                              (row.status === "Open" && "green") ||
+                              (row.status === "Pending" && "blue") ||
+                              (row.status === "Rejected" && "red"),
+                          }}
+                        >
+                          {row.status}
+                        </Typography>
+                      )}
+                    </div>
                   </TableCell>
                   <TableCell>
                     <NestedList interviews={row.interviews} />
                   </TableCell>
                   <TableCell>
                     <FormDialog jobId={row._id} />
+                  </TableCell>
+                  <TableCell>
+                    {isDoubileClick ? (
+                      <Button
+                        variant="text"
+                        onClick={() => {
+                          props.studentStore.edditStatusForStudent(
+                            row._id,
+                            status
+                          );
+
+                          setIsDoubileClick(!isDoubileClick);
+                        }}
+                      >
+                        {/* Save */}
+                        <AddCircleOutline />
+                      </Button>
+                    ) : (
+                      <Button variant="text" disabled>
+                        {/* Save */}
+                        <AddCircleOutline />
+                      </Button>
+                    )}
                   </TableCell>
                 </TableRow>
               ))}
