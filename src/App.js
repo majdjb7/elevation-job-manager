@@ -35,20 +35,20 @@ const theme = createMuiTheme({
 function App() {
   const [name, setName] = useState('');
 
-  useEffect(() => {
-      (
-          async () => {
-              const response = await fetch('http://localhost:8888/api/user', {
-                  headers: {'Content-Type': 'application/json'},
-                  credentials: 'include',
-              });
+  // useEffect(() => {
+  //     (
+  //         async () => {
+  //             const response = await fetch('http://localhost:8888/api/user', {
+  //                 headers: {'Content-Type': 'application/json'},
+  //                 credentials: 'include',
+  //             });
 
-              const content = await response.json();
+  //             const content = await response.json();
 
-              setName(content.name);
-          }
-      )();
-  });
+  //             setName(content.name);
+  //         }
+  //     )();
+  // });
 
 
   return (

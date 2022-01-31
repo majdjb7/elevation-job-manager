@@ -93,6 +93,16 @@ export default function Layout({ children }) {
       icon: <Work color="secondary" />,
       path: "/adminPage",
     },
+    {
+      text: "Login",
+      icon: <Work color="secondary" />,
+      path: "/login",
+    },
+    {
+      text: "Register",
+      icon: <Work color="secondary" />,
+      path: "/register",
+    },
   ];
 
   return (
