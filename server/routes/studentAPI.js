@@ -14,7 +14,7 @@ router.get("/jobs/:id", async (req, res) => {
         populate: {
           path: "interviews",
         },
-         options: { sort: { mostRecentInterview: -1 }}
+        options: { sort: { mostRecentInterview: -1 } },
       })
       .exec(function (err, student) {
         res.send(student.jobs);
@@ -26,7 +26,7 @@ router.get("/jobs/:id", async (req, res) => {
 
 router.post("/jobs/:id", async (req, res) => {
   let id = req.params.id;
-  console.log(req.body);
+
   try {
     let job = new Job({
       companyName: req.body.companyName,
@@ -35,7 +35,7 @@ router.post("/jobs/:id", async (req, res) => {
       description: req.body.description,
       status: "Open",
       whereFindJob: req.body.whereFindJob,
-      studentId:id
+      studentId: id,
     });
 
     Student.findByIdAndUpdate(
@@ -80,6 +80,20 @@ router.post("/jobs/:id/interviews", async (req, res) => {
     res.send(interview);
   } catch (error) {
     res.send(error);
+  }
+});
+router.post("/jobs/status/:jobId/interviews", async (req, res) => {
+  const id = req.params.jobId;
+
+  try {
+    Job.findByIdAndUpdate(
+      id,
+      { status: req.body.status },
+      function (err, user) {}
+    );
+    res.send().status(200);
+  } catch (error) {
+    res.send(error).status(500);
   }
 });
 
