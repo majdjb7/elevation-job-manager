@@ -6,7 +6,7 @@ const Interview = require("../models/Interview");
 
 router.get("/allJobs", async (req, res) => {
     try {
-        await Job.find({})
+         Job.find({})
         .populate({
             path: 'interviews',
         }).sort({ mostRecentInterview: -1 })
@@ -32,10 +32,9 @@ router.get("/allJobs", async (req, res) => {
             }
             result.push(studentjob)
             }
-            console.log(result);
             res.send(result)
     })}catch (error) {
-       res.send(error);
+      res.status(500).send({ error: 'Something failed!' })
     }
    
 });
@@ -52,7 +51,7 @@ router.get("/jobs", async (req, res) => {
         .exec(function (err, studentJobs) {
             res.send(studentJobs)
     })}catch (error) {
-       res.send(error);
+      res.status(500).send({ error: 'Something failed!' })
     }
 });
 router.get("/cohorts/:cohortName", async (req, res) => {
@@ -68,7 +67,7 @@ router.get("/cohorts/:cohortName", async (req, res) => {
         res.send(studentJobs);
       });
   } catch (error) {
-    res.send(error);
+    res.status(500).send({ error: 'Something failed!' })
   }
 });
 
