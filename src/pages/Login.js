@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom'
+import Button from '@mui/material/Button';
+import { useHistory, useLocation } from "react-router-dom";
 
 export default function Login(props) {
   console.log(props)
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [redirect, setRedirect] = useState(false);
+
+  const history = useHistory();
+  const location = useLocation();
 
   const submit = async (e) => {
     e.preventDefault();
@@ -43,6 +48,13 @@ if (redirect) {
       />
 
       <button className="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+
+      <h3>Do'nt have an account?</h3>
+      <Button variant="contained" color="secondary"
+            onClick={() => history.push('/Register')}>Register
+          </Button>
     </form>
+
+    
   );
 }
