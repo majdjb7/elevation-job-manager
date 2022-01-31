@@ -11,6 +11,7 @@ export class StudentInventory {
       StudentJobs: observable,
       numItems: computed,
       checkUserLoggedIn: action,
+      logout: action,
       addJobsFromDB: action,
     });
     this.addJobsFromDB();
@@ -31,8 +32,16 @@ export class StudentInventory {
     });
 
     const content = await response.json();
-
     this.name = content.name
-  
   }
+
+  logout = async () => {
+    await fetch('http://localhost:8888/auth/logout', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        credentials: 'include',
+    });
+
+    this.name = '';
+}
 }

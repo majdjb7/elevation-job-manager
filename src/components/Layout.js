@@ -7,6 +7,7 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
+import Button from '@mui/material/Button';
 import Nav from './Nav'
 import { inject, observer } from "mobx-react";
 import { observe } from "mobx";
@@ -127,12 +128,15 @@ observer((props) => {
             Today is the {format(new Date(), "do MMMM Y")}
           </Typography>
           <Typography>{props.studentStore.name}</Typography>
-          <button label="hi"/>
           <Avatar
             className={classes.avatar}
             src="https://media-exp1.licdn.com/dms/image/C4E03AQGzvBqaQHa1vw/profile-displayphoto-shrink_800_800/0/1631448072130?e=1648684800&v=beta&t=6122tVcQhDq7qdokhU5w-kFyImVX3OcGrJq6i1IMMck"
           />
-          
+          <Button variant="contained" color="secondary"
+            onClick={() => {
+              props.studentStore.logout()
+            }}>Logout
+          </Button>
         </Toolbar>
       </AppBar>
 
