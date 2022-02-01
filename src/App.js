@@ -8,6 +8,11 @@ import AddInterview from "./components/AddInterview";
 import AdminPage from "./components/AdminPage";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { inject, observer } from "mobx-react";
+import { observe } from "mobx";
+import Home from "./pages/Home";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
 
 import NestedList from "./components/NestedList";
 const theme = createMuiTheme({
@@ -28,34 +33,76 @@ const theme = createMuiTheme({
   },
 });
 
-function App() {
+const App = inject("studentStore")(
+  observer((props) => {
+
+  // const [name, setName] = useState('');
+
+  const [loggedIn, setLoggedIn] = useState(false)
+
+  useEffect(() => {
+    props.studentStore.checkUserLoggedIn()
+    // if(props.studentStore.name != '') {
+    //   setLoggedIn(true)
+    // }
+  });
+
+
+
   return (
     <ThemeProvider theme={theme}>
       {/* to overide and change the orignal colors and thems in other comps */}
-      <Router>
-        <Layout>
-          {/* to make the navbar and the bar stick on all the pgs down */}
+        {props.studentStore.isLoggedIn ?
+        <Router>
+          <Layout>
+            <Switch>
+              <Route exact path="/processes">
+                <Processes />
+              </Route>
+              <Route exact path="/addProcess">
+                <AddProcess />
+              </Route>
+              <Route exact path="/addInterview">
+                <AddInterview />
+              </Route>
 
-          <Switch>
-            {/* Switch = every time will get 1 router */}
-            <Route exact path="/">
-              <Processes />
-            </Route>
-            <Route exact path="/addProcess">
-              <AddProcess />
-            </Route>
-            <Route exact path="/addInterview">
-              <AddInterview />
-            </Route>
+              <Route exact path="/AdminPage">
+                <AdminPage />
+              </Route>
 
-            <Route exact path="/AdminPage">
-              <AdminPage />
-            </Route>
-          </Switch>
-        </Layout>
-      </Router>
+              <Route exact path="/Home">
+                <Home />
+              </Route>
+
+              <Route exact path="/Register">
+                <Register />
+              </Route>
+
+              <Route exact path="/Login">
+                <Login />
+              </Route>
+            </Switch>
+          </Layout>
+        </Router> :
+                <Router>
+                  <Switch>
+                    <Route exact path="/">
+                      <Home name={props.studentStore.name} loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
+                    </Route>
+
+                    <Route exact path="/Login">
+                      <Login />
+                    </Route>
+
+                    <Route exact path="/Register">
+                      <Register />
+                    </Route>
+
+                  </Switch>
+                  </Router>}
+        
     </ThemeProvider>
   );
-}
+}));
 
 export default App;

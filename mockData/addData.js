@@ -8,82 +8,113 @@ mongoose.connect(
   { useNewUrlParser: true }
 );
 
-// const studentData = require("./students.json");
-// const adminData = require("./admins.json");
-// const jobData = require("./jobs.json");
-// const interviewData = require("./interviews.json");
+const studentData = require("./students.json");
+const adminData = require("./admins.json");
+const jobData = require("./jobs.json");
+const interviewData = require("./interviews.json");
+function addData() {
+  adminData.forEach((admin) => {
+    const a = new Admin({
+      firstName: admin.firstName,
+      lastName: admin.lastName,
+      email: admin.email,
+      mobileNo: admin.mobileNo,
+      password: admin.password,
+    });
+    a.save();
+  });
 
-// adminData.forEach((admin) => {
-//   const a = new Admin({
-//     firstName: admin.firstName,
-//     lastName: admin.lastName,
-//     email: admin.email,
-//     mobileNo: admin.mobileNo,
-//     password: admin.password,
-//   });
-//   a.save();
-// });
+  studentData.forEach((student) => {
+    const s = new Student({
+      firstName: student.firstName,
+      lastName: student.lastName,
+      email: student.email,
+      cohort: student.cohort,
+      mobileNo: student.mobileNo,
+      password: student.password,
+      jobs: student.jobs,
+    });
 
-// studentData.forEach((student) => {
-//   const s = new Student({
-//     firstName: student.firstName,
-//     lastName: student.lastName,
-//     email: student.email,
-//     cohort: student.cohort,
-//     mobileNo: student.mobileNo,
-//     password: student.password,
-//     jobs: student.jobs,
-//   });
+    jobData.forEach((job) => {
+      const j = new Job({
+        companyName: job.companyName,
+        role: job.role,
+        location: job.location,
+        description: job.description,
+        status: job.status,
+        whereFindJob: job.whereFindJob,
+        interviews: job.interviews,
+      });
+      interviewData.forEach((interview) => {
+        const i = new Interview({
+          type: interview.type,
+          time: interview.time,
+          interviewerName: interview.interviewerName,
+          status: interview.status,
+        });
+        i.save();
+        j.interviews.push(i);
+      });
+      j.save();
+      s.jobs.push(j);
+    });
 
-//   jobData.forEach((job) => {
-//     const j = new Job({
-//       companyName: job.companyName,
-//       role: job.role,
-//       location: job.location,
-//       description: job.description,
-//       status: job.status,
-//       whereFindJob: job.whereFindJob,
-//       interviews: job.interviews,
-//     });
-//     interviewData.forEach((interview) => {
-//       const i = new Interview({
-//         type: interview.type,
-//         time: interview.time,
-//         interviewerName: interview.interviewerName,
-//         status: interview.status,
-//       });
-//       i.save();
-//       j.interviews.push(i);
-//     });
-//     j.save();
-//     s.jobs.push(j);
-//   });
+    jobData.forEach((job) => {
+      const j = new Job({
+        companyName: job.companyName,
+        role: job.role,
+        location: job.location,
+        description: job.description,
+        status: job.status,
+        whereFindJob: job.whereFindJob,
+        mostRecentInterview: "Sunday, August 19, 2018 9:23 PM",
+        interviews: job.interviews,
+      });
+      interviewData.forEach((interview) => {
+        const i = new Interview({
+          type: interview.type,
+          time: interview.time,
+          interviewerName: interview.interviewerName,
+          status: interview.status,
+        });
+        i.save();
+        j.interviews.push(i);
+      });
+      j.save();
+      s.jobs.push(j);
+    });
 
-//   jobData.forEach((job) => {
-//     const j = new Job({
-//       companyName: job.companyName,
-//       role: job.role,
-//       location: job.location,
-//       description: job.description,
-//       status: job.status,
-//       whereFindJob: job.whereFindJob,
-//       mostRecentInterview: "Sunday, August 19, 2018 9:23 PM",
-//       interviews: job.interviews,
-//     });
-//     interviewData.forEach((interview) => {
-//       const i = new Interview({
-//         type: interview.type,
-//         time: interview.time,
-//         interviewerName: interview.interviewerName,
-//         status: interview.status,
-//       });
-//       i.save();
-//       j.interviews.push(i);
-//     });
-//     j.save();
-//     s.jobs.push(j);
-//   });
+    jobData.forEach((job) => {
+      const j = new Job({
+        companyName: job.companyName,
+        role: job.role,
+        location: job.location,
+        description: job.description,
+        status: job.status,
+        whereFindJob: job.whereFindJob,
+        mostRecentDate: null,
+        interviews: job.interviews,
+      });
+      interviewData.forEach((interview) => {
+        const i = new Interview({
+          type: interview.type,
+          time: interview.time,
+          interviewerName: interview.interviewerName,
+          status: interview.status,
+        });
+        i.save();
+        j.interviews.push(i);
+      });
+      j.save();
+      s.jobs.push(j);
+    });
 
+<<<<<<< HEAD
+    s.save();
+  });
+}
+
+=======
 //   jobData.forEach((job) => {
 //     const j = new Job({
 //       companyName: job.companyName,
@@ -111,6 +142,7 @@ mongoose.connect(
 
 //   s.save();
 // });
+>>>>>>> main
 function updateJob() {
   try {
     Student.find({})
@@ -129,4 +161,9 @@ function updateJob() {
     res.send(error);
   }
 }
+<<<<<<< HEAD
+
+// addData();
+=======
+>>>>>>> main
 updateJob();

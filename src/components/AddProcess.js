@@ -26,9 +26,7 @@ const useStyles = makeStyles({
 });
 
 function AddProcess() {
-  const MAJD_ID = "61f6c18cebcb5be4dc8f990c";
-  const AYMAN_ID = "61f10b63c075b471f2572f98";
-  const MOSTFA_ID = "61f10b63c075b471f2572f4f";
+  const MAJD_ID = "61f6ab5115cb71811bc607d3";
 
   const classes = useStyles();
   const history = useHistory();
