@@ -77,7 +77,7 @@ observer((props) => {
   const history = useHistory();
   const location = useLocation();
 
-  if(props.studentStore.name === '') {
+  if(props.studentStore.firstName === '') {
     return <Redirect to="/"/>;
   }
 
@@ -127,7 +127,7 @@ observer((props) => {
           <Typography className={classes.date}>
             Today is the {format(new Date(), "do MMMM Y")}
           </Typography>
-          <Typography>{props.studentStore.name}</Typography>
+          <Typography>{props.studentStore.firstName}</Typography>
           <Avatar
             className={classes.avatar}
             src="https://media-exp1.licdn.com/dms/image/C4E03AQGzvBqaQHa1vw/profile-displayphoto-shrink_800_800/0/1631448072130?e=1648684800&v=beta&t=6122tVcQhDq7qdokhU5w-kFyImVX3OcGrJq6i1IMMck"

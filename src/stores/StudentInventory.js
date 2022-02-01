@@ -5,10 +5,10 @@ import axios from "axios";
 export class StudentInventory {
   constructor() {
     this.StudentJobs = [];
-    this.name = '';
+    this.firstName = '';
     this.isLoggedIn = false;
     makeObservable(this, {
-      name: observable,
+      firstName: observable,
       StudentJobs: observable,
       isLoggedIn: observable,
       numItems: computed,
@@ -38,9 +38,13 @@ export class StudentInventory {
         headers: {'Content-Type': 'application/json'},
         credentials: 'include',
     });
-
+    console.log("Res: ", response)
     const content = await response.json();
-    this.name = content.name;
+    this.firstName = content.firstName;
+    if(response.status != 401) {
+      this.setLogin()
+
+    }
   }
 
   logout = async () => {
@@ -50,7 +54,7 @@ export class StudentInventory {
         credentials: 'include',
     });
 
-    this.name = '';
+    this.firstName = '';
     this.isLoggedIn = false;
   }
 

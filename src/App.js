@@ -42,9 +42,6 @@ const App = inject("studentStore")(
 
   useEffect(() => {
     props.studentStore.checkUserLoggedIn()
-    // if(props.studentStore.name != '') {
-    //   setLoggedIn(true)
-    // }
   });
 
 
@@ -87,7 +84,7 @@ const App = inject("studentStore")(
                 <Router>
                   <Switch>
                     <Route exact path="/">
-                      <Home name={props.studentStore.name} loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
+                      <Home name={props.studentStore.firstName} loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
                     </Route>
 
                     <Route exact path="/Login">
