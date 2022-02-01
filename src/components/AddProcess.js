@@ -12,6 +12,8 @@ import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import { inject, observer } from "mobx-react";
+import { observe } from "mobx";
 
 const useStyles = makeStyles({
   field: {
@@ -25,8 +27,9 @@ const useStyles = makeStyles({
   },
 });
 
-function AddProcess() {
-  const MAJD_ID = "61f6ab5115cb71811bc607d3";
+const AddProcess = inject("studentStore")(
+  observer((props) => {
+  const MAJD_ID = "61f95c96ecdd8874b477d4de";
 
   const classes = useStyles();
   const history = useHistory();
@@ -66,7 +69,7 @@ function AddProcess() {
     }
     if (companyName && role && location && description && whereFindJob) {
       const res = await axios.post(
-        `http://localhost:8888/student/jobs/${MAJD_ID}`,
+        `http://localhost:8888/student/jobs/${props.studentStore.studentID}`,
         { companyName, role, location, description, whereFindJob }
       );
       history.push({
@@ -176,5 +179,5 @@ function AddProcess() {
       </form>
     </Container>
   );
-}
+}));
 export default AddProcess;

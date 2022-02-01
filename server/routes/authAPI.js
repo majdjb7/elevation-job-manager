@@ -3,21 +3,23 @@ const router = express.Router();
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const User = require("../models/User")
+const Student = require("../models/Student")
 
 router.post('/register', async (req, res) => {
     const salt = await bcrypt.genSalt(10)
     const hashedPassword = await bcrypt.hash(req.body.password, salt)
 
-    const user = new User({
+    const student = new Student({
         name: req.body.firstName,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
         mobileNo: req.body.mobileNo,
+        cohort: req.body.cohort,
         password: hashedPassword,
     })
 
-    const result = await user.save()
+    const result = await student.save()
 
     const {password, ...data} = await result.toJSON()
 
@@ -25,21 +27,21 @@ router.post('/register', async (req, res) => {
 })
 
 router.post('/login', async (req, res) => {
-    const user = await User.findOne({email: req.body.email})
+    const student = await Student.findOne({email: req.body.email})
 
-    if(!user) {
+    if(!student) {
         return res.status(404).send({
             message: 'User Not Found'
         })
     }
 
-    if(!await bcrypt.compare(req.body.password, user.password)) {
+    if(!await bcrypt.compare(req.body.password, student.password)) {
         return res.status(400).send({
             message: 'Invalid Credentials'
         })
     }
 
-    const token = jwt.sign({_id: user._id}, "secret")
+    const token = jwt.sign({_id: student._id}, "secret")
 
     res.cookie('jwt', token, {
         httpOnly: true,
@@ -47,7 +49,8 @@ router.post('/login', async (req, res) => {
     })
 
     res.send({
-        message: 'Success'
+        message: 'Success',
+        studentID: student._id,
     })
 })
 
@@ -63,9 +66,9 @@ router.get('/user', async (req, res) => {
             })
         }
 
-        const user = await User.findOne({_id: claims._id})
+        const student = await Student.findOne({_id: claims._id})
 
-        const {password, ...data} = await user.toJSON()
+        const {password, ...data} = await student.toJSON()
 
         res.send(data)
     }catch (e) {
@@ -81,6 +84,10 @@ router.post('/logout', async (req, res) => {
     res.send({
         message: 'Success'
     })
+})
+
+router.post('/userID', async (req, res) => {
+    let
 })
 
 

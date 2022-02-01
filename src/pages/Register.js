@@ -6,6 +6,7 @@ export default function Register() {
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [mobileNo, setMobileNo] = useState('');
+    const [cohort, setCohort] = useState('');
     const [password, setPassword] = useState('');
     const [redirect, setRedirect] = useState(false);
 
@@ -20,6 +21,7 @@ export default function Register() {
                 lastName,
                 email,
                 mobileNo,
+                cohort,
                 password
             })
         });
@@ -48,6 +50,10 @@ export default function Register() {
 
         <input className="form-control" placeholder="Phone Number" required
             onChange={e => setMobileNo(e.target.value)}
+        />
+
+        <input className="form-control" placeholder="Cohort" required
+            onChange={e => setCohort(e.target.value)}
         />
 
         <input type="password" className="form-control" placeholder="Password" required

@@ -7,7 +7,6 @@ import { observe } from "mobx";
 
  const Login = inject("studentStore")(
   observer((props) => {
-  console.log(props)
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [redirect, setRedirect] = useState(false);
@@ -34,6 +33,7 @@ import { observe } from "mobx";
     });
 
     const content = await response.json();
+    props.studentStore.setStudentID(content.studentID)
     props.studentStore.setLogin();
     setRedirect(true);
     // props.setName(content.name);
