@@ -31,8 +31,8 @@ const BasicSelect = inject(
     };
 
     return (
-      <Box sx={{ minWidth: 100, maxWidth: 200 }}>
-        <FormControl fullWidth>
+      <Box sx={{ minWidth: 100, maxWidth: 185 }}>
+        <FormControl fullWidth size="small">
           <InputLabel id="demo-simple-select-label">
             {props.selectBy}
           </InputLabel>

@@ -6,6 +6,7 @@ export class AdminInventory {
   constructor() {
     this.AdminJobs = [];
     this.allStudents = [];
+    this.studentsNames = [];
     this.showCurrCohort = "All";
     this.acceptedStudentsPercentage = { Employed: 0, Unemployed: 0 };
     this.acceptedStudentsPercentagePerCohort = { Employed: 0, Unemployed: 0 };
@@ -26,6 +27,7 @@ export class AdminInventory {
 
     makeObservable(this, {
       AdminJobs: observable,
+      studentsNames: observable,
       allStudents: observable,
       acceptedStudentsPercentage: observable,
       acceptedStudentsPercentagePerCohort: observable,
@@ -35,6 +37,8 @@ export class AdminInventory {
       addJobsFromDBToAdmin: action,
       sortPerCohortName: action,
       sortByStatus: action,
+      getAllStudentsNames: action,
+      filterByName: action,
     });
     this.addJobsFromDBToAdmin();
   }
@@ -171,8 +175,26 @@ export class AdminInventory {
       this.sortAllStudentJobs();
     }
   };
+  filterByName = async (name) => {
+    this.allStudents = [];
+    this.AdminJobs = [];
+
+    let result = await axios.get(
+      `http://localhost:8888/admin/students/${name}`
+    );
+    this.allStudents = result.data;
+    this.sortAllStudentJobs();
+  };
+  getAllStudentsNames = async () => {
+    await this.addJobsFromDBToAdmin();
+    this.AdminJobs.forEach((s) => {
+      this.studentsNames.push(s.studentName);
+    });
+    this.studentsNames = [...new Set(this.studentsNames)];
+
+    return;
+  };
   sortByStatus = async (status) => {
-    console.log(status);
     await this.sortPerCohortName(this.showCurrCohort);
     let filterArr = this.AdminJobs.filter((a) => a.status == status);
     this.AdminJobs = [...filterArr];

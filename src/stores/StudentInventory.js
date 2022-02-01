@@ -34,7 +34,7 @@ export class StudentInventory {
 
   setLogin = () => {
     this.isLoggedIn = true;
-  }
+  };
 
   setStudentID = (id) => {
     this.studentID = id;
@@ -42,9 +42,9 @@ export class StudentInventory {
   }
 
   checkUserLoggedIn = async () => {
-    const response = await fetch('http://localhost:8888/auth/user', {
-        headers: {'Content-Type': 'application/json'},
-        credentials: 'include',
+    const response = await fetch("http://localhost:8888/auth/user", {
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
     });
     const content = await response.json();
     this.firstName = content.firstName;
@@ -55,10 +55,10 @@ export class StudentInventory {
   }
 
   logout = async () => {
-    await fetch('http://localhost:8888/auth/logout', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        credentials: 'include',
+    await fetch("http://localhost:8888/auth/logout", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
     });
 
     this.firstName = '';
