@@ -75,50 +75,8 @@ const useStyles = makeStyles((theme) => {
   };
 });
 
-<<<<<<< HEAD
-const Layout = inject("studentStore") (
-observer((props) => {
-  {
-    /* the props children is all the comps from app.js under the switch */
-  }
-  const classes = useStyles();
-  const history = useHistory();
-  const location = useLocation();
-
-  if(props.studentStore.firstName === '') {
-    return <Redirect to="/"/>;
-  }
-
-  const menuItems = [
-    {
-      text: "Home",
-      icon: <Work color="secondary" />,
-      path: "/",
-    },
-    {
-      text: "Processes",
-      icon: <Work color="secondary" />,
-      path: "/processes",
-    },
-    {
-      text: "Add Process",
-      icon: <AddCircle color="secondary" />,
-      path: "/addProcess",
-    },
-    {
-      text: "AdminPage",
-      icon: <Work color="secondary" />,
-      path: "/adminPage",
-    },
-    {
-      text: "Login",
-      icon: <Work color="secondary" />,
-      path: "/login",
-    },
-=======
 const Layout = inject("studentStore")(
   observer((props) => {
->>>>>>> main
     {
       /* the props children is all the comps from app.js under the switch */
     }
@@ -126,37 +84,9 @@ const Layout = inject("studentStore")(
     const history = useHistory();
     const location = useLocation();
 
-<<<<<<< HEAD
-  return (
-    <div className={classes.root}>
-      {/* app bar */}
-      <AppBar
-        position="fixed"
-        className={classes.appBar}
-        elevation={0}
-        color={"primary"}
-      >
-        <Toolbar>
-          <Typography className={classes.date}>
-            Today is the {format(new Date(), "do MMMM Y")}
-          </Typography>
-          <Typography>{props.studentStore.firstName}</Typography>
-          <Avatar
-            className={classes.avatar}
-            src="https://media-exp1.licdn.com/dms/image/C4E03AQGzvBqaQHa1vw/profile-displayphoto-shrink_800_800/0/1631448072130?e=1648684800&v=beta&t=6122tVcQhDq7qdokhU5w-kFyImVX3OcGrJq6i1IMMck"
-          />
-          <Button variant="contained" color="secondary"
-            onClick={() => {
-              props.studentStore.logout()
-            }}>Logout
-          </Button>
-        </Toolbar>
-      </AppBar>
-=======
-    if (props.studentStore.name === "") {
-      return <Redirect to="/" />;
+    if(props.studentStore.firstName === '') {
+      return <Redirect to="/"/>;
     }
->>>>>>> main
 
     const menuItems = [
       {
@@ -210,10 +140,10 @@ const Layout = inject("studentStore")(
             <Typography className={classes.date}>
               Today is the {format(new Date(), "do MMMM Y")}
             </Typography>
-            <Typography>{props.studentStore.name}</Typography>
+            <Typography>{props.studentStore.firstName}</Typography>
 
             <Avatar
-              alt={props.studentStore.name}
+              alt={props.studentStore.firstName}
               src="."
               className={classes.avatar}
             />

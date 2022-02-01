@@ -37,25 +37,6 @@ const theme = createMuiTheme({
 
 const App = inject("studentStore")(
   observer((props) => {
-<<<<<<< HEAD
-
-  // const [name, setName] = useState('');
-
-  const [loggedIn, setLoggedIn] = useState(false)
-
-  useEffect(() => {
-    props.studentStore.checkUserLoggedIn()
-  });
-
-
-
-  return (
-    <ThemeProvider theme={theme}>
-      {/* to overide and change the orignal colors and thems in other comps */}
-        {props.studentStore.isLoggedIn ?
-        <Router>
-          <Layout>
-=======
     // const [name, setName] = useState('');
 
     const [loggedIn, setLoggedIn] = useState(false);
@@ -108,11 +89,10 @@ const App = inject("studentStore")(
           </Router>
         ) : (
           <Router>
->>>>>>> main
             <Switch>
               <Route exact path="/">
                 <Home
-                  name={props.studentStore.name}
+                  name={props.studentStore.firstName}
                   loggedIn={loggedIn}
                   setLoggedIn={setLoggedIn}
                 />
@@ -126,36 +106,11 @@ const App = inject("studentStore")(
                 <Register />
               </Route>
             </Switch>
-<<<<<<< HEAD
-          </Layout>
-        </Router> :
-                <Router>
-                  <Switch>
-                    <Route exact path="/">
-                      <Home name={props.studentStore.firstName} loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
-                    </Route>
-
-                    <Route exact path="/Login">
-                      <Login />
-                    </Route>
-
-                    <Route exact path="/Register">
-                      <Register />
-                    </Route>
-
-                  </Switch>
-                  </Router>}
-        
-    </ThemeProvider>
-  );
-}));
-=======
           </Router>
         )}
       </ThemeProvider>
     );
   })
 );
->>>>>>> main
 
 export default App;
