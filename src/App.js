@@ -6,6 +6,8 @@ import Processes from "./components/Processes";
 import AddProcess from "./components/AddProcess";
 import AddInterview from "./components/AddInterview";
 import AdminPage from "./components/AdminPage";
+import Dashboard from "./components/adminDashboard/Dashboard";
+
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { inject, observer } from "mobx-react";
@@ -35,74 +37,80 @@ const theme = createMuiTheme({
 
 const App = inject("studentStore")(
   observer((props) => {
+    // const [name, setName] = useState('');
 
-  // const [name, setName] = useState('');
+    const [loggedIn, setLoggedIn] = useState(false);
 
-  const [loggedIn, setLoggedIn] = useState(false)
+    useEffect(() => {
+      props.studentStore.checkUserLoggedIn();
+      // if(props.studentStore.name != '') {
+      //   setLoggedIn(true)
+      // }
+    });
 
-  useEffect(() => {
-    props.studentStore.checkUserLoggedIn()
-    // if(props.studentStore.name != '') {
-    //   setLoggedIn(true)
-    // }
-  });
+    return (
+      <ThemeProvider theme={theme}>
+        {/* to overide and change the orignal colors and thems in other comps */}
+        {props.studentStore.isLoggedIn ? (
+          <Router>
+            <Layout>
+              <Switch>
+                <Route exact path="/processes">
+                  <Processes />
+                </Route>
+                <Route exact path="/dashboard">
+                  <Dashboard />
+                </Route>
 
+                <Route exact path="/addProcess">
+                  <AddProcess />
+                </Route>
+                <Route exact path="/addInterview">
+                  <AddInterview />
+                </Route>
 
+                <Route exact path="/AdminPage">
+                  <AdminPage />
+                </Route>
 
-  return (
-    <ThemeProvider theme={theme}>
-      {/* to overide and change the orignal colors and thems in other comps */}
-        {props.studentStore.isLoggedIn ?
-        <Router>
-          <Layout>
+                <Route exact path="/Home">
+                  <Home />
+                </Route>
+
+                <Route exact path="/Register">
+                  <Register />
+                </Route>
+
+                <Route exact path="/Login">
+                  <Login />
+                </Route>
+              </Switch>
+            </Layout>
+          </Router>
+        ) : (
+          <Router>
             <Switch>
-              <Route exact path="/processes">
-                <Processes />
-              </Route>
-              <Route exact path="/addProcess">
-                <AddProcess />
-              </Route>
-              <Route exact path="/addInterview">
-                <AddInterview />
-              </Route>
-
-              <Route exact path="/AdminPage">
-                <AdminPage />
-              </Route>
-
-              <Route exact path="/Home">
-                <Home />
-              </Route>
-
-              <Route exact path="/Register">
-                <Register />
+              <Route exact path="/">
+                <Home
+                  name={props.studentStore.name}
+                  loggedIn={loggedIn}
+                  setLoggedIn={setLoggedIn}
+                />
               </Route>
 
               <Route exact path="/Login">
                 <Login />
               </Route>
+
+              <Route exact path="/Register">
+                <Register />
+              </Route>
             </Switch>
-          </Layout>
-        </Router> :
-                <Router>
-                  <Switch>
-                    <Route exact path="/">
-                      <Home name={props.studentStore.name} loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
-                    </Route>
-
-                    <Route exact path="/Login">
-                      <Login />
-                    </Route>
-
-                    <Route exact path="/Register">
-                      <Register />
-                    </Route>
-
-                  </Switch>
-                  </Router>}
-        
-    </ThemeProvider>
-  );
-}));
+          </Router>
+        )}
+      </ThemeProvider>
+    );
+  })
+);
 
 export default App;

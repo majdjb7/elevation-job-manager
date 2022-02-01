@@ -26,7 +26,7 @@ const useStyles = makeStyles({
 });
 
 function AddProcess() {
-  const MAJD_ID = "61f6ab5115cb71811bc607d3";
+  const MAJD_ID = "61f6c18cebcb5be4dc8f990c";
 
   const classes = useStyles();
   const history = useHistory();
