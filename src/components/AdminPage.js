@@ -66,9 +66,12 @@ const useStyles = makeStyles((theme) => ({
   TablePagination: {
     maxWidth: "32%",
   },
+  filter: {
+    margin: "20px 0px",
+  },
 }));
 
-const Processes = inject("adminStore")(
+const Processes = inject("adminStore","studentStore")(
   observer((props) => {
     /************************************************ */
     const history = useHistory();
@@ -80,6 +83,7 @@ const Processes = inject("adminStore")(
       props.adminStore.getStatsOfAcceptedStudents("Cohort 21");
       props.adminStore.getStatusStats();
       props.adminStore.getStatusStatsByCohort();
+      props.adminStore.getAllStudentsNames();
     }, []);
     /************************************************ */
     const classes = useStyles();
@@ -113,36 +117,40 @@ const Processes = inject("adminStore")(
         interviewType + ": " + moment(maxDate).format(format1);
       return mostRelevantInterview;
     };
-    const studentPage = async function (id) {
-      let studentData=await axios.get(`http://localhost:8888/student/${id}`);
-      props.adminStore.studentData=studentData.data;
-      console.log("aa", props.adminStore.studentData);
-        let result = await axios.get(`http://localhost:8888/student/jobs/${id}`);
-        
-        props.adminStore.studentProfileJobs = result.data;
-        history.push({
-          pathname: "/studentprofile"
-        });
+    const studentPage = async function (id) { 
+     // let studentData=await axios.get(`http://localhost:8888/student/${id}`);
+    //  props.adminStore.studentData=studentData.data;
+    //  console.log("aa", props.adminStore.studentData);
+      await props.studentStore.getStudentData(id)
+      
+    //  let result = await axios.get(`http://localhost:8888/student/jobs/${id}`);
+     //   props.adminStore.studentProfileJobs = result.data;
+       history.push({
+         pathname: "/studentprofile"
+       });
       
        // console.log("Something wrong")
       
     }
     return (
       <div>
-        <AutocompleteSearch />
         <Grid
+          className={classes.filter}
           container
           direction="row"
           justifycontent="space-between"
           alignItems="flex-start"
         >
-          <Grid item lg={2}>
+          <Grid item lg={10}>
+            <AutocompleteSearch />
+          </Grid>
+          <Grid item lg={1}>
             <BasicSelect
               selectBy="Cohort"
               ArrMenuItems={["All", "Cohort 21", "Cohort 22"]}
             />
           </Grid>
-          <Grid item lg={8}>
+          <Grid item lg={1}>
             <BasicSelect
               selectBy="Status"
               ArrMenuItems={["Open", "Pending", "Accepted", "Rejected"]}

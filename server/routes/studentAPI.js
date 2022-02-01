@@ -125,19 +125,20 @@ router.post("/jobs/status/:jobId/interviews", async (req, res) => {
     res.send(error).status(500);
   }
 });
-router.post("/message", async (req, res) => {
+router.post("/message/send", async (req, res) => {
   const accountSid = 'AC57dc8be65772dbc89448964560190aab';
-  const authToken = '[AuthToken]';
+  const authToken = '3cd076257cad63698d98cc307350d9c4';
   const client = require('twilio')(accountSid, authToken);
 
   client.messages
     .create({
-      body: 'Your appointment is coming up on July 21 at 3PM',
+      body: 'from elevation',
       from: 'whatsapp:+14155238886',
-      to: 'whatsapp:+972532282478'
+      to: 'whatsapp:+972502702170'
     })
     .then(message => console.log(message.sid))
     .done();
+
 })
 
 module.exports = router;

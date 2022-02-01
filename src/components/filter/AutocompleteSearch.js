@@ -3,25 +3,50 @@ import React, { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import Autocomplete from "@mui/material/Autocomplete";
+import Button from "@mui/material/Button";
+import { Grid } from "@material-ui/core";
 ////////////////////////////
 import { inject, observer } from "mobx-react";
-import { observe } from "mobx";
-import { toJS } from "mobx";
+import { observe, toJS } from "mobx";
+
 /////////////////////////////
 
 const AutocompleteSearch = inject("adminStore")(
   observer((props) => {
+    const [value, setValue] = React.useState("");
+    const [inputValue, setInputValue] = React.useState("");
+    const studentsNames = toJS(props.adminStore.studentsNames);
+    const handelSearch = (event) => {
+      console.log(inputValue);
+      props.adminStore.filterByName(inputValue);
+    };
     return (
-      <Stack spacing={2} sx={{ width: 300 }}>
-        <Autocomplete
-          id="free-solo-demo"
-          freeSolo
-          options={top100Films.map((s) => s.title)}
-          renderInput={(params) => (
-            <TextField {...params} label="Search for student..." />
-          )}
-        />
-      </Stack>
+      <div>
+        <Grid container justifycontent="space-between">
+          <Grid item lg={3}>
+            <Stack spacing={2} sx={{ width: 240 }}>
+              <Autocomplete
+                inputValue={inputValue}
+                onInputChange={(event, newInputValue) => {
+                  setInputValue(newInputValue);
+                }}
+                id="free-solo-demo"
+                freeSolo
+                size="small"
+                options={studentsNames.map((s) => s)}
+                renderInput={(params) => (
+                  <TextField {...params} label="Search for student..." />
+                )}
+              />
+            </Stack>
+          </Grid>
+          <Grid item lg={8}>
+            <Button variant="contained" size="medum" onClick={handelSearch}>
+              Search
+            </Button>
+          </Grid>
+        </Grid>
+      </div>
     );
   })
 );

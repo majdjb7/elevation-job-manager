@@ -55,6 +55,27 @@ router.get("/jobs", async (req, res) => {
       res.status(500).send({ error: 'Something failed!' })
     }
 });
+
+router.get("/students/:name/", async (req, res) => {
+  firstName = req.params.name.split(" ")[0];
+  lastName = req.params.name.split(" ")[1];
+
+  try {
+    await Student.find({ firstName: firstName, lastName: lastName })
+      .populate({
+        path: "jobs",
+        populate: {
+          path: "interviews",
+        },
+      })
+      .exec(function (err, studentJobs) {
+        res.send(studentJobs).status(200);
+      });
+  } catch (error) {
+    res.send(error).status.status(500);
+  }
+});
+
 router.get("/cohorts/:cohortName", async (req, res) => {
   try {
     await Student.find({ cohort: req.params.cohortName })
