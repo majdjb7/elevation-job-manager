@@ -65,6 +65,9 @@ const useStyles = makeStyles((theme) => ({
   TablePagination: {
     maxWidth: "32%",
   },
+  filter: {
+    margin: "20px 0px",
+  },
 }));
 
 const Processes = inject("adminStore")(
@@ -79,6 +82,7 @@ const Processes = inject("adminStore")(
       props.adminStore.getStatsOfAcceptedStudents("Cohort 21");
       props.adminStore.getStatusStats();
       props.adminStore.getStatusStatsByCohort();
+      props.adminStore.getAllStudentsNames();
     }, []);
     /************************************************ */
     const classes = useStyles();
@@ -115,20 +119,23 @@ const Processes = inject("adminStore")(
 
     return (
       <div>
-        <AutocompleteSearch />
         <Grid
+          className={classes.filter}
           container
           direction="row"
           justifycontent="space-between"
           alignItems="flex-start"
         >
-          <Grid item lg={2}>
+          <Grid item lg={10}>
+            <AutocompleteSearch />
+          </Grid>
+          <Grid item lg={1}>
             <BasicSelect
               selectBy="Cohort"
               ArrMenuItems={["All", "Cohort 21", "Cohort 22"]}
             />
           </Grid>
-          <Grid item lg={8}>
+          <Grid item lg={1}>
             <BasicSelect
               selectBy="Status"
               ArrMenuItems={["Open", "Pending", "Accepted", "Rejected"]}
