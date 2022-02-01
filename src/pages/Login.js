@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom'
 import Button from '@mui/material/Button';
 import { useHistory, useLocation } from "react-router-dom";
+import { inject, observer } from "mobx-react";
+import { observe } from "mobx";
 
-export default function Login(props) {
+ const Login = inject("studentStore")(
+  observer((props) => {
   console.log(props)
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -26,7 +29,7 @@ export default function Login(props) {
     });
 
     const content = await response.json();
-
+    props.studentStore.setLogin();
     setRedirect(true);
     // props.setName(content.name);
 }
@@ -57,4 +60,6 @@ if (redirect) {
 
     
   );
-}
+}));
+
+export default Login;

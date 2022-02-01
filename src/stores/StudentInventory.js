@@ -6,11 +6,14 @@ export class StudentInventory {
   constructor() {
     this.StudentJobs = [];
     this.name = '';
+    this.isLoggedIn = false;
     makeObservable(this, {
       name: observable,
       StudentJobs: observable,
+      isLoggedIn: observable,
       numItems: computed,
       checkUserLoggedIn: action,
+      setLogin: action,
       logout: action,
       addJobsFromDB: action,
     });
@@ -26,6 +29,10 @@ export class StudentInventory {
     this.StudentJobs = result.data;
   };
 
+  setLogin = () => {
+    this.isLoggedIn = true;
+  }
+
   checkUserLoggedIn = async () => {
     const response = await fetch('http://localhost:8888/auth/user', {
         headers: {'Content-Type': 'application/json'},
@@ -33,7 +40,7 @@ export class StudentInventory {
     });
 
     const content = await response.json();
-    this.name = content.name
+    this.name = content.name;
   }
 
   logout = async () => {
@@ -44,7 +51,8 @@ export class StudentInventory {
     });
 
     this.name = '';
-}
+    this.isLoggedIn = false;
+  }
 
   edditStatusForStudent = async (jobId, status) => {
     const res = await axios.post(

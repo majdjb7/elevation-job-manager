@@ -4,13 +4,6 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const User = require("../models/User")
 
-
-/*
-{
-    "email": "m@gmail.com",
-    "password": "a123456"
-}
-*/
 router.post('/register', async (req, res) => {
     const salt = await bcrypt.genSalt(10)
     const hashedPassword = await bcrypt.hash(req.body.password, salt)

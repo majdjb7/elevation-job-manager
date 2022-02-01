@@ -33,7 +33,7 @@ const theme = createMuiTheme({
   },
 });
 
-const App= inject("studentStore")(
+const App = inject("studentStore")(
   observer((props) => {
 
   // const [name, setName] = useState('');
@@ -47,10 +47,12 @@ const App= inject("studentStore")(
     // }
   });
 
+
+
   return (
     <ThemeProvider theme={theme}>
       {/* to overide and change the orignal colors and thems in other comps */}
-        {loggedIn ?
+        {props.studentStore.isLoggedIn ?
         <Router>
           <Layout>
             <Switch>
