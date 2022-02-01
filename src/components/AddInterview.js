@@ -38,7 +38,7 @@ const AddInterview = inject("studentStore")(
     const [timeError, setTimeError] = useState(false);
     const [interviewerName, setInterviewerName] = useState("");
     const [interviewerNameError, setInterviewerNameError] = useState(false);
-
+    const [error, setError] = useState("");
     const handleSubmit = async (e) => {
       e.preventDefault();
       setTypeError(false);
@@ -56,6 +56,7 @@ const AddInterview = inject("studentStore")(
 
       if (type && time && interviewerName) {
         let id = location.state;
+        try{
         const res = await axios.post(
           "http://localhost:8888/student/jobs/" + id + "/interviews",
           { type, time, interviewerName }
@@ -65,7 +66,10 @@ const AddInterview = inject("studentStore")(
           pathname: "/",
           state: res.data._id,
         });
+      }catch(error){
+        setError("Something wrong")
       }
+    }
     };
 
     return (
@@ -144,6 +148,9 @@ const AddInterview = inject("studentStore")(
           >
             Submit
           </Button>
+          <p id="error">
+          {error}
+        </p>
         </form>
       </Container>
     );

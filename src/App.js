@@ -6,6 +6,7 @@ import Processes from "./components/Processes";
 import AddProcess from "./components/AddProcess";
 import AddInterview from "./components/AddInterview";
 import AdminPage from "./components/AdminPage";
+import StudentProfile from"./components/studendProfile";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -51,6 +52,10 @@ function App() {
             <Route exact path="/AdminPage">
               <AdminPage />
             </Route>
+            <Route exact path="/studentprofile">
+              <StudentProfile />
+            </Route>
+            
           </Switch>
         </Layout>
       </Router>

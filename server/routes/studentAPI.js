@@ -74,5 +74,9 @@ router.post("/jobs/:id/interviews", async (req, res) => {
     res.status(500).send({ error: 'Something failed!' })
   }
 });
-
+router.get("/:id",async(req,res)=>{
+  const id = req.params.id;
+  const student=await Student.findOne({_id:id})
+  res.send(student)
+})
 module.exports = router;

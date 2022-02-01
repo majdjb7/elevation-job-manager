@@ -6,6 +6,8 @@ export class AdminInventory {
   constructor() {
     this.AdminJobs = [];
     this.allStudents = [];
+    this.studentData=[];
+    this.studentProfileJobs=[];
     this.showCurrCohort = "Cohort 21";
     this.acceptedStudentsPercentage = { Employed: 0, Unemployed: 0 };
     this.acceptedStudentsPercentagePerCohort = { Employed: 0, Unemployed: 0 };
@@ -161,11 +163,16 @@ export class AdminInventory {
     this.allStudents = [];
     this.AdminJobs = [];
     this.showCurrCohort = cohortName;
+    try{
     let result = await axios.get(
       `http://localhost:8888/admin/cohorts/${cohortName}`
     );
+  
     this.allStudents = result.data;
     this.sortAllStudentJobs();
+  }catch(error){
+    console.log("Something wrong")
+  }
   };
   sortByStatus = async (status) => {
     await this.sortPerCohortName(this.showCurrCohort);
@@ -175,10 +182,18 @@ export class AdminInventory {
   addJobsFromDBToAdmin = async () => {
     this.allStudents = [];
     this.AdminJobs = [];
+    try{
     let result = await axios.get(`http://localhost:8888/admin/jobs`);
     this.allStudents = result.data;
+    }catch(error){
+      console.log("Something wrong") 
+    }
+    try{
     let jobs = await axios.get(`http://localhost:8888/admin/allJobs`);
     this.AdminJobs = jobs.data;
+    }catch(error){
+      console.log("Something wrong") 
+    }
     //  this.sortAllStudentJobs();
   };
 }

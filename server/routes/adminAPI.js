@@ -23,6 +23,7 @@ router.get("/allJobs", async (req, res) => {
                 whereFindJob: job.whereFindJob, 
                 mostRecentInterview:job.mostRecentInterview, 
                 interviews:job.interviews,
+                studentId:job.studentId,
                 studentName:student.firstName+" "+student.lastName,
                 firstName: student.firstName,
                 lastName:  student.lastName,

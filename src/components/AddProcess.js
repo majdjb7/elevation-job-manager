@@ -42,6 +42,7 @@ function AddProcess() {
   const [descriptionError, setDescriptionError] = useState(false);
   const [whereFindJob, setWhereFindJob] = useState("");
   const [whereFindJobError, setWhereFindJobError] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -67,14 +68,18 @@ function AddProcess() {
       setWhereFindJobError(true);
     }
     if (companyName && role && location && description && whereFindJob) {
-      const res = await axios.post(
-        `http://localhost:8888/student/jobs/${MAJD_ID}`,
-        { companyName, role, location, description, whereFindJob }
-      );
-      history.push({
-        pathname: "/addInterview",
-        state: res.data._id,
-      });
+      try {
+        const res = await axios.post(
+          `http://localhost:8888/student/jobs/${MAJD_ID}`,
+          { companyName, role, location, description, whereFindJob }
+        );
+        history.push({
+          pathname: "/addInterview",
+          state: res.data._id,
+        });
+      } catch (error) {
+        setError("Something wrong")
+      }
     }
   };
 
@@ -175,6 +180,9 @@ function AddProcess() {
         >
           Submit
         </Button>
+        <p id="error">
+          {error}
+        </p>
       </form>
     </Container>
   );
