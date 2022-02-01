@@ -10,6 +10,7 @@ const studentSchema = new Schema({
     password:  String,
     jobs: [{ type: Schema.Types.ObjectId, ref: 'Job' }]
 })
+//.add(User)
 
 const Student = mongoose.model("Student", studentSchema)
 module.exports = Student

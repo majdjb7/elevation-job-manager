@@ -23,6 +23,7 @@ import NestedList from "./NestedList";
 import PieChart from "./PieChart";
 
 import BasicSelect from "./filter/BasicSelect";
+import AutocompleteSearch from "./filter/AutocompleteSearch";
 
 import moment from "moment";
 import axios from "axios";
@@ -79,8 +80,6 @@ const Processes = inject("adminStore")(
       props.adminStore.getStatsOfAcceptedStudents("Cohort 21");
       props.adminStore.getStatusStats();
       props.adminStore.getStatusStatsByCohort();
-
-      console.log(props.adminStore.numOfStudents);
     }, []);
     /************************************************ */
     const classes = useStyles();
@@ -130,6 +129,7 @@ const Processes = inject("adminStore")(
     }
     return (
       <div>
+        <AutocompleteSearch />
         <Grid
           container
           direction="row"
@@ -139,7 +139,7 @@ const Processes = inject("adminStore")(
           <Grid item lg={2}>
             <BasicSelect
               selectBy="Cohort"
-              ArrMenuItems={["Cohort 21", "Cohort 22"]}
+              ArrMenuItems={["All", "Cohort 21", "Cohort 22"]}
             />
           </Grid>
           <Grid item lg={8}>
@@ -186,7 +186,7 @@ const Processes = inject("adminStore")(
                     <Typography variant="h6">Job Info</Typography>
                   </TableCell>
                   <TableCell className={classes.tableHeaderCell}>
-                    <Typography variant="h6">Closest Interview</Typography>
+                    <Typography variant="h6">Current Interview</Typography>
                   </TableCell>
                   <TableCell className={classes.tableHeaderCell}>
                     <Typography variant="h6">Status</Typography>

@@ -1,8 +1,10 @@
 const express = require("express");
 const router = express.Router();
+const nodemailer = require("nodemailer");
 const Job = require("../models/Job");
 const Student = require("../models/Student");
 const Interview = require("../models/Interview");
+const Admin = require("../models/Admin")
 router.get("/jobs/:id", async (req, res) => {
   let id = req.params.id;
 
@@ -13,7 +15,7 @@ router.get("/jobs/:id", async (req, res) => {
         populate: {
           path: "interviews",
         },
-        options: { sort: { mostRecentInterview: -1 } }
+        options: { sort: { mostRecentInterview: -1 } },
       })
       .exec(function (err, student) {
         res.send(student.jobs);
@@ -67,16 +69,75 @@ router.post("/jobs/:id/interviews", async (req, res) => {
       );
       await interview.save();
       res.send(interview);
-    }else{
+    } else {
       res.send("all the inputs are required")
     }
   } catch (error) {
     res.status(500).send({ error: 'Something failed!' })
   }
 });
-router.get("/:id",async(req,res)=>{
+router.get("/:id", async (req, res) => {
   const id = req.params.id;
-  const student=await Student.findOne({_id:id})
+  const student = await Student.findOne({ _id: id })
   res.send(student)
 })
+router.post("/jobs/status/:jobId/interviews", async (req, res) => {
+  const id = req.params.jobId;
+  if (req.body.status == "Accepted") {
+    const job = await Job.findOne({ _id: id })
+    const student = await Student.findOne({ _id: job.studentId })
+    let mail = student.firstName + " " + student.lastName + " passd interview in " + job.companyName
+    let mails = ""
+    const admins = await Admin.find({})
+    for (let admin of admins) {
+      mails = mails + " " + admin.email
+    }
+    console.log(mails);
+    let transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: 'elevation744',
+        pass: 'Atedna4!@#'
+      }
+    });
+    let mailOptions = {
+      from: 'elevation744@gmail.com',
+      to: mails,
+      subject: 'hi',
+      text: mail
+    };
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Email sent: ' + info.response);
+      }
+    })
+  }
+  try {
+    Job.findByIdAndUpdate(
+      id,
+      { status: req.body.status },
+      function (err, user) { }
+    );
+    res.send().status(200);
+  } catch (error) {
+    res.send(error).status(500);
+  }
+});
+router.post("/message", async (req, res) => {
+  const accountSid = 'AC57dc8be65772dbc89448964560190aab';
+  const authToken = '[AuthToken]';
+  const client = require('twilio')(accountSid, authToken);
+
+  client.messages
+    .create({
+      body: 'Your appointment is coming up on July 21 at 3PM',
+      from: 'whatsapp:+14155238886',
+      to: 'whatsapp:+972532282478'
+    })
+    .then(message => console.log(message.sid))
+    .done();
+})
+
 module.exports = router;

@@ -13,6 +13,7 @@ import {
   Typography,
   TablePagination,
   TableFooter,
+  Button,
 } from "@material-ui/core";
 import { IconButton } from "@mui/material";
 
@@ -106,6 +107,14 @@ const StudentProfile = inject("adminStore")(
 
     return (
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
+         <Button
+          
+          color="primary"
+          variant="contained"
+          
+        >
+          send message
+        </Button>
           <p>first name:{props.adminStore.studentData.firstName}</p>
         <TableContainer component={Paper} className={classes.tableContainer}>
           <Table className={classes.table} aria-label="simple table">

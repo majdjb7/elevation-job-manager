@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core";
 import Drawer from "@material-ui/core/Drawer";
 import Typography from "@material-ui/core/Typography";
@@ -7,8 +7,12 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-
+import Button from '@mui/material/Button';
+import Nav from './Nav'
+import { inject, observer } from "mobx-react";
+import { observe } from "mobx";
 import { Work, SchoolRounded, AddCircle } from "@material-ui/icons";
+import { Redirect } from 'react-router-dom'
 
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -64,7 +68,8 @@ const useStyles = makeStyles((theme) => {
   };
 });
 
-export default function Layout({ children }) {
+const Layout = inject("studentStore") (
+observer((props) => {
   {
     /* the props children is all the comps from app.js under the switch */
   }
@@ -72,11 +77,20 @@ export default function Layout({ children }) {
   const history = useHistory();
   const location = useLocation();
 
+  if(props.studentStore.name === '') {
+    return <Redirect to="/"/>;
+  }
+
   const menuItems = [
+    {
+      text: "Home",
+      icon: <Work color="secondary" />,
+      path: "/",
+    },
     {
       text: "Processes",
       icon: <Work color="secondary" />,
-      path: "/",
+      path: "/processes",
     },
     {
       text: "Add Process",
@@ -87,6 +101,16 @@ export default function Layout({ children }) {
       text: "AdminPage",
       icon: <Work color="secondary" />,
       path: "/adminPage",
+    },
+    {
+      text: "Login",
+      icon: <Work color="secondary" />,
+      path: "/login",
+    },
+    {
+      text: "Register",
+      icon: <Work color="secondary" />,
+      path: "/register",
     },
   ];
 
@@ -103,11 +127,16 @@ export default function Layout({ children }) {
           <Typography className={classes.date}>
             Today is the {format(new Date(), "do MMMM Y")}
           </Typography>
-          <Typography>Ayman</Typography>
+          <Typography>{props.studentStore.name}</Typography>
           <Avatar
             className={classes.avatar}
             src="https://media-exp1.licdn.com/dms/image/C4E03AQGzvBqaQHa1vw/profile-displayphoto-shrink_800_800/0/1631448072130?e=1648684800&v=beta&t=6122tVcQhDq7qdokhU5w-kFyImVX3OcGrJq6i1IMMck"
           />
+          <Button variant="contained" color="secondary"
+            onClick={() => {
+              props.studentStore.logout()
+            }}>Logout
+          </Button>
         </Toolbar>
       </AppBar>
 
@@ -151,8 +180,10 @@ export default function Layout({ children }) {
         <div className={classes.toolbar}>
           {/* to make some space under the toolbar|navBar */}
         </div>
-        {children}
+        {props.children}
       </div>
     </div>
   );
-}
+}));
+
+export default Layout;
