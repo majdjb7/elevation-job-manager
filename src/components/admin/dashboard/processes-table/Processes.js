@@ -1,3 +1,4 @@
+import { useHistory } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
@@ -72,10 +73,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Processes = inject("adminStore")(
+const Processes = inject("adminStore","studentStore")(
   observer((props) => {
     /************************************************ */
-
+    const history = useHistory();
     useEffect(async () => {
       await props.adminStore.addJobsFromDBToAdmin();
 
@@ -117,7 +118,14 @@ const Processes = inject("adminStore")(
         interviewType + ": " + moment(maxDate).format(format1);
       return mostRelevantInterview;
     };
-
+    const studentPage = async function (id) {
+      const data = await props.studentStore.getStudentData(id)
+      
+        history.push({
+          pathname: "/studentprofile"
+        });
+      
+    }
     return (
       <div>
         <Card {...props}>
@@ -167,7 +175,8 @@ const Processes = inject("adminStore")(
                             className={classes.avatar}
                           />
                           <Grid item lg={10}>
-                            <Typography className={classes.name}>
+                            <Typography className={classes.name}
+                              onClick={() => studentPage(row.studentId)}>
                               {row.studentName}
                             </Typography>
                             <Typography color="textSecondary" variant="body2">

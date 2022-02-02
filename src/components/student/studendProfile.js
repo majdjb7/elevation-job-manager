@@ -1,7 +1,7 @@
 import React from "react";
 import Processes from "./Processes";
 import UserDetails from "./UserDetails";
-
+import Simulation from '../Simulation'
 ////////////////////////////////////////////////////////
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
@@ -14,7 +14,7 @@ const StudentProfile = () => (
       <UserDetails/>
       </Grid>
       <Grid item xs={8}>
-        
+        <Simulation/>
       </Grid>
     
       <Grid item xs={12}>

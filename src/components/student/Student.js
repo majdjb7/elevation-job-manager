@@ -12,6 +12,7 @@ import Dashboard from "../admin/dashboard/Dashboard";
 import AddAdmin from "../admin/AddAdmin"
 
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+import StudentProfile from "../student/studendProfile";
 
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -33,6 +34,9 @@ export default function Student() {
             </Route>
             <Route exact path="/addInterview">
               <AddInterview />
+            </Route>
+            <Route exact path="/studentprofile">
+              <StudentProfile />
             </Route>
             {/* /* DELETE LATER: when admin login is complete */}
             <Route exact path="/dashboard">

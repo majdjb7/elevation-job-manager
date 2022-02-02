@@ -81,7 +81,7 @@ router.post("/jobs/status/:jobId/interviews", async (req, res) => {
   if (req.body.status == "Accepted") {
     const job = await Job.findOne({ _id: id })
     const student = await Student.findOne({ _id: job.studentId })
-    let mail = student.firstName + " " + student.lastName + " passd interview in " + job.companyName
+    let mail =student.firstName+ " " + student.lastName+" has passed interview at "+job.companyName
     let mails = ""
     const admins = await Admin.find({})
     for (let admin of admins) {
@@ -120,21 +120,7 @@ router.post("/jobs/status/:jobId/interviews", async (req, res) => {
     res.send(error).status(500);
   }
 });
-router.post("/message/send", async (req, res) => {
-  const accountSid = 'AC57dc8be65772dbc89448964560190aab';
-  const authToken = '3cd076257cad63698d98cc307350d9c4';
-  const client = require('twilio')(accountSid, authToken);
 
-  client.messages
-    .create({
-      body: 'from elevation',
-      from: 'whatsapp:+14155238886',
-      to: 'whatsapp:+972502702170'
-    })
-    .then(message => console.log(message.sid))
-    .done();
-
-})
 router.get("/data/:id", async (req, res) => {
   const id = req.params.id;
   const student = await Student.findOne({ _id: id })

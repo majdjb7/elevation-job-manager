@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import {
     Avatar,
     Box,
@@ -5,10 +6,19 @@ import {
     Card,
     CardActions,
     CardContent,
+    TextField,
     Divider,
-    Typography
+    Typography,
+    Grid
 } from '@mui/material';
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormControl from "@material-ui/core/FormControl";
+import FormLabel from "@material-ui/core/FormLabel";
+import { makeStyles } from "@material-ui/core";
 import { inject, observer } from "mobx-react";
+import axios from "axios";
 const user = {
     avatar: '/static/images/avatars/avatar_6.png',
     city: 'Los Angeles',
@@ -18,12 +28,33 @@ const user = {
     timezone: 'GTM-7'
 };
 
-const UserDetails = inject("studentStore")(
+const useStyles = makeStyles({
+    field: {
+        marginTop: 20,
+        marginBottom: 20,
+        display: "block",
+        maxWidth: "50%",
+    },
+    Container: {
+        //      marginLeft: "-80px",
+    },
+});
+
+const Simulation = inject("studentStore")(
     observer((props) => {
-
+        const classes = useStyles();
+        const [zoom, setZoom] = useState("");
+        const [time, setTime] = useState("");
+        const [type, setType] = useState("");
+        const send = async () => {
+            if (zoom && time && type && props.studentStore.studentData.firstName) {
+                const res = await axios.post(
+                    `http://localhost:8888/admin/message/send`,
+                    { zoom, time, type, firstName: props.studentStore.studentData.firstName }
+                );
+            }
+        }
         return (
-
-
             <Card >
                 <CardContent>
                     <Box
@@ -33,86 +64,73 @@ const UserDetails = inject("studentStore")(
                             flexDirection: 'column'
                         }}
                     >
-                        <Container size="sm">
-                            <Typography
-                                variant="h6"
-                                color="textSecondary"
-                                component="h2"
-                                gutterBottom
-                                className={classes.Container}
-                            >
-                                Create a New Interview
-                            </Typography>
+                        <Typography
+                            variant="h6"
+                            color="textSecondary"
+                            component="h2"
+                            gutterBottom
+                        >
+                            inivite to simulation
+                        </Typography>
 
-                            <form
-                                noValidate
-                                autoComplete="off"
-                                onSubmit={handleSubmit}
-                                className={classes.Container}
-                            >
-                                <FormControl className={classes.field}>
-                                    <FormLabel>Type</FormLabel>
-                                    <RadioGroup value={type} onChange={(e) => setType(e.target.value)}>
-                                        <FormControlLabel value="HR" control={<Radio />} label="HR" />
-                                        <FormControlLabel
-                                            value="Telephone"
-                                            control={<Radio color="primary" />}
-                                            label="Telephone"
-                                        />
-                                        <FormControlLabel
-                                            value="Technical"
-                                            control={<Radio color="primary" />}
-                                            label="Technical"
-                                        />
-                                        <FormControlLabel
-                                            value="Home Assignment"
-                                            control={<Radio color="primary" />}
-                                            label="Home Assignment"
-                                        />
-                                        <FormControlLabel
-                                            value="Home Test"
-                                            control={<Radio color="primary" />}
-                                            label="Home Test"
-                                        />
-                                    </RadioGroup>
-                                </FormControl>
-
+                        <Grid container spacing={1}>
+                            <Grid item xs={6}>
+                                <TextField
+                                    onChange={(e) => setZoom(e.target.value)}
+                                    className={classes.field}
+                                    label="Zoom URL"
+                                    variant="outlined"
+                                    color="primary"
+                                    required
+                                    fullWidth
+                                />
+                            </Grid>
+                            <Grid item xs={6}>
                                 <TextField
                                     onChange={(e) => setTime(e.target.value)}
+                                    className={classes.field}
                                     id="datetime-local"
                                     label="Time"
                                     type="datetime-local"
                                     required
-                                    error={timeError}
                                     sx={{ width: 250 }}
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
                                 />
-                                <TextField
-                                    className={classes.field}
-                                    onChange={(e) => setInterviewerName(e.target.value)}
-                                    label="InterviewerName"
-                                    variant="outlined"
-                                    color="primary"
-                                    fullWidth
-                                    required
-                                    error={interviewerNameError}
-                                />
+                            </Grid>
+                            <Grid item xs={6}>
+                                <FormControl className={classes.field}>
+                                    <FormLabel>Type</FormLabel>
+                                    <RadioGroup value={type}
+                                        onChange={(e) => setType(e.target.value)}>
+                                        <Grid item xs={6}>
+                                            <FormControlLabel value="HR" control={<Radio color="primary" />} label="HR" />
+                                        </Grid>
+                                        <Grid item xs={6}>
+                                            <FormControlLabel
+                                                value="Technical"
+                                                control={<Radio color="primary" />}
+                                                label="Technical"
+                                            /></Grid>
+
+
+                                    </RadioGroup>
+                                </FormControl>
+
+                            </Grid>
+                            <Grid item xs={6}>
 
                                 <Button
                                     type="submit"
                                     color="primary"
                                     variant="contained"
-                                    endIcon={<KeyboardArrowRightIcon />}
+                                    onClick={send}
                                 >
-                                    Submit
+                                    Send
                                 </Button>
-                                <p id="error">
-                                    {error}
-                                </p>
-                            </form>
-                        </Container>
+                            </Grid>
+                        </Grid>
                     </Box>
                 </CardContent>
                 <Divider />
@@ -122,4 +140,4 @@ const UserDetails = inject("studentStore")(
 )
 
 
-export default UserDetails;
+export default Simulation;
