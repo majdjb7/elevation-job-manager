@@ -18,6 +18,8 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import { format } from "date-fns";
 import Avatar from "@material-ui/core/Avatar";
+import StudentMenuItems from "./student/StudentMenuItems";
+import AdminMenuItems from "./admin/AdminMenuItems";
 
 const drawerWidth = 230;
 
@@ -84,48 +86,9 @@ const Layout = inject("studentStore")(
     const history = useHistory();
     const location = useLocation();
 
-    if(props.studentStore.firstName === '') {
-      return <Redirect to="/"/>;
+    if (props.studentStore.firstName === "") {
+      return <Redirect to="/" />;
     }
-
-    const menuItems = [
-      {
-        text: "Home",
-        icon: <Work color="secondary" />,
-        path: "/",
-      },
-      {
-        text: "Processes",
-        icon: <Work color="secondary" />,
-        path: "/processes",
-      },
-      {
-        text: "Add Process",
-        icon: <AddCircle color="secondary" />,
-        path: "/addProcess",
-      },
-      {
-        text: "AdminPage",
-        icon: <Work color="secondary" />,
-        path: "/adminPage",
-      },
-      {
-        text: "Login",
-        icon: <Work color="secondary" />,
-        path: "/login",
-      },
-      {
-        text: "Register",
-        icon: <Work color="secondary" />,
-        path: "/register",
-      },
-      {
-        text: "Dashboard",
-        icon: <BarChart color="secondary" />,
-        path: "/dashboard",
-      },
-      ,
-    ];
 
     return (
       <div className={classes.root}>
@@ -173,25 +136,8 @@ const Layout = inject("studentStore")(
           </div>
 
           {/* links/list section */}
-          <List>
-            {menuItems.map((item) => (
-              <ListItem
-                button
-                key={item.text}
-                onClick={() => history.push(item.path)}
-                className={`${
-                  location.pathname == item.path ? classes.active : null
-                } ${classes.ListItem}`}
-                //  to make the btns hover
-              >
-                <ListItemIcon>{item.icon}</ListItemIcon>
-                <ListItemText
-                  primary={item.text}
-                  className={classes.ListItemText}
-                />
-              </ListItem>
-            ))}
-          </List>
+          <AdminMenuItems />
+          <StudentMenuItems />
         </Drawer>
 
         {/* main content */}
