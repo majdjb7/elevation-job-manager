@@ -22,7 +22,7 @@ import { observe } from "mobx";
   const submit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch('http://localhost:8888/', {
+    const response = await fetch('http://localhost:8888/auth/login', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         credentials: 'include',

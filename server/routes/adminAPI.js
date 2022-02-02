@@ -92,5 +92,26 @@ router.get("/cohorts/:cohortName", async (req, res) => {
     res.status(500).send({ error: 'Something failed!' })
   }
 });
+router.post("/message/send", async (req, res) => {
+  const accountSid = 'AC57dc8be65772dbc89448964560190aab';
+  const authToken = '3cd076257cad63698d98cc307350d9c4';
+  const client = require('twilio')(accountSid, authToken);
+
+  client.messages
+    .create({
+      body: `Hi ${req.body.firstName},
+      You have been invited to a ${req.body.type} Simulation Interview with {admin.name},
+      on: ${req.body.time}.
+      Here is the link for the meeting: ${req.body.zoom}
+      If the time or date isn't convenient, please reply stating what times you ARE available for the simulation.
+      Reply to: WhatsApp: {admin.num}
+                    Email: {admin.email}`,
+      from: 'whatsapp:+14155238886',
+      to: 'whatsapp:+972532282478'
+    })
+    .then(message => console.log(message.sid))
+    .done();
+
+})
 
 module.exports = router;
