@@ -36,6 +36,7 @@ const FormDialog = inject("studentStore")(
     const [timeError, setTimeError] = useState(false);
     const [typeError, setTypeError] = useState(false);
     const [interviewerNameError, setInterviewerNameError] = useState(false);
+    const [error, setError] = useState("");
     const handleClickOpen = () => {
       setOpen(true);
     };
@@ -57,12 +58,16 @@ const FormDialog = inject("studentStore")(
       console.log(type, time, interviewerName);
       if (type && time && interviewerName) {
         let id = props.jobId;
+        try{
         const res = await axios.post(
           "http://localhost:8888/student/jobs/" + id + "/interviews",
           { type, time, interviewerName }
         );
         await props.studentStore.addJobsFromDB();
+      }catch(error){
+        setError("Something wrong")
       }
+    }
     };
     const handleClose = () => {
       setOpen(false);
@@ -130,6 +135,9 @@ const FormDialog = inject("studentStore")(
             <Button onClick={handleClose}>Cancel</Button>
             <Button onClick={handleAdd}>Add</Button>
           </DialogActions>
+          <p id="error">
+          {error}
+        </p>
         </Dialog>
       </div>
     );

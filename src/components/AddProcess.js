@@ -43,6 +43,7 @@ const AddProcess = inject("studentStore")(
   const [descriptionError, setDescriptionError] = useState(false);
   const [whereFindJob, setWhereFindJob] = useState("");
   const [whereFindJobError, setWhereFindJobError] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -68,6 +69,7 @@ const AddProcess = inject("studentStore")(
       setWhereFindJobError(true);
     }
     if (companyName && role && location && description && whereFindJob) {
+      console.log(props.studentStore.studentID);
       const res = await axios.post(
         `http://localhost:8888/student/jobs/${props.studentStore.studentID}`,
         { companyName, role, location, description, whereFindJob }
@@ -176,6 +178,9 @@ const AddProcess = inject("studentStore")(
         >
           Submit
         </Button>
+        <p id="error">
+          {error}
+        </p>
       </form>
     </Container>
   );

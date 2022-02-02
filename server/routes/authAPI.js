@@ -47,7 +47,6 @@ router.post('/login', async (req, res) => {
         httpOnly: true,
         maxAge: 24 * 60 * 60 * 1000 //1 day
     })
-
     res.send({
         message: 'Success',
         studentID: student._id,

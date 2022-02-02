@@ -69,14 +69,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-let STATUSES = ["Active", "Pending", "Blocked"];
-
 const Processes = inject("studentStore")(
   observer((props) => {
     /************************************************ */
-
     useEffect(async () => {
-      await props.studentStore.addJobsFromDB();
+     await props.studentStore.addJobsFromDB();
     }, []);
     /************************************************ */
     const classes = useStyles();
@@ -192,8 +189,9 @@ const Processes = inject("studentStore")(
                           className={classes.status}
                           style={{
                             backgroundColor:
-                              (row.status === "Open" && "green") ||
-                              (row.status === "Pending" && "blue") ||
+                              (row.status === "Open" && "blue") ||
+                              (row.status === "Pending" && "orange") ||
+                              (row.status === "Accepted" && "green") ||
                               (row.status === "Rejected" && "red"),
                           }}
                         >
