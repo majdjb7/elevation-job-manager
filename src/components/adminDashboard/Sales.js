@@ -25,7 +25,7 @@ export const Sales = (props) => {
         borderRadius: 4,
         categoryPercentage: 0.5,
         data: [18, 5, 19, 27, 29, 19, 20],
-        label: "This year",
+        label: "Students looking for a job",
         maxBarThickness: 10,
       },
       {
@@ -35,11 +35,19 @@ export const Sales = (props) => {
         borderRadius: 4,
         categoryPercentage: 0.5,
         data: [11, 20, 12, 29, 30, 25, 13],
-        label: "Last year",
+        label: "Working students",
         maxBarThickness: 10,
       },
     ],
-    labels: ["1 Aug", "2 Aug", "3 Aug", "4 Aug", "5 Aug", "6 Aug", "7 aug"],
+    labels: [
+      "Cohort 16",
+      "Cohort 17",
+      "Cohort 18",
+      "Cohort 19",
+      "Cohort 20",
+      "Cohort 21",
+      "Cohort 22",
+    ],
   };
 
   const options = {
@@ -95,11 +103,12 @@ export const Sales = (props) => {
     <Card {...props}>
       <CardHeader
         action={
-          <Button endIcon={<ArrowDropDownIcon fontSize="small" />} size="small">
-            Last 7 days
-          </Button>
+          // <Button endIcon={<ArrowDropDownIcon fontSize="small" />} size="small">
+          //   Last 7 Cohorts
+          // </Button>
+          <Button size="small">Last 7 Cohorts</Button>
         }
-        title="Latest Sales"
+        title="Latest Cohorts"
       />
       <Divider />
       <CardContent>
