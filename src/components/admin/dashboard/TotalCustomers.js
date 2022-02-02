@@ -8,14 +8,14 @@ import {
 } from "@mui/material";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import PeopleIcon from "@mui/icons-material/PeopleOutlined";
-
+import WorkOutlineRoundedIcon from "@mui/icons-material/WorkOutlineRounded";
 export const TotalCustomers = (props) => (
   <Card {...props}>
     <CardContent>
       <Grid container spacing={3} sx={{ justifyContent: "space-between" }}>
         <Grid item>
           <Typography color="textSecondary" gutterBottom variant="overline">
-            TOTAL CUSTOMERS
+            TOTAL WORKING STUDENTS
           </Typography>
           <Typography color="textPrimary" variant="h4">
             1,6k
@@ -29,7 +29,7 @@ export const TotalCustomers = (props) => (
               width: 56,
             }}
           >
-            <PeopleIcon />
+            <WorkOutlineRoundedIcon />
           </Avatar>
         </Grid>
       </Grid>

@@ -15,10 +15,10 @@ export const Budget = (props) => (
       <Grid container spacing={3} sx={{ justifyContent: "space-between" }}>
         <Grid item>
           <Typography color="textSecondary" gutterBottom variant="overline">
-            BUDGET
+            TOTAL STUDENTS
           </Typography>
           <Typography color="textPrimary" variant="h4">
-            $24k
+            3.5K
           </Typography>
         </Grid>
         <Grid item>

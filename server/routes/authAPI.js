@@ -85,9 +85,6 @@ router.post('/logout', async (req, res) => {
     })
 })
 
-router.post('/userID', async (req, res) => {
-    let
-})
 
 
 module.exports = router;

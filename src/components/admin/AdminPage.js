@@ -19,7 +19,7 @@ import { inject, observer } from "mobx-react";
 import { observe } from "mobx";
 import { toJS } from "mobx";
 /////////////////////////////
-import NestedList from "./NestedList";
+import NestedList from "../NestedList";
 import PieChart from "./PieChart";
 
 import BasicSelect from "./filter/BasicSelect";
@@ -71,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Processes = inject("adminStore","studentStore")(
+const AdminPage = inject("adminStore","studentStore")(
   observer((props) => {
     /************************************************ */
     const history = useHistory();
@@ -292,4 +292,4 @@ const Processes = inject("adminStore","studentStore")(
   })
 );
 
-export default Processes;
+export default AdminPage;

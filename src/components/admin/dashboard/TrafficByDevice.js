@@ -25,7 +25,7 @@ export const TrafficByDevice = (props) => {
         hoverBorderColor: "#FFFFFF",
       },
     ],
-    labels: ["Desktop25", "Tablet", "Mobile"],
+    labels: ["ًWorking", "Searching", "Other"],
   };
 
   const options = {
@@ -52,19 +52,19 @@ export const TrafficByDevice = (props) => {
 
   const devices = [
     {
-      title: "Desktop",
+      title: "Working",
       value: 63,
       icon: LaptopMacIcon,
       color: "#3F51B5",
     },
     {
-      title: "Tablet",
+      title: "Searching",
       value: 15,
       icon: TabletIcon,
       color: "#E53935",
     },
     {
-      title: "Mobile",
+      title: "Inactive",
       value: 23,
       icon: PhoneIcon,
       color: "#FB8C00",
@@ -73,7 +73,7 @@ export const TrafficByDevice = (props) => {
 
   return (
     <Card {...props}>
-      <CardHeader title="Traffic by Device" />
+      <CardHeader title="Job Status" />
       <Divider />
       <CardContent>
         <Box
