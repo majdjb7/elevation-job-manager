@@ -77,7 +77,6 @@ const Processes = inject("adminStore","studentStore")(
     const history = useHistory();
     useEffect(async () => {
       await props.adminStore.addJobsFromDBToAdmin();
-      // console.log(toJS(props.adminStore.AdminJobs))
 
       props.adminStore.getStatsOfAcceptedStudents();
       props.adminStore.getStatsOfAcceptedStudents("Cohort 21");
@@ -168,16 +167,7 @@ const Processes = inject("adminStore","studentStore")(
             alignItems="flex-start"
           >
             <Grid item lg={7}>
-              <PieChart
-                name="Percentage of Employed/Unemployed"
-                stats={toJS(props.adminStore.acceptedStudentsPercentage)}
-              />
-            </Grid>
-            <Grid item lg={5}>
-              <PieChart
-                name="General Status of All Jobs"
-                stats={toJS(props.adminStore.statsOfJobStatus)}
-              />
+              <PieChart name="Percentage of Employed/Unemployed" />
             </Grid>
           </Grid>
           <TableContainer component={Paper} className={classes.tableContainer}>
@@ -213,6 +203,11 @@ const Processes = inject("adminStore","studentStore")(
                   <TableRow hover key={index}>
                     <TableCell>
                       <Grid container>
+                        <Avatar
+                          alt={row.studentName}
+                          src="."
+                          className={classes.avatar}
+                        />
                         <Grid item lg={10}>
                           <Typography className={classes.name}
                             onClick={()=>studentPage(row.studentId)}>
@@ -229,13 +224,6 @@ const Processes = inject("adminStore","studentStore")(
                     </TableCell>
                     <TableCell>
                       <Grid container>
-                        {/* <Grid item lg={2}>
-                        <Avatar
-                          alt={row.companyName}
-                          src="."
-                          className={classes.avatar}
-                        />
-                      </Grid> */}
                         <Grid item lg={10}>
                           <Typography
                             className={classes.name}>

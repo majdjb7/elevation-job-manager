@@ -76,11 +76,6 @@ router.post("/jobs/:id/interviews", async (req, res) => {
     res.status(500).send({ error: 'Something failed!' })
   }
 });
-router.get("/:id", async (req, res) => {
-  const id = req.params.id;
-  const student = await Student.findOne({ _id: id })
-  res.send(student)
-})
 router.post("/jobs/status/:jobId/interviews", async (req, res) => {
   const id = req.params.jobId;
   if (req.body.status == "Accepted") {
@@ -139,6 +134,11 @@ router.post("/message/send", async (req, res) => {
     .then(message => console.log(message.sid))
     .done();
 
+})
+router.get("/data/:id", async (req, res) => {
+  const id = req.params.id;
+  const student = await Student.findOne({ _id: id })
+  res.send(student)
 })
 
 module.exports = router;
