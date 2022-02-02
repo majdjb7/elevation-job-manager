@@ -33,9 +33,15 @@ import { observe } from "mobx";
     });
 
     const content = await response.json();
-    props.studentStore.setStudentID(content.studentID)
-    props.studentStore.setLogin();
-    setRedirect(true);
+    if(content.message === 'Success') {
+      props.studentStore.setStudentID(content.studentID)
+      props.studentStore.setLogin();
+      console.log("CON: ", content)
+      setRedirect(true);
+    }
+    else{
+      alert(content.message)
+    }
     // props.setName(content.name);
 }
 

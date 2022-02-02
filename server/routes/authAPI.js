@@ -50,20 +50,29 @@ router.post('/registerAdmin', async (req, res) => {
 
 router.post('/login', async (req, res) => {
     const student = await Student.findOne({email: req.body.email})
+    const admin = await Admin.findOne({email: req.body.email})
+    let user
 
-    if(!student) {
+    if(student && !user) {
+        user = student
+    }
+    if(admin && !student) {
+        user = admin
+    }
+
+    if(!student && !admin) {
         return res.status(404).send({
             message: 'User Not Found'
         })
     }
 
-    if(!await bcrypt.compare(req.body.password, student.password)) {
+    if(!await bcrypt.compare(req.body.password, user.password)) {
         return res.status(400).send({
             message: 'Invalid Credentials'
         })
     }
 
-    const token = jwt.sign({_id: student._id}, "secret")
+    const token = jwt.sign({_id: user._id}, "secret")
 
     res.cookie('jwt', token, {
         httpOnly: true,
@@ -71,7 +80,7 @@ router.post('/login', async (req, res) => {
     })
     res.send({
         message: 'Success',
-        studentID: student._id,
+        studentID: user._id,
     })
 })
 
@@ -88,8 +97,15 @@ router.get('/user', async (req, res) => {
         }
 
         const student = await Student.findOne({_id: claims._id})
-
-        const {password, ...data} = await student.toJSON()
+        const admin = await Admin.findOne({_id: claims._id})
+        let user
+        if(student && !admin) {
+            user = student
+        }
+        if(admin && !student) {
+            user = admin
+        }
+        const {password, ...data} = await user.toJSON()
 
         res.send(data)
     }catch (e) {
