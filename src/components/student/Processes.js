@@ -28,10 +28,10 @@ import {
 import moment from "moment";
 
 /////////////////////////////
-import NestedList from "./NestedList";
-import FormDialog from "./FormDialog";
+import NestedList from "../NestedList";
+import FormDialog from "../FormDialog";
 
-import StatusSelect from "./StatusSelect";
+import StatusSelect from "../StatusSelect";
 import Box from "@mui/material/Box";
 
 const useStyles = makeStyles((theme) => ({
