@@ -72,23 +72,10 @@ const useStyles = makeStyles((theme) => ({
 const Processes = inject("studentStore")(
   observer((props) => {
     /************************************************ */
-
     useEffect(async () => {
-     // await props.studentStore.addJobsFromDB();
+     await props.studentStore.addJobsFromDB();
     }, []);
     /************************************************ */
-    // const getJobsFromDB = async () => {
-    //   try {
-    //     await props.studentStore.addJobsFromDB();
-    //   } catch (err) {
-    //     console.error(err.message);
-    //   }
-    // };
-
-    // useEffect(async ()=>{
-    //   getJobsFromDB()
-    // })
-      /************************************************ */
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -202,8 +189,9 @@ const Processes = inject("studentStore")(
                           className={classes.status}
                           style={{
                             backgroundColor:
-                              (row.status === "Open" && "green") ||
-                              (row.status === "Pending" && "blue") ||
+                              (row.status === "Open" && "blue") ||
+                              (row.status === "Pending" && "orange") ||
+                              (row.status === "Accepted" && "green") ||
                               (row.status === "Rejected" && "red"),
                           }}
                         >
