@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom'
 
 export default function Register() {
-    const [name, setName] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
+    const [mobileNo, setMobileNo] = useState('');
+    const [cohort, setCohort] = useState('');
     const [password, setPassword] = useState('');
     const [redirect, setRedirect] = useState(false);
 
@@ -14,8 +17,11 @@ export default function Register() {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-                name,
+                firstName,
+                lastName,
                 email,
+                mobileNo,
+                cohort,
                 password
             })
         });
@@ -23,19 +29,31 @@ export default function Register() {
     }
 
     if(redirect) {
-        return <Redirect to="/login"/>;
+        return <Redirect to="/"/>;
     }
 
   return (
     <form onSubmit={submit}>
         <h1 className="h3 mb-3 fw-normal">Please register</h1>
         
-        <input className="form-control" placeholder="Name" required
-            onChange={e => setName(e.target.value)}
+        <input className="form-control" placeholder="First Name" required
+            onChange={e => setFirstName(e.target.value)}
+        />
+
+        <input className="form-control" placeholder="Last Name" required
+            onChange={e => setLastName(e.target.value)}
         />
 
         <input type="email" className="form-control" placeholder="Email address" required
             onChange={e => setEmail(e.target.value)}
+        />
+
+        <input className="form-control" placeholder="Phone Number" required
+            onChange={e => setMobileNo(e.target.value)}
+        />
+
+        <input className="form-control" placeholder="Cohort" required
+            onChange={e => setCohort(e.target.value)}
         />
 
         <input type="password" className="form-control" placeholder="Password" required

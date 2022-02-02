@@ -5,15 +5,19 @@ import axios from "axios";
 export class StudentInventory {
   constructor() {
     this.StudentJobs = [];
-    this.name = "";
+    this.firstName = '';
     this.isLoggedIn = false;
+    this.studentID = '';
+
     makeObservable(this, {
-      name: observable,
+      firstName: observable,
       StudentJobs: observable,
       isLoggedIn: observable,
+      studentID: observable,
       numItems: computed,
       checkUserLoggedIn: action,
       setLogin: action,
+      setStudentID: action,
       logout: action,
       addJobsFromDB: action,
     });
@@ -23,9 +27,8 @@ export class StudentInventory {
     return this.StudentJobs.length;
   }
   addJobsFromDB = async () => {
-    // this.StudentJobs = [];
-    let majd = "61f6c18cebcb5be4dc8f990c";
-    let result = await axios.get(`http://localhost:8888/student/jobs/${majd}`);
+    // let majd = "61f95c96ecdd8874b477d4de";
+    let result = await axios.get(`http://localhost:8888/student/jobs/${this.studentID}`);
     this.StudentJobs = result.data;
   };
 
@@ -33,15 +36,23 @@ export class StudentInventory {
     this.isLoggedIn = true;
   };
 
+  setStudentID = (id) => {
+    this.studentID = id;
+    console.log(this.studentID)
+  }
+
   checkUserLoggedIn = async () => {
     const response = await fetch("http://localhost:8888/auth/user", {
       headers: { "Content-Type": "application/json" },
       credentials: "include",
     });
-
     const content = await response.json();
-    this.name = content.name;
-  };
+    this.firstName = content.firstName;
+    if(response.status != 401) {
+      this.setLogin()
+    }
+    console.log(this.studentID)
+  }
 
   logout = async () => {
     await fetch("http://localhost:8888/auth/logout", {
@@ -50,9 +61,10 @@ export class StudentInventory {
       credentials: "include",
     });
 
-    this.name = "";
+    this.firstName = '';
     this.isLoggedIn = false;
-  };
+    this.studentID = '';
+  }
 
   edditStatusForStudent = async (jobId, status) => {
     const res = await axios.post(

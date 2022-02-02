@@ -6,7 +6,7 @@ export default function Home(props) {
   
   return (
     <div>
-        {props.name ? props.setLoggedIn(true) : <Login />}
+        {props.firstName ? props.setLoggedIn(true) : <Login />}
         
     </div>
   );

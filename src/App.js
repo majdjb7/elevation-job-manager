@@ -92,7 +92,7 @@ const App = inject("studentStore")(
             <Switch>
               <Route exact path="/">
                 <Home
-                  name={props.studentStore.name}
+                  name={props.studentStore.firstName}
                   loggedIn={loggedIn}
                   setLoggedIn={setLoggedIn}
                 />

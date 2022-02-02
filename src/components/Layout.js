@@ -84,8 +84,8 @@ const Layout = inject("studentStore")(
     const history = useHistory();
     const location = useLocation();
 
-    if (props.studentStore.name === "") {
-      return <Redirect to="/" />;
+    if(props.studentStore.firstName === '') {
+      return <Redirect to="/"/>;
     }
 
     const menuItems = [
@@ -140,10 +140,10 @@ const Layout = inject("studentStore")(
             <Typography className={classes.date}>
               Today is the {format(new Date(), "do MMMM Y")}
             </Typography>
-            <Typography>{props.studentStore.name}</Typography>
+            <Typography>{props.studentStore.firstName}</Typography>
 
             <Avatar
-              alt={props.studentStore.name}
+              alt={props.studentStore.firstName}
               src="."
               className={classes.avatar}
             />
