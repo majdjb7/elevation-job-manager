@@ -44,15 +44,9 @@ const theme = createMuiTheme({
 
 const App = inject("studentStore")(
   observer((props) => {
-    // const [name, setName] = useState('');
-
-    const [loggedIn, setLoggedIn] = useState(false);
 
     useEffect(() => {
       props.studentStore.checkUserLoggedIn();
-      // if(props.studentStore.name != '') {
-      //   setLoggedIn(true)
-      // }
     });
 
     return (

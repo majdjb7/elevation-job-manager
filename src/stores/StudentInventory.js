@@ -10,16 +10,19 @@ export class StudentInventory {
     this.firstName = '';
     this.isLoggedIn = false;
     this.studentID = '';
+    this.isAdmin = false;
 
     makeObservable(this, {
       firstName: observable,
       StudentJobs: observable,
       isLoggedIn: observable,
+      isAdmin: observable,
       studentData: observable,
       studentProfileJobs: observable,
       studentID: observable,
       numItems: computed,
       checkUserLoggedIn: action,
+      setUserType: action,
       setLogin: action,
       setStudentID: action,
       logout: action,
@@ -34,18 +37,24 @@ export class StudentInventory {
   }
   addJobsFromDB = async () => {
     try {
-      let result = await axios.get(`http://localhost:8888/student/jobs/${this.studentID}`);
-      this.StudentJobs = result.data;
+      if(this.isAdmin == false) {
+        let result = await axios.get(`http://localhost:8888/student/jobs/${this.studentID}`);
+        this.StudentJobs = result.data;
+      }
     } catch (error) {
       console.log("Something wrong")
     }
   };
+
+  setUserType = (type) => {
+    this.isAdmin = type
+  }
+
   getStudentData = async (id) => {
     const studentData = await axios.get(`http://localhost:8888/student/data/${id}`);
     this.studentData = studentData.data
     let result = await axios.get(`http://localhost:8888/student/jobs/${id}`);
     this.StudentJobs = result.data;
-
   }
 
   setLogin = () => {
@@ -57,7 +66,9 @@ export class StudentInventory {
     console.log(this.studentID)
   }
 
+
   checkUserLoggedIn = async () => {
+    // if(this.isLoggedIn == true) {
     const response = await fetch("http://localhost:8888/auth/user", {
       headers: { "Content-Type": "application/json" },
       credentials: "include",
@@ -69,6 +80,7 @@ export class StudentInventory {
       this.setLogin()
     }
     console.log(this.studentID)
+  // }
   }
 
   logout = async () => {

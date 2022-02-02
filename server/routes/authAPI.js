@@ -81,6 +81,7 @@ router.post('/login', async (req, res) => {
     res.send({
         message: 'Success',
         studentID: user._id,
+        isAdmin: user.isAdmin,
     })
 })
 

@@ -33,16 +33,17 @@ import { observe } from "mobx";
     });
 
     const content = await response.json();
-    if(content.message === 'Success') {
+    console.log("CON: ", content)
+
+    if(content.message === 'Success') { // && content.isAdmin == false
       props.studentStore.setStudentID(content.studentID)
       props.studentStore.setLogin();
-      console.log("CON: ", content)
+      props.studentStore.setUserType(content.isAdmin)
       setRedirect(true);
     }
     else{
       alert(content.message)
     }
-    // props.setName(content.name);
 }
 
 if (redirect) {
