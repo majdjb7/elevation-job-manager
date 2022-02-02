@@ -7,6 +7,7 @@ import AddProcess from "../AddProcess";
 import AddInterview from "../AddInterview";
 import AdminPage from "../admin/AdminPage";
 import Dashboard from "../admin/dashboard/Dashboard";
+import StudentProfile from "../student/studendProfile";
 
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -28,6 +29,9 @@ export default function Student() {
             </Route>
             <Route exact path="/addInterview">
               <AddInterview />
+            </Route>
+            <Route exact path="/studentprofile">
+              <StudentProfile />
             </Route>
             {/* /* DELETE LATER: when admin login is complete */}
             <Route exact path="/dashboard">
