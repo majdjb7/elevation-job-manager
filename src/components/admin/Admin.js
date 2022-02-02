@@ -29,6 +29,9 @@ export default function Admin() {
             <Route exact path="/adminPage">
               <AdminPage />
             </Route>
+            <Route exact path="/addAdmin">
+              <AddAdmin />
+            </Route>
           </Switch>
         </Layout>
       </Router>

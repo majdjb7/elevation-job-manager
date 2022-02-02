@@ -16,6 +16,7 @@ import { observe } from "mobx";
 import Home from "./components/authentication/Home";
 import Register from "./components/authentication/Register";
 import Login from "./components/authentication/Login";
+import AddAdmin from "./components/admin/AddAdmin"
 
 import NestedList from "./components/NestedList";
 

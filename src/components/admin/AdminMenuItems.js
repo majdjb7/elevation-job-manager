@@ -59,6 +59,11 @@ export default function AdminMenuItems() {
       icon: <BarChart color="secondary" />,
       path: "/dashboard",
     },
+    {
+      text: "Add Admin",
+      icon: <AddCircle color="secondary" />,
+      path: "/addAdmin",
+    },
   ];
 
   return (

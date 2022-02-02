@@ -5,8 +5,13 @@ import Layout from "../Layout";
 import Processes from "./Processes";
 import AddProcess from "../AddProcess";
 import AddInterview from "../AddInterview";
+
+//FOR ADMIN: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 import AdminPage from "../admin/AdminPage";
 import Dashboard from "../admin/dashboard/Dashboard";
+import AddAdmin from "../admin/AddAdmin"
+
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -35,6 +40,9 @@ export default function Student() {
             </Route>
             <Route exact path="/adminPage">
               <AdminPage />
+            </Route>
+            <Route exact path="/addAdmin">
+              <AddAdmin />
             </Route>
           </Switch>
         </Layout>

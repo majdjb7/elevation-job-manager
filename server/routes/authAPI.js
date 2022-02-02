@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const User = require("../models/User")
 const Student = require("../models/Student")
+const Admin = require("../models/Admin")
 
 router.post('/register', async (req, res) => {
     const salt = await bcrypt.genSalt(10)
@@ -20,6 +21,27 @@ router.post('/register', async (req, res) => {
     })
 
     const result = await student.save()
+
+    const {password, ...data} = await result.toJSON()
+
+    res.send(data)
+})
+
+router.post('/registerAdmin', async (req, res) => {
+    const salt = await bcrypt.genSalt(10)
+    const hashedPassword = await bcrypt.hash(req.body.password, salt)
+
+    const admin = new Admin({
+        name: req.body.firstName,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        isAdmin: true,
+        mobileNo: req.body.mobileNo,
+        password: hashedPassword,
+    })
+
+    const result = await admin.save()
 
     const {password, ...data} = await result.toJSON()
 
