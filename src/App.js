@@ -2,19 +2,20 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core";
 import { purple } from "@material-ui/core/colors";
 import Layout from "./components/Layout";
-import Processes from "./components/Processes";
+import Processes from "./components/student/Processes";
 import AddProcess from "./components/AddProcess";
 import AddInterview from "./components/AddInterview";
-import AdminPage from "./components/AdminPage";
-import Dashboard from "./components/adminDashboard/Dashboard";
+import StudentProfile from "./components/student/studendProfile";
+import AdminPage from "./components/admin/AdminPage";
+import Dashboard from "./components/admin/dashboard/Dashboard";
 
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { inject, observer } from "mobx-react";
 import { observe } from "mobx";
-import Home from "./pages/Home";
-import Register from "./pages/Register";
-import Login from "./pages/Login";
+import Home from "./components/authentication/Home";
+import Register from "./components/authentication/Register";
+import Login from "./components/authentication/Login";
 
 import NestedList from "./components/NestedList";
 const theme = createMuiTheme({
@@ -83,6 +84,9 @@ const App = inject("studentStore")(
 
                 <Route exact path="/Login">
                   <Login />
+                </Route>
+                <Route exact path="/studentprofile">
+                  <StudentProfile />
                 </Route>
               </Switch>
             </Layout>

@@ -19,14 +19,15 @@ import { inject, observer } from "mobx-react";
 import { observe } from "mobx";
 import { toJS } from "mobx";
 /////////////////////////////
-import NestedList from "./NestedList";
+import NestedList from "../NestedList";
 import PieChart from "./PieChart";
 
 import BasicSelect from "./filter/BasicSelect";
 import AutocompleteSearch from "./filter/AutocompleteSearch";
 
 import moment from "moment";
-
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   table: {
     minWidth: 650,
@@ -70,10 +71,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Processes = inject("adminStore")(
+const AdminPage = inject("adminStore","studentStore")(
   observer((props) => {
     /************************************************ */
-
+    const history = useHistory();
     useEffect(async () => {
       await props.adminStore.addJobsFromDBToAdmin();
 
@@ -115,7 +116,21 @@ const Processes = inject("adminStore")(
         interviewType + ": " + moment(maxDate).format(format1);
       return mostRelevantInterview;
     };
-
+    const studentPage = async function (id) { 
+     // let studentData=await axios.get(`http://localhost:8888/student/${id}`);
+    //  props.adminStore.studentData=studentData.data;
+    //  console.log("aa", props.adminStore.studentData);
+      await props.studentStore.getStudentData(id)
+      
+    //  let result = await axios.get(`http://localhost:8888/student/jobs/${id}`);
+     //   props.adminStore.studentProfileJobs = result.data;
+       history.push({
+         pathname: "/studentprofile"
+       });
+      
+       // console.log("Something wrong")
+      
+    }
     return (
       <div>
         <Grid
@@ -194,11 +209,9 @@ const Processes = inject("adminStore")(
                           className={classes.avatar}
                         />
                         <Grid item lg={10}>
-                          <Typography className={classes.name}>
-                            {row.studentName}
-                          </Typography>
-                          <Typography color="textSecondary" variant="body2">
-                            {row.cohort}
+                          <Typography className={classes.name}
+                            onClick={()=>studentPage(row.studentId)}>
+                            {row.studentName} - ({row.cohort})
                           </Typography>
                           <Typography color="textSecondary" variant="body2">
                             Phone No: {row.mobileNo}
@@ -212,7 +225,8 @@ const Processes = inject("adminStore")(
                     <TableCell>
                       <Grid container>
                         <Grid item lg={10}>
-                          <Typography className={classes.name}>
+                          <Typography
+                            className={classes.name}>
                             {row.companyName}
                           </Typography>
                           <Typography color="textSecondary" variant="body2">
@@ -278,4 +292,4 @@ const Processes = inject("adminStore")(
   })
 );
 
-export default Processes;
+export default AdminPage;
