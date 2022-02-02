@@ -69,8 +69,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-let STATUSES = ["Active", "Pending", "Blocked"];
-
 const Processes = inject("studentStore")(
   observer((props) => {
     /************************************************ */
@@ -79,6 +77,18 @@ const Processes = inject("studentStore")(
       await props.studentStore.addJobsFromDB();
     }, []);
     /************************************************ */
+    // const getJobsFromDB = async () => {
+    //   try {
+    //     await props.studentStore.addJobsFromDB();
+    //   } catch (err) {
+    //     console.error(err.message);
+    //   }
+    // };
+
+    // useEffect(async ()=>{
+    //   getJobsFromDB()
+    // })
+      /************************************************ */
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);

@@ -48,6 +48,8 @@ export class StudentInventory {
     });
     const content = await response.json();
     this.firstName = content.firstName;
+    this.studentID = content._id;
+    console.log(content)
     if(response.status != 401) {
       this.setLogin()
     }
