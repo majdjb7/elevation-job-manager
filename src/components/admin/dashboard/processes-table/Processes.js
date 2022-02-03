@@ -14,11 +14,14 @@ import {
   Typography,
   TablePagination,
   TableFooter,
+  Button,
 } from "@material-ui/core";
+// import Button from '@mui/material/Button';
 ////////////////////////////
 import { inject, observer } from "mobx-react";
 import { observe } from "mobx";
 import { toJS } from "mobx";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 /////////////////////////////
 import NestedList from "../../../NestedList";
 import PieChart from "../../PieChart";
@@ -55,6 +58,7 @@ const useStyles = makeStyles((theme) => ({
   },
   name: {
     fontWeight: "bold",
+    cursor: "pointer",
   },
   status: {
     fontWeight: "bold",
@@ -73,7 +77,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Processes = inject("adminStore","studentStore")(
+const Processes = inject(
+  "adminStore",
+  "studentStore"
+)(
   observer((props) => {
     /************************************************ */
     const history = useHistory();
@@ -119,13 +126,12 @@ const Processes = inject("adminStore","studentStore")(
       return mostRelevantInterview;
     };
     const studentPage = async function (id) {
-      const data = await props.studentStore.getStudentData(id)
-      
-        history.push({
-          pathname: "/studentprofile"
-        });
-      
-    }
+      const data = await props.studentStore.getStudentData(id);
+
+      history.push({
+        pathname: "/studentprofile",
+      });
+    };
     return (
       <div>
         <Card {...props}>
@@ -175,10 +181,13 @@ const Processes = inject("adminStore","studentStore")(
                             className={classes.avatar}
                           />
                           <Grid item lg={10}>
-                            <Typography className={classes.name}
-                              onClick={() => studentPage(row.studentId)}>
+                            <Typography
+                              className={classes.name}
+                              onClick={() => studentPage(row.studentId)}
+                            >
                               {row.studentName}
                             </Typography>
+
                             <Typography color="textSecondary" variant="body2">
                               {row.cohort}
                             </Typography>
