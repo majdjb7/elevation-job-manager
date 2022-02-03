@@ -29,7 +29,7 @@ export const Sales = (props) => {
         maxBarThickness: 10,
       },
       {
-        backgroundColor: "#EEEEEE",
+        backgroundColor: "#4caf50",
         barPercentage: 0.5,
         barThickness: 12,
         borderRadius: 4,
