@@ -21,11 +21,11 @@ const useStyles = makeStyles({
     marginTop: 20,
     marginBottom: 20,
     display: "block",
-    maxWidth: "25%",
+    maxWidth: "250px",
   },
-  Container: {
-    marginLeft: "-80px",
-  },
+  // Container: {
+  //   marginLeft: "-80px",
+  // },
 });
 const AddInterview = inject("studentStore")(
   observer((props) => {
@@ -56,30 +56,30 @@ const AddInterview = inject("studentStore")(
 
       if (type && time && interviewerName) {
         let id = location.state;
-        try{
-        const res = await axios.post(
-          "http://localhost:8888/student/jobs/" + id + "/interviews",
-          { type, time, interviewerName }
-        );
-        await props.studentStore.addJobsFromDB();
-        history.push({
-          pathname: "/",
-          state: res.data._id,
-        });
-      }catch(error){
-        setError("Something wrong")
+        try {
+          const res = await axios.post(
+            "http://localhost:8888/student/jobs/" + id + "/interviews",
+            { type, time, interviewerName }
+          );
+          await props.studentStore.addJobsFromDB();
+          history.push({
+            pathname: "/",
+            state: res.data._id,
+          });
+        } catch (error) {
+          setError("Something wrong");
+        }
       }
-    }
     };
 
     return (
-      <Container size="sm">
+      <div>
         <Typography
           variant="h6"
           color="textSecondary"
           component="h2"
           gutterBottom
-          className={classes.Container}
+          // className={classes.Container}
         >
           Create a New Interview
         </Typography>
@@ -88,12 +88,16 @@ const AddInterview = inject("studentStore")(
           noValidate
           autoComplete="off"
           onSubmit={handleSubmit}
-          className={classes.Container}
+          // className={classes.Container}
         >
           <FormControl className={classes.field}>
             <FormLabel>Type</FormLabel>
             <RadioGroup value={type} onChange={(e) => setType(e.target.value)}>
-              <FormControlLabel value="HR" control={<Radio />} label="HR" />
+              <FormControlLabel
+                value="HR"
+                control={<Radio color="primary" />}
+                label="HR"
+              />
               <FormControlLabel
                 value="Telephone"
                 control={<Radio color="primary" />}
@@ -148,11 +152,9 @@ const AddInterview = inject("studentStore")(
           >
             Submit
           </Button>
-          <p id="error">
-          {error}
-        </p>
+          <p id="error">{error}</p>
         </form>
-      </Container>
+      </div>
     );
   })
 );

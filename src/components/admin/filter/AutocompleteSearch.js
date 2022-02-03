@@ -1,18 +1,30 @@
 import React, { useState, useEffect } from "react";
-
+import { purple, red } from "@mui/material/colors";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import Autocomplete from "@mui/material/Autocomplete";
 import Button from "@mui/material/Button";
 import { Grid } from "@material-ui/core";
+import PersonSearchIcon from "@mui/icons-material/PersonSearch";
 ////////////////////////////
 import { inject, observer } from "mobx-react";
 import { observe, toJS } from "mobx";
 
 /////////////////////////////
 import { Box, Card, CardHeader } from "@mui/material";
+import { makeStyles } from "@material-ui/core";
+// const useStyles = makeStyles({
+//   field: {
+//     width: "17%",
+//     backgroundColor: "#0066ff",
+//     color: "white",
+//     borderRadius: "5px",
+//     // padding: "4px",
+//   },
+// });
 const AutocompleteSearch = inject("adminStore")(
   observer((props) => {
+    // const classes = useStyles();
     const [value, setValue] = React.useState("");
     const [inputValue, setInputValue] = React.useState("");
     const studentsNames = toJS(props.adminStore.studentsNames);
@@ -21,8 +33,8 @@ const AutocompleteSearch = inject("adminStore")(
     };
     return (
       <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={2}>
-          <Grid item lg={8} md={8} xl={8} xs={12}>
+        <Grid container spacing={1}>
+          <Grid item lg={6} md={8} xl={6} xs={12}>
             <Autocomplete
               inputValue={inputValue}
               onInputChange={(event, newInputValue) => {
@@ -37,8 +49,12 @@ const AutocompleteSearch = inject("adminStore")(
               )}
             />
           </Grid>
-          <Grid item lg={4} md={4} xl={4} xs={12}>
-            <Button variant="contained" size="large" onClick={handelSearch}>
+          <Grid item lg={6} md={4} xl={6} xs={12}>
+            <Button
+              variant="contained"
+              onClick={handelSearch}
+              startIcon={<PersonSearchIcon />}
+            >
               Search
             </Button>
           </Grid>

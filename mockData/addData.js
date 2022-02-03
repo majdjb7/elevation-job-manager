@@ -109,12 +109,10 @@ function addData() {
       s.jobs.push(j);
     });
 
-<<<<<<< HEAD
     s.save();
   });
 }
 
-=======
 //   jobData.forEach((job) => {
 //     const j = new Job({
 //       companyName: job.companyName,
@@ -142,7 +140,6 @@ function addData() {
 
 //   s.save();
 // });
->>>>>>> main
 function updateJob() {
   try {
     Student.find({})
@@ -161,9 +158,6 @@ function updateJob() {
     res.send(error);
   }
 }
-<<<<<<< HEAD
 
 // addData();
-=======
->>>>>>> main
 updateJob();

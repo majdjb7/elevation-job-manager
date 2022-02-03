@@ -73,7 +73,7 @@ const Processes = inject("studentStore")(
   observer((props) => {
     /************************************************ */
     useEffect(async () => {
-    // await props.studentStore.addJobsFromDB();
+      // await props.studentStore.addJobsFromDB();
     }, []);
     /************************************************ */
     const classes = useStyles();
@@ -201,7 +201,7 @@ const Processes = inject("studentStore")(
                     </div>
                   </TableCell>
                   <TableCell>
-                    <NestedList interviews={row.interviews} />
+                    <NestedList jobId={row._id} interviews={row.interviews} />
                   </TableCell>
                   <TableCell>
                     <FormDialog jobId={row._id} />

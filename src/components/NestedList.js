@@ -60,7 +60,7 @@ export default function NestedList(props) {
             ? props.interviews.map((i, index) => (
                 <div key={index}>
                   <ListItemText
-                    key={index}
+                    key={props.jobId + "" + index}
                     sx={{ pl: 1 }}
                     primary={`${i.type}`}
                   />

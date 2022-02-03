@@ -78,7 +78,7 @@ export default function Filter() {
   return (
     <Container maxWidth={false}>
       <Grid container className={classes.filter} spacing={3}>
-        <Grid item item lg={8} md={3} xl={10} xs={1}>
+        <Grid item item lg={7} md={3} xl={9} xs={1}>
           <AutocompleteSearch />
         </Grid>
         <Grid item item lg={2} md={12} xl={1} xs={12}>
