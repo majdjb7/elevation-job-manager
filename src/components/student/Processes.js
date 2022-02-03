@@ -180,24 +180,20 @@ const Processes = inject("studentstore")(
                     {getMostRecentInterview(row.interviews)}
                   </TableCell>
                   <TableCell>
-                    <div onDoubleClick={handleDoubleClick}>
-                      {isDoubileClick ? (
-                        <StatusSelect status={status} setStatus={setStatus} />
-                      ) : (
-                        <Typography
-                          className={classes.status}
-                          style={{
-                            backgroundColor:
-                              (row.status === "Open" && "blue") ||
-                              (row.status === "Pending" && "orange") ||
-                              (row.status === "Accepted" && "green") ||
-                              (row.status === "Rejected" && "red"),
-                          }}
-                        >
-                          {row.status}
-                        </Typography>
-                      )}
-                    </div>
+                    {/* <StatusSelect status={status} setStatus={setStatus} /> */}
+
+                    <Typography
+                      className={classes.status}
+                      style={{
+                        backgroundColor:
+                          (row.status === "Open" && "blue") ||
+                          (row.status === "Pending" && "orange") ||
+                          (row.status === "Accepted" && "green") ||
+                          (row.status === "Rejected" && "red"),
+                      }}
+                    >
+                      {row.status}
+                    </Typography>
                   </TableCell>
                   <TableCell>
                     <NestedList jobId={row._id} interviews={row.interviews} />
