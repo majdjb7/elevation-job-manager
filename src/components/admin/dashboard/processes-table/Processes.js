@@ -70,7 +70,7 @@ const useStyles = makeStyles((theme) => ({
     display: "inline-block",
   },
   TablePagination: {
-    maxWidth: "32%",
+    width: "94%",
   },
   filter: {
     margin: "20px 0px",
@@ -78,20 +78,20 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Processes = inject(
-  "adminStore",
-  "studentStore"
+  "adminstore",
+  "studentstore"
 )(
   observer((props) => {
     /************************************************ */
     const history = useHistory();
     useEffect(async () => {
-      await props.adminStore.addJobsFromDBToAdmin();
+      await props.adminstore.addJobsFromDBToAdmin();
 
-      props.adminStore.getStatsOfAcceptedStudents();
-      props.adminStore.getStatsOfAcceptedStudents("Cohort 21");
-      props.adminStore.getStatusStats();
-      props.adminStore.getStatusStatsByCohort();
-      props.adminStore.getAllStudentsNames();
+      props.adminstore.getStatsOfAcceptedStudents();
+      props.adminstore.getStatsOfAcceptedStudents("Cohort 21");
+      props.adminstore.getStatusStats();
+      props.adminstore.getStatusStatsByCohort();
+      props.adminstore.getAllStudentsNames();
     }, []);
     /************************************************ */
     const classes = useStyles();
@@ -126,7 +126,7 @@ const Processes = inject(
       return mostRelevantInterview;
     };
     const studentPage = async function (id) {
-      const data = await props.studentStore.getStudentData(id);
+      const data = await props.studentstore.getStudentData(id);
 
       history.push({
         pathname: "/studentprofile",
@@ -168,7 +168,7 @@ const Processes = inject(
                 </TableHead>
 
                 <TableBody>
-                  {props.adminStore.AdminJobs.slice(
+                  {props.adminstore.AdminJobs.slice(
                     page * rowsPerPage,
                     page * rowsPerPage + rowsPerPage
                   ).map((row, index) => (
@@ -250,13 +250,11 @@ const Processes = inject(
               </Table>
             </TableContainer>
 
-            {/* <TableFooter> */}
-
             <TablePagination
               className={classes.TablePagination}
               rowsPerPageOptions={[5, 10, 15]}
               component="div"
-              count={props.adminStore.AdminJobs.length}
+              count={props.adminstore.AdminJobs.length}
               rowsPerPage={rowsPerPage}
               page={page}
               onChangePage={handleChangePage}
@@ -264,7 +262,7 @@ const Processes = inject(
             />
           </Box>
         </Card>
-        {/* </TableFooter> */}
+
         {/* </Paper> */}
       </div>
     );

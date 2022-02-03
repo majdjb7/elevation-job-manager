@@ -25,7 +25,7 @@ const useStyles = makeStyles({
   },
 });
 
-const FormDialog = inject("studentStore")(
+const FormDialog = inject("studentstore")(
   observer((props) => {
     const [open, setOpen] = React.useState(false);
     const [interviewType, setInterviewType] = React.useState("");
@@ -58,16 +58,16 @@ const FormDialog = inject("studentStore")(
       console.log(type, time, interviewerName);
       if (type && time && interviewerName) {
         let id = props.jobId;
-        try{
-        const res = await axios.post(
-          "http://localhost:8888/student/jobs/" + id + "/interviews",
-          { type, time, interviewerName }
-        );
-        await props.studentStore.addJobsFromDB();
-      }catch(error){
-        setError("Something wrong")
+        try {
+          const res = await axios.post(
+            "http://localhost:8888/student/jobs/" + id + "/interviews",
+            { type, time, interviewerName }
+          );
+          await props.studentstore.addJobsFromDB();
+        } catch (error) {
+          setError("Something wrong");
+        }
       }
-    }
     };
     const handleClose = () => {
       setOpen(false);
@@ -135,9 +135,7 @@ const FormDialog = inject("studentStore")(
             <Button onClick={handleClose}>Cancel</Button>
             <Button onClick={handleAdd}>Add</Button>
           </DialogActions>
-          <p id="error">
-          {error}
-        </p>
+          <p id="error">{error}</p>
         </Dialog>
       </div>
     );

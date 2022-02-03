@@ -6,12 +6,12 @@ import { Provider } from "mobx-react";
 import { StudentInventory } from "./stores/StudentInventory";
 import { AdminInventory } from "./stores/AdminInventory";
 
-const studentStore = new StudentInventory();
-const adminStore = new AdminInventory();
+const studentstore = new StudentInventory();
+const adminstore = new AdminInventory();
 
 const stores = {
-  studentStore,
-  adminStore,
+  studentstore,
+  adminstore,
 };
 
 ReactDOM.render(

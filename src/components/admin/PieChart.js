@@ -6,13 +6,13 @@ import { observe } from "mobx";
 import { toJS } from "mobx";
 /////////////////////////////
 
-const PieChart = inject("adminStore")(
+const PieChart = inject("adminstore")(
   observer((props) => {
     const labels = Object.keys(
-      toJS(props.adminStore.acceptedStudentsPercentage)
+      toJS(props.adminstore.acceptedStudentsPercentage)
     );
     const series = Object.values(
-      toJS(props.adminStore.acceptedStudentsPercentage)
+      toJS(props.adminstore.acceptedStudentsPercentage)
     );
     const options = { labels };
 

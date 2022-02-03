@@ -7,7 +7,7 @@ import Register from "./Register";
 import Login from "./Login";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-const Authentication = inject("studentStore")(
+const Authentication = inject("studentstore")(
   observer((props) => {
     const [loggedIn, setLoggedIn] = useState(false);
     return (
@@ -16,7 +16,7 @@ const Authentication = inject("studentStore")(
           <Switch>
             <Route exact path="/">
               <Home
-                name={props.studentStore.firstName}
+                name={props.studentstore.firstName}
                 loggedIn={loggedIn}
                 setLoggedIn={setLoggedIn}
               />

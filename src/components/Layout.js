@@ -77,7 +77,7 @@ const useStyles = makeStyles((theme) => {
   };
 });
 
-const Layout = inject("studentStore")(
+const Layout = inject("studentstore")(
   observer((props) => {
     {
       /* the props children is all the comps from app.js under the switch */
@@ -86,7 +86,7 @@ const Layout = inject("studentStore")(
     const history = useHistory();
     const location = useLocation();
 
-    if (props.studentStore.firstName === "") {
+    if (props.studentstore.firstName === "") {
       return <Redirect to="/" />;
     }
 
@@ -103,10 +103,10 @@ const Layout = inject("studentStore")(
             <Typography className={classes.date}>
               Today is the {format(new Date(), "do MMMM Y")}
             </Typography>
-            <Typography>{props.studentStore.firstName}</Typography>
+            <Typography>{props.studentstore.firstName}</Typography>
 
             <Avatar
-              alt={props.studentStore.firstName}
+              alt={props.studentstore.firstName}
               src="."
               className={classes.avatar}
             />
@@ -114,7 +114,7 @@ const Layout = inject("studentStore")(
               variant="contained"
               color="secondary"
               onClick={() => {
-                props.studentStore.logout();
+                props.studentstore.logout();
               }}
             >
               Logout
@@ -136,7 +136,7 @@ const Layout = inject("studentStore")(
           </div>
 
           {/* links/list section */}
-          {/* {props.studentStore.isAdmin ? <AdminMenuItems />: <StudentMenuItems />}
+          {/* {props.studentstore.isAdmin ? <AdminMenuItems />: <StudentMenuItems />}
            */}
           <AdminMenuItems />
           <StudentMenuItems />

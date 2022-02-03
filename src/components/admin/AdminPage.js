@@ -71,18 +71,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AdminPage = inject("adminStore","studentStore")(
+const AdminPage = inject(
+  "adminstore",
+  "studentstore"
+)(
   observer((props) => {
     /************************************************ */
     const history = useHistory();
     useEffect(async () => {
-      await props.adminStore.addJobsFromDBToAdmin();
+      await props.adminstore.addJobsFromDBToAdmin();
 
-      props.adminStore.getStatsOfAcceptedStudents();
-      props.adminStore.getStatsOfAcceptedStudents("Cohort 21");
-      props.adminStore.getStatusStats();
-      props.adminStore.getStatusStatsByCohort();
-      props.adminStore.getAllStudentsNames();
+      props.adminstore.getStatsOfAcceptedStudents();
+      props.adminstore.getStatsOfAcceptedStudents("Cohort 21");
+      props.adminstore.getStatusStats();
+      props.adminstore.getStatusStatsByCohort();
+      props.adminstore.getAllStudentsNames();
     }, []);
     /************************************************ */
     const classes = useStyles();
@@ -116,21 +119,20 @@ const AdminPage = inject("adminStore","studentStore")(
         interviewType + ": " + moment(maxDate).format(format1);
       return mostRelevantInterview;
     };
-    const studentPage = async function (id) { 
-     // let studentData=await axios.get(`http://localhost:8888/student/${id}`);
-    //  props.adminStore.studentData=studentData.data;
-    //  console.log("aa", props.adminStore.studentData);
-      await props.studentStore.getStudentData(id)
-      
-    //  let result = await axios.get(`http://localhost:8888/student/jobs/${id}`);
-     //   props.adminStore.studentProfileJobs = result.data;
-       history.push({
-         pathname: "/studentprofile"
-       });
-      
-       // console.log("Something wrong")
-      
-    }
+    const studentPage = async function (id) {
+      // let studentData=await axios.get(`http://localhost:8888/student/${id}`);
+      //  props.adminstore.studentData=studentData.data;
+      //  console.log("aa", props.adminstore.studentData);
+      await props.studentstore.getStudentData(id);
+
+      //  let result = await axios.get(`http://localhost:8888/student/jobs/${id}`);
+      //   props.adminstore.studentProfileJobs = result.data;
+      history.push({
+        pathname: "/studentprofile",
+      });
+
+      // console.log("Something wrong")
+    };
     return (
       <div>
         <Grid
@@ -158,7 +160,7 @@ const AdminPage = inject("adminStore","studentStore")(
         </Grid>
         <Paper sx={{ width: "100%", overflow: "hidden" }}>
           <h1 text-align="center">
-            Total Num of Students: {props.adminStore.numOfStudents}
+            Total Num of Students: {props.adminstore.numOfStudents}
           </h1>
           <Grid
             container
@@ -196,7 +198,7 @@ const AdminPage = inject("adminStore","studentStore")(
               </TableHead>
 
               <TableBody>
-                {props.adminStore.AdminJobs.slice(
+                {props.adminstore.AdminJobs.slice(
                   page * rowsPerPage,
                   page * rowsPerPage + rowsPerPage
                 ).map((row, index) => (
@@ -209,8 +211,10 @@ const AdminPage = inject("adminStore","studentStore")(
                           className={classes.avatar}
                         />
                         <Grid item lg={10}>
-                          <Typography className={classes.name}
-                            onClick={()=>studentPage(row.studentId)}>
+                          <Typography
+                            className={classes.name}
+                            onClick={() => studentPage(row.studentId)}
+                          >
                             {row.studentName} - ({row.cohort})
                           </Typography>
                           <Typography color="textSecondary" variant="body2">
@@ -225,8 +229,7 @@ const AdminPage = inject("adminStore","studentStore")(
                     <TableCell>
                       <Grid container>
                         <Grid item lg={10}>
-                          <Typography
-                            className={classes.name}>
+                          <Typography className={classes.name}>
                             {row.companyName}
                           </Typography>
                           <Typography color="textSecondary" variant="body2">
@@ -278,7 +281,7 @@ const AdminPage = inject("adminStore","studentStore")(
             className={classes.TablePagination}
             rowsPerPageOptions={[5, 10, 15]}
             component="div"
-            count={props.adminStore.AdminJobs.length}
+            count={props.adminstore.AdminJobs.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onChangePage={handleChangePage}

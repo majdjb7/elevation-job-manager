@@ -27,7 +27,7 @@ const useStyles = makeStyles({
   //   marginLeft: "-80px",
   // },
 });
-const AddInterview = inject("studentStore")(
+const AddInterview = inject("studentstore")(
   observer((props) => {
     const location = useLocation();
     const classes = useStyles();
@@ -61,7 +61,7 @@ const AddInterview = inject("studentStore")(
             "http://localhost:8888/student/jobs/" + id + "/interviews",
             { type, time, interviewerName }
           );
-          await props.studentStore.addJobsFromDB();
+          await props.studentstore.addJobsFromDB();
           history.push({
             pathname: "/",
             state: res.data._id,

@@ -16,7 +16,7 @@ import { observe } from "mobx";
 import Home from "./components/authentication/Home";
 import Register from "./components/authentication/Register";
 import Login from "./components/authentication/Login";
-import AddAdmin from "./components/admin/AddAdmin"
+import AddAdmin from "./components/admin/AddAdmin";
 
 import NestedList from "./components/NestedList";
 
@@ -42,17 +42,16 @@ const theme = createMuiTheme({
   },
 });
 
-const App = inject("studentStore")(
+const App = inject("studentstore")(
   observer((props) => {
-
     useEffect(() => {
-      props.studentStore.checkUserLoggedIn();
+      props.studentstore.checkUserLoggedIn();
     });
 
     return (
       <ThemeProvider theme={theme}>
         {/* to overide and change the orignal colors and thems in other comps */}
-        {props.studentStore.isLoggedIn ? <Student /> : <Authentication />}
+        {props.studentstore.isLoggedIn ? <Student /> : <Authentication />}
       </ThemeProvider>
     );
   })

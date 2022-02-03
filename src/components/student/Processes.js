@@ -69,11 +69,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Processes = inject("studentStore")(
+const Processes = inject("studentstore")(
   observer((props) => {
     /************************************************ */
     useEffect(async () => {
-      // await props.studentStore.addJobsFromDB();
+      // await props.studentstore.addJobsFromDB();
     }, []);
     /************************************************ */
     const classes = useStyles();
@@ -144,7 +144,7 @@ const Processes = inject("studentStore")(
               </TableRow>
             </TableHead>
             <TableBody>
-              {props.studentStore.StudentJobs.slice(
+              {props.studentstore.StudentJobs.slice(
                 page * rowsPerPage,
                 page * rowsPerPage + rowsPerPage
               ).map((row, index) => (
@@ -210,7 +210,7 @@ const Processes = inject("studentStore")(
                       <Button
                         variant="text"
                         onClick={() => {
-                          props.studentStore.edditStatusForStudent(
+                          props.studentstore.edditStatusForStudent(
                             row._id,
                             status
                           );
@@ -238,7 +238,7 @@ const Processes = inject("studentStore")(
           className={classes.TablePagination}
           rowsPerPageOptions={[5, 10]}
           component="div"
-          count={props.studentStore.StudentJobs.length}
+          count={props.studentstore.StudentJobs.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onChangePage={handleChangePage}

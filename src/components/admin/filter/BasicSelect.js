@@ -10,8 +10,8 @@ import { observe } from "mobx";
 import { toJS } from "mobx";
 /////////////////////////////
 const BasicSelect = inject(
-  "adminStore",
-  "studentStore"
+  "adminstore",
+  "studentstore"
 )(
   observer((props) => {
     const [menuItem, setMenuItem] = React.useState("");
@@ -22,11 +22,11 @@ const BasicSelect = inject(
 
       if (props.selectBy === "Cohort") {
         console.log(props.selectBy);
-        props.adminStore.sortPerCohortName(e);
+        props.adminstore.sortPerCohortName(e);
       }
       if (props.selectBy === "Status") {
         // console.log("Status");
-        props.adminStore.sortByStatus(e);
+        props.adminstore.sortByStatus(e);
       }
     };
 
