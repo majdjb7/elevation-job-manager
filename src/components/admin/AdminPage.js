@@ -27,6 +27,7 @@ import AutocompleteSearch from "./filter/AutocompleteSearch";
 
 import moment from "moment";
 import axios from "axios";
+import { Redirect } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   table: {
@@ -76,6 +77,9 @@ const AdminPage = inject(
   "studentstore"
 )(
   observer((props) => {
+    if (props.studentstore.isAdmin === false) {
+      return <Redirect to="/" />;
+    }
     /************************************************ */
     const history = useHistory();
     useEffect(async () => {
@@ -192,7 +196,7 @@ const AdminPage = inject(
                     <Typography variant="h6">Status</Typography>
                   </TableCell>
                   <TableCell className={classes.tableHeaderCell}>
-                    <Typography variant="h6">show History</Typography>
+                    <Typography variant="h6">Show History</Typography>
                   </TableCell>
                 </TableRow>
               </TableHead>
@@ -258,9 +262,10 @@ const AdminPage = inject(
                         className={classes.status}
                         style={{
                           backgroundColor:
-                            (row.status === "Open" && "green") ||
-                            (row.status === "Pending" && "blue") ||
-                            (row.status === "Rejected" && "red"),
+                          (row.status === "Open" && "blue") ||
+                          (row.status === "Pending" && "orange") ||
+                          (row.status === "Accepted" && "green") ||
+                          (row.status === "Rejected" && "red"),
                         }}
                       >
                         {row.status}

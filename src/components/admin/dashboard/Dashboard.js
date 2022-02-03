@@ -8,8 +8,15 @@ import { TrafficByDevice } from "./TrafficByDevice";
 import { LatestProducts } from "./LatestProducts";
 import { LatestOrders } from "./LatestOrders";
 import Processes from "./processes-table/Processes";
+import { inject, observer } from "mobx-react";
+import { observe } from "mobx";
+import { Redirect } from 'react-router-dom'
 
-const Dashboard = () => {
+const Dashboard = inject("studentstore")(
+  observer((props) => {
+    if (props.studentstore.isAdmin === false) {
+      return <Redirect to="/" />;
+    }
   return (
     <Box
       component="main"
@@ -49,6 +56,6 @@ const Dashboard = () => {
       </Container>
     </Box>
   );
-};
+}));
 
 export default Dashboard;
