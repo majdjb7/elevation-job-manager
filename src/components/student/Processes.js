@@ -73,7 +73,7 @@ const Processes = inject("studentstore")(
   observer((props) => {
     /************************************************ */
     useEffect(async () => {
-      // await props.studentstore.addJobsFromDB();
+      await props.studentstore.addJobsFromDB();
     }, []);
     /************************************************ */
     const classes = useStyles();
