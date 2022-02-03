@@ -29,7 +29,7 @@ export const TrafficByDevice = (props) => {
   };
 
   const options = {
-    animation: false,
+    animation: true,
     cutoutPercentage: 80,
     layout: { padding: 0 },
     legend: {
@@ -55,13 +55,13 @@ export const TrafficByDevice = (props) => {
       title: "Working",
       value: 63,
       icon: LaptopMacIcon,
-      color: "#3F51B5",
+      color: "#4caf50",
     },
     {
       title: "Searching",
       value: 15,
       icon: TabletIcon,
-      color: "#E53935",
+      color: "#3F51B5",
     },
     {
       title: "Inactive",
