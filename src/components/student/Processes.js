@@ -151,14 +151,13 @@ const Processes = inject("studentStore")(
                 <TableRow hover key={index}>
                   <TableCell>
                     <Grid container>
-                      <Grid item lg={2}>
-                        <Avatar
-                          alt={row.companyName}
-                          src="."
-                          className={classes.avatar}
-                        />
-                      </Grid>
-                      <Grid item lg={10}>
+                      <Avatar
+                        alt={row.companyName}
+                        src="."
+                        className={classes.avatar}
+                      />
+
+                      <Grid item lg={8}>
                         <Typography className={classes.name}>
                           {row.companyName}
                         </Typography>

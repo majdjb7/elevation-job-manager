@@ -180,7 +180,7 @@ const Processes = inject(
                             src="."
                             className={classes.avatar}
                           />
-                          <Grid item lg={10}>
+                          <Grid item lg={5}>
                             <Typography
                               className={classes.name}
                               onClick={() => studentPage(row.studentId)}
@@ -202,7 +202,7 @@ const Processes = inject(
                       </TableCell>
                       <TableCell>
                         <Grid container>
-                          <Grid item lg={10}>
+                          <Grid item lg={8}>
                             <Typography className={classes.name}>
                               {row.companyName}
                             </Typography>
