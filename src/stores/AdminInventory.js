@@ -33,7 +33,7 @@ export class AdminInventory {
       acceptedStudentsPercentagePerCohort: observable,
       statsOfJobStatus: observable,
       statsOfJobStatusByCohort: observable,
-      numItems: computed,
+      totalStudents: computed,
       addJobsFromDBToAdmin: action,
       sortPerCohortName: action,
       sortByStatus: action,
@@ -42,7 +42,7 @@ export class AdminInventory {
     });
     this.addJobsFromDBToAdmin();
   }
-  get numItems() {
+  get totalStudents() {
     return this.AdminJobs.length;
   }
 
@@ -202,17 +202,17 @@ export class AdminInventory {
   addJobsFromDBToAdmin = async () => {
     this.allStudents = [];
     this.AdminJobs = [];
-    try{
-    let result = await axios.get(`http://localhost:8888/admin/jobs`);
-    this.allStudents = result.data;
-    }catch(error){
-      console.log("Something wrong") 
+    try {
+      let result = await axios.get(`http://localhost:8888/admin/jobs`);
+      this.allStudents = result.data;
+    } catch (error) {
+      console.log("Something wrong");
     }
-    try{
-    let jobs = await axios.get(`http://localhost:8888/admin/allJobs`);
-    this.AdminJobs = jobs.data;
-    }catch(error){
-      console.log("Something wrong") 
+    try {
+      let jobs = await axios.get(`http://localhost:8888/admin/allJobs`);
+      this.AdminJobs = jobs.data;
+    } catch (error) {
+      console.log("Something wrong");
     }
     //  this.sortAllStudentJobs();
   };

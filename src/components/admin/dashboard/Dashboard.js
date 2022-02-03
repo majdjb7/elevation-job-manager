@@ -1,5 +1,5 @@
 import { Box, Container, Grid } from "@mui/material";
-import { Budget } from "./Budget";
+import TotalStudents from "./TotalStudents";
 import { TotalCustomers } from "./TotalCustomers";
 import { TasksProgress } from "./TasksProgress";
 import { TotalProfit } from "./TotalProfit";
@@ -21,7 +21,7 @@ const Dashboard = () => {
       <Container maxWidth={false}>
         <Grid container spacing={3}>
           <Grid item lg={3} sm={6} xl={3} xs={12}>
-            <Budget />
+            <TotalStudents />
           </Grid>
           <Grid item xl={3} lg={3} sm={6} xs={12}>
             <TotalCustomers />
