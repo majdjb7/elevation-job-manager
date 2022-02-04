@@ -45,13 +45,13 @@ export default function NestedList(props) {
           value={status}
           label="Status"
         >
-          {props.interviews.map((interview) => (
+          {props.interviews.map((interview, i) => (
             <Typography
-              key={props.jobId + "" + interview.id}
+              key={props.jobId + "" + interview.id + i}
               variant="h6"
               className={classes.SelectL}
             >
-              {interview._id}
+              {interview.type}
               {"    "}
               <Moment format="DD/MM/YYYY">{interview.time}</Moment>
               <hr />
