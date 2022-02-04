@@ -1,6 +1,7 @@
 import { observable, action, makeObservable, computed } from "mobx";
 import axios from "axios";
 import { toJS } from "mobx";
+import { requests, getTotalWorkersFromDB } from "../requests";
 
 export class AdminInventory {
   constructor() {
@@ -49,7 +50,10 @@ export class AdminInventory {
   get numOfStudents() {
     return this.allStudents.length;
   }
-
+  getTotalWorkers = async () => {
+    let result = getTotalWorkersFromDB("Cohort 21");
+    console.log(result);
+  };
   sortAllStudentJobs = () => {
     this.allStudents.map((s) => {
       s.jobs.map((j) => {
