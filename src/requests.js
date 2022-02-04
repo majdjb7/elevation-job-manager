@@ -16,5 +16,12 @@ export const getTotalWorkersFromDB = async (cohortName) => {
 
   return result.data;
 };
+export const testing = async () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve("Hello");
+    }, 1000);
+  });
+};
 
 export default requests;

@@ -5,55 +5,58 @@ const Student = require("../models/Student");
 const Interview = require("../models/Interview");
 
 router.get("/allJobs", async (req, res) => {
-    try {
-         Job.find({})
-        .populate({
-            path: 'interviews',
-        }).sort({ mostRecentInterview: -1 })
-        .exec(async function (err, jobs) {
-            let result=[]
-            for(let job of jobs){
-            let student= await Student.findOne({ _id: job.studentId})
-            let studentjob={
-                companyName: job.companyName,
-                role: job.role,
-                location: job.location,
-                description: job.description,
-                status: job.status,
-                whereFindJob: job.whereFindJob, 
-                mostRecentInterview:job.mostRecentInterview, 
-                interviews:job.interviews,
-                studentId:job.studentId,
-                studentName:student.firstName+" "+student.lastName,
-                firstName: student.firstName,
-                lastName:  student.lastName,
-                email:     student.email,
-                cohort:    student.cohort,
-                mobileNo:  student.mobileNo               
-            }
-            result.push(studentjob)
-            }
-            res.send(result)
-    })}catch (error) {
-      res.status(500).send({ error: 'Something failed!' })
-    }
-   
+  try {
+    Job.find({})
+      .populate({
+        path: "interviews",
+      })
+      .sort({ mostRecentInterview: -1 })
+      .exec(async function (err, jobs) {
+        let result = [];
+        for (let job of jobs) {
+          let student = await Student.findOne({ _id: job.studentId });
+          let studentjob = {
+            companyName: job.companyName,
+            role: job.role,
+            location: job.location,
+            description: job.description,
+            status: job.status,
+            whereFindJob: job.whereFindJob,
+            mostRecentInterview: job.mostRecentInterview,
+            interviews: job.interviews,
+            studentId: job.studentId,
+            studentName: student.firstName + " " + student.lastName,
+            firstName: student.firstName,
+            lastName: student.lastName,
+            email: student.email,
+            cohort: student.cohort,
+            mobileNo: student.mobileNo,
+          };
+          result.push(studentjob);
+        }
+        res.send(result);
+      });
+  } catch (error) {
+    res.status(500).send({ error: "Something failed!" });
+  }
 });
 router.get("/jobs", async (req, res) => {
- try {
-        await Student.find({})
-        .populate({
-            path: 'jobs',
-                populate: {
-                    path: 'interviews'
-                } ,
-                options: { sort: { mostRecentInterview: -1 }}
-        }).sort({ mostRecentInterview: -1 })
-        .exec(function (err, studentJobs) {
-            res.send(studentJobs)
-    })}catch (error) {
-      res.status(500).send({ error: 'Something failed!' })
-    }
+  try {
+    await Student.find({})
+      .populate({
+        path: "jobs",
+        populate: {
+          path: "interviews",
+        },
+        options: { sort: { mostRecentInterview: -1 } },
+      })
+      .sort({ mostRecentInterview: -1 })
+      .exec(function (err, studentJobs) {
+        res.send(studentJobs);
+      });
+  } catch (error) {
+    res.status(500).send({ error: "Something failed!" });
+  }
 });
 
 router.get("/students/:name/", async (req, res) => {
@@ -86,16 +89,16 @@ router.get("/cohorts/:cohortName", async (req, res) => {
         },
       })
       .exec(function (err, studentJobs) {
-        res.send(studentJobs);
+        res.send(studentJobs).status(200);
       });
   } catch (error) {
-    res.status(500).send({ error: 'Something failed!' })
+    res.status(400).send({ error: "Something failed!" });
   }
 });
 router.post("/message/send", async (req, res) => {
-  const accountSid = 'AC57dc8be65772dbc89448964560190aab';
-  const authToken = '3cd076257cad63698d98cc307350d9c4';
-  const client = require('twilio')(accountSid, authToken);
+  const accountSid = "AC57dc8be65772dbc89448964560190aab";
+  const authToken = "3cd076257cad63698d98cc307350d9c4";
+  const client = require("twilio")(accountSid, authToken);
 
   client.messages
     .create({
@@ -106,12 +109,11 @@ router.post("/message/send", async (req, res) => {
       If the time or date isn't convenient, please reply stating what times you ARE available for the simulation.
       Reply to: WhatsApp: {admin.num}
                     Email: {admin.email}`,
-      from: 'whatsapp:+14155238886',
-      to: 'whatsapp:+972532282478'
+      from: "whatsapp:+14155238886",
+      to: "whatsapp:+972532282478",
     })
-    .then(message => console.log(message.sid))
+    .then((message) => console.log(message.sid))
     .done();
-
-})
+});
 
 module.exports = router;

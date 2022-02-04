@@ -1,8 +1,8 @@
 import React from "react";
-import { sortPerCohortName } from "../requests";
+import { testing, getTotalWorkersFromDB } from "../requests";
 
-test("properly get student by cohort name", () => {
-  const res = sortPerCohortName("Cohort 22").then(function (result) {
-    expect(result.length).toBe(3);
+test("Testing ", () => {
+  return testing().then(function (result) {
+    expect(result).toBe("Hello");
   });
 });
