@@ -50,10 +50,10 @@ export class AdminInventory {
   get numOfStudents() {
     return this.allStudents.length;
   }
-  getTotalWorkers = async () => {
-    let result = getTotalWorkersFromDB("Cohort 21");
-    console.log(result);
-  };
+  // getTotalWorkers = async () => {
+  //   let result = getTotalWorkersFromDB("Cohort 21");
+  //   console.log(result);
+  // };
   sortAllStudentJobs = () => {
     this.allStudents.map((s) => {
       s.jobs.map((j) => {

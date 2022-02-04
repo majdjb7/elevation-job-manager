@@ -132,7 +132,7 @@ const Processes = inject(
         pathname: "/studentprofile",
       });
     };
-    props.adminstore.getTotalWorkers();
+
     return (
       <div>
         <Card {...props}>
