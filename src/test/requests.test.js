@@ -1,5 +1,5 @@
 import React from "react";
-import { sum, sortPerCohortName } from "../requests";
+import { sortPerCohortName } from "../requests";
 
 test("properly get student by cohort name", () => {
   const res = sortPerCohortName("Cohort 22").then(function (result) {
