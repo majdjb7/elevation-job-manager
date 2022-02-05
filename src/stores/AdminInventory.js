@@ -28,9 +28,6 @@ export class AdminInventory {
     return this.allStudents.length;
   }
 
-  get numOfStudents() {
-    return this.allStudents.length;
-  }
   // getTotalWorkers = async () => {
   //   let result = getTotalWorkersFromDB("Cohort 21");
   //   console.log(result);

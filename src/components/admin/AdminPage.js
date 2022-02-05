@@ -160,7 +160,7 @@ const AdminPage = inject(
         </Grid>
         <Paper sx={{ width: "100%", overflow: "hidden" }}>
           <h1 text-align="center">
-            Total Num of Students: {props.adminstore.numOfStudents}
+            Total Num of Students: {props.adminstore.totalStudents}
           </h1>
           <Grid
             container
