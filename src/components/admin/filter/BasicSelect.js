@@ -22,11 +22,11 @@ const BasicSelect = inject(
 
       if (props.selectBy === "Cohort") {
         console.log(props.selectBy);
-        props.adminstore.sortPerCohortName(e);
+        props.adminstore.filterProcessesByCohortName(e);
       }
       if (props.selectBy === "Status") {
         // console.log("Status");
-        props.adminstore.sortByStatus(e);
+        props.adminstore.filterProcessesByStatus(e);
       }
     };
 

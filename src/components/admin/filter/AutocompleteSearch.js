@@ -29,7 +29,7 @@ const AutocompleteSearch = inject("adminstore")(
     const [inputValue, setInputValue] = React.useState("");
     const studentsNames = toJS(props.adminstore.studentsNames);
     const handelSearch = (event) => {
-      props.adminstore.filterByName(inputValue);
+      props.adminstore.filterProcessesByName(inputValue);
     };
     return (
       <Box sx={{ flexGrow: 1 }}>

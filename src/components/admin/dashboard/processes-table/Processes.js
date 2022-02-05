@@ -85,7 +85,7 @@ const Processes = inject(
     /************************************************ */
     const history = useHistory();
     useEffect(async () => {
-      await props.adminstore.addJobsFromDBToAdmin();
+      await props.adminstore.getAllStudentsProcessesFromDB();
 
       props.adminstore.getStatsOfAcceptedStudents();
       props.adminstore.getStatsOfAcceptedStudents("Cohort 21");
@@ -169,84 +169,85 @@ const Processes = inject(
                 </TableHead>
 
                 <TableBody>
-                  {props.adminstore.AdminJobs.slice(
-                    page * rowsPerPage,
-                    page * rowsPerPage + rowsPerPage
-                  ).map((row, index) => (
-                    <TableRow hover key={index}>
-                      <TableCell>
-                        <Grid container>
-                          <Avatar
-                            alt={row.studentName}
-                            src="."
-                            className={classes.avatar}
-                          />
-                          <Grid item lg={5}>
-                            <Typography
-                              className={classes.name}
-                              onClick={() => studentPage(row.studentId)}
-                            >
-                              {row.studentName}
-                            </Typography>
+                  {props.adminstore.allStudentsProcesses
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((row, index) => (
+                      <TableRow hover key={index}>
+                        <TableCell>
+                          <Grid container>
+                            <Avatar
+                              alt={row.studentName}
+                              src="."
+                              className={classes.avatar}
+                            />
+                            <Grid item lg={5}>
+                              <Typography
+                                className={classes.name}
+                                onClick={() => studentPage(row.studentId)}
+                              >
+                                {row.studentName}
+                              </Typography>
 
-                            <Typography color="textSecondary" variant="body2">
-                              {row.cohort}
-                            </Typography>
-                            <Typography color="textSecondary" variant="body2">
-                              Phone No: {row.mobileNo}
-                            </Typography>
-                            <Typography color="textSecondary" variant="body2">
-                              eMail: {row.email}
-                            </Typography>
+                              <Typography color="textSecondary" variant="body2">
+                                {row.cohort}
+                              </Typography>
+                              <Typography color="textSecondary" variant="body2">
+                                Phone No: {row.mobileNo}
+                              </Typography>
+                              <Typography color="textSecondary" variant="body2">
+                                eMail: {row.email}
+                              </Typography>
+                            </Grid>
                           </Grid>
-                        </Grid>
-                      </TableCell>
-                      <TableCell>
-                        <Grid container>
-                          <Grid item lg={8}>
-                            <Typography className={classes.name}>
-                              {row.companyName}
-                            </Typography>
-                            <Typography color="textSecondary" variant="body2">
-                              {row.location}
-                            </Typography>
-                            <Typography color="textSecondary" variant="body2">
-                              I found it by {row.whereFindJob}
-                            </Typography>
+                        </TableCell>
+                        <TableCell>
+                          <Grid container>
+                            <Grid item lg={8}>
+                              <Typography className={classes.name}>
+                                {row.companyName}
+                              </Typography>
+                              <Typography color="textSecondary" variant="body2">
+                                {row.location}
+                              </Typography>
+                              <Typography color="textSecondary" variant="body2">
+                                I found it by {row.whereFindJob}
+                              </Typography>
+                            </Grid>
                           </Grid>
-                        </Grid>
-                      </TableCell>
+                        </TableCell>
 
-                      <TableCell>
-                        <Typography variant="subtitle2">{row.role}</Typography>
-                        <Typography color="textSecondary" variant="body2">
-                          {row.description}
-                        </Typography>
-                      </TableCell>
+                        <TableCell>
+                          <Typography variant="subtitle2">
+                            {row.role}
+                          </Typography>
+                          <Typography color="textSecondary" variant="body2">
+                            {row.description}
+                          </Typography>
+                        </TableCell>
 
-                      <TableCell>
-                        {getMostRecentInterview(row.interviews)}
-                      </TableCell>
+                        <TableCell>
+                          {getMostRecentInterview(row.interviews)}
+                        </TableCell>
 
-                      <TableCell>
-                        <Typography
-                          className={classes.status}
-                          style={{
-                            backgroundColor:
-                              (row.status === "Open" && "green") ||
-                              (row.status === "Pending" && "blue") ||
-                              (row.status === "Rejected" && "red"),
-                          }}
-                        >
-                          {row.status}
-                        </Typography>
-                      </TableCell>
+                        <TableCell>
+                          <Typography
+                            className={classes.status}
+                            style={{
+                              backgroundColor:
+                                (row.status === "Open" && "green") ||
+                                (row.status === "Pending" && "blue") ||
+                                (row.status === "Rejected" && "red"),
+                            }}
+                          >
+                            {row.status}
+                          </Typography>
+                        </TableCell>
 
-                      <TableCell>
-                        <NestedList interviews={row.interviews} />
-                      </TableCell>
-                    </TableRow>
-                  ))}
+                        <TableCell>
+                          <NestedList interviews={row.interviews} />
+                        </TableCell>
+                      </TableRow>
+                    ))}
                 </TableBody>
               </Table>
             </TableContainer>
@@ -255,7 +256,7 @@ const Processes = inject(
               className={classes.TablePagination}
               rowsPerPageOptions={[5, 10, 15]}
               component="div"
-              count={props.adminstore.AdminJobs.length}
+              count={props.adminstore.allStudentsProcesses.length}
               rowsPerPage={rowsPerPage}
               page={page}
               onChangePage={handleChangePage}

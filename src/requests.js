@@ -3,7 +3,7 @@ import axios from "axios";
 const requests = {
   fetchAdminAPI: `http://localhost:8888/admin`,
 };
-export const sortPerCohortName = async (cohortName) => {
+export const filterProcessesByCohortName = async (cohortName) => {
   let result = await axios.get(
     `${requests.fetchAdminAPI}/cohorts/${cohortName}`
   );
