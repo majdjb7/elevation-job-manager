@@ -73,7 +73,7 @@ const Register = inject("adminstore")(
     }
 
     return (
-        <>
+        
             <ThemeProvider theme={theme}>
                 <Container component="main" maxWidth="xs">
                     <CssBaseline />
@@ -198,7 +198,7 @@ const Register = inject("adminstore")(
                 </Container>
             </ThemeProvider>
 
-            {/* <form onSubmit={submit}>
+            /* <form onSubmit={submit}>
         <h1 className="h3 mb-3 fw-normal">Please register</h1>
         
         <input className="form-control" placeholder="First Name" required
@@ -227,8 +227,8 @@ const Register = inject("adminstore")(
 
         <button className="w-100 btn btn-lg btn-primary" type="submit">Submit</button>
 
-    </form> */}
-        </>
+    </form> */
+        
     )
 }));
 

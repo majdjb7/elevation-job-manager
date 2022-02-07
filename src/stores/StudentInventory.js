@@ -28,6 +28,7 @@ export class StudentInventory {
       logout: action,
       addJobsFromDB: action,
       getStudentData: action,
+      deleteProcesses:action,
     });
     this.addJobsFromDB();
   }
@@ -104,4 +105,11 @@ export class StudentInventory {
     );
     this.addJobsFromDB();
   };
+   deleteProcesses = async function (id) {
+    const res = await axios.delete(
+      `http://localhost:8888/student/jobs/${id}`,
+
+    );
+    this.addJobsFromDB();
+  }
 }
