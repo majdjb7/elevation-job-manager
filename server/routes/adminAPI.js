@@ -29,7 +29,33 @@ const generateProcesses = async (jobs) => {
   }
   return result;
 };
+//Statistics: Where the students found their job
 
+router.get("/where-students-found-job", async (req, res) => {
+  const whereFindJob = {
+    LinkedIn: 0,
+    Facebook: 0,
+    "Company website": 0,
+    Friend: 0,
+  };
+  try {
+    Job.find({})
+      .populate({
+        path: "interviews",
+      })
+      .sort({ mostRecentInterview: -1 })
+      .exec(async function (err, jobs) {
+        let jobsProcesses = await generateProcesses(jobs);
+
+        jobsProcesses.forEach((j) => {
+          whereFindJob[j.whereFindJob]++;
+        });
+        res.send(whereFindJob);
+      });
+  } catch (error) {
+    res.status(500).send({ error: "Something failed!" });
+  }
+});
 router.get("/tasks-progress", async (req, res) => {
   try {
     Job.find({})
@@ -39,7 +65,7 @@ router.get("/tasks-progress", async (req, res) => {
       .sort({ mostRecentInterview: -1 })
       .exec(async function (err, jobs) {
         let jobsProcesses = await generateProcesses(jobs);
-        console.log(typeof jobsProcesses);
+
         let counterTasksProgress = 0;
         let studentsInPrrogress = {};
         jobsProcesses.forEach((j) => {
