@@ -1,12 +1,11 @@
 import { Box, Container, Grid } from "@mui/material";
 import TotalStudents from "./TotalStudents";
-import { TotalCustomers } from "./TotalCustomers";
+import { TotalWorkers } from "./TotalWorkers";
 import { TasksProgress } from "./TasksProgress";
-import { TotalProfit } from "./TotalProfit";
-import { Sales } from "./Sales";
-import { TrafficByDevice } from "./TrafficByDevice";
-import { LatestProducts } from "./LatestProducts";
-import { LatestOrders } from "./LatestOrders";
+import { TotalCohorts } from "./TotalCohorts";
+import { LatestCohorts } from "./LatestCohorts";
+import { JobStatusChart } from "./JobStatusChart";
+
 import Processes from "./processes-table/Processes";
 
 const Dashboard = () => {
@@ -24,25 +23,22 @@ const Dashboard = () => {
             <TotalStudents />
           </Grid>
           <Grid item xl={3} lg={3} sm={6} xs={12}>
-            <TotalCustomers />
+            <TotalWorkers />
           </Grid>
           <Grid item xl={3} lg={3} sm={6} xs={12}>
             <TasksProgress />
           </Grid>
           <Grid item xl={3} lg={3} sm={6} xs={12}>
-            <TotalProfit sx={{ height: "100%" }} />
+            <TotalCohorts sx={{ height: "100%" }} />
           </Grid>
           <Grid item lg={8} md={12} xl={9} xs={12}>
-            <Sales />
+            <LatestCohorts />
           </Grid>
           <Grid item lg={4} md={12} xl={3} xs={12}>
-            <TrafficByDevice sx={{ height: "100%" }} />
+            <JobStatusChart sx={{ height: "100%" }} />
           </Grid>
-          {/* <Grid item lg={4} md={6} xl={3} xs={12}>
-            <LatestProducts sx={{ height: "100%" }} />
-          </Grid> */}
+
           <Grid item lg={12} md={12} xl={12} xs={12}>
-            {/* <LatestOrders /> */}
             <Processes />
           </Grid>
         </Grid>

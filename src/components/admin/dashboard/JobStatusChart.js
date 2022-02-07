@@ -12,7 +12,7 @@ import LaptopMacIcon from "@mui/icons-material/LaptopMac";
 import PhoneIcon from "@mui/icons-material/Phone";
 import TabletIcon from "@mui/icons-material/Tablet";
 
-export const TrafficByDevice = (props) => {
+export const JobStatusChart = (props) => {
   const theme = useTheme();
 
   const data = {

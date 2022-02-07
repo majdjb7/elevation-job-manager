@@ -7,9 +7,9 @@ export class StudentInventory {
     this.StudentJobs = [];
     this.studentData = {};
     this.studentProfileJobs = [];
-    this.firstName = '';
+    this.firstName = "";
     this.isLoggedIn = false;
-    this.studentID = '';
+    this.studentID = "";
     this.isAdmin = false;
 
     makeObservable(this, {
@@ -27,8 +27,7 @@ export class StudentInventory {
       setStudentID: action,
       logout: action,
       addJobsFromDB: action,
-      getStudentData: action
-
+      getStudentData: action,
     });
     this.addJobsFromDB();
   }
@@ -37,25 +36,29 @@ export class StudentInventory {
   }
   addJobsFromDB = async () => {
     try {
-      if(this.isAdmin == false) {
-        let result = await axios.get(`http://localhost:8888/student/jobs/${this.studentID}`);
+      if (this.isAdmin == false) {
+        let result = await axios.get(
+          `http://localhost:8888/student/jobs/${this.studentID}`
+        );
         this.StudentJobs = result.data;
       }
     } catch (error) {
-      console.log("Something wrong")
+      console.log("Something wrong");
     }
   };
 
   setUserType = (type) => {
-    this.isAdmin = type
-  }
+    this.isAdmin = type;
+  };
 
   getStudentData = async (id) => {
-    const studentData = await axios.get(`http://localhost:8888/student/data/${id}`);
-    this.studentData = studentData.data
+    const studentData = await axios.get(
+      `http://localhost:8888/student/data/${id}`
+    );
+    this.studentData = studentData.data;
     let result = await axios.get(`http://localhost:8888/student/jobs/${id}`);
     this.StudentJobs = result.data;
-  }
+  };
 
   setLogin = () => {
     this.isLoggedIn = true;
@@ -63,9 +66,8 @@ export class StudentInventory {
 
   setStudentID = (id) => {
     this.studentID = id;
-    console.log(this.studentID)
-  }
-
+    console.log(this.studentID);
+  };
 
   checkUserLoggedIn = async () => {
     // if(this.isLoggedIn == true) {
@@ -76,12 +78,12 @@ export class StudentInventory {
     const content = await response.json();
     this.firstName = content.firstName;
     this.studentID = content._id;
-    if(response.status != 401) {
-      this.setLogin()
+    if (response.status != 401) {
+      this.setLogin();
     }
-    console.log(this.studentID)
-  // }
-  }
+
+    // }
+  };
 
   logout = async () => {
     await fetch("http://localhost:8888/auth/logout", {
@@ -90,10 +92,10 @@ export class StudentInventory {
       credentials: "include",
     });
 
-    this.firstName = '';
+    this.firstName = "";
     this.isLoggedIn = false;
-    this.studentID = '';
-  }
+    this.studentID = "";
+  };
 
   edditStatusForStudent = async (jobId, status) => {
     const res = await axios.post(

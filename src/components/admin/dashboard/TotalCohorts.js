@@ -1,7 +1,7 @@
 import { Avatar, Card, CardContent, Grid, Typography } from "@mui/material";
 import PeopleIcon from "@mui/icons-material/PeopleOutlined";
 
-export const TotalProfit = (props) => (
+export const TotalCohorts = (props) => (
   <Card {...props}>
     <CardContent>
       <Grid container spacing={3} sx={{ justifyContent: "space-between" }}>

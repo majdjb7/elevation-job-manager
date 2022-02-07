@@ -1,26 +1,27 @@
 import { observable, action, makeObservable, computed } from "mobx";
 import axios from "axios";
 import { toJS } from "mobx";
-import { requests, getTotalWorkersFromDB } from "../requests";
-
+import { requests, getAllStudentsProcesses } from "../requests";
+import { NumOfWorkers } from "./filters";
 export class AdminInventory {
   constructor() {
     this.allStudentsProcesses = [];
     this.allStudents = [];
     this.studentsNames = [];
     this.showCurrCohort = "All";
-
+    this.totalWorkers = 0;
     makeObservable(this, {
       allStudentsProcesses: observable,
       studentsNames: observable,
       allStudents: observable,
-
+      totalWorkers: observable,
       totalStudents: computed,
       getAllStudentsProcessesFromDB: action,
       filterProcessesByCohortName: action,
       filterProcessesByStatus: action,
       getAllStudentsNames: action,
       filterProcessesByName: action,
+      getTotalWorkers: action,
     });
     this.getAllStudentsProcessesFromDB();
   }
@@ -28,10 +29,12 @@ export class AdminInventory {
     return this.allStudents.length;
   }
 
-  // getTotalWorkers = async () => {
-  //   let result = getTotalWorkersFromDB("Cohort 21");
-  //   console.log(result);
-  // };
+  getTotalWorkers = async () => {
+    let allStudentsProcesses = await getAllStudentsProcesses();
+
+    this.totalWorkers = NumOfWorkers(allStudentsProcesses);
+    return this.totalWorkers;
+  };
   generateAllStudentsProcesses = () => {
     this.allStudents.map((s) => {
       s.jobs.map((j) => {

@@ -13,7 +13,7 @@ import {
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 
-export const Sales = (props) => {
+export const LatestCohorts = (props) => {
   const theme = useTheme();
 
   const data = {
@@ -102,12 +102,7 @@ export const Sales = (props) => {
   return (
     <Card {...props}>
       <CardHeader
-        action={
-          // <Button endIcon={<ArrowDropDownIcon fontSize="small" />} size="small">
-          //   Last 7 Cohorts
-          // </Button>
-          <Button size="small">Last 7 Cohorts</Button>
-        }
+        action={<Button size="small">Last 7 Cohorts</Button>}
         title="Latest Cohorts"
       />
       <Divider />
@@ -128,15 +123,7 @@ export const Sales = (props) => {
           justifyContent: "flex-end",
           p: 2,
         }}
-      >
-        <Button
-          color="primary"
-          endIcon={<ArrowRightIcon fontSize="small" />}
-          size="small"
-        >
-          Overview
-        </Button>
-      </Box>
+      ></Box>
     </Card>
   );
 };

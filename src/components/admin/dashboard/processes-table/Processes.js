@@ -87,10 +87,6 @@ const Processes = inject(
     useEffect(async () => {
       await props.adminstore.getAllStudentsProcessesFromDB();
 
-      props.adminstore.getStatsOfAcceptedStudents();
-      props.adminstore.getStatsOfAcceptedStudents("Cohort 21");
-      props.adminstore.getStatusStats();
-      props.adminstore.getStatusStatsByCohort();
       props.adminstore.getAllStudentsNames();
     }, []);
     /************************************************ */
