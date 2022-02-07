@@ -25,7 +25,7 @@ export default function Student() {
       <Router>
         <Layout>
           <Switch>
-            <Route exact path="/processes">
+            <Route exact path="/">
               <Processes />
             </Route>
 
@@ -39,13 +39,13 @@ export default function Student() {
               <StudentProfile />
             </Route>
             {/* /* DELETE LATER: when admin login is complete */}
-            <Route exact path="/dashboard">
+            {/* <Route exact path="/dashboard">
               <Dashboard />
             </Route>
 
             <Route exact path="/addAdmin">
               <AddAdmin />
-            </Route>
+            </Route> */}
           </Switch>
         </Layout>
       </Router>
