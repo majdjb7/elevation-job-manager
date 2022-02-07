@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Redirect } from 'react-router-dom'
+import { Redirect } from "react-router-dom";
 import {
   Table,
   TableBody,
@@ -72,9 +72,9 @@ const useStyles = makeStyles((theme) => ({
 
 const Processes = inject("studentstore")(
   observer((props) => {
-    if (props.studentstore.isAdmin === true) {
-      return <Redirect to="/" />;
-  }
+    //   if (props.studentstore.isAdmin === true) {
+    //     return <Redirect to="/" />;
+    // }
     /************************************************ */
     useEffect(async () => {
       await props.studentstore.addJobsFromDB();

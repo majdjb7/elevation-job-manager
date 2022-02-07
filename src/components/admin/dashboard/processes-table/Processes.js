@@ -84,9 +84,9 @@ const Processes = inject(
 )(
   observer((props) => {
     /************************************************ */
-    if (props.studentstore.isAdmin === false) {
-      return <Redirect to="/" />;
-    }
+    // if (props.studentstore.isAdmin === false) {
+    //   return <Redirect to="/" />;
+    // }
     const history = useHistory();
     useEffect(async () => {
       await props.adminstore.getAllStudentsProcessesFromDB();
