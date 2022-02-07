@@ -29,7 +29,55 @@ const generateProcesses = async (jobs) => {
   }
   return result;
 };
-//Statistics: Where the students found their job
+
+router.get("/inactive-students", async (req, res) => {
+  try {
+    Job.find({})
+      .populate({
+        path: "interviews",
+      })
+      .sort({ mostRecentInterview: -1 })
+      .exec(async function (err, jobs) {
+        let jobsProcesses = await generateProcesses(jobs);
+
+        let counterActiveStudents = 0;
+        let activeStudents = {};
+        jobsProcesses.forEach((j) => {
+          if (
+            j.status === "Pending" ||
+            j.status === "Open" ||
+            j.status === "Accepted"
+          ) {
+            if (!activeStudents[j.studentId]) {
+              activeStudents[j.studentId] = "i'm in progress";
+              counterActiveStudents++;
+            }
+          }
+        });
+        Student.countDocuments({}, function (err, count) {
+          res.send({ inactiveStudents: count - counterActiveStudents });
+        });
+      });
+  } catch (error) {
+    res.status(500).send({ error: "Something failed!" });
+  }
+});
+router.get("/cohorts", async (req, res) => {
+  const cohorts = {};
+  try {
+    let students = await Student.find({});
+    students.forEach((student) => {
+      if (cohorts[student.cohort]) {
+        cohorts[student.cohort]++;
+      } else {
+        cohorts[student.cohort] = 1;
+      }
+    });
+    res.send(cohorts);
+  } catch (error) {
+    res.status(500).send({ error: "Something failed!" });
+  }
+});
 
 router.get("/where-students-found-job", async (req, res) => {
   const whereFindJob = {
