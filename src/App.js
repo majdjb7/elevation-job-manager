@@ -3,8 +3,8 @@ import { createMuiTheme, ThemeProvider } from "@material-ui/core";
 import { purple } from "@material-ui/core/colors";
 
 import Processes from "./components/student/Processes";
-import AddProcess from "./components/AddProcess";
-import AddInterview from "./components/AddInterview";
+import AddProcess from "./components/student/AddProcess";
+import AddInterview from "./components/student/AddInterview";
 import StudentProfile from "./components/student/studendProfile";
 
 import Dashboard from "./components/admin/dashboard/Dashboard";
@@ -18,7 +18,7 @@ import Register from "./components/authentication/Register";
 import Login from "./components/authentication/Login";
 import AddAdmin from "./components/admin/AddAdmin";
 
-import NestedList from "./components/NestedList";
+import NestedList from "./components/student/NestedList";
 
 //////////
 import Student from "./components/student/Student";

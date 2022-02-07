@@ -3,8 +3,8 @@ import { createMuiTheme, ThemeProvider } from "@material-ui/core";
 import { purple } from "@material-ui/core/colors";
 import Layout from "../Layout";
 import Processes from "./Processes";
-import AddProcess from "../AddProcess";
-import AddInterview from "../AddInterview";
+import AddProcess from "../student/AddProcess";
+import AddInterview from "../student/AddInterview";
 
 import Dashboard from "../admin/dashboard/Dashboard";
 
