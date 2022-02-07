@@ -4,6 +4,68 @@ const Job = require("../models/Job");
 const Student = require("../models/Student");
 const Interview = require("../models/Interview");
 
+const generateProcesses = async (jobs) => {
+  let result = [];
+  for (let job of jobs) {
+    let student = await Student.findOne({ _id: job.studentId });
+    let studentjob = {
+      companyName: job.companyName,
+      role: job.role,
+      location: job.location,
+      description: job.description,
+      status: job.status,
+      whereFindJob: job.whereFindJob,
+      mostRecentInterview: job.mostRecentInterview,
+      interviews: job.interviews,
+      studentId: job.studentId,
+      studentName: student.firstName + " " + student.lastName,
+      firstName: student.firstName,
+      lastName: student.lastName,
+      email: student.email,
+      cohort: student.cohort,
+      mobileNo: student.mobileNo,
+    };
+    result.push(studentjob);
+  }
+  return result;
+};
+
+router.get("/tasks-progress", async (req, res) => {
+  try {
+    Job.find({})
+      .populate({
+        path: "interviews",
+      })
+      .sort({ mostRecentInterview: -1 })
+      .exec(async function (err, jobs) {
+        let jobsProcesses = await generateProcesses(jobs);
+        console.log(typeof jobsProcesses);
+        let counterTasksProgress = 0;
+        let studentsInPrrogress = {};
+        jobsProcesses.forEach((j) => {
+          if (j.status === "Pending" || j.status === "Open") {
+            if (!studentsInPrrogress[j.studentId]) {
+              studentsInPrrogress[j.studentId] = "i'm in progress";
+              counterTasksProgress++;
+            }
+          }
+        });
+        res.send({ counterTasksProgress });
+      });
+  } catch (error) {
+    res.status(500).send({ error: "Something failed!" });
+  }
+});
+
+router.get("/totlal-students", async (req, res) => {
+  try {
+    const students = await Student.find({});
+    res.status(200).send({ totlalStudents: students.length });
+  } catch (err) {
+    res.status(500).send({ error: "Something failed!" });
+  }
+});
+
 router.get("/allJobs", async (req, res) => {
   try {
     Job.find({})
@@ -12,28 +74,7 @@ router.get("/allJobs", async (req, res) => {
       })
       .sort({ mostRecentInterview: -1 })
       .exec(async function (err, jobs) {
-        let result = [];
-        for (let job of jobs) {
-          let student = await Student.findOne({ _id: job.studentId });
-          let studentjob = {
-            companyName: job.companyName,
-            role: job.role,
-            location: job.location,
-            description: job.description,
-            status: job.status,
-            whereFindJob: job.whereFindJob,
-            mostRecentInterview: job.mostRecentInterview,
-            interviews: job.interviews,
-            studentId: job.studentId,
-            studentName: student.firstName + " " + student.lastName,
-            firstName: student.firstName,
-            lastName: student.lastName,
-            email: student.email,
-            cohort: student.cohort,
-            mobileNo: student.mobileNo,
-          };
-          result.push(studentjob);
-        }
+        let result = await generateProcesses(jobs);
         res.send(result);
       });
   } catch (error) {
