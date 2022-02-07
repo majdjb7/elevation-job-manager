@@ -104,7 +104,6 @@ export class AdminInventory {
   };
 
   getCohorts = async () => {
-
     try {
       let result = await axios.get(`http://localhost:8888/admin/cohorts`);
       this.cohorts = result.data;
@@ -112,6 +111,36 @@ export class AdminInventory {
     catch (error) {
       console.log("Something wrong with getting cohorts")
     }
-    console.log(this.cohorts)
   }
+
+  addCohort = async (cohort) => {
+    try {
+      await fetch("http://localhost:8888/admin/cohorts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          cohort,
+        }),
+      });
+    }
+    catch (error) {
+      console.log("Something wrong with getting cohorts")
+    }
+  }
+
+  deleteCohort = async (cohort) => {
+    try {
+      await fetch("http://localhost:8888/admin/cohorts", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          cohort,
+        }),
+      });
+    }
+    catch (error) {
+      console.log("Something wrong with getting cohorts")
+    }
+  }
+
 }

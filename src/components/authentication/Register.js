@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom'
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -13,6 +13,13 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormHelperText from '@mui/material/FormHelperText';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import { inject, observer } from "mobx-react";
+import { toJS } from "mobx";
 
 function Copyright(props) {
     return (
@@ -29,7 +36,8 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function Register() {
+const Register = inject("adminstore")(
+    observer((props) => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
@@ -37,6 +45,10 @@ export default function Register() {
     const [cohort, setCohort] = useState('');
     const [password, setPassword] = useState('');
     const [redirect, setRedirect] = useState(false);
+
+    useEffect(() => {
+      props.adminstore.getCohorts();
+    });
 
     const submit = async (e) => {
         e.preventDefault();
@@ -139,14 +151,30 @@ export default function Register() {
                                     />
                                 </Grid>
                                 <Grid item xs={12}>
-                                    <TextField
+                                <FormControl sx={{ m: 1, minWidth: 120 }}>
+                                    <InputLabel id="demo-simple-select-helper-label">Cohort</InputLabel>
+                                    <Select
+                                    labelId="demo-simple-select-helper-label"
+                                    id="demo-simple-select-helper"
+                                    value={cohort}
+                                    label="Cohort"
+                                    onChange={e => setCohort(e.target.value)}
+                                    >
+                                    <MenuItem value="">
+                                        <em>None</em>
+                                    </MenuItem>
+                                    {props.adminstore.cohorts.map((c, i) => <MenuItem value={c.name}>{c.name}</MenuItem>)}
+                                    </Select>
+                                    <FormHelperText>Choose one of the aboce cohorts</FormHelperText>
+                                </FormControl>
+                                    {/* <TextField
                                         required
                                         fullWidth
                                         id="cohort"
                                         label="Cohort"
                                         name="cohort"
                                         onChange={e => setCohort(e.target.value)}
-                                    />
+                                    /> */}
                                 </Grid>
                             </Grid>
                             <Button
@@ -202,4 +230,6 @@ export default function Register() {
     </form> */}
         </>
     )
-}
+}));
+
+export default Register;

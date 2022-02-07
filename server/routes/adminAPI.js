@@ -119,7 +119,7 @@ router.post("/message/send", async (req, res) => {
 
 router.get("/cohorts", async (req, res) => {
   try {
-    Cohort.find({}, {name:1, _id:0})
+    Cohort.find({}, {name:1, numOfStudents:1, _id:0})
     .exec(function (err, cohorts) {
       res.send(cohorts);
     });
@@ -130,6 +130,7 @@ router.get("/cohorts", async (req, res) => {
 
 router.post("/cohorts", async (req, res) => {
   try {
+    console.log(req.body.cohort)
     if (req.body.cohort) {
       let cohort = new Cohort({
         name: req.body.cohort,
@@ -148,8 +149,7 @@ router.post("/cohorts", async (req, res) => {
 
 router.delete("/cohorts", async (req, res) => {
   try {
-    if (req.body.cohort) {
-      
+    if (req.body.cohort) {      
       Cohort.findOneAndDelete({name: req.body.cohort}, function(err, cohort) {
         res.send(cohort)
     })

@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken')
 const User = require("../models/User")
 const Student = require("../models/Student")
 const Admin = require("../models/Admin")
+const Cohort = require("../models/Cohort")
 
 router.post('/register', async (req, res) => {
     const salt = await bcrypt.genSalt(10)
@@ -19,9 +20,18 @@ router.post('/register', async (req, res) => {
         cohort: req.body.cohort,
         password: hashedPassword,
     })
+    
+    // Cohort.findOneAndUpdate({name: req.body.cohort}, { $inc: {'numOfStudents': 1 } }, {new: true })
+
+    Cohort.findOneAndUpdate({name: req.body.cohort}, { $inc: {'numOfStudents': 1 } }, {new: true }, function(err, response) {
+        if (err) {
+        console.log(err);
+       }
+    })
+       
 
     const result = await student.save()
-
+ 
     const {password, ...data} = await result.toJSON()
 
     res.send(data)

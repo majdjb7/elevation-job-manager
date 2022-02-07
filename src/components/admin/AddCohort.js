@@ -8,34 +8,33 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
-import Checkbox from '@mui/material/Checkbox';
 import Avatar from '@mui/material/Avatar';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 
 const AddCohort = inject("adminstore")(
   observer((props) => {
-    const [checked, setChecked] = React.useState([1]);
 
     function handleDelete(cohortName) {
-      // cohortName.preventDefault();
-      alert(cohortName);
+      props.adminstore.deleteCohort(cohortName)
     }
     
     const [cohortName, setCohortName] = useState("");
-    const [redirect, setRedirect] = useState(false);
+    // const [redirect, setRedirect] = useState(false);
     props.adminstore.getCohorts();
-    console.log(toJS(props.adminstore.cohorts))
+
     const submit = async (e) => {
       e.preventDefault();
-
-      setRedirect(true);
+      props.adminstore.addCohort(cohortName)
+      setCohortName("")
+      // setRedirect(true);
     };
 
-    if (redirect) {
-      return <Redirect to="/" />;
-    }
+    // if (redirect) {
+    //   return <Redirect to="/" />;
+    // }
 
+    
     return (
       <div>
         <List dense sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>

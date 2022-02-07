@@ -7,8 +7,9 @@ const cohortSchema = new Schema({
         unique: true,
         required: true
     },
-    numOfSudents: {
+    numOfStudents: {
         type: Number,
+        default: 0
     }
 })
 
