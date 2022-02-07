@@ -8,11 +8,13 @@ export class AdminInventory {
     this.allStudentsProcesses = [];
     this.allStudents = [];
     this.studentsNames = [];
+    this.cohorts = [];
     this.showCurrCohort = "All";
     this.totalWorkers = 0;
     makeObservable(this, {
       allStudentsProcesses: observable,
       studentsNames: observable,
+      cohorts: observable,
       allStudents: observable,
       totalWorkers: observable,
       totalStudents: computed,
@@ -100,4 +102,16 @@ export class AdminInventory {
       console.log("Something wrong");
     }
   };
+
+  getCohorts = async () => {
+
+    try {
+      let result = await axios.get(`http://localhost:8888/admin/cohorts`);
+      this.cohorts = result.data;
+    }
+    catch (error) {
+      console.log("Something wrong with getting cohorts")
+    }
+    console.log(this.cohorts)
+  }
 }

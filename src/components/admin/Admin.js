@@ -3,6 +3,7 @@ import { createMuiTheme, ThemeProvider } from "@material-ui/core";
 import { purple } from "@material-ui/core/colors";
 import Layout from "../Layout";
 import AddAdmin from "./AddAdmin";
+import AddCohort from "./AddCohort";
 import Dashboard from "./dashboard/Dashboard";
 import StudentProfile from "../student/studendProfile";
 
@@ -24,6 +25,9 @@ export default function Admin() {
 
             <Route exact path="/addAdmin">
               <AddAdmin />
+            </Route>
+            <Route exact path="/addCohort">
+              <AddCohort />
             </Route>
             <Route exact path="/studentprofile">
               <StudentProfile />

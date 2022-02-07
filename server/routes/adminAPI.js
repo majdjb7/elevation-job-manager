@@ -3,6 +3,7 @@ const router = express.Router();
 const Job = require("../models/Job");
 const Student = require("../models/Student");
 const Interview = require("../models/Interview");
+const Cohort = require("../models/Cohort");
 
 router.get("/allJobs", async (req, res) => {
   try {
@@ -115,5 +116,49 @@ router.post("/message/send", async (req, res) => {
     .then((message) => console.log(message.sid))
     .done();
 });
+
+router.get("/cohorts", async (req, res) => {
+  try {
+    Cohort.find({}, {name:1, _id:0})
+    .exec(function (err, cohorts) {
+      res.send(cohorts);
+    });
+  } catch (error) {
+    res.status(500).send({ error: 'Something failed!' })
+  }
+})
+
+router.post("/cohorts", async (req, res) => {
+  try {
+    if (req.body.cohort) {
+      let cohort = new Cohort({
+        name: req.body.cohort,
+
+      });
+     
+      await cohort.save();
+      res.send(cohort);
+    } else {
+      res.send("Input is required")
+    }
+  } catch (error) {
+    res.status(500).send({ error: 'Something failed!' })
+  }
+})
+
+router.delete("/cohorts", async (req, res) => {
+  try {
+    if (req.body.cohort) {
+      
+      Cohort.findOneAndDelete({name: req.body.cohort}, function(err, cohort) {
+        res.send(cohort)
+    })
+    } else {
+      res.send("Input is required")
+    }
+  } catch (error) {
+    res.status(500).send({ error: 'Something failed!' })
+  }
+})
 
 module.exports = router;
