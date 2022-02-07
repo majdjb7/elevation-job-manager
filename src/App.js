@@ -44,9 +44,9 @@ const theme = createMuiTheme({
 
 const App = inject("studentstore")(
   observer((props) => {
-    useEffect(() => {
-      props.studentstore.checkUserLoggedIn();
-    });
+    // useEffect(() => {
+    //   props.studentstore.checkUserLoggedIn();
+    // });
 
     return (
       <ThemeProvider theme={theme}>
