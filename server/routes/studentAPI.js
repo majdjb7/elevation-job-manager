@@ -53,6 +53,18 @@ router.post("/jobs/:id", async (req, res) => {
     res.status(500).send({ error: 'Something failed!' })
   }
 });
+
+router.delete("/jobs/:id", async (req, res) => {
+  let id = req.params.id;
+  Job.findOneAndDelete({ _id: id }, function (err, docs) {
+    if (err) {
+      res.status(500).send({ error: 'Something failed!' })
+    }
+    else {
+      res.send("ok")
+    }
+  })
+})
 router.post("/jobs/:id/interviews", async (req, res) => {
   let id = req.params.id;
   try {
@@ -81,7 +93,7 @@ router.post("/jobs/status/:jobId/interviews", async (req, res) => {
   if (req.body.status == "Accepted") {
     const job = await Job.findOne({ _id: id })
     const student = await Student.findOne({ _id: job.studentId })
-    let mail =student.firstName+ " " + student.lastName+" has passed interview at "+job.companyName
+    let mail = student.firstName + " " + student.lastName + " has passed interview at " + job.companyName
     let mails = ""
     const admins = await Admin.find({})
     for (let admin of admins) {

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Redirect } from "react-router-dom";
+import DeleteIcon from '@mui/icons-material/Delete';
+import axios from "axios";
 import {
   Table,
   TableBody,
@@ -114,7 +116,6 @@ const Processes = inject("studentstore")(
         interviewType + ": " + moment(maxDate).format(format1);
       return mostRelevantInterview;
     };
-
     return (
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
         <TableContainer component={Paper} className={classes.tableContainer}>
@@ -141,6 +142,9 @@ const Processes = inject("studentstore")(
                 </TableCell>
                 <TableCell className={classes.tableHeaderCell}>
                   <Typography variant="h6">Save</Typography>
+                </TableCell>
+                <TableCell className={classes.tableHeaderCell}>
+                  <Typography variant="h6">Delete</Typography>
                 </TableCell>
               </TableRow>
             </TableHead>
@@ -229,6 +233,12 @@ const Processes = inject("studentstore")(
                         <AddCircleOutline />
                       </Button>
                     )}
+
+                  </TableCell>
+                  <TableCell>
+                    <IconButton aria-label="delete" onClick={() => props.studentstore.deleteProcesses(row._id)}>
+                      <DeleteIcon />
+                    </IconButton>
                   </TableCell>
                 </TableRow>
               ))}
