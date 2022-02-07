@@ -28,6 +28,7 @@ import NestedList from "../../../student/NestedList";
 import BasicSelect from "../../filter/BasicSelect";
 import AutocompleteSearch from "../../filter/AutocompleteSearch";
 import Filter from "./Filter";
+import { Redirect } from "react-router-dom";
 import moment from "moment";
 ///////////////////////////////////
 import { format } from "date-fns";
@@ -83,6 +84,9 @@ const Processes = inject(
 )(
   observer((props) => {
     /************************************************ */
+    if (props.studentstore.isAdmin === false) {
+      return <Redirect to="/" />;
+    }
     const history = useHistory();
     useEffect(async () => {
       await props.adminstore.getAllStudentsProcessesFromDB();
@@ -159,7 +163,7 @@ const Processes = inject(
                       <Typography variant="h6">Status</Typography>
                     </TableCell>
                     <TableCell className={classes.tableHeaderCell}>
-                      <Typography variant="h6">show History</Typography>
+                      <Typography variant="h6">Show History</Typography>
                     </TableCell>
                   </TableRow>
                 </TableHead>
@@ -230,8 +234,9 @@ const Processes = inject(
                             className={classes.status}
                             style={{
                               backgroundColor:
-                                (row.status === "Open" && "green") ||
-                                (row.status === "Pending" && "blue") ||
+                                (row.status === "Open" && "blue") ||
+                                (row.status === "Pending" && "orange") ||
+                                (row.status === "Accepted" && "green") ||
                                 (row.status === "Rejected" && "red"),
                             }}
                           >
