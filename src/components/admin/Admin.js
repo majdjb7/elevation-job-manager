@@ -5,7 +5,7 @@ import Layout from "../Layout";
 import Processes from "./Processes";
 import AddProcess from "../AddProcess";
 import AddInterview from "../AddInterview";
-import AdminPage from "../admin/AdminPage";
+
 import Dashboard from "../admin/dashboard/Dashboard";
 
 import Home from "../authentication/Home";
@@ -26,9 +26,7 @@ export default function Admin() {
             <Route exact path="/dashboard">
               <Dashboard />
             </Route>
-            <Route exact path="/adminPage">
-              <AdminPage />
-            </Route>
+
             <Route exact path="/addAdmin">
               <AddAdmin />
             </Route>

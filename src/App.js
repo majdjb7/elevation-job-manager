@@ -6,7 +6,7 @@ import Processes from "./components/student/Processes";
 import AddProcess from "./components/AddProcess";
 import AddInterview from "./components/AddInterview";
 import StudentProfile from "./components/student/studendProfile";
-import AdminPage from "./components/admin/AdminPage";
+
 import Dashboard from "./components/admin/dashboard/Dashboard";
 
 import { useState, useEffect } from "react";

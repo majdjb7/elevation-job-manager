@@ -24,7 +24,7 @@ import { toJS } from "mobx";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 /////////////////////////////
 import NestedList from "../../../NestedList";
-import PieChart from "../../PieChart";
+
 import BasicSelect from "../../filter/BasicSelect";
 import AutocompleteSearch from "../../filter/AutocompleteSearch";
 import Filter from "./Filter";

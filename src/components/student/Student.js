@@ -7,9 +7,9 @@ import AddProcess from "../AddProcess";
 import AddInterview from "../AddInterview";
 
 //FOR ADMIN: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-import AdminPage from "../admin/AdminPage";
+
 import Dashboard from "../admin/dashboard/Dashboard";
-import AddAdmin from "../admin/AddAdmin"
+import AddAdmin from "../admin/AddAdmin";
 
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 import StudentProfile from "../student/studendProfile";
@@ -42,9 +42,7 @@ export default function Student() {
             <Route exact path="/dashboard">
               <Dashboard />
             </Route>
-            <Route exact path="/adminPage">
-              <AdminPage />
-            </Route>
+
             <Route exact path="/addAdmin">
               <AddAdmin />
             </Route>

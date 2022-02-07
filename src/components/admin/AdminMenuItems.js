@@ -49,11 +49,7 @@ export default function AdminMenuItems() {
       icon: <Work color="secondary" />,
       path: "/",
     },
-    {
-      text: "AdminPage",
-      icon: <Work color="secondary" />,
-      path: "/adminPage",
-    },
+
     {
       text: "Dashboard",
       icon: <BarChart color="secondary" />,
