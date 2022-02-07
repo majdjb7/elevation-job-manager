@@ -10,23 +10,17 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Checkbox from '@mui/material/Checkbox';
 import Avatar from '@mui/material/Avatar';
+import DeleteIcon from '@mui/icons-material/Delete';
+import IconButton from '@mui/material/IconButton';
 
 const AddCohort = inject("adminstore")(
   observer((props) => {
     const [checked, setChecked] = React.useState([1]);
 
-    const handleToggle = (value) => () => {
-      const currentIndex = checked.indexOf(value);
-      const newChecked = [...checked];
-  
-      if (currentIndex === -1) {
-        newChecked.push(value);
-      } else {
-        newChecked.splice(currentIndex, 1);
-      }
-  
-      setChecked(newChecked);
-    };
+    function handleDelete(cohortName) {
+      // cohortName.preventDefault();
+      alert(cohortName);
+    }
     
     const [cohortName, setCohortName] = useState("");
     const [redirect, setRedirect] = useState(false);
@@ -51,29 +45,25 @@ const AddCohort = inject("adminstore")(
             <ListItem
               key={value.name}
               secondaryAction={
-                <Checkbox
-                  edge="end"
-                  onChange={handleToggle(value.name)}
-                  checked={checked.indexOf(value.name) !== -1}
-                  inputProps={{ 'aria-labelledby': labelId }}
-                />
+                <IconButton  onClick={() => { handleDelete(value.name) }}>
+                  <DeleteIcon />
+                </IconButton>
               }
               disablePadding
             >
               <ListItemButton>
                 <ListItemAvatar>
                   <Avatar
-                    alt={`Avatar n°${value.name + 1}`}
-                    src={`/static/images/avatar/${value.name + 1}.jpg`}
+                    alt={value.name}
+                    src="."
                   />
                 </ListItemAvatar>
-                <ListItemText id={labelId} primary={`Line item ${value.name}`} />
+                <ListItemText id={labelId} primary={`${value.name}`} />
               </ListItemButton>
             </ListItem>
           );
         })}
       </List>
-
         
         <form onSubmit={submit}>
           <h1 className="h3 mb-3 fw-normal">

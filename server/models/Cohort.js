@@ -7,6 +7,9 @@ const cohortSchema = new Schema({
         unique: true,
         required: true
     },
+    numOfSudents: {
+        type: Number,
+    }
 })
 
 const Cohort = mongoose.model("Cohort", cohortSchema)
