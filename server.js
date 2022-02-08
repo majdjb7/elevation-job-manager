@@ -12,10 +12,11 @@ mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost/finalProjectDB'
 //might need useUnifiedTopology: true
 
 app.use(cookieParser())
-app.use(cors({
-  credentials: true,
-  origin: ['https://elevation-job-manager.herokuapp.com']
-})) //  // origin: ['https://elevation-job-manager.herokuapp.com/'] (WAS AFTER CREDENTIALS)
+app.use(cors())
+// app.use(cors({
+//   credentials: true,
+//   origin: ['https://elevation-job-manager.herokuapp.com']
+// })) //  // origin: ['https://elevation-job-manager.herokuapp.com/'] (WAS AFTER CREDENTIALS)
 
 
 app.use(function (req, res, next) {

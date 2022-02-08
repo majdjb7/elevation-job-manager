@@ -39,7 +39,7 @@ export class StudentInventory {
     try {
       //http://localhost:8888
       if (this.isAdmin == false) {
-        let result = await axios.get(`student/jobs/${this.studentID}`)
+        let result = await axios.get(`/student/jobs/${this.studentID}`)
         
         this.StudentJobs = result.data;
         console.log(result)
