@@ -5,7 +5,7 @@ import Layout from "../Layout";
 import Processes from "./Processes";
 import AddProcess from "../student/AddProcess";
 import AddInterview from "../student/AddInterview";
-
+import MyCalendar from "../MyCalendar";
 //FOR ADMIN: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 import Dashboard from "../admin/dashboard/Dashboard";
@@ -41,6 +41,9 @@ export default function Student() {
             {/* /* DELETE LATER: when admin login is complete */}
             <Route exact path="/dashboard">
               <Dashboard />
+            </Route>
+            <Route exact path="/MyCalendar">
+              <MyCalendar />
             </Route>
 
             <Route exact path="/addAdmin">

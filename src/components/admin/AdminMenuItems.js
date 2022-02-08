@@ -11,7 +11,13 @@ import Button from "@mui/material/Button";
 
 import { inject, observer } from "mobx-react";
 import { observe } from "mobx";
-import { Work, SchoolRounded, AddCircle, BarChart } from "@material-ui/icons";
+import {
+  Today,
+  Work,
+  SchoolRounded,
+  AddCircle,
+  BarChart,
+} from "@material-ui/icons";
 import { Redirect } from "react-router-dom";
 
 import AppBar from "@material-ui/core/AppBar";
@@ -55,6 +61,12 @@ export default function AdminMenuItems() {
       icon: <BarChart color="secondary" />,
       path: "/dashboard",
     },
+    {
+      text: "Calendar",
+      icon: <Today color="secondary" />,
+      path: "/MyCalendar",
+    },
+
     {
       text: "Add Admin",
       icon: <AddCircle color="secondary" />,

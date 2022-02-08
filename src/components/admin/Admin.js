@@ -5,7 +5,7 @@ import Layout from "../Layout";
 import Processes from "./Processes";
 import AddProcess from "../student/AddProcess";
 import AddInterview from "../student/AddInterview";
-
+import MyCalendar from "../../MyCalendar";
 import Dashboard from "../admin/dashboard/Dashboard";
 
 import Home from "../authentication/Home";
@@ -25,6 +25,9 @@ export default function Admin() {
             </Route>
             <Route exact path="/dashboard">
               <Dashboard />
+            </Route>
+            <Route exact path="/MyCalendar">
+              <MyCalendar />
             </Route>
 
             <Route exact path="/addAdmin">
