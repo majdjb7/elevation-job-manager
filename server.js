@@ -18,7 +18,7 @@ app.use(cors({
 }))
 
 app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
   res.header(
     "Access-Control-Allow-Headers",
@@ -26,6 +26,7 @@ app.use(function (req, res, next) {
   );
   next();
 });
+app.use(express.static(path.join(__dirname, 'build')));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -35,6 +36,11 @@ app.use("/auth", authAPI);
 
 
 const port = 8888;
+
+//HEROKU
+app.get('*', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
 app.listen(process.env.PORT || port, function () {
   console.log(`Running server on port ${port}`);

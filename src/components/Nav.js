@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 
 const Nav = (props) => {
     const logout = async () => {
-        await fetch('http://localhost:8000/api/logout', {
+        await fetch('/api/logout', { //http://localhost:8000
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             credentials: 'include',

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const requests = {
-  fetchAdminAPI: `http://localhost:8888/admin`,
+  fetchAdminAPI: `/admin`, //http://localhost:8888
 };
 export const filterProcessesByCohortName = async (cohortName) => {
   let result = await axios.get(

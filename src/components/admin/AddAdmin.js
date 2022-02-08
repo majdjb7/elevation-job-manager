@@ -43,7 +43,7 @@ const AddAdmin = inject("studentstore")(
     const submit = async (e) => {
       e.preventDefault();
 
-      await fetch("http://localhost:8888/auth/registerAdmin", {
+      await fetch("/auth/registerAdmin", { //http://localhost:8888
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

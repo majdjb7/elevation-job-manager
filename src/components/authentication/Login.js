@@ -47,7 +47,7 @@ const Login = inject("studentstore")(
     const submit = async (e) => {
       e.preventDefault();
 
-      const response = await fetch("http://localhost:8888/auth/login", {
+      const response = await fetch("/auth/login", { //http://localhost:8888
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

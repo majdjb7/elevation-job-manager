@@ -69,7 +69,7 @@ const AddProcess = inject("studentstore")(
       if (companyName && role && location && description && whereFindJob) {
         console.log(props.studentstore.studentID);
         const res = await axios.post(
-          `http://localhost:8888/student/jobs/${props.studentstore.studentID}`,
+          `/student/jobs/${props.studentstore.studentID}`, //http://localhost:8888
           { companyName, role, location, description, whereFindJob }
         );
         history.push({

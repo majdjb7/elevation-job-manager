@@ -39,7 +39,7 @@ export class StudentInventory {
     try {
       if (this.isAdmin == false) {
         let result = await axios.get(
-          `http://localhost:8888/student/jobs/${this.studentID}`
+          `/student/jobs/${this.studentID}` //http://localhost:8888
         );
         this.StudentJobs = result.data;
       }
@@ -54,10 +54,10 @@ export class StudentInventory {
 
   getStudentData = async (id) => {
     const studentData = await axios.get(
-      `http://localhost:8888/student/data/${id}`
+      `/student/data/${id}` //http://localhost:8888
     );
     this.studentData = studentData.data;
-    let result = await axios.get(`http://localhost:8888/student/jobs/${id}`);
+    let result = await axios.get(`/student/jobs/${id}`); //http://localhost:8888
     this.StudentJobs = result.data;
   };
 
@@ -87,7 +87,7 @@ export class StudentInventory {
   };
 
   logout = async () => {
-    await fetch("http://localhost:8888/auth/logout", {
+    await fetch("/auth/logout", { //http://localhost:8888
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
@@ -100,14 +100,14 @@ export class StudentInventory {
 
   edditStatusForStudent = async (jobId, status) => {
     const res = await axios.post(
-      "http://localhost:8888/student/jobs/status/" + jobId + "/interviews",
+      "/student/jobs/status/" + jobId + "/interviews", //http://localhost:8888
       { status }
     );
     this.addJobsFromDB();
   };
    deleteProcesses = async function (id) {
     const res = await axios.delete(
-      `http://localhost:8888/student/jobs/${id}`,
+      `/student/jobs/${id}`, //http://localhost:8888
 
     );
     this.addJobsFromDB();

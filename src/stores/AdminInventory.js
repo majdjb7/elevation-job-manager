@@ -58,7 +58,7 @@ export class AdminInventory {
       await this.getAllStudentsProcessesFromDB();
     } else {
       let result = await axios.get(
-        `http://localhost:8888/admin/cohorts/${cohortName}`
+        `/admin/cohorts/${cohortName}` //http://localhost:8888
       );
       this.allStudents = result.data;
       this.generateAllStudentsProcesses();
@@ -69,7 +69,7 @@ export class AdminInventory {
     this.allStudentsProcesses = [];
 
     let result = await axios.get(
-      `http://localhost:8888/admin/students/${name}`
+      `/admin/students/${name}` //http://localhost:8888
     );
     this.allStudents = result.data;
     this.generateAllStudentsProcesses();
@@ -90,13 +90,13 @@ export class AdminInventory {
     this.allStudents = [];
     this.allStudentsProcesses = [];
     try {
-      let result = await axios.get(`http://localhost:8888/admin/jobs`);
+      let result = await axios.get(`/admin/jobs`); //http://localhost:8888
       this.allStudents = result.data;
     } catch (error) {
       console.log("Something wrong");
     }
     try {
-      let jobs = await axios.get(`http://localhost:8888/admin/allJobs`);
+      let jobs = await axios.get(`/admin/allJobs`); //http://localhost:8888
       this.allStudentsProcesses = jobs.data;
     } catch (error) {
       console.log("Something wrong");
@@ -105,7 +105,7 @@ export class AdminInventory {
 
   getCohorts = async () => {
     try {
-      let result = await axios.get(`http://localhost:8888/admin/cohorts`);
+      let result = await axios.get(`/admin/cohorts`); //http://localhost:8888
       this.cohorts = result.data;
     }
     catch (error) {
@@ -115,7 +115,7 @@ export class AdminInventory {
 
   addCohort = async (cohort) => {
     try {
-      await fetch("http://localhost:8888/admin/cohorts", {
+      await fetch("/admin/cohorts", { //http://localhost:8888
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -130,7 +130,7 @@ export class AdminInventory {
 
   deleteCohort = async (cohort) => {
     try {
-      await fetch("http://localhost:8888/admin/cohorts", {
+      await fetch("/admin/cohorts", { //http://localhost:8888
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
