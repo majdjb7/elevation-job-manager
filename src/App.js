@@ -50,13 +50,16 @@ const App = inject("studentstore")(
     // });
     
     return (
-      <ThemeProvider theme={theme}>
-        {/* to overide and change the orignal colors and thems in other comps */}
-        {!props.studentstore.isLoggedIn ? <Authentication /> : null}
-        {props.studentstore.isLoggedIn && props.studentstore.isAdmin == false ? <Student /> : null}
-        {props.studentstore.isLoggedIn && props.studentstore.isAdmin == true ? <Admin /> : null}
+      // <ThemeProvider theme={theme}>
+      //   {/* to overide and change the orignal colors and thems in other comps */}
+      //   {!props.studentstore.isLoggedIn ? <Authentication /> : null}
+      //   {props.studentstore.isLoggedIn && props.studentstore.isAdmin == false ? <Student /> : null}
+      //   {props.studentstore.isLoggedIn && props.studentstore.isAdmin == true ? <Admin /> : null}
 
-      </ThemeProvider>
+      // </ThemeProvider>
+      <div>
+        Hello
+      </div>
     );
   })
 );
