@@ -39,6 +39,9 @@ export default function Student() {
               <StudentProfile />
             </Route>
             {/* /* DELETE LATER: when admin login is complete */}
+            <Route exact path="/addAdmin">
+              <AddAdmin />
+            </Route> */
             {/* <Route exact path="/dashboard">
               <Dashboard />
             </Route>

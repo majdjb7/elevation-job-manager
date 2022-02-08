@@ -14,8 +14,8 @@ mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost/finalProjectDB'
 app.use(cookieParser())
 app.use(cors({
   credentials: true,
-  origin: ['http://localhost:3000']
-}))
+})) //  // origin: ['http://localhost:3000'] (WAS AFTER CREDENTIALS)
+
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
