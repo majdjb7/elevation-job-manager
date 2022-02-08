@@ -37,10 +37,9 @@ export class StudentInventory {
   }
   addJobsFromDB = async () => {
     try {
+      //http://localhost:8888
       if (this.isAdmin == false) {
-        let result = await axios.get(
-          `/student/jobs/${this.studentID}` //http://localhost:8888
-        )
+        let result = await axios.get(`/student/jobs/${this.studentID}`)
         this.StudentJobs = result.data;
         console.log(this.StudentJobs)
       }
@@ -54,9 +53,8 @@ export class StudentInventory {
   };
 
   getStudentData = async (id) => {
-    const studentData = await axios.get(
-      `/student/data/${id}` //http://localhost:8888
-    );
+    //http://localhost:8888
+    const studentData = await axios.get(`/student/data/${id}`);
     this.studentData = studentData.data;
     let result = await axios.get(`/student/jobs/${id}`); //http://localhost:8888
     this.StudentJobs = result.data;
@@ -100,10 +98,8 @@ export class StudentInventory {
   };
 
   edditStatusForStudent = async (jobId, status) => {
-    const res = await axios.post(
-      "/student/jobs/status/" + jobId + "/interviews", //http://localhost:8888
-      { status }
-    );
+    //http://localhost:8888
+    const res = await axios.post("/student/jobs/status/" + jobId + "/interviews", { status });
     this.addJobsFromDB();
   };
    deleteProcesses = async function (id) {
