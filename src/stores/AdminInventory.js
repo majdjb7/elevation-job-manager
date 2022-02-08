@@ -16,6 +16,7 @@ export class AdminInventory {
       allStudents: observable,
       totalWorkers: observable,
       totalStudents: computed,
+
       getAllStudentsProcessesFromDB: action,
       filterProcessesByCohortName: action,
       filterProcessesByStatus: action,
@@ -28,7 +29,18 @@ export class AdminInventory {
   get totalStudents() {
     return this.allStudents.length;
   }
-
+  getAllEvents = async () => {
+    let events = await getAllStudentsProcesses();
+    let myEvents = events.map((p) => {
+      if (p.status === "Open" || p.status === "Pending")
+        return {
+          title: p.studentName + " | " + p.companyName + " | " + p.role,
+          start: new Date(p.mostRecentInterview),
+          end: new Date(p.mostRecentInterview),
+        };
+    });
+    return myEvents;
+  };
   getTotalWorkers = async () => {
     let allStudentsProcesses = await getAllStudentsProcesses();
 
