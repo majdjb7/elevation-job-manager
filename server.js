@@ -27,8 +27,8 @@ app.use(function (req, res, next) {
   );
   next();
 });
-// app.use(express.static(path.join(__dirname, 'build')));
-app.use('/static', express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(path.join(__dirname, 'build')));
+// app.use('/static', express.static(path.join(__dirname, 'client/build')));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
