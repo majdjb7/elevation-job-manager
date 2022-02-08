@@ -40,7 +40,10 @@ export class StudentInventory {
       //http://localhost:8888
       if (this.isAdmin == false) {
         let result = await axios.get(`/student/jobs/${this.studentID}`)
+        
         this.StudentJobs = result.data;
+        console.log(result)
+        console.log(result.data)
         console.log(this.StudentJobs)
       }
     } catch (error) {
