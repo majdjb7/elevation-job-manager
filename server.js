@@ -8,7 +8,7 @@ const studentAPI = require("./server/routes/studentAPI");
 const adminAPI = require("./server/routes/adminAPI");
 const authAPI = require("./server/routes/authAPI");
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/finalProjectDB', { useNewUrlParser: true })
+mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost/finalProjectDB', { useNewUrlParser: true })
 //might need useUnifiedTopology: true
 
 app.use(cookieParser())
@@ -35,6 +35,7 @@ app.use("/auth", authAPI);
 
 
 const port = 8888;
-app.listen(port, function () {
+
+app.listen(process.env.PORT || port, function () {
   console.log(`Running server on port ${port}`);
 });
