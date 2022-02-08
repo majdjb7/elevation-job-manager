@@ -72,7 +72,7 @@ export class StudentInventory {
 
   checkUserLoggedIn = async () => {
     // if(this.isLoggedIn == true) {
-    const response = await fetch("http://localhost:8888/auth/user", {
+    const response = await fetch("/auth/user", { //http://localhost:8888
       headers: { "Content-Type": "application/json" },
       credentials: "include",
     });
