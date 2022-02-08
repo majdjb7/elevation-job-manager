@@ -30,6 +30,53 @@ const generateProcesses = async (jobs) => {
   return result;
 };
 
+router.get("/chart-latest-cohorts", async (req, res) => {
+  try {
+    Job.find({})
+      .populate({
+        path: "interviews",
+      })
+      .sort({ mostRecentInterview: -1 })
+      .exec(async function (err, jobs) {
+        let jobsProcesses = await generateProcesses(jobs);
+        let cohorts = {};
+        let StuentsdInCohort = {};
+        let chartLatestCohorts = {};
+        for (let job of jobsProcesses) {
+          if (!cohorts[job.cohort]) {
+            cohorts[job.cohort] = {};
+          }
+          if (job.status === "Accepted") {
+            if (!cohorts[job.cohort][job.studentName]) {
+              cohorts[job.cohort][job.studentName] = {};
+            }
+            cohorts[job.cohort][job.studentName] = "Accepted";
+          }
+          if (!StuentsdInCohort[job.cohort]) {
+            StuentsdInCohort[job.cohort] = {};
+          }
+          if (!StuentsdInCohort[job.cohort][job.studentName]) {
+            StuentsdInCohort[job.cohort][job.studentName] = {};
+          }
+          StuentsdInCohort[job.cohort][job.studentName] = job.cohort;
+        }
+        for (const key in StuentsdInCohort) {
+          if (!chartLatestCohorts[key]) {
+            chartLatestCohorts[key] = { working: 0, notWorking: 0 };
+          }
+          chartLatestCohorts[key]["working"] = Object.keys(cohorts[key]).length;
+          chartLatestCohorts[key]["notWorking"] =
+            Object.keys(StuentsdInCohort[key]).length -
+            Object.keys(cohorts[key]).length;
+        }
+
+        res.status(200).json({ chartLatestCohorts });
+      });
+  } catch (error) {
+    res.status(500).send({ error: "Something failed!" });
+  }
+});
+
 router.get("/inactive-students", async (req, res) => {
   try {
     Job.find({})
