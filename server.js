@@ -14,12 +14,12 @@ mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost/finalProjectDB'
 app.use(cookieParser())
 app.use(cors({
   credentials: true,
-  origin: ['https://elevation-job-manager.herokuapp.com/']
+  origin: ['https://elevation-job-manager.herokuapp.com']
 })) //  // origin: ['https://elevation-job-manager.herokuapp.com/'] (WAS AFTER CREDENTIALS)
 
 
 app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "https://elevation-job-manager.herokuapp.com/");
+  res.header("Access-Control-Allow-Origin", "https://elevation-job-manager.herokuapp.com");
   res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
   res.header(
     "Access-Control-Allow-Headers",
