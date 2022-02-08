@@ -53,17 +53,18 @@ const Register = inject("adminstore")(
     const submit = async (e) => {
         e.preventDefault();
 
-        await fetch("/auth/registerAdmin", { //http://localhost:8888
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
+        await fetch('/auth/register', { //http://localhost:8888
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-              firstName,
-              lastName,
-              email,
-              mobileNo,
-              password,
-            }),
-          });
+                firstName,
+                lastName,
+                email,
+                mobileNo,
+                cohort,
+                password
+            })
+        });
         setRedirect(true)
     }
 
