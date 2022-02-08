@@ -30,7 +30,7 @@ export class StudentInventory {
       getStudentData: action,
       deleteProcesses:action,
     });
-    // this.addJobsFromDB();
+    this.addJobsFromDB();
   }
   get numItems() {
     return this.StudentJobs.length;
