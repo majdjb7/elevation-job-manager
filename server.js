@@ -10,7 +10,7 @@ const authAPI = require("./server/routes/authAPI");
 
 app.use(cookieParser())
 
-mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost/finalProjectDB', { useNewUrlParser: true })
+mongoose.connect(process.env.MONGODB_URL)
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
