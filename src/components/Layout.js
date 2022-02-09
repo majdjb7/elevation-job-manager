@@ -86,9 +86,9 @@ const Layout = inject("studentstore")(
     const history = useHistory();
     const location = useLocation();
 
-    if (props.studentstore.firstName === "") {
-      return <Redirect to="/" />;
-    }
+    // if (props.studentstore.firstName === "") {
+    //   return <Redirect to="/" />;
+    // }
 
     return (
       <div className={classes.root}>
@@ -115,6 +115,10 @@ const Layout = inject("studentstore")(
               color="secondary"
               onClick={() => {
                 props.studentstore.logout();
+
+                history.push({
+                  pathname: "/",
+                });
               }}
             >
               Logout
@@ -136,8 +140,11 @@ const Layout = inject("studentstore")(
           </div>
 
           {/* links/list section */}
-          {props.studentstore.isAdmin ? <AdminMenuItems />: <StudentMenuItems />}
-           
+
+          <AdminMenuItems />
+
+          {/* <StudentMenuItems /> */}
+
           {/* <AdminMenuItems />
           <StudentMenuItems /> */}
         </Drawer>

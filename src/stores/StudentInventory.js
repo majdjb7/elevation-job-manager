@@ -29,7 +29,6 @@ export class StudentInventory {
       addJobsFromDB: action,
       getStudentData: action,
     });
-    this.addJobsFromDB();
   }
   get numItems() {
     return this.StudentJobs.length;

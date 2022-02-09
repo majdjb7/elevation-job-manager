@@ -15,17 +15,8 @@ const Authentication = inject("studentstore")(
         <Router>
           <Switch>
             <Route exact path="/">
-              <Home
-                name={props.studentstore.firstName}
-                loggedIn={loggedIn}
-                setLoggedIn={setLoggedIn}
-              />
-            </Route>
-
-            <Route exact path="/Login">
               <Login />
             </Route>
-
             <Route exact path="/Register">
               <Register />
             </Route>

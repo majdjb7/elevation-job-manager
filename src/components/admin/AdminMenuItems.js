@@ -59,7 +59,7 @@ export default function AdminMenuItems() {
     {
       text: "Dashboard",
       icon: <BarChart color="secondary" />,
-      path: "/dashboard",
+      path: "/Dashboard",
     },
     {
       text: "Calendar",
@@ -70,7 +70,7 @@ export default function AdminMenuItems() {
     {
       text: "Add Admin",
       icon: <AddCircle color="secondary" />,
-      path: "/addAdmin",
+      path: "/AddAdmin",
     },
   ];
 

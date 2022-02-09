@@ -14,10 +14,10 @@ const Login = inject("studentstore")(
     const history = useHistory();
     const location = useLocation();
 
-    useEffect(() => {
-      props.studentstore.checkUserLoggedIn();
-      // props.studentstore.setLogin();
-    });
+    // useEffect(() => {
+    //   props.studentstore.checkUserLoggedIn();
+    //   // props.studentstore.setLogin();
+    // }, []);
 
     const submit = async (e) => {
       e.preventDefault();
@@ -33,22 +33,22 @@ const Login = inject("studentstore")(
       });
 
       const content = await response.json();
-      console.log("CON: ", content);
 
       if (content.message === "Success") {
         // && content.isAdmin == false
         props.studentstore.setStudentID(content.studentID);
+
         props.studentstore.setLogin();
         props.studentstore.setUserType(content.isAdmin);
-        setRedirect(true);
+        //setRedirect(true);
       } else {
         alert(content.message);
       }
     };
 
-    if (redirect) {
-      return <Redirect to="/" />;
-    }
+    // if (redirect) {
+    //   return <Redirect to="/" />;
+    // }
 
     return (
       <form onSubmit={submit}>

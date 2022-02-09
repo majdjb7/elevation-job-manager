@@ -24,7 +24,6 @@ export class AdminInventory {
       filterProcessesByName: action,
       getTotalWorkers: action,
     });
-    this.getAllStudentsProcessesFromDB();
   }
   get totalStudents() {
     return this.allStudents.length;
