@@ -30,15 +30,12 @@ export class StudentInventory {
       getStudentData: action,
       deleteProcesses:action,
     });
-    // this.addJobsFromDB();
   }
   get numItems() {
     return this.StudentJobs.length;
   }
   addJobsFromDB = async () => {
     try {
-      // console.log("ID: ", this.studentID)
-      //http://localhost:8888
       if (this.isAdmin == false) {
         let result = await axios.get(`/student/jobs/${this.studentID}`)
         
@@ -57,10 +54,9 @@ export class StudentInventory {
   };
 
   getStudentData = async (id) => {
-    //http://localhost:8888
     const studentData = await axios.get(`/student/data/${id}`);
     this.studentData = studentData.data;
-    let result = await axios.get(`/student/jobs/${id}`); //http://localhost:8888
+    let result = await axios.get(`/student/jobs/${id}`);
     this.StudentJobs = result.data;
   };
 
@@ -74,8 +70,7 @@ export class StudentInventory {
   };
 
   checkUserLoggedIn = async () => {
-    // if(this.isLoggedIn == true) {
-    const response = await fetch("/auth/user", { //http://localhost:8888
+    const response = await fetch("/auth/user", {
       headers: { "Content-Type": "application/json" },
       credentials: "include",
     });
@@ -86,11 +81,10 @@ export class StudentInventory {
       this.setLogin();
     }
 
-    // }
   };
 
   logout = async () => {
-    await fetch("/auth/logout", { //http://localhost:8888
+    await fetch("/auth/logout", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
@@ -102,13 +96,12 @@ export class StudentInventory {
   };
 
   edditStatusForStudent = async (jobId, status) => {
-    //http://localhost:8888
     const res = await axios.post("/student/jobs/status/" + jobId + "/interviews", { status });
     this.addJobsFromDB();
   };
    deleteProcesses = async function (id) {
     const res = await axios.delete(
-      `/student/jobs/${id}`, //http://localhost:8888
+      `/student/jobs/${id}`,
 
     );
     this.addJobsFromDB();

@@ -19,7 +19,7 @@ import {
 } from "@material-ui/core";
 import { IconButton } from "@mui/material";
 import Button from "@mui/material/Button";
-////////////////////////////
+
 import { inject, observer } from "mobx-react";
 import { observe } from "mobx";
 import {
@@ -30,7 +30,6 @@ import {
 } from "@material-ui/icons";
 import moment from "moment";
 
-/////////////////////////////
 import NestedList from "../student/NestedList";
 import FormDialog from "../student/FormDialog";
 
@@ -74,14 +73,10 @@ const useStyles = makeStyles((theme) => ({
 
 const Processes = inject("studentstore")(
   observer((props) => {
-    //   if (props.studentstore.isAdmin === true) {
-    //     return <Redirect to="/" />;
-    // }
-    /************************************************ */
+
     useEffect(async () => {
       await props.studentstore.addJobsFromDB();
     }, []);
-    /************************************************ */
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -224,12 +219,10 @@ const Processes = inject("studentstore")(
                           setIsDoubileClick(!isDoubileClick);
                         }}
                       >
-                        {/* Save */}
                         <AddCircleOutline />
                       </Button>
                     ) : (
                       <Button variant="text" disabled>
-                        {/* Save */}
                         <AddCircleOutline />
                       </Button>
                     )}
@@ -245,7 +238,7 @@ const Processes = inject("studentstore")(
             </TableBody>
           </Table>
         </TableContainer>
-        {/* <TableFooter> */}
+
         <TablePagination
           className={classes.TablePagination}
           rowsPerPageOptions={[5, 10]}
