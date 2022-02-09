@@ -27,7 +27,10 @@ const useStyles = makeStyles({
   // },
 });
 
-const AddProcess = inject("studentstore")(
+const AddProcess = inject(
+  "studentstore",
+  "userstore"
+)(
   observer((props) => {
     const classes = useStyles();
     const history = useHistory();
@@ -69,7 +72,7 @@ const AddProcess = inject("studentstore")(
       if (companyName && role && location && description && whereFindJob) {
         console.log(props.studentstore.studentID);
         const res = await axios.post(
-          `http://localhost:8888/student/jobs/${props.studentstore.studentID}`,
+          `http://localhost:8888/student/jobs/${props.userstore.userID}`,
           { companyName, role, location, description, whereFindJob }
         );
         history.push({

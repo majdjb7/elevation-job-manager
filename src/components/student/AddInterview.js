@@ -61,7 +61,7 @@ const AddInterview = inject("studentstore")(
             "http://localhost:8888/student/jobs/" + id + "/interviews",
             { type, time, interviewerName }
           );
-          await props.studentstore.addJobsFromDB();
+          //await props.studentstore.addJobsFromDB();
           history.push({
             pathname: "/",
             state: res.data._id,

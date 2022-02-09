@@ -70,14 +70,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Processes = inject("studentstore")(
+const Processes = inject(
+  "studentstore",
+  "userstore"
+)(
   observer((props) => {
-    //   if (props.studentstore.isAdmin === true) {
-    //     return <Redirect to="/" />;
-    // }
-    /************************************************ */
     useEffect(async () => {
-      await props.studentstore.addJobsFromDB();
+      await props.studentstore.addJobsFromDB(props.userstore.userID);
     }, []);
     /************************************************ */
     const classes = useStyles();

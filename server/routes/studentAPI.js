@@ -4,7 +4,7 @@ const nodemailer = require("nodemailer");
 const Job = require("../models/Job");
 const Student = require("../models/Student");
 const Interview = require("../models/Interview");
-const Admin = require("../models/Admin")
+const Admin = require("../models/Admin");
 router.get("/jobs/:id", async (req, res) => {
   let id = req.params.id;
 
@@ -21,14 +21,20 @@ router.get("/jobs/:id", async (req, res) => {
         res.send(student.jobs);
       });
   } catch (error) {
-    res.status(500).send({ error: 'Something failed!' })
+    res.status(500).send({ error: "Something failed!" });
   }
 });
 
 router.post("/jobs/:id", async (req, res) => {
   let id = req.params.id;
   try {
-    if (req.body.companyName && req.body.role && req.body.location && req.body.description && req.body.whereFindJob) {
+    if (
+      req.body.companyName &&
+      req.body.role &&
+      req.body.location &&
+      req.body.description &&
+      req.body.whereFindJob
+    ) {
       let job = new Job({
         companyName: req.body.companyName,
         role: req.body.role,
@@ -36,21 +42,21 @@ router.post("/jobs/:id", async (req, res) => {
         description: req.body.description,
         status: "Open",
         whereFindJob: req.body.whereFindJob,
-        studentId: id
+        studentId: id,
       });
 
       Student.findByIdAndUpdate(
         id,
         { $push: { jobs: job } },
-        function (err, user) { }
+        function (err, user) {}
       );
       await job.save();
       res.send(job);
     } else {
-      res.send("all the inputs are required")
+      res.send("all the inputs are required");
     }
   } catch (error) {
-    res.status(500).send({ error: 'Something failed!' })
+    res.status(500).send({ error: "Something failed!" });
   }
 });
 router.post("/jobs/:id/interviews", async (req, res) => {
@@ -64,56 +70,64 @@ router.post("/jobs/:id/interviews", async (req, res) => {
       });
       Job.findByIdAndUpdate(
         id,
-        { $push: { interviews: interview }, mostRecentInterview: req.body.time },
-        function (err, interview) { }
+        {
+          $push: { interviews: interview },
+          mostRecentInterview: req.body.time,
+        },
+        function (err, interview) {}
       );
       await interview.save();
       res.send(interview);
     } else {
-      res.send("all the inputs are required")
+      res.send("all the inputs are required");
     }
   } catch (error) {
-    res.status(500).send({ error: 'Something failed!' })
+    res.status(500).send({ error: "Something failed!" });
   }
 });
 router.post("/jobs/status/:jobId/interviews", async (req, res) => {
   const id = req.params.jobId;
   if (req.body.status == "Accepted") {
-    const job = await Job.findOne({ _id: id })
-    const student = await Student.findOne({ _id: job.studentId })
-    let mail =student.firstName+ " " + student.lastName+" has passed interview at "+job.companyName
-    let mails = ""
-    const admins = await Admin.find({})
+    const job = await Job.findOne({ _id: id });
+    const student = await Student.findOne({ _id: job.studentId });
+    let mail =
+      student.firstName +
+      " " +
+      student.lastName +
+      " has passed interview at " +
+      job.companyName;
+    let mails = "";
+    const admins = await Admin.find({});
     for (let admin of admins) {
-      mails = mails + " " + admin.email
+      mails = mails + " " + admin.email;
     }
-    console.log(mails);
+
     let transporter = nodemailer.createTransport({
-      service: 'gmail',
+      service: "gmail",
       auth: {
-        user: 'elevation744',
-        pass: 'Atedna4!@#'
-      }
+        user: "elevation744",
+        pass: "Atedna4!@#",
+      },
     });
     let mailOptions = {
-      from: 'elevation744@gmail.com',
+      from: "elevation744@gmail.com",
       to: mails,
-      subject: 'hi',
-      text: mail
+      subject: "hi",
+      text: mail,
     };
     transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
         console.log(error);
       } else {
-        console.log('Email sent: ' + info.response);
+        console.log("Email sent: " + info.response);
       }
-    })
+    });
   }
   try {
     Job.findByIdAndUpdate(
       id,
       { status: req.body.status },
-      function (err, user) { }
+      function (err, user) {}
     );
     res.send().status(200);
   } catch (error) {
@@ -123,8 +137,8 @@ router.post("/jobs/status/:jobId/interviews", async (req, res) => {
 
 router.get("/data/:id", async (req, res) => {
   const id = req.params.id;
-  const student = await Student.findOne({ _id: id })
-  res.send(student)
-})
+  const student = await Student.findOne({ _id: id });
+  res.send(student);
+});
 
 module.exports = router;
