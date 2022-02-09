@@ -49,7 +49,8 @@ export class StudentInventory {
     this.StudentJobs = result.data;
   };
 
-  EditDone = async function (
+  EditDone = async (
+    studentId,
     id,
     companyName,
     location,
@@ -60,7 +61,7 @@ export class StudentInventory {
     type,
     time,
     status
-  ) {
+  ) => {
     const res = await axios.post(
       `http://localhost:8888/student/edit/jobs/${id}`,
       {
@@ -77,7 +78,7 @@ export class StudentInventory {
     if (status != "") {
       this.edditStatusForStudent(id, status);
     }
-    //this.addJobsFromDB();
+    this.addJobsFromDB(studentId);
   };
   edditStatusForStudent = async (jobId, status) => {
     const res = await axios.post(
@@ -85,8 +86,8 @@ export class StudentInventory {
       { status }
     );
   };
-  deleteProcesses = async function (id) {
+  deleteProcesses = async function (studentId, id) {
     const res = await axios.delete(`http://localhost:8888/student/jobs/${id}`);
-    //this.addJobsFromDB();
+    this.addJobsFromDB(studentId);
   };
 }

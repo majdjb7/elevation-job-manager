@@ -405,7 +405,10 @@ const Processes = inject(
                     <IconButton
                       aria-label="delete"
                       onClick={() =>
-                        props.studentstore.deleteProcesses(row._id)
+                        props.studentstore.deleteProcesses(
+                          props.userstore.userID,
+                          row._id
+                        )
                       }
                     >
                       <DeleteIcon />
@@ -417,6 +420,7 @@ const Processes = inject(
                         aria-label="check"
                         onClick={() => {
                           props.studentstore.EditDone(
+                            props.userstore.userID,
                             row._id,
                             companyName,
                             location,
