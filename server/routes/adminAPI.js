@@ -240,7 +240,18 @@ router.get("/students/:name/", async (req, res) => {
     res.send(error).status.status(500);
   }
 });
-
+router.get("/cohorts", async (req, res) => {
+  try {
+    Cohort.find({}, { name: 1, numOfStudents: 1, _id: 0 }).exec(function (
+      err,
+      cohorts
+    ) {
+      res.send(cohorts);
+    });
+  } catch (error) {
+    res.status(500).send({ error: "Something failed!" });
+  }
+});
 router.get("/cohorts/:cohortName", async (req, res) => {
   try {
     await Student.find({ cohort: req.params.cohortName })
