@@ -13,12 +13,12 @@ export default function StatusSelect({ status, setStatus }) {
   return (
     <Box>
       <FormControl sx={{ minWidth: 100 }}>
-        <InputLabel id="demo-simple-select-label">Status</InputLabel>
+        <InputLabel id="demo-simple-select-label">{status}</InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={status}
-          label="Status"
+          label={status}
           onChange={handleChange}
         >
           <MenuItem value={"Open"}>Open</MenuItem>

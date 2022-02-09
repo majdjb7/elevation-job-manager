@@ -15,6 +15,7 @@ import axios from "axios";
 import { inject, observer } from "mobx-react";
 import { observe } from "mobx";
 
+
 const useStyles = makeStyles({
   field: {
     marginTop: 20,
@@ -42,7 +43,8 @@ const AddProcess = inject("studentstore")(
     const [whereFindJob, setWhereFindJob] = useState("");
     const [whereFindJobError, setWhereFindJobError] = useState(false);
     const [error, setError] = useState("");
-
+  
+  
     const handleSubmit = async (e) => {
       e.preventDefault();
       setCompanyNameError(false);
@@ -67,11 +69,11 @@ const AddProcess = inject("studentstore")(
         setWhereFindJobError(true);
       }
       if (companyName && role && location && description && whereFindJob) {
-        console.log(props.studentstore.studentID);
+       
         const res = await axios.post(
           `http://localhost:8888/student/jobs/${props.studentstore.studentID}`,
           { companyName, role, location, description, whereFindJob }
-        );
+        );       
         history.push({
           pathname: "/addInterview",
           state: res.data._id,

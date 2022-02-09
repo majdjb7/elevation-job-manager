@@ -15,6 +15,13 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { inject, observer } from "mobx-react";
 import { observe } from "mobx";
+import Stack from '@mui/material/Stack';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const useStyles = makeStyles({
   field: {
@@ -39,6 +46,18 @@ const AddInterview = inject("studentstore")(
     const [interviewerName, setInterviewerName] = useState("");
     const [interviewerNameError, setInterviewerNameError] = useState(false);
     const [error, setError] = useState("");
+    const [open, setOpen] = React.useState(false);
+    const handleClick = () => {
+      setOpen(true);
+    };
+  
+    const handleClose = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+  
+      setOpen(false);
+    };
     const handleSubmit = async (e) => {
       e.preventDefault();
       setTypeError(false);
@@ -74,6 +93,16 @@ const AddInterview = inject("studentstore")(
 
     return (
       <div>
+        <Stack spacing={2} sx={{ width: '100%' }}>
+      <Button variant="outlined" onClick={handleClick}>
+        Open success snackbar
+      </Button>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="info" sx={{ width: '100%' }}>
+          Done!! now add your first interview
+        </Alert>
+      </Snackbar>
+    </Stack>
         <Typography
           variant="h6"
           color="textSecondary"

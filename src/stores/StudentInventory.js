@@ -29,6 +29,7 @@ export class StudentInventory {
       addJobsFromDB: action,
       getStudentData: action,
       deleteProcesses:action,
+      EditDone:action,
     });
     this.addJobsFromDB();
   }
@@ -42,6 +43,7 @@ export class StudentInventory {
           `http://localhost:8888/student/jobs/${this.studentID}`
         );
         this.StudentJobs = result.data;
+        console.log("aa",this.StudentJobs);
       }
     } catch (error) {
       console.log("Something wrong");
@@ -97,7 +99,16 @@ export class StudentInventory {
     this.isLoggedIn = false;
     this.studentID = "";
   };
-
+   EditDone = async function (id,companyName, location, whereFindJob, role, description, interviewId, type,time,status) {
+    const res = await axios.post(
+      `http://localhost:8888/student/edit/jobs/${id}`,
+      { companyName, location, whereFindJob, role, description, interviewId, type,time }
+    );
+    if(status!=""){
+this.edditStatusForStudent(id,status)
+    }
+    this.addJobsFromDB();
+  }
   edditStatusForStudent = async (jobId, status) => {
     const res = await axios.post(
       "http://localhost:8888/student/jobs/status/" + jobId + "/interviews",
