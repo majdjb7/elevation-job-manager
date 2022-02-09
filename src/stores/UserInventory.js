@@ -35,7 +35,7 @@ export class UserInventory {
   };
 
   checkUserLoggedIn = async () => {
-    const response = await fetch("http://localhost:8888/auth/user", {
+    const response = await fetch("/auth/user", {
       headers: { "Content-Type": "application/json" },
       credentials: "include",
     });
@@ -51,7 +51,7 @@ export class UserInventory {
   };
 
   logout = async () => {
-    await fetch("http://localhost:8888/auth/logout", {
+    await fetch("/auth/logout", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",

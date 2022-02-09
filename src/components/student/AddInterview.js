@@ -57,10 +57,11 @@ const AddInterview = inject("studentstore")(
       if (type && time && interviewerName) {
         let id = location.state;
         try {
-          const res = await axios.post(
-            "http://localhost:8888/student/jobs/" + id + "/interviews",
-            { type, time, interviewerName }
-          );
+          const res = await axios.post("/student/jobs/" + id + "/interviews", {
+            type,
+            time,
+            interviewerName,
+          });
           //await props.studentstore.addJobsFromDB();
           history.push({
             pathname: "/",

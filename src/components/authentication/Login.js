@@ -36,7 +36,7 @@ const Login = inject(
     const submit = async (e) => {
       e.preventDefault();
 
-      const response = await fetch("http://localhost:8888/auth/login", {
+      const response = await fetch("/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

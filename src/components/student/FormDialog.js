@@ -59,10 +59,11 @@ const FormDialog = inject("studentstore")(
       if (type && time && interviewerName) {
         let id = props.jobId;
         try {
-          const res = await axios.post(
-            "http://localhost:8888/student/jobs/" + id + "/interviews",
-            { type, time, interviewerName }
-          );
+          const res = await axios.post("/student/jobs/" + id + "/interviews", {
+            type,
+            time,
+            interviewerName,
+          });
           await props.studentstore.addJobsFromDB();
         } catch (error) {
           setError("Something wrong");

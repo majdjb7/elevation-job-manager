@@ -73,18 +73,15 @@ const Simulation = inject(
 
     const send = async () => {
       if (zoom && time && type && props.studentstore.studentData.firstName) {
-        const res = await axios.post(
-          `http://localhost:8888/admin/message/send`,
-          {
-            userFirstName: props.userstore.userFirstName,
-            userEmail: props.userstore.userEmail,
-            mobileNo: props.userstore.mobileNo,
-            zoom,
-            time,
-            type,
-            firstName: props.studentstore.studentData.firstName,
-          }
-        );
+        const res = await axios.post(`/admin/message/send`, {
+          userFirstName: props.userstore.userFirstName,
+          userEmail: props.userstore.userEmail,
+          mobileNo: props.userstore.mobileNo,
+          zoom,
+          time,
+          type,
+          firstName: props.studentstore.studentData.firstName,
+        });
       }
     };
     return (

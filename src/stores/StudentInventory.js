@@ -29,9 +29,7 @@ export class StudentInventory {
   addJobsFromDB = async (studentID) => {
     try {
       if (this.isAdmin == false) {
-        let result = await axios.get(
-          `http://localhost:8888/student/jobs/${studentID}`
-        );
+        let result = await axios.get(`/student/jobs/${studentID}`);
         this.StudentJobs = result.data;
       }
     } catch (error) {
@@ -41,11 +39,9 @@ export class StudentInventory {
 
   getStudentData = async (id) => {
     this.studentId = id;
-    const studentData = await axios.get(
-      `http://localhost:8888/student/data/${id}`
-    );
+    const studentData = await axios.get(`/student/data/${id}`);
     this.studentData = studentData.data;
-    let result = await axios.get(`http://localhost:8888/student/jobs/${id}`);
+    let result = await axios.get(`/student/jobs/${id}`);
     this.StudentJobs = result.data;
   };
 
@@ -62,19 +58,16 @@ export class StudentInventory {
     time,
     status
   ) => {
-    const res = await axios.post(
-      `http://localhost:8888/student/edit/jobs/${id}`,
-      {
-        companyName,
-        location,
-        whereFindJob,
-        role,
-        description,
-        interviewId,
-        type,
-        time,
-      }
-    );
+    const res = await axios.post(`/student/edit/jobs/${id}`, {
+      companyName,
+      location,
+      whereFindJob,
+      role,
+      description,
+      interviewId,
+      type,
+      time,
+    });
     if (status != "") {
       this.edditStatusForStudent(id, status);
     }
@@ -82,12 +75,12 @@ export class StudentInventory {
   };
   edditStatusForStudent = async (jobId, status) => {
     const res = await axios.post(
-      "http://localhost:8888/student/jobs/status/" + jobId + "/interviews",
+      "/student/jobs/status/" + jobId + "/interviews",
       { status }
     );
   };
   deleteProcesses = async function (studentId, id) {
-    const res = await axios.delete(`http://localhost:8888/student/jobs/${id}`);
+    const res = await axios.delete(`/student/jobs/${id}`);
     this.addJobsFromDB(studentId);
   };
 }
