@@ -71,7 +71,6 @@ export default function AdminMenuItems() {
           className={`${
             location.pathname == item.path ? classes.active : null
           } ${classes.ListItem}`}
-          //  to make the btns hover
         >
           <ListItemIcon>{item.icon}</ListItemIcon>
           <ListItemText primary={item.text} className={classes.ListItemText} />

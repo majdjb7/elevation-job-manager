@@ -53,7 +53,7 @@ const Register = inject("adminstore")(
     const submit = async (e) => {
         e.preventDefault();
 
-        await fetch('/auth/register', { //http://localhost:8888
+        await fetch('/auth/register', { 
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

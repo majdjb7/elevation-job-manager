@@ -69,7 +69,7 @@ const useStyles = makeStyles((theme) => {
     },
     avatar: {
       backgroundColor: theme.palette.secondary.light,
-      // color: theme.palette.getContrastText(theme.palette.primary.light),
+
       color: "#1a73e8",
       fontWeight: "bold",
       marginRight: "15px",

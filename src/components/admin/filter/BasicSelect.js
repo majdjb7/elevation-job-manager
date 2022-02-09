@@ -4,11 +4,11 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-////////////////////////////
+
 import { inject, observer } from "mobx-react";
 import { observe } from "mobx";
 import { toJS } from "mobx";
-/////////////////////////////
+
 const BasicSelect = inject(
   "adminstore",
   "studentstore"
@@ -25,7 +25,6 @@ const BasicSelect = inject(
         props.adminstore.filterProcessesByCohortName(e);
       }
       if (props.selectBy === "Status") {
-        // console.log("Status");
         props.adminstore.filterProcessesByStatus(e);
       }
     };

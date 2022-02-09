@@ -27,7 +27,6 @@ const Login = inject("studentstore")(
 
     useEffect(() => {
       props.studentstore.checkUserLoggedIn();
-      // props.studentstore.setLogin();
     });
 
     function Copyright(props) {
@@ -47,7 +46,7 @@ const Login = inject("studentstore")(
     const submit = async (e) => {
       e.preventDefault();
 
-      const response = await fetch("/auth/login", { //http://localhost:8888
+      const response = await fetch("/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -61,7 +60,6 @@ const Login = inject("studentstore")(
       console.log("CON: ", content);
 
       if (content.message === "Success") {
-        // && content.isAdmin == false
         props.studentstore.setStudentID(content.studentID);
         props.studentstore.setLogin();
         props.studentstore.setUserType(content.isAdmin);

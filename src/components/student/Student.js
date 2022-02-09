@@ -6,12 +6,10 @@ import Processes from "./Processes";
 import AddProcess from "../student/AddProcess";
 import AddInterview from "../student/AddInterview";
 
-//FOR ADMIN: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 import Dashboard from "../admin/dashboard/Dashboard";
 import AddAdmin from "../admin/AddAdmin";
 
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 import StudentProfile from "../student/studendProfile";
 
 import { useState, useEffect } from "react";

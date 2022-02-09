@@ -9,11 +9,11 @@ import {
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import PeopleIcon from "@mui/icons-material/PeopleOutlined";
 import WorkOutlineRoundedIcon from "@mui/icons-material/WorkOutlineRounded";
-////////////////////////////
+
 import { inject, observer } from "mobx-react";
 import { observe } from "mobx";
 import { toJS } from "mobx";
-/////////////////////////////
+
 export const TotalWorkers = inject(
   "adminstore",
   "studentstore"

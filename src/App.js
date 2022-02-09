@@ -20,7 +20,7 @@ import AddAdmin from "./components/admin/AddAdmin";
 
 import NestedList from "./components/student/NestedList";
 
-//////////
+
 import Student from "./components/student/Student";
 import Admin from "./components/admin/Admin";
 import Authentication from "./components/authentication/Authentication";
@@ -45,13 +45,11 @@ const theme = createMuiTheme({
 
 const App = inject("studentstore")(
   observer((props) => {
-    // useEffect(() => {
-    //   props.studentstore.checkUserLoggedIn();
-    // });
+   
     
     return (
       <ThemeProvider theme={theme}>
-        {/* to overide and change the orignal colors and thems in other comps */}
+
         {!props.studentstore.isLoggedIn ? <Authentication /> : null}
         {props.studentstore.isLoggedIn && props.studentstore.isAdmin == false ? <Student /> : null}
         {props.studentstore.isLoggedIn && props.studentstore.isAdmin == true ? <Admin /> : null}

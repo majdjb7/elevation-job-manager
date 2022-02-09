@@ -8,11 +8,11 @@ import {
 } from "@mui/material";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import MoneyIcon from "@mui/icons-material/Money";
-////////////////////////////
+
 import { inject, observer } from "mobx-react";
 import { observe } from "mobx";
 import { toJS } from "mobx";
-/////////////////////////////
+
 
 const TotalStudents = inject(
   "adminstore",

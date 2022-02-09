@@ -16,18 +16,17 @@ import {
   Container,
 } from "@material-ui/core";
 
-////////////////////////////
+
 import { inject, observer } from "mobx-react";
 import { observe } from "mobx";
 import { toJS } from "mobx";
-/////////////////////////////
+
 import NestedList from "../../../student/NestedList";
 
 import BasicSelect from "../../filter/BasicSelect";
 import AutocompleteSearch from "../../filter/AutocompleteSearch";
 
 import moment from "moment";
-///////////////////////////////////
 import { format } from "date-fns";
 import { Box, Card, CardHeader } from "@mui/material";
 const useStyles = makeStyles((theme) => ({
@@ -42,7 +41,6 @@ const useStyles = makeStyles((theme) => ({
   tableHeaderCellForName: {
     fontWeight: "bold",
     color: "#0066ff",
-    // width: "25%",
   },
   tableHeaderCell: {
     fontWeight: "bold",

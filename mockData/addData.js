@@ -113,33 +113,7 @@ function addData() {
   });
 }
 
-//   jobData.forEach((job) => {
-//     const j = new Job({
-//       companyName: job.companyName,
-//       role: job.role,
-//       location: job.location,
-//       description: job.description,
-//       status: job.status,
-//       whereFindJob: job.whereFindJob,
-//       mostRecentDate: null,
-//       interviews: job.interviews,
-//     });
-//     interviewData.forEach((interview) => {
-//       const i = new Interview({
-//         type: interview.type,
-//         time: interview.time,
-//         interviewerName: interview.interviewerName,
-//         status: interview.status,
-//       });
-//       i.save();
-//       j.interviews.push(i);
-//     });
-//     j.save();
-//     s.jobs.push(j);
-//   });
 
-//   s.save();
-// });
 function updateJob() {
   try {
     Student.find({})
@@ -147,7 +121,7 @@ function updateJob() {
         path: "jobs",
       })
       .exec(async function (err, students) {
-        //  console.log(students);
+
         for (let student of students) {
           for (let job of student.jobs) {
             await Job.findByIdAndUpdate(job._id, { studentId: student._id });
@@ -159,5 +133,5 @@ function updateJob() {
   }
 }
 
-//addData();
+
 updateJob();

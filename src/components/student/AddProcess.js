@@ -22,9 +22,7 @@ const useStyles = makeStyles({
     display: "block",
     maxWidth: "35%",
   },
-  // Container: {
-  //   marginLeft: "-80px",
-  // },
+
 });
 
 const AddProcess = inject("studentstore")(
@@ -69,7 +67,7 @@ const AddProcess = inject("studentstore")(
       if (companyName && role && location && description && whereFindJob) {
         console.log(props.studentstore.studentID);
         const res = await axios.post(
-          `/student/jobs/${props.studentstore.studentID}`, //http://localhost:8888
+          `/student/jobs/${props.studentstore.studentID}`, 
           { companyName, role, location, description, whereFindJob }
         );
         history.push({
@@ -86,7 +84,6 @@ const AddProcess = inject("studentstore")(
           color="textSecondary"
           component="h2"
           gutterBottom
-          // className={classes.Container}
         >
           Create a New Procsss
         </Typography>
@@ -95,7 +92,6 @@ const AddProcess = inject("studentstore")(
           noValidate
           autoComplete="off"
           onSubmit={handleSubmit}
-          // className={classes.Container}
         >
           <TextField
             className={classes.field}

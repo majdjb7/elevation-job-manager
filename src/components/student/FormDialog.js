@@ -60,7 +60,7 @@ const FormDialog = inject("studentstore")(
         let id = props.jobId;
         try {
           const res = await axios.post(
-            "/student/jobs/" + id + "/interviews", //http://localhost:8888
+            "/student/jobs/" + id + "/interviews", 
             { type, time, interviewerName }
           );
           await props.studentstore.addJobsFromDB();

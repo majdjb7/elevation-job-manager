@@ -20,19 +20,17 @@ const AddCohort = inject("adminstore")(
     }
     
     const [cohortName, setCohortName] = useState("");
-    // const [redirect, setRedirect] = useState(false);
+
     props.adminstore.getCohorts();
 
     const submit = async (e) => {
       e.preventDefault();
       props.adminstore.addCohort(cohortName)
       setCohortName("")
-      // setRedirect(true);
+
     };
 
-    // if (redirect) {
-    //   return <Redirect to="/" />;
-    // }
+
 
     
     return (

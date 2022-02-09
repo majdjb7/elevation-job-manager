@@ -23,9 +23,7 @@ const useStyles = makeStyles({
     display: "block",
     maxWidth: "250px",
   },
-  // Container: {
-  //   marginLeft: "-80px",
-  // },
+
 });
 const AddInterview = inject("studentstore")(
   observer((props) => {
@@ -56,7 +54,7 @@ const AddInterview = inject("studentstore")(
 
       if (type && time && interviewerName) {
         let id = location.state;
-         //http://localhost:8888
+
         try {
           const res = await axios.post(
             "/student/jobs/" + id + "/interviews",
@@ -80,7 +78,6 @@ const AddInterview = inject("studentstore")(
           color="textSecondary"
           component="h2"
           gutterBottom
-          // className={classes.Container}
         >
           Create a New Interview
         </Typography>
@@ -89,7 +86,6 @@ const AddInterview = inject("studentstore")(
           noValidate
           autoComplete="off"
           onSubmit={handleSubmit}
-          // className={classes.Container}
         >
           <FormControl className={classes.field}>
             <FormLabel>Type</FormLabel>

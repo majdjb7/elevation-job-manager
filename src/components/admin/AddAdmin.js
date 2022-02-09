@@ -30,9 +30,7 @@ function Copyright(props) {
 const theme = createTheme();
 const AddAdmin = inject("studentstore")(
   observer((props) => {
-    // if (props.studentstore.isAdmin === false) {
-    //     return <Redirect to="/" />;
-    // }
+    
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
@@ -43,7 +41,7 @@ const AddAdmin = inject("studentstore")(
     const submit = async (e) => {
       e.preventDefault();
 
-      await fetch("/auth/registerAdmin", { //http://localhost:8888
+      await fetch("/auth/registerAdmin", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

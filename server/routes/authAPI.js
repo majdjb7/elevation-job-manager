@@ -21,8 +21,8 @@ router.post('/register', async (req, res) => {
         password: hashedPassword,
     })
     
-    // Cohort.findOneAndUpdate({name: req.body.cohort}, { $inc: {'numOfStudents': 1 } }, {new: true })
 
+    
     Cohort.findOneAndUpdate({name: req.body.cohort}, { $inc: {'numOfStudents': 1 } }, {new: true }, function(err, response) {
         if (err) {
         console.log(err);
@@ -86,7 +86,7 @@ router.post('/login', async (req, res) => {
 
     res.cookie('jwt', token, {
         httpOnly: true,
-        maxAge: 24 * 60 * 60 * 1000 //1 day
+        maxAge: 24 * 60 * 60 * 1000
     })
     res.send({
         message: 'Success',

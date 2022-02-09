@@ -36,7 +36,7 @@ const useStyles = makeStyles({
     maxWidth: "50%",
   },
   Container: {
-    //      marginLeft: "-80px",
+    
   },
 });
 
@@ -49,7 +49,7 @@ const Simulation = inject("studentstore")(
     const send = async () => {
       if (zoom && time && type && props.studentstore.studentData.firstName) {
         const res = await axios.post(
-          `/admin/message/send`, //http://localhost:8888
+          `/admin/message/send`,
           {
             zoom,
             time,

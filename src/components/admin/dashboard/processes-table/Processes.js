@@ -16,13 +16,12 @@ import {
   TableFooter,
   Button,
 } from "@material-ui/core";
-// import Button from '@mui/material/Button';
-////////////////////////////
+
 import { inject, observer } from "mobx-react";
 import { observe } from "mobx";
 import { toJS } from "mobx";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-/////////////////////////////
+
 import NestedList from "../../../student/NestedList";
 
 import BasicSelect from "../../filter/BasicSelect";
@@ -30,7 +29,7 @@ import AutocompleteSearch from "../../filter/AutocompleteSearch";
 import Filter from "./Filter";
 import { Redirect } from "react-router-dom";
 import moment from "moment";
-///////////////////////////////////
+
 import { format } from "date-fns";
 import { Box, Card, CardHeader } from "@mui/material";
 
@@ -46,7 +45,8 @@ const useStyles = makeStyles((theme) => ({
   tableHeaderCellForName: {
     fontWeight: "bold",
     color: "#0066ff",
-    // width: "25%",
+
+    
   },
   tableHeaderCell: {
     fontWeight: "bold",
@@ -83,10 +83,7 @@ const Processes = inject(
   "studentstore"
 )(
   observer((props) => {
-    /************************************************ */
-    // if (props.studentstore.isAdmin === false) {
-    //   return <Redirect to="/" />;
-    // }
+  
     const history = useHistory();
     useEffect(async () => {
       await props.adminstore.getAllStudentsProcessesFromDB();
