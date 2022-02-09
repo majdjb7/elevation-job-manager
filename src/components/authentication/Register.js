@@ -195,16 +195,15 @@ const Register = inject("adminstore")(
               </Button>
               <Grid container justifyContent="flex-end">
                 <Grid item>
-                  <Link
+                  <div
                     onClick={() => {
                       history.push({
                         pathname: "/",
                       });
                     }}
-                    variant="body2"
                   >
                     Already have an account? Sign in
-                  </Link>
+                  </div>
                 </Grid>
               </Grid>
             </Box>

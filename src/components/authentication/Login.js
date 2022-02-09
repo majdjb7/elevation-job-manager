@@ -180,16 +180,15 @@ const Login = inject(
                     {/* <Link href="/Register" variant="body2">
                       {"Don't have an account? Sign Up"}
                     </Link> */}
-                    <Link
+                    <div
                       onClick={() => {
                         history.push({
                           pathname: "/Register",
                         });
                       }}
-                      variant="body2"
                     >
-                      {"Don't have an account? Sign Up"}
-                    </Link>
+                      Don't have an account? Sign Up
+                    </div>
                   </Grid>
                 </Grid>
                 <Copyright sx={{ mt: 5 }} />
