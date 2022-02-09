@@ -54,7 +54,7 @@ const Register = inject("adminstore")(
     const [password, setPassword] = useState("");
     const [redirect, setRedirect] = useState(false);
     const [cohortsArr, setCohortsArr] = useState([]);
-
+    const history = useHistory();
     useEffect(() => {
       props.adminstore.getCohorts();
     }, []);
