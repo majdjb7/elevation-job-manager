@@ -6,7 +6,11 @@ export class UserInventory {
     this.isLoggedIn = false;
     this.userID = "";
     this.isAdmin = false;
+    this.userEmail = "";
+    this.mobileNo = "";
     makeObservable(this, {
+      userEmail: observable,
+      mobileNo: observable,
       userFirstName: observable,
       isLoggedIn: observable,
       isAdmin: observable,
@@ -37,6 +41,8 @@ export class UserInventory {
     });
     const content = await response.json();
     this.userFirstName = content.firstName;
+    this.userEmail = content.email;
+    this.mobileNo = content.mobileNo;
     this.userID = content._id;
     this.isAdmin = content.isAdmin;
     if (response.status != 401) {
@@ -54,5 +60,7 @@ export class UserInventory {
     this.isLoggedIn = false;
     this.userID = "";
     this.isAdmin = false;
+    this.userEmail = "";
+    this.mobileNo = "";
   };
 }

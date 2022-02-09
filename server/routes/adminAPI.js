@@ -276,12 +276,12 @@ router.post("/message/send", async (req, res) => {
   client.messages
     .create({
       body: `Hi ${req.body.firstName},
-      You have been invited to a ${req.body.type} Simulation Interview with {admin.name},
+      You have been invited to a ${req.body.type} Simulation Interview with ${req.body.userFirstName},
       on: ${req.body.time}.
       Here is the link for the meeting: ${req.body.zoom}
       If the time or date isn't convenient, please reply stating what times you ARE available for the simulation.
-      Reply to: WhatsApp: {admin.num}
-                    Email: {admin.email}`,
+      Reply to: WhatsApp: ${req.body.mobileNo}
+                    Email: ${req.body.userEmail}`,
       from: "whatsapp:+14155238886",
       to: "whatsapp:+972532282478",
     })

@@ -40,7 +40,10 @@ const useStyles = makeStyles({
   },
 });
 
-const Simulation = inject("studentstore")(
+const Simulation = inject(
+  "studentstore",
+  "userstore"
+)(
   observer((props) => {
     const classes = useStyles();
     const [zoom, setZoom] = useState("");
@@ -51,6 +54,9 @@ const Simulation = inject("studentstore")(
         const res = await axios.post(
           `http://localhost:8888/admin/message/send`,
           {
+            userFirstName: props.userstore.userFirstName,
+            userEmail: props.userstore.userEmail,
+            mobileNo: props.userstore.mobileNo,
             zoom,
             time,
             type,
