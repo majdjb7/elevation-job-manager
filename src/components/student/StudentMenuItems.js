@@ -59,6 +59,11 @@ export default function StudentMenuItems() {
       icon: <AddCircle color="secondary" />,
       path: "/addProcess",
     },
+    {
+      text: "Add Admin",
+      icon: <AddCircle color="secondary" />,
+      path: "/AddAdmin",
+    },
   ];
 
   return (

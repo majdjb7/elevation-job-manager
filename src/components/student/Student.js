@@ -37,6 +37,9 @@ export default function Student() {
             <Route exact path="/studentprofile">
               <StudentProfile />
             </Route>
+            <Route exact path="/AddAdmin">
+              <AddAdmin />
+            </Route>
           </Switch>
         </Layout>
       </Router>
