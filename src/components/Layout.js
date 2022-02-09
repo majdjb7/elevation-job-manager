@@ -143,8 +143,7 @@ const Layout = inject(
           </div>
 
           {/* links/list section */}
-
-          <AdminMenuItems />
+          {props.userstore.isAdmin ? <AdminMenuItems /> : <StudentMenuItems />}
 
           {/* <StudentMenuItems /> */}
 

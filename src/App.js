@@ -5,7 +5,7 @@ import { purple } from "@material-ui/core/colors";
 import Processes from "./components/student/Processes";
 import AddProcess from "./components/student/AddProcess";
 import AddInterview from "./components/student/AddInterview";
-import StudentProfile from "./components/student/studendProfile";
+import Student from "./components/student/Student";
 
 import Dashboard from "./components/admin/dashboard/Dashboard";
 
@@ -54,7 +54,7 @@ const App = inject(
       if (props.userstore.isAdmin) {
         routes = <Admin />;
       } else {
-        routes = <StudentProfile />;
+        routes = <Student />;
       }
     } else {
       routes = <Authentication />;

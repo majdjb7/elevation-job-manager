@@ -58,6 +58,9 @@ const Login = inject(
         <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
         <h1>admin@gmail.com</h1>
         <h1>1234567891</h1>
+        <h1>amer@amer.com</h1>
+        <h1>123456</h1>
+
         <input
           type="email"
           className="form-control"
