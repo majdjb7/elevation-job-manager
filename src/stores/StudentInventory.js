@@ -37,7 +37,7 @@ export class StudentInventory {
   }
   addJobsFromDB = async () => {
     try {
-      console.log("ID: ", this.studentID)
+      // console.log("ID: ", this.studentID)
       //http://localhost:8888
       if (this.isAdmin == false) {
         let result = await axios.get(`/student/jobs/${this.studentID}`)
