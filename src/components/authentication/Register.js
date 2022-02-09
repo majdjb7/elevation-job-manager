@@ -195,7 +195,9 @@ const Register = inject("adminstore")(
               </Button>
               <Grid container justifyContent="flex-end">
                 <Grid item>
-                  <div
+                  <Button
+                    variant="contained"
+                    color="secondary"
                     onClick={() => {
                       history.push({
                         pathname: "/",
@@ -203,7 +205,7 @@ const Register = inject("adminstore")(
                     }}
                   >
                     Already have an account? Sign in
-                  </div>
+                  </Button>
                 </Grid>
               </Grid>
             </Box>
