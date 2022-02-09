@@ -72,6 +72,11 @@ export default function AdminMenuItems() {
       icon: <AddCircle color="secondary" />,
       path: "/AddAdmin",
     },
+    {
+      text: "Add Cohort",
+      icon: <AddCircle color="secondary" />,
+      path: "/addCohort",
+    },
   ];
 
   return (

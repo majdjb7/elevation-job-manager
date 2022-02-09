@@ -53,10 +53,13 @@ const Register = inject("adminstore")(
     const [cohort, setCohort] = useState("");
     const [password, setPassword] = useState("");
     const [redirect, setRedirect] = useState(false);
+    const [cohortsArr, setCohortsArr] = useState([]);
 
     useEffect(() => {
       props.adminstore.getCohorts();
-    });
+
+      //setCohortsArr(props.adminstore.cohorts);
+    }, []);
 
     const submit = async (e) => {
       e.preventDefault();
@@ -172,12 +175,14 @@ const Register = inject("adminstore")(
                       <MenuItem value="">
                         <em>None</em>
                       </MenuItem>
-                      {/* {props.adminstore.cohorts.map((c, i) => (
-                        <MenuItem value={c.name}>{c.name}</MenuItem>
-                      ))} */}
+                      {props.adminstore.cohorts.map((c, i) => (
+                        <MenuItem key={c.name + " " + i} value={c.name}>
+                          {c.name}
+                        </MenuItem>
+                      ))}
                     </Select>
                     <FormHelperText>
-                      Choose one of the aboce cohorts
+                      Choose one of the above cohorts
                     </FormHelperText>
                   </FormControl>
                 </Grid>

@@ -3,6 +3,7 @@ const router = express.Router();
 const Job = require("../models/Job");
 const Student = require("../models/Student");
 const Interview = require("../models/Interview");
+const Cohort = require("../models/Cohort");
 
 const generateProcesses = async (jobs) => {
   let result = [];
@@ -109,7 +110,7 @@ router.get("/inactive-students", async (req, res) => {
     res.status(500).send({ error: "Something failed!" });
   }
 });
-router.get("/cohorts", async (req, res) => {
+router.get("/students-numbers-cohort", async (req, res) => {
   const cohorts = {};
   try {
     let students = await Student.find({});
@@ -252,6 +253,42 @@ router.get("/cohorts", async (req, res) => {
     res.status(500).send({ error: "Something failed!" });
   }
 });
+
+router.post("/cohorts", async (req, res) => {
+  try {
+    console.log(req.body.cohort);
+    if (req.body.cohort) {
+      let cohort = new Cohort({
+        name: req.body.cohort,
+      });
+
+      await cohort.save();
+      res.send(cohort);
+    } else {
+      res.send("Input is required");
+    }
+  } catch (error) {
+    res.status(500).send({ error: "Something failed!" });
+  }
+});
+
+router.delete("/cohorts", async (req, res) => {
+  try {
+    if (req.body.cohort) {
+      Cohort.findOneAndDelete(
+        { name: req.body.cohort },
+        function (err, cohort) {
+          res.send(cohort);
+        }
+      );
+    } else {
+      res.send("Input is required");
+    }
+  } catch (error) {
+    res.status(500).send({ error: "Something failed!" });
+  }
+});
+
 router.get("/cohorts/:cohortName", async (req, res) => {
   try {
     await Student.find({ cohort: req.params.cohortName })

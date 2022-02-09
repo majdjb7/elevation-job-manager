@@ -25,6 +25,9 @@ export class AdminInventory {
       getAllStudentsNames: action,
       filterProcessesByName: action,
       getTotalWorkers: action,
+      // deleteCohort: action,
+      // addCohort: action,
+      // getCohorts: action,
     });
   }
   get totalStudents() {
@@ -113,10 +116,39 @@ export class AdminInventory {
       console.log("Something wrong");
     }
   };
+
   getCohorts = async () => {
     try {
       let result = await axios.get(`http://localhost:8888/admin/cohorts`);
-      this.cohorts = result.data;
+      this.cohorts = [...result.data];
+    } catch (error) {
+      console.log("Something wrong with getting cohorts");
+    }
+  };
+
+  addCohort = async (cohort) => {
+    try {
+      await fetch("http://localhost:8888/admin/cohorts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          cohort,
+        }),
+      });
+    } catch (error) {
+      console.log("Something wrong with getting cohorts");
+    }
+  };
+
+  deleteCohort = async (cohort) => {
+    try {
+      await fetch("http://localhost:8888/admin/cohorts", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          cohort,
+        }),
+      });
     } catch (error) {
       console.log("Something wrong with getting cohorts");
     }

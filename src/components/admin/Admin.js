@@ -14,6 +14,7 @@ import axios from "axios";
 import { inject, observer } from "mobx-react";
 import { observe } from "mobx";
 import StudentProfile from "../student/studendProfile";
+import AddCohort from "./AddCohort";
 export default function Admin() {
   return (
     <div>
@@ -35,6 +36,9 @@ export default function Admin() {
 
             <Route exact path="/studentprofile">
               <StudentProfile />
+            </Route>
+            <Route exact path="/addCohort">
+              <AddCohort />
             </Route>
           </Switch>
         </Layout>
