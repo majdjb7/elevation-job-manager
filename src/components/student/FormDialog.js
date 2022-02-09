@@ -63,7 +63,7 @@ const FormDialog = inject("studentstore")(
             "http://localhost:8888/student/jobs/" + id + "/interviews",
             { type, time, interviewerName }
           );
-          await props.studentstore.addJobsFromDB();
+          // await props.studentstore.addJobsFromDB();
         } catch (error) {
           setError("Something wrong");
         }

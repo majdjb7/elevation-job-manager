@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Redirect } from "react-router-dom";
-import DeleteIcon from '@mui/icons-material/Delete';
+import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
 import {
   Table,
@@ -81,7 +81,7 @@ const Processes = inject(
       if (!props.userstore.isAdmin) {
         await props.studentstore.addJobsFromDB(props.userstore.userID);
       } else {
-        await props.studentstore.addJobsFromDB(props.rowId);
+        //await props.studentstore.addJobsFromDB(props.rowId);
       }
     }, []);
     /************************************************ */
@@ -236,10 +236,14 @@ const Processes = inject(
                         <AddCircleOutline />
                       </Button>
                     )}
-
                   </TableCell>
                   <TableCell>
-                    <IconButton aria-label="delete" onClick={() => props.studentstore.deleteProcesses(row._id)}>
+                    <IconButton
+                      aria-label="delete"
+                      onClick={() =>
+                        props.studentstore.deleteProcesses(row._id)
+                      }
+                    >
                       <DeleteIcon />
                     </IconButton>
                   </TableCell>

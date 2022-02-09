@@ -19,7 +19,7 @@ export class StudentInventory {
       numItems: computed,
       addJobsFromDB: action,
       getStudentData: action,
-      deleteProcesses:action,
+      deleteProcesses: action,
     });
   }
   get numItems() {
@@ -27,6 +27,7 @@ export class StudentInventory {
   }
   addJobsFromDB = async (studentID) => {
     try {
+      this.studentId = studentID;
       if (this.isAdmin == false) {
         let result = await axios.get(
           `http://localhost:8888/student/jobs/${studentID}`
@@ -53,12 +54,10 @@ export class StudentInventory {
       "http://localhost:8888/student/jobs/status/" + jobId + "/interviews",
       { status }
     );
+    this.addJobsFromDB(this.studentId);
   };
-   deleteProcesses = async function (id) {
-    const res = await axios.delete(
-      `http://localhost:8888/student/jobs/${id}`,
-
-    );
-    this.addJobsFromDB();
-  }
+  deleteProcesses = async (id) => {
+    const res = await axios.delete(`http://localhost:8888/student/jobs/${id}`);
+    this.addJobsFromDB(this.studentId);
+  };
 }
