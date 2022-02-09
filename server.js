@@ -45,7 +45,7 @@ const port = 8888;
 
 //HEROKU
 app.get("*", function (req, res) {
-  res.sendFile(path.join(__dirname, "build", "index.html"));
+  res.sendFile(path.join(__dirname, "build", "public/index.html"));
 });
 
 app.listen(process.env.PORT || port, function () {
