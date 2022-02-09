@@ -16,7 +16,6 @@ const StudentProfile = () => (
       <Grid item xs={8}>
         <Simulation />
       </Grid>
-
       <Grid item xs={12}>
         {/* <Processes /> */}
       </Grid>

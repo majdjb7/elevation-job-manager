@@ -76,7 +76,11 @@ const Processes = inject(
 )(
   observer((props) => {
     useEffect(async () => {
-      await props.studentstore.addJobsFromDB(props.userstore.userID);
+      if (!props.userstore.isAdmin) {
+        await props.studentstore.addJobsFromDB(props.userstore.userID);
+      } else {
+        await props.studentstore.addJobsFromDB(props.rowId);
+      }
     }, []);
     /************************************************ */
     const classes = useStyles();

@@ -10,7 +10,7 @@ export class StudentInventory {
     this.firstName = "";
     this.isLoggedIn = false;
     this.isAdmin = false;
-
+    this.studentId = "";
     makeObservable(this, {
       firstName: observable,
       StudentJobs: observable,
@@ -38,6 +38,7 @@ export class StudentInventory {
   };
 
   getStudentData = async (id) => {
+    this.studentId = id;
     const studentData = await axios.get(
       `http://localhost:8888/student/data/${id}`
     );
