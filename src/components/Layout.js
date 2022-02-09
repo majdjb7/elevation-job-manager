@@ -77,7 +77,10 @@ const useStyles = makeStyles((theme) => {
   };
 });
 
-const Layout = inject("studentstore")(
+const Layout = inject(
+  "studentstore",
+  "userstore"
+)(
   observer((props) => {
     {
       /* the props children is all the comps from app.js under the switch */
@@ -114,7 +117,7 @@ const Layout = inject("studentstore")(
               variant="contained"
               color="secondary"
               onClick={() => {
-                props.studentstore.logout();
+                props.userstore.logout();
 
                 history.push({
                   pathname: "/",

@@ -5,7 +5,10 @@ import { useHistory, useLocation } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 import { observe } from "mobx";
 
-const Login = inject("studentstore")(
+const Login = inject(
+  "studentstore",
+  "userstore"
+)(
   observer((props) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -36,10 +39,10 @@ const Login = inject("studentstore")(
 
       if (content.message === "Success") {
         // && content.isAdmin == false
-        props.studentstore.setStudentID(content.studentID);
+        props.userstore.setUserID(content.userID);
 
-        props.studentstore.setLogin();
-        props.studentstore.setUserType(content.isAdmin);
+        props.userstore.setLogin();
+        props.userstore.setUserType(content.isAdmin);
         //setRedirect(true);
       } else {
         alert(content.message);
@@ -53,6 +56,8 @@ const Login = inject("studentstore")(
     return (
       <form onSubmit={submit}>
         <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
+        <h1>admin@gmail.com</h1>
+        <h1>1234567891</h1>
         <input
           type="email"
           className="form-control"

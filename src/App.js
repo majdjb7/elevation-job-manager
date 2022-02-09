@@ -44,15 +44,22 @@ const theme = createMuiTheme({
 
 const App = inject(
   "studentstore",
-  "adminstore"
+  "adminstore",
+  "userstore"
 )(
   observer((props) => {
-    props.studentstore.checkUserLoggedIn();
-    return (
-      <ThemeProvider theme={theme}>
-        {props.studentstore.isLoggedIn ? <Admin /> : <Authentication />}
-      </ThemeProvider>
-    );
+    props.userstore.checkUserLoggedIn();
+    let routes;
+    if (props.userstore.isLoggedIn) {
+      if (props.userstore.isAdmin) {
+        routes = <Admin />;
+      } else {
+        routes = <StudentProfile />;
+      }
+    } else {
+      routes = <Authentication />;
+    }
+    return <ThemeProvider theme={theme}>{routes}</ThemeProvider>;
   })
 );
 
