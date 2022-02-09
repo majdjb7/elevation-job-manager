@@ -57,8 +57,6 @@ const Register = inject("adminstore")(
 
     useEffect(() => {
       props.adminstore.getCohorts();
-
-      //setCohortsArr(props.adminstore.cohorts);
     }, []);
 
     const submit = async (e) => {
