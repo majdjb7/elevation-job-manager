@@ -15,6 +15,7 @@ import { inject, observer } from "mobx-react";
 import { observe } from "mobx";
 import StudentProfile from "../student/studendProfile";
 import AddCohort from "./AddCohort";
+import Register from "../authentication/Register";
 export default function Admin() {
   return (
     <div>
@@ -39,6 +40,9 @@ export default function Admin() {
             </Route>
             <Route exact path="/addCohort">
               <AddCohort />
+            </Route>
+            <Route exact path="/Register">
+              <Register />
             </Route>
           </Switch>
         </Layout>

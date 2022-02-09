@@ -17,7 +17,7 @@ const Authentication = inject("studentstore")(
             <Route exact path="/">
               <Login />
             </Route>
-            <Route exact path="/register">
+            <Route exact path="/Register">
               <Register />
             </Route>
           </Switch>

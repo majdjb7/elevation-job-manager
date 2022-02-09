@@ -7,7 +7,7 @@ import AddProcess from "../student/AddProcess";
 import AddInterview from "../student/AddInterview";
 import MyCalendar from "../MyCalendar";
 //FOR ADMIN: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
+import Register from "../authentication/Register";
 import Dashboard from "../admin/dashboard/Dashboard";
 import AddAdmin from "../admin/AddAdmin";
 
@@ -39,6 +39,9 @@ export default function Student() {
             </Route>
             <Route exact path="/AddAdmin">
               <AddAdmin />
+            </Route>
+            <Route exact path="/Register">
+              <Register />
             </Route>
           </Switch>
         </Layout>
