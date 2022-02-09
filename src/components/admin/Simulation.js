@@ -19,6 +19,14 @@ import FormLabel from "@material-ui/core/FormLabel";
 import { makeStyles } from "@material-ui/core";
 import { inject, observer } from "mobx-react";
 import axios from "axios";
+import Stack from "@mui/material/Stack";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
 const user = {
   avatar: "/static/images/avatars/avatar_6.png",
   city: "Los Angeles",
@@ -49,6 +57,20 @@ const Simulation = inject(
     const [zoom, setZoom] = useState("");
     const [time, setTime] = useState("");
     const [type, setType] = useState("");
+    const [open, setOpen] = React.useState(false);
+
+    const handleClick = () => {
+      setOpen(true);
+    };
+
+    const handleClose = (event, reason) => {
+      if (reason === "clickaway") {
+        return;
+      }
+
+      setOpen(false);
+    };
+
     const send = async () => {
       if (zoom && time && type && props.studentstore.studentData.firstName) {
         const res = await axios.post(
@@ -67,6 +89,17 @@ const Simulation = inject(
     };
     return (
       <Card>
+        <Stack spacing={2} sx={{ width: "100%" }}>
+          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+            <Alert
+              onClose={handleClose}
+              severity="success"
+              sx={{ width: "100%" }}
+            >
+              Message sent!
+            </Alert>
+          </Snackbar>
+        </Stack>
         <CardContent>
           <Box
             sx={{
@@ -92,6 +125,7 @@ const Simulation = inject(
                   label="Zoom URL"
                   variant="outlined"
                   color="primary"
+                  value={zoom}
                   required
                   fullWidth
                 />
@@ -104,6 +138,7 @@ const Simulation = inject(
                   label="Time"
                   type="datetime-local"
                   required
+                  value={time}
                   sx={{ width: 250 }}
                   InputLabelProps={{
                     shrink: true,
@@ -139,7 +174,13 @@ const Simulation = inject(
                   type="submit"
                   color="primary"
                   variant="contained"
-                  onClick={send}
+                  onClick={() => {
+                    send();
+                    handleClick();
+                    setZoom("");
+                    setTime("");
+                    setType("");
+                  }}
                 >
                   Send
                 </Button>
