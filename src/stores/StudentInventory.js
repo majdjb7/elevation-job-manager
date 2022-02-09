@@ -19,6 +19,8 @@ export class StudentInventory {
       numItems: computed,
       addJobsFromDB: action,
       getStudentData: action,
+      deleteProcesses: action,
+      EditDone: action,
     });
   }
   get numItems() {
@@ -47,10 +49,44 @@ export class StudentInventory {
     this.StudentJobs = result.data;
   };
 
+  EditDone = async function (
+    id,
+    companyName,
+    location,
+    whereFindJob,
+    role,
+    description,
+    interviewId,
+    type,
+    time,
+    status
+  ) {
+    const res = await axios.post(
+      `http://localhost:8888/student/edit/jobs/${id}`,
+      {
+        companyName,
+        location,
+        whereFindJob,
+        role,
+        description,
+        interviewId,
+        type,
+        time,
+      }
+    );
+    if (status != "") {
+      this.edditStatusForStudent(id, status);
+    }
+    //this.addJobsFromDB();
+  };
   edditStatusForStudent = async (jobId, status) => {
     const res = await axios.post(
       "http://localhost:8888/student/jobs/status/" + jobId + "/interviews",
       { status }
     );
+  };
+  deleteProcesses = async function (id) {
+    const res = await axios.delete(`http://localhost:8888/student/jobs/${id}`);
+    //this.addJobsFromDB();
   };
 }

@@ -134,7 +134,82 @@ router.post("/jobs/status/:jobId/interviews", async (req, res) => {
     res.send(error).status(500);
   }
 });
-
+router.delete("/jobs/:id", async (req, res) => {
+  let id = req.params.id;
+  Job.findOneAndDelete({ _id: id }, function (err, docs) {
+    if (err) {
+      res.status(500).send({ error: "Something failed!" });
+    } else {
+      res.send("ok");
+    }
+  });
+});
+router.post("/edit/jobs/:id", async (req, res) => {
+  const id = req.params.id;
+  let companyName = req.body.companyName;
+  let location = req.body.location;
+  let whereFindJob = req.body.whereFindJob;
+  let role = req.body.role;
+  let description = req.body.description;
+  let type = req.body.type;
+  let interviewId = req.body.interviewId;
+  let time = req.body.time;
+  let job;
+  try {
+    job = await Job.findOne({ _id: id });
+  } catch (error) {
+    res.send(error).status(500);
+  }
+  if (req.body.companyName == "") {
+    companyName = job.companyName;
+  }
+  if (req.body.location == "") {
+    location = job.location;
+  }
+  if (req.body.whereFindJob == "") {
+    whereFindJob = job.whereFindJob;
+  }
+  if (req.body.role == "") {
+    role = job.role;
+  }
+  if (req.body.description == "") {
+    description = job.description;
+  }
+  try {
+    Job.findByIdAndUpdate(
+      id,
+      { companyName, location, whereFindJob, role, description },
+      function (err, user) {}
+    );
+    res.send().status(200);
+  } catch (error) {
+    res.send(error).status(500);
+  }
+  if (type != "" && interviewId != "") {
+    try {
+      Interview.findByIdAndUpdate(
+        interviewId,
+        { type },
+        function (err, user) {}
+      );
+      res.send().status(200);
+    } catch (error) {
+      res.send(error).status(500);
+    }
+  }
+  if (time != "" && interviewId != "") {
+    try {
+      Interview.findByIdAndUpdate(
+        interviewId,
+        { time },
+        function (err, user) {}
+      );
+      res.send().status(200);
+    } catch (error) {
+      res.send(error).status(500);
+    }
+  }
+});
 router.get("/data/:id", async (req, res) => {
   const id = req.params.id;
   const student = await Student.findOne({ _id: id });
