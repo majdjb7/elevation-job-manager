@@ -59,6 +59,17 @@ router.post("/jobs/:id", async (req, res) => {
     res.status(500).send({ error: "Something failed!" });
   }
 });
+
+router.delete("/jobs/:id", async (req, res) => {
+  let id = req.params.id;
+  Job.findOneAndDelete({ _id: id }, function (err, docs) {
+    if (err) {
+      res.status(500).send({ error: "Something failed!" });
+    } else {
+      res.send("ok");
+    }
+  });
+});
 router.post("/jobs/:id/interviews", async (req, res) => {
   let id = req.params.id;
   try {

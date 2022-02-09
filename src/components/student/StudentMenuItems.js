@@ -45,14 +45,9 @@ export default function StudentMenuItems() {
   const location = useLocation();
   const menuItems = [
     {
-      text: "Home",
-      icon: <Work color="secondary" />,
-      path: "/",
-    },
-    {
       text: "Processes",
       icon: <Work color="secondary" />,
-      path: "/processes",
+      path: "/",
     },
     {
       text: "Add Process",

@@ -32,7 +32,6 @@ export default function Admin() {
             <Route exact path="/AddAdmin">
               <AddAdmin />
             </Route>
-
             <Route exact path="/studentprofile">
               <StudentProfile />
             </Route>

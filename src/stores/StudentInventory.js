@@ -19,6 +19,7 @@ export class StudentInventory {
       numItems: computed,
       addJobsFromDB: action,
       getStudentData: action,
+      deleteProcesses:action,
     });
   }
   get numItems() {
@@ -53,4 +54,11 @@ export class StudentInventory {
       { status }
     );
   };
+   deleteProcesses = async function (id) {
+    const res = await axios.delete(
+      `http://localhost:8888/student/jobs/${id}`,
+
+    );
+    this.addJobsFromDB();
+  }
 }

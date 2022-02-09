@@ -51,12 +51,6 @@ export default function AdminMenuItems() {
   const location = useLocation();
   const menuItems = [
     {
-      text: "Home",
-      icon: <Work color="secondary" />,
-      path: "/",
-    },
-
-    {
       text: "Dashboard",
       icon: <BarChart color="secondary" />,
       path: "/Dashboard",
