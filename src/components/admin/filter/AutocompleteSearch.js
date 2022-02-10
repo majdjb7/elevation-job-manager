@@ -13,18 +13,18 @@ import { observe, toJS } from "mobx";
 /////////////////////////////
 import { Box, Card, CardHeader } from "@mui/material";
 import { makeStyles } from "@material-ui/core";
-// const useStyles = makeStyles({
-//   field: {
-//     width: "17%",
-//     backgroundColor: "#0066ff",
-//     color: "white",
-//     borderRadius: "5px",
-//     // padding: "4px",
-//   },
-// });
+const useStyles = makeStyles({
+  field: {
+    width: "30%",
+    backgroundColor: "#0066ff",
+    color: "white",
+    borderRadius: "5px",
+    padding: "4px",
+  },
+});
 const AutocompleteSearch = inject("adminstore")(
   observer((props) => {
-    // const classes = useStyles();
+    const classes = useStyles();
     const [value, setValue] = React.useState("");
     const [inputValue, setInputValue] = React.useState("");
     const studentsNames = toJS(props.adminstore.studentsNames);
@@ -54,6 +54,7 @@ const AutocompleteSearch = inject("adminstore")(
               variant="contained"
               onClick={handelSearch}
               startIcon={<PersonSearchIcon />}
+              className={classes.field}
             >
               Search
             </Button>
