@@ -59,6 +59,7 @@ const App = inject(
     } else {
       routes = <Authentication />;
     }
+
     return <ThemeProvider theme={theme}>{routes}</ThemeProvider>;
   })
 );

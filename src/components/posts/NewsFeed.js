@@ -25,19 +25,17 @@ const NewsFeed = inject("adminstore")(
     };
 
     return (
-      <Container>
-        <Masonry
-          breakpointCols={breakpoints}
-          className="my-masonry-grid"
-          columnClassName="my-masonry-grid_column"
-        >
-          {AcceptedStudents.map((student, index) => (
-            <div key={index}>
-              <PostCard student={student} />
-            </div>
-          ))}
-        </Masonry>
-      </Container>
+      <Masonry
+        breakpointCols={breakpoints}
+        className="my-masonry-grid"
+        columnClassName="my-masonry-grid_column"
+      >
+        {AcceptedStudents.map((student, index) => (
+          <div key={index}>
+            <PostCard student={student} />
+          </div>
+        ))}
+      </Masonry>
     );
   })
 );

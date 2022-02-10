@@ -23,7 +23,7 @@ export default function Admin() {
         <Layout>
           <Switch>
             <Route exact path="/">
-              <Dashboard />
+              <Processes />
             </Route>
             <Route exact path="/NewsFeed">
               <NewsFeed />
@@ -41,8 +41,8 @@ export default function Admin() {
             <Route exact path="/addCohort">
               <AddCohort />
             </Route>
-            <Route exact path="/Processes">
-              <Processes />
+            <Route exact path="/Dashboard">
+              <Dashboard />
             </Route>
           </Switch>
         </Layout>

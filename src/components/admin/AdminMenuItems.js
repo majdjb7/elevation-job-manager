@@ -61,12 +61,12 @@ export default function AdminMenuItems() {
     {
       text: "Dashboard",
       icon: <BarChart color="secondary" />,
-      path: "/",
+      path: "/Dashboard",
     },
     {
       text: "Processes",
       icon: <PeopleAlt color="secondary" />,
-      path: "/Processes",
+      path: "/",
     },
     {
       text: "Calendar",

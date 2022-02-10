@@ -18,7 +18,11 @@ router.get("/jobs/:id", async (req, res) => {
         options: { sort: { mostRecentInterview: -1 } },
       })
       .exec(function (err, student) {
-        res.send(student.jobs);
+        if (!student) {
+          res.status(500).send({ error: "Something failed!" });
+        } else {
+          res.send(student.jobs);
+        }
       });
   } catch (error) {
     res.status(500).send({ error: "Something failed!" });

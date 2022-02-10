@@ -7,6 +7,7 @@ import { Calendar, dateFnsLocalizer } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Typography from "@mui/material/Typography";
 ////////////////////////////
 import { inject, observer } from "mobx-react";
 import { observe } from "mobx";
@@ -47,8 +48,9 @@ const MyCalendar = inject(
     };
     return (
       <div className="App">
-        <h1>Calendar</h1>
-
+        <Typography component="h1" variant="h5">
+          Calendar
+        </Typography>
         <Calendar
           localizer={localizer}
           events={myEvents}
