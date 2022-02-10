@@ -7,28 +7,31 @@ import Typography from "@material-ui/core/Typography";
 import DeleteOutlined from "@material-ui/icons/DeleteOutlined";
 import { makeStyles } from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
-import { yellow, green, pink, blue } from "@material-ui/core/colors";
+import { yellow, green, pink, blue, purple } from "@material-ui/core/colors";
 
 const useStyles = makeStyles({
   // to make it  dainamic = change the colors in card by the not catg
   avatar: {
-    backgroundColor: (note) => {
-      if (note.category == "work") {
+    backgroundColor: (student) => {
+      if (student.whereFindJob == "Facebook") {
         return yellow[700];
       }
-      if (note.category == "money") {
+      if (student.whereFindJob == "LinkedIn") {
         return green[500];
       }
-      if (note.category == "todos") {
+      if (student.whereFindJob == "Friend") {
         return pink[500];
+      }
+      if (student.whereFindJob == "Company website") {
+        return purple[500];
       }
       return blue[500];
     },
   },
 });
 
-export default function NewsFeed({ note, handleDelete }) {
-  const classes = useStyles(note);
+export default function PostCard({ student }) {
+  const classes = useStyles(student);
 
   return (
     <div>
@@ -36,20 +39,22 @@ export default function NewsFeed({ note, handleDelete }) {
         <CardHeader
           avatar={
             <Avatar className={classes.avatar}>
-              {note.category[0].toUpperCase()}
+              {student.studentName[0].toUpperCase()}
             </Avatar>
           }
-          action={
-            <IconButton onClick={() => handleDelete(note.id)}>
-              <DeleteOutlined />
-            </IconButton>
-          }
-          title={note.title}
-          subheader={note.category}
+          //   action={<DeleteOutlined />}
+          title={student.studentName}
+          subheader={student.email}
         />
         <CardContent>
           <Typography variant="body2" color="textSecondary">
-            {note.details}
+            Company Name: {student.companyName}
+          </Typography>
+          <Typography variant="body2" color="textSecondary">
+            Role: {student.role}
+          </Typography>
+          <Typography variant="body2" color="textSecondary">
+            Location: {student.location}
           </Typography>
         </CardContent>
       </Card>

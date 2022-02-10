@@ -11,14 +11,16 @@ export class AdminInventory {
     this.showCurrCohort = "All";
     this.totalWorkers = 0;
     this.cohorts = [];
+    this.allAcceptedStudents = [];
     makeObservable(this, {
       allStudentsProcesses: observable,
       studentsNames: observable,
       allStudents: observable,
       totalWorkers: observable,
       cohorts: observable,
+      allAcceptedStudents: observable,
       totalStudents: computed,
-
+      getAllAcceptedStudents: action,
       getAllStudentsProcessesFromDB: action,
       filterProcessesByCohortName: action,
       filterProcessesByStatus: action,
@@ -51,6 +53,16 @@ export class AdminInventory {
     this.totalWorkers = NumOfWorkers(allStudentsProcesses);
     return this.totalWorkers;
   };
+
+  getAllAcceptedStudents = async () => {
+    let allStudentsProcesses = await getAllStudentsProcesses();
+    let allAcceptedStudents = allStudentsProcesses.filter(
+      (p) => p.status === "Accepted"
+    );
+    this.allAcceptedStudents = allAcceptedStudents;
+    return this.allAcceptedStudents;
+  };
+
   generateAllStudentsProcesses = () => {
     this.allStudents.map((s) => {
       s.jobs.map((j) => {

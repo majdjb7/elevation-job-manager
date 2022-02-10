@@ -6,6 +6,7 @@ import Processes from "./Processes";
 import AddProcess from "../student/AddProcess";
 import AddInterview from "../student/AddInterview";
 import MyCalendar from "../MyCalendar";
+import NewsFeed from "../posts/NewsFeed";
 //FOR ADMIN: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 import Dashboard from "../admin/dashboard/Dashboard";
@@ -36,6 +37,9 @@ export default function Student() {
             </Route>
             <Route exact path="/studentprofile">
               <StudentProfile />
+            </Route>
+            <Route exact path="/NewsFeed">
+              <NewsFeed />
             </Route>
           </Switch>
         </Layout>

@@ -18,6 +18,7 @@ import {
   AddCircle,
   BarChart,
   PeopleAlt,
+  PostAdd,
 } from "@material-ui/icons";
 
 import { Redirect } from "react-router-dom";
@@ -52,6 +53,11 @@ export default function AdminMenuItems() {
   const history = useHistory();
   const location = useLocation();
   const menuItems = [
+    {
+      text: "News Feed",
+      icon: <PostAdd color="secondary" />,
+      path: "/NewsFeed",
+    },
     {
       text: "Dashboard",
       icon: <BarChart color="secondary" />,

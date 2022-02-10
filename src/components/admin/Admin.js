@@ -15,6 +15,7 @@ import { inject, observer } from "mobx-react";
 import { observe } from "mobx";
 import StudentProfile from "../student/studendProfile";
 import AddCohort from "./AddCohort";
+import NewsFeed from "../posts/NewsFeed";
 export default function Admin() {
   return (
     <div>
@@ -24,7 +25,9 @@ export default function Admin() {
             <Route exact path="/">
               <Dashboard />
             </Route>
-
+            <Route exact path="/NewsFeed">
+              <NewsFeed />
+            </Route>
             <Route exact path="/MyCalendar">
               <MyCalendar />
             </Route>
