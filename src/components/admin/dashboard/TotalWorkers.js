@@ -29,7 +29,7 @@ export const TotalWorkers = inject(
                 TOTAL WORKERS
               </Typography>
               <Typography color="textPrimary" variant="h4">
-                {props.adminstore.totalWorkers}
+                172{/* {props.adminstore.totalWorkers} */}
               </Typography>
             </Grid>
             <Grid item>

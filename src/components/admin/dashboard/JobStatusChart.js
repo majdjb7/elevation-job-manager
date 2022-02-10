@@ -25,7 +25,7 @@ export const JobStatusChart = (props) => {
         hoverBorderColor: "#FFFFFF",
       },
     ],
-    labels: ["ًWorking", "Searching", "Other"],
+    labels: ["ًWorking", "Searching", "Inactive"],
   };
 
   const options = {

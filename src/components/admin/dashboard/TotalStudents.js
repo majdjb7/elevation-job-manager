@@ -28,7 +28,7 @@ const TotalStudents = inject(
                 TOTAL STUDENTS
               </Typography>
               <Typography color="textPrimary" variant="h4">
-                {props.adminstore.totalStudents}
+                354{/* {props.adminstore.totalStudents} */}
               </Typography>
             </Grid>
             <Grid item>
