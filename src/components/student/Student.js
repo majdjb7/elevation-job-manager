@@ -25,7 +25,7 @@ export default function Student() {
       <Router>
         <Layout>
           <Switch>
-            <Route exact path="/processes">
+            <Route exact path="/">
               <Processes />
             </Route>
             <Route exact path="/addProcess">

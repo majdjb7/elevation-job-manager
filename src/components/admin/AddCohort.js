@@ -11,7 +11,10 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
-
+import Typography from "@mui/material/Typography";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
 const AddCohort = inject("adminstore")(
   observer((props) => {
     function handleDelete(cohortName) {
@@ -26,15 +29,36 @@ const AddCohort = inject("adminstore")(
       e.preventDefault();
       props.adminstore.addCohort(cohortName);
       setCohortName("");
-      // setRedirect(true);
     };
-
-    // if (redirect) {
-    //   return <Redirect to="/" />;
-    // }
 
     return (
       <div>
+        <form onSubmit={submit}>
+          {/* <h1 className="h3 mb-3 fw-normal">Add Cohort</h1> */}
+          <Typography component="h1" variant="h5">
+            Add Cohort
+          </Typography>
+          <Grid container spacing={1}>
+            <Grid item>
+              <TextField
+                autoComplete="given-name"
+                name="firstName"
+                required
+                size="small"
+                id="firstName"
+                label="Cohort Name"
+                onChange={(e) => setCohortName(e.target.value)}
+                autoFocus
+                // sx={{ width: "30%" }}
+              />
+            </Grid>
+            <Grid item lg={1}>
+              <Button type="submit" sx={{ width: "30%" }} variant="contained">
+                Submit
+              </Button>
+            </Grid>
+          </Grid>
+        </form>
         <List
           dense
           sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
@@ -65,21 +89,6 @@ const AddCohort = inject("adminstore")(
             );
           })}
         </List>
-
-        <form onSubmit={submit}>
-          <h1 className="h3 mb-3 fw-normal">Add Cohort</h1>
-
-          <input
-            className="form-control"
-            placeholder="Cohort Name"
-            required
-            onChange={(e) => setCohortName(e.target.value)}
-          />
-
-          <button className="w-100 btn btn-lg btn-primary" type="submit">
-            Submit
-          </button>
-        </form>
       </div>
     );
   })

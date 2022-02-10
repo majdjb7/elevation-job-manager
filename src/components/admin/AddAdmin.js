@@ -85,7 +85,7 @@ const AddAdmin = inject("studentstore")(
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Here you can add another Admin and give him/her admin permission
+              Enter admin details
             </Typography>
             <Box component="form" noValidate onSubmit={submit} sx={{ mt: 3 }}>
               <Grid container spacing={2}>

@@ -56,9 +56,7 @@ const useStyles = makeStyles((theme) => {
       flexGrow: 1,
     },
     toolbar: theme.mixins.toolbar,
-    avatar: {
-      marginLeft: theme.spacing(2),
-    },
+
     ListItemText: {
       color: "#ffffff",
     },
@@ -69,10 +67,10 @@ const useStyles = makeStyles((theme) => {
     },
     avatar: {
       backgroundColor: theme.palette.secondary.light,
-      // color: theme.palette.getContrastText(theme.palette.primary.light),
+
       color: "#1a73e8",
       fontWeight: "bold",
-      marginRight: "15px",
+      margin: "5px",
     },
   };
 });
@@ -82,16 +80,9 @@ const Layout = inject(
   "userstore"
 )(
   observer((props) => {
-    {
-      /* the props children is all the comps from app.js under the switch */
-    }
     const classes = useStyles();
     const history = useHistory();
     const location = useLocation();
-
-    // if (props.studentstore.firstName === "") {
-    //   return <Redirect to="/" />;
-    // }
 
     return (
       <div className={classes.root}>
@@ -106,16 +97,16 @@ const Layout = inject(
             <Typography className={classes.date}>
               Today is the {format(new Date(), "do MMMM Y")}
             </Typography>
-            <Typography>{props.studentstore.firstName}</Typography>
+            <Typography>{props.userstore.userFirstName}</Typography>
 
             <Avatar
-              alt={props.studentstore.firstName}
+              alt={props.userstore.userFirstName}
               src="."
               className={classes.avatar}
             />
             <Button
               variant="contained"
-              color="secondary"
+              color="primary"
               onClick={() => {
                 props.userstore.logout();
 

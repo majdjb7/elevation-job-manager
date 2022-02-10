@@ -46,7 +46,7 @@ const Dashboard = inject("studentstore")(
             </Grid>
 
             <Grid item lg={12} md={12} xl={12} xs={12}>
-              <Processes />
+              {/* <Processes /> */}
             </Grid>
           </Grid>
         </Container>

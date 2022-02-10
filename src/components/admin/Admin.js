@@ -22,11 +22,9 @@ export default function Admin() {
         <Layout>
           <Switch>
             <Route exact path="/">
-              <Home />
-            </Route>
-            <Route exact path="/Dashboard">
               <Dashboard />
             </Route>
+
             <Route exact path="/MyCalendar">
               <MyCalendar />
             </Route>
@@ -39,6 +37,9 @@ export default function Admin() {
             </Route>
             <Route exact path="/addCohort">
               <AddCohort />
+            </Route>
+            <Route exact path="/Processes">
+              <Processes />
             </Route>
           </Switch>
         </Layout>

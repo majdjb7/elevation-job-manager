@@ -11,7 +11,15 @@ import Button from "@mui/material/Button";
 
 import { inject, observer } from "mobx-react";
 import { observe } from "mobx";
-import { Work, SchoolRounded, AddCircle, BarChart } from "@material-ui/icons";
+import {
+  Work,
+  SchoolRounded,
+  AddCircle,
+  BarChart,
+  PeopleAlt,
+  Newspaper,
+  PostAdd,
+} from "@material-ui/icons";
 import { Redirect } from "react-router-dom";
 
 import AppBar from "@material-ui/core/AppBar";
@@ -45,14 +53,14 @@ export default function StudentMenuItems() {
   const location = useLocation();
   const menuItems = [
     {
-      text: "Home",
-      icon: <Work color="secondary" />,
-      path: "/",
+      text: "News Feed",
+      icon: <PostAdd color="secondary" />,
+      path: "/NewsFeed",
     },
     {
       text: "Processes",
       icon: <Work color="secondary" />,
-      path: "/processes",
+      path: "/",
     },
     {
       text: "Add Process",

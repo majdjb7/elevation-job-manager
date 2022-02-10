@@ -17,7 +17,9 @@ import {
   SchoolRounded,
   AddCircle,
   BarChart,
+  PeopleAlt,
 } from "@material-ui/icons";
+
 import { Redirect } from "react-router-dom";
 
 import AppBar from "@material-ui/core/AppBar";
@@ -51,15 +53,14 @@ export default function AdminMenuItems() {
   const location = useLocation();
   const menuItems = [
     {
-      text: "Home",
-      icon: <Work color="secondary" />,
-      path: "/",
-    },
-
-    {
       text: "Dashboard",
       icon: <BarChart color="secondary" />,
-      path: "/Dashboard",
+      path: "/",
+    },
+    {
+      text: "Processes",
+      icon: <PeopleAlt color="secondary" />,
+      path: "/Processes",
     },
     {
       text: "Calendar",
@@ -74,7 +75,7 @@ export default function AdminMenuItems() {
     },
     {
       text: "Add Cohort",
-      icon: <AddCircle color="secondary" />,
+      icon: <Work color="secondary" />,
       path: "/addCohort",
     },
   ];
