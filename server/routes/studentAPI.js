@@ -98,7 +98,7 @@ router.post("/jobs/status/:jobId/interviews", async (req, res) => {
       student.firstName +
       " " +
       student.lastName +
-      " has passed interview at " +
+      " start working at " +
       job.companyName;
     let mails = "";
     const admins = await Admin.find({});

@@ -41,6 +41,9 @@ export default function Student() {
             <Route exact path="/NewsFeed">
               <NewsFeed />
             </Route>
+            <Route exact path="/AddAdmin">
+              <AddAdmin />
+            </Route>
           </Switch>
         </Layout>
       </Router>

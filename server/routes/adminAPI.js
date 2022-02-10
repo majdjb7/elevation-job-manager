@@ -320,7 +320,7 @@ router.post("/message/send", async (req, res) => {
       Reply to: WhatsApp: ${req.body.mobileNo}
                     Email: ${req.body.userEmail}`,
       from: "whatsapp:+14155238886",
-      to: "whatsapp:+972532282478",
+      to: "whatsapp:+972557040672",
     })
     .then((message) => console.log(message.sid))
     .done();
